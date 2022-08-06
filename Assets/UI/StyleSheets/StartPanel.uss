@@ -1,0 +1,49 @@
+:root{
+    --transitionTimingFunction: ease-in-out-back: /*Testing out variables*/
+}
+.button {
+    display: flex;
+    align-items: auto;
+    justify-content: center;
+    width: 200px;
+    height: 40px;
+    margin: 10px;
+    padding: 10px;
+    background-color: rgb(37, 63, 36);
+    flex-direction: row;
+    flex-wrap: wrap;
+    -unity-font-style: bold;
+    font-size: 200%;
+    -unity-text-align: middle-center;
+    border-radius: 100%;
+    border-color: rgb(0, 0, 0);
+    border-width: 5px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-self: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(25, 26, 25);
+    border-color: rgb(0, 0, 0);
+    border-width: 5px;
+}
+
+.button:hover {
+    transition: 0.25s;
+    transition-timing-function: var(--transitionTimingFunction);   /*This is hardly noticeable*/
+    background-color: rgb(50, 50, 50);
+    scale: 1.1;                                     /* This works as a scale multiplier */
+}
+
+.button:active {
+    transition: 0.25s;
+    transition-timing-function: var(--transitionTimingFunction);
+    background-color: rgb(150, 150, 150);
+    scale: 0.95;
+}

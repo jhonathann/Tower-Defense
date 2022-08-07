@@ -27,7 +27,7 @@ public class MenuController : MonoBehaviour
      //Function that triggers when the startButton gets clicked
      private void startButtonOnClick(ClickEvent evt)
      {
-          SceneManager.LoadScene("Game"); //Make sure the scene is already in the build settings
+          SceneManager.LoadSceneAsync("Game"); //Make sure the scene is already in the build settings
      }
 
      //Function that triggers when the quitButton gets clicked

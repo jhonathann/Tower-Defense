@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 232151327}
   - component: {fileID: 232151329}
   m_Layer: 5
-  m_Name: Menu
+  m_Name: StartPage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

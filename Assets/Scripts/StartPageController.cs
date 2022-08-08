@@ -2,49 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
-public class MenuController : MonoBehaviour
+
+//This Script controlls the behaviour of the start page in the starter page
+public class StartPageController : MonoBehaviour
 {
-     private UIDocument menu;
-     private Button continueButton;
+     private UIDocument startPage;
+     private Button startButton;
      private Button exitButton;
+
      private void OnEnable()
      {
           getElements();
           registerEvents();
      }
+
      private void OnDisable()
      {
           unregisterEvents();
      }
+
      //Gets the UI elements from the panel 
      private void getElements()
      {
           //Get the UI component (the element that has the script attached)
-          menu = GetComponent<UIDocument>();
+          startPage = GetComponent<UIDocument>();
 
           //Search for the buttons inside the menu
           //.Query search for especific elements in the visual tree (short .Q) in this case by the name of the element
-          continueButton = menu.rootVisualElement.Query<Button>("ContinueButton");
-          exitButton = menu.rootVisualElement.Query<Button>("ExitButton");
+          startButton = startPage.rootVisualElement.Query<Button>("StartButton");
+          exitButton = startPage.rootVisualElement.Query<Button>("ExitButton");
      }
+
      //Sets the buttons to trigger certain functions as a response to an especific event
      private void registerEvents()
      {
-          continueButton.RegisterCallback<ClickEvent>(continueButtonOnClick);
+          startButton.RegisterCallback<ClickEvent>(startButtonOnClick);
           exitButton.RegisterCallback<ClickEvent>(exitButtonOnClick);
      }
      //Removes the callbacks from the buttons (when the UI document gets disabled)
      private void unregisterEvents()
      {
-          continueButton.UnregisterCallback<ClickEvent>(continueButtonOnClick);
+          startButton.UnregisterCallback<ClickEvent>(startButtonOnClick);
           exitButton.UnregisterCallback<ClickEvent>(exitButtonOnClick);
      }
-     //Function that triggers when the continueButton gets clicked
-     private void continueButtonOnClick(ClickEvent evt)
+
+     //Function that triggers when the startButton gets clicked
+     private void startButtonOnClick(ClickEvent evt)
      {
-          this.gameObject.SetActive(false); //deactivates the game object of the menu
-          Time.timeScale = 1;//unpauses the game
+          SceneManager.LoadSceneAsync("Game"); //Make sure the scene is already in the build settings
      }
 
      //Function that triggers when the exitButton gets clicked
@@ -53,4 +60,5 @@ public class MenuController : MonoBehaviour
           //Closes the game
           Application.Quit();
      }
+
 }

@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/StyleSheets/StartPanel.uss?fileID=7433441132597879392&amp;guid=e4157f564dbf78040ab9f0eccfa7a732&amp;type=3#StartPanel" />
-    <ui:VisualElement name="ButtonContainer" class="buttonContainer">
-        <ui:Button text="START" name="StartButton" class="button" />
-        <ui:Button text="QUIT" name="QuitButton" class="button" />
+    <ui:VisualElement name="GlobalContainer" class="globalContainer">
+        <ui:Button name="StartButton" text="START" class="button" />
+        <ui:Button text="EXIT" name="ExitButton" class="button" />
     </ui:VisualElement>
 </ui:UXML>

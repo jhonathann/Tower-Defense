@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/StyleSheets/Menu.uss?fileID=7433441132597879392&amp;guid=220a9ac230da5fe439f473624701e6b2&amp;type=3#Menu" />
+    <ui:VisualElement name="GlobalContainer" class="globalContainer">
+        <ui:VisualElement name="MenuContainer" class="menuContainer">
+            <ui:Button text="Continue" display-tooltip-when-elided="true" name="ContinueButton" class="button" />
+            <ui:Button text="Exit" display-tooltip-when-elided="true" name="ExitButton" class="button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+//Script that controlls the behaviour of the menu
 public class MenuController : MonoBehaviour
 {
      private UIDocument menu;
@@ -10,12 +11,21 @@ public class MenuController : MonoBehaviour
      private Button exitButton;
      private void OnEnable()
      {
+          fadeInAnimation();
           getElements();
           registerEvents();
      }
      private void OnDisable()
      {
           unregisterEvents();
+     }
+     //Makes the enable animation
+     private IEnumerator fadeInAnimation()
+     {
+          // Color startColor = new Color(0, 0, 0, 0);
+          // Color finishColor = new Color(0, 0, 0, 1);
+          // menu.enabled = false;
+          yield return null;
      }
      //Gets the UI elements from the panel 
      private void getElements()
@@ -46,7 +56,6 @@ public class MenuController : MonoBehaviour
           this.gameObject.SetActive(false); //deactivates the game object of the menu
           Time.timeScale = 1;//unpauses the game
      }
-
      //Function that triggers when the exitButton gets clicked
      private void exitButtonOnClick(ClickEvent evt)
      {

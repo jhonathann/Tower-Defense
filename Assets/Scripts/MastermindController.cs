@@ -16,14 +16,13 @@ public class MastermindController : MonoBehaviour
      private void Update()
      {
           toggleMenu();
-          print(Time.timeScale);
      }
-     //finds the menu object with the name "Menu"
+     //Finds the menu object with the name "Menu"
      private void findMenu()
      {
           menu = GameObject.Find("Menu");
      }
-     //activates or deactivates the menu when esc is pressed (and pause or depause the game accordingly)
+     //Activates or deactivates the menu when esc is pressed (and pause or depause the game accordingly)
      private void toggleMenu()
      {
           if (Input.GetKeyDown(KeyCode.Escape))

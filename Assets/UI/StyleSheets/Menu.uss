@@ -1,6 +1,8 @@
 /*Use % for element sizes to include different screen sizes*/
-
-.globalContainer {
+:root {
+    --transitionTimingFunction: ease-in-out-back;
+}
+.globalContainer{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -9,9 +11,8 @@
     justify-content: center;
     align-items: center;
     align-self: center;
-    background-color: rgba(0, 0, 0, 0);   /*Set to transparent*/
+    visibility: hidden;
 }
-
 .menuContainer{
     display: flex;
     flex-direction: column;
@@ -23,7 +24,19 @@
     align-self: center;
     background-color: rgba(0, 0, 0, 0.5);
 }
-
+.menuContainer:enabled{
+    transition: 0.5s;
+    transition-timing-function: var(--transitionTimingFunction);
+    visibility: visible;
+    scale: 1;
+    
+}
+.menuContainer:disabled{
+    transition: 0.5s;
+    transition-timing-function: var(--transitionTimingFunction);
+    visibility: hidden;
+    scale:0;
+}
 .button {
     display: flex;
     flex-direction: row;

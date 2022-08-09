@@ -28,6 +28,7 @@ public class StartPageController : MonoBehaviour
      {
           //Get the UI component (the element that has the script attached)
           startPage = GetComponent<UIDocument>();
+          print(startPage.rootVisualElement.name);
 
           //Search for the buttons inside the menu
           //.Query search for especific elements in the visual tree (short .Q) in this case by the name of the element

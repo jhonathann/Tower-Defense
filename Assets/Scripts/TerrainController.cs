@@ -37,8 +37,8 @@ public class TerrainController : MonoBehaviour
                     }
                     if (i == 9 && j == portalLocation)
                     {
-                         terrain[i][j] = Instantiate(basePrefab, new Vector3(5 + 10 * i, 0, 5 + 10 * j), basePrefab.transform.rotation);
-                         terrain[i][j].GetComponent<Renderer>().material.color = Color.red;
+                         terrain[i][j] = Instantiate(portalPrefab, new Vector3(5 + 10 * i, 0, 5 + 10 * j), portalPrefab.transform.rotation);
+                         //terrain[i][j].GetComponent<Renderer>().material.color = Color.red;
                     }
                }
           }

@@ -18,9 +18,9 @@ public class CameraController : MonoBehaviour
      }
      private void moveCamera()
      {
-          speedInX = Input.GetAxis("Horizontal") * Time.deltaTime * 5;
-          speedInY = Input.GetAxis("Jump") * Time.deltaTime * 5;
-          speedInZ = Input.GetAxis("Vertical") * Time.deltaTime * 5;
+          speedInX = Input.GetAxis("Horizontal") * Time.deltaTime * 50;
+          speedInY = Input.GetAxis("Jump") * Time.deltaTime * 50;
+          speedInZ = Input.GetAxis("Vertical") * Time.deltaTime * 50;
 
           this.gameObject.transform.Translate(new Vector3(speedInX, speedInY, speedInZ));
      }

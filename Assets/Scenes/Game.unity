@@ -250,8 +250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 8104583186438417897, guid: f42046bd5b249994cbbeb898b0f22fa5, type: 3}
-  basePrefab: {fileID: 919132149155446097, guid: c041e4faeed919947a03d065dc20ecc4, type: 3}
-  portalPrefab: {fileID: 919132149155446097, guid: 428f56bd4cb78964a8a54f7c0385e183, type: 3}
+  basePrefab: {fileID: 6406884937665194355, guid: 931ba3e7cf9a9e14bbb67330469e0d1c, type: 3}
+  portalPrefab: {fileID: 5550512875219071430, guid: 1ed7cae8dec62e645b1fa788418d6358, type: 3}
 --- !u!4 &170276880
 Transform:
   m_ObjectHideFlags: 0

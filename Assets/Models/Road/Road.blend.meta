@@ -3,7 +3,12 @@ guid: 888375372a4465547ab47c53c348a623
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Road
+    second: {fileID: 2100000, guid: 2ce5a7cd129266f4d983e74d53f00182, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

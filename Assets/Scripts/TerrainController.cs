@@ -6,42 +6,86 @@ using UnityEngine;
 public class TerrainController : MonoBehaviour
 {
      public GameObject roadPrefab;
-     public GameObject basePrefab;
+     public GameObject castlePrefab;
      public GameObject portalPrefab;
      private Grid terrain;
-     private void Start()
+     void Start()
      {
           //Function that creates the terrain 
           createTerrain();
      }
-     private void Update()
+     void Update()
      {
 
      }
-     private void createTerrain()
+     void createTerrain()
      {
           //Create the terrain grid
           terrain = new Grid(20, 20);
-          //Define the base and the portal locations given by randomizers
-          int baseX = Random.Range(0, terrain.width);
-          int baseY = Random.Range(0, terrain.height);
-          int portalX = Random.Range(0, terrain.width);
-          int portalY = Random.Range(0, terrain.height);
 
-          //Optain the path beetween the 2 tiles 
-          List<Tile> Path = terrain.AStar(terrain.tiles[baseX, baseY], terrain.tiles[portalX, portalY]);
+          //Getting the full path using diferent points (min 2 points start and base)(else it will throw an indexOutOfRange exeption)
+          List<Tile> path = getFullPath(getPoints(5));
 
-          //Assign the tile prefab to all the tiles in the path
-          foreach (Tile tile in Path)
+          //Assign the road prefab to all the tiles in the path
+          foreach (Tile tile in path)
           {
                tile.prefab = roadPrefab;
           }
 
-          //Assign the corresponding prefabs to the base and the portal
-          terrain.tiles[baseX, baseY].prefab = basePrefab;
-          terrain.tiles[portalX, portalY].prefab = portalPrefab;
+          Tile castle = path[0];
+          Tile portal = path[path.Count - 1];
 
+          //Assign the corresponding prefabs to the base and the portal
+          castle.prefab = castlePrefab;
+          portal.prefab = portalPrefab;
+
+          //Draw the grid (it uses this.gameobject as a parameter to assign the terrain GameObject as the father of all the tiles)
           terrain.drawGrid(this.gameObject);
+
+          castle.prefab.transform.LookAt(path[1].prefab.transform);
+          portal.prefab.transform.LookAt(portal.previous.prefab.transform);
+     }
+
+     //This list keeps track of the already assigned tiles (used in getRandomTile())
+     List<Tile> assignedTiles = new List<Tile>();
+
+     //This function returns random tiles from the terrain grid
+     Tile getRandomTile()
+     {
+     inicio:
+          int x = Random.Range(0, terrain.width);
+          int y = Random.Range(0, terrain.height);
+          if (!assignedTiles.Contains(terrain.tiles[x, y]))
+          {
+               assignedTiles.Add(terrain.tiles[x, y]);
+               return terrain.tiles[x, y];
+          }
+          else
+          {
+               goto inicio; //If the random gives an already assigned tile then tries again
+          }
+     }
+
+     //function that generates a list of the points used to create the full path
+     List<Tile> getPoints(int numberOfPoints)
+     {
+          List<Tile> points = new List<Tile>();
+          for (int i = 0; i < numberOfPoints; i++)
+          {
+               points.Add(getRandomTile());
+          }
+          return points;
+     }
+
+     //Function used to optain the path beetween all the points
+     List<Tile> getFullPath(List<Tile> points)
+     {
+          List<Tile> path = new List<Tile>();
+          for (int i = 0; i < points.Count - 1; i++)
+          {
+               path.AddRange(terrain.AStar(points[i], points[i + 1]));
+          }
+          return path;
      }
 }
 
@@ -119,6 +163,8 @@ public class Grid
                          currentTile = currentTile.previous;
                     }
 
+                    //Add the start node (to keep the start node as the first path node and the goal node as the last)
+                    returnList.Add(start);
                     //Reverse the list to get the path from start to goal 
                     returnList.Reverse();
                     return returnList;
@@ -176,7 +222,7 @@ public class Grid
           }
           //This is only reachable if there is no possible path
           Debug.Log("Path not found");
-          return new List<Tile>();
+          return null;
      }
 
      //Function that draws the whole grid instantiating the prefab that every tile has
@@ -189,7 +235,7 @@ public class Grid
                     //This is inside a try-catch block in case the tile doesn't have an associated prefab
                     try
                     {
-                         Object.Instantiate(tiles[i, j].prefab, new Vector3(i, 0, j) * tiles[i, j].size, tiles[i, j].prefab.transform.rotation, parent.transform);
+                         tiles[i, j].prefab = Object.Instantiate(tiles[i, j].prefab, new Vector3(i, 0, j) * tiles[i, j].size, tiles[i, j].prefab.transform.rotation, parent.transform);
                     }
                     catch { }
 

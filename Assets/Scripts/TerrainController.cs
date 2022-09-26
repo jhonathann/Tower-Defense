@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TerrainController : MonoBehaviour
 {
-     public GameObject tilePrefab;
+     public GameObject roadPrefab;
      public GameObject basePrefab;
      public GameObject portalPrefab;
      private Grid terrain;
@@ -34,7 +34,7 @@ public class TerrainController : MonoBehaviour
           //Assign the tile prefab to all the tiles in the path
           foreach (Tile tile in Path)
           {
-               tile.prefab = tilePrefab;
+               tile.prefab = roadPrefab;
           }
 
           //Assign the corresponding prefabs to the base and the portal

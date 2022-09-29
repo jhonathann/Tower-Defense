@@ -43,6 +43,8 @@ public class TerrainController : MonoBehaviour
 
           castle.gameObject.transform.LookAt(path[1].gameObject.transform);
           portal.gameObject.transform.LookAt(portal.previous.gameObject.transform);
+          castle.gameObject.name = "Castle";
+          portal.gameObject.name = "Portal";
      }
      //This function returns random tiles from the terrain grid
      Tile getRandomTile()
@@ -61,10 +63,12 @@ public class TerrainController : MonoBehaviour
           while (i < numberOfPoints)
           {
                Tile goal = getRandomTile();
+               //Check to see if the obteined Tile isn't already in the path
                if (goal.gameObject == null)
                {
                     List<Tile> semiPath = semiPath = terrain.AStar(start, goal);
 
+                    //Check to see if the a* algorithm returned a valid path
                     if (semiPath != null)
                     {
                          assignatePrefab(semiPath);
@@ -72,14 +76,10 @@ public class TerrainController : MonoBehaviour
                          start = goal;
                          i++;
                     }
-                    else
+                    else //If the algorithm did'nt return a valid path, that still add to the count (just for the sake of increasing randomizing)
                     {
                          i++;
                     }
-               }
-               else
-               {
-                    goal = getRandomTile();
                }
           }
           return path;

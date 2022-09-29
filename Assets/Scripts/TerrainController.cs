@@ -28,7 +28,7 @@ public class TerrainController : MonoBehaviour
           //Getting the full path using diferent points (min 2 points start and base)(else it will throw an indexOutOfRange exeption)
           path = getFullPath(5);
 
-          //Remove repeated elements
+          //Remove repeated elements from the path
           path = path.Distinct().ToList();
 
           Tile castle = path[0];
@@ -39,7 +39,7 @@ public class TerrainController : MonoBehaviour
           portal.gameObject = portalPrefab;
 
           //Draw the grid (it uses this.gameobject as a parameter to assign the terrain GameObject as the father of all the tiles)
-          terrain.drawGrid(this.gameObject);
+          terrain.drawPath(path, this.gameObject);
 
           castle.gameObject.transform.LookAt(path[1].gameObject.transform);
           portal.gameObject.transform.LookAt(portal.previous.gameObject.transform);
@@ -84,6 +84,8 @@ public class TerrainController : MonoBehaviour
           }
           return path;
      }
+
+     // Function used to assignate the respective prefab when the semipaths are being generated
      void assignatePrefab(List<Tile> semiPath)
      {
           foreach (Tile tile in semiPath)
@@ -289,21 +291,17 @@ public class Grid
      }
 
      //Function that draws the whole grid instantiating the prefab that every tile has
-     public void drawGrid(GameObject parent)
+     public void drawPath(List<Tile> path, GameObject parent)
      {
-          for (int i = 0; i < tiles.GetLength(0); i++)
+          foreach (Tile tile in path)
           {
-               for (int j = 0; j < tiles.GetLength(1); j++)
+               try
                {
-                    //This is inside a try-catch block in case the tile doesn't have an associated prefab
-                    try
-                    {
-                         tiles[i, j].gameObject = Object.Instantiate(tiles[i, j].gameObject, new Vector3(i, 0, j) * tiles[i, j].size, tiles[i, j].gameObject.transform.rotation, parent.transform);
-                         tiles[i, j].gameObject.name = i + " " + j;
-                    }
-                    catch { }
-
+                    tile.gameObject = Object.Instantiate(tile.gameObject, new Vector3(tile.x, 0, tile.y) * tile.size, tile.gameObject.transform.rotation, parent.transform);
+                    tile.gameObject.name = tile.x + " " + tile.y;
+                    tile.gameObject.transform.LookAt(tile.previous.gameObject.transform);
                }
+               catch { }
           }
      }
 }

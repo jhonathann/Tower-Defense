@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Indicator
+    second: {fileID: 2100000, guid: f646b00b3d85a7a49a482ea3df21804b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Road
     second: {fileID: 2100000, guid: 2ce5a7cd129266f4d983e74d53f00182, type: 2}
   materials:

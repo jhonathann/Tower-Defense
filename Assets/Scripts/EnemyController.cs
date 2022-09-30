@@ -16,8 +16,6 @@ public class EnemyController : MonoBehaviour
      void Update()
      {
           travelPath();
-          checkForArrival();
-
      }
      void initializeEnemy()
      {
@@ -35,7 +33,7 @@ public class EnemyController : MonoBehaviour
           if (currentCheckPoint >= 0)
           {
                this.transform.Translate(direction * Time.deltaTime * speed);
-               if (Vector3.Distance(this.transform.position, gameData.path[currentCheckPoint].gameObject.transform.position) < 0.5f)
+               if (Vector3.Distance(this.transform.position, gameData.path[currentCheckPoint].gameObject.transform.position) < 1f)
                {
                     currentCheckPoint--;
                     //The try-catch block is just for the last case when index gets to -1
@@ -47,14 +45,13 @@ public class EnemyController : MonoBehaviour
                }
           }
      }
-     void checkForArrival()
+
+     void OnTriggerEnter(Collider enteringObjectCollider)
      {
-          //When the enemy reaches the castle
-          if (currentCheckPoint == 0)
+          if (enteringObjectCollider.gameObject.name == "Castle")
           {
                Destroy(this.gameObject);
-               //Reduces the health
-               gameData.health--;
           }
      }
+
 }

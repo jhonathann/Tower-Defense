@@ -19,4 +19,14 @@ public class CastleController : MonoBehaviour
                Destroy(this.gameObject);
           }
      }
+
+     void OnMouseEnter()
+     {
+          Debug.Log("Entering Castle");
+     }
+
+     void OnMouseExit()
+     {
+          Debug.Log("Exiting Castle");
+     }
 }

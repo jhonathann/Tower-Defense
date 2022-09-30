@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2935340485543646150}
-  - component: {fileID: -7305019217613532620}
+  - component: {fileID: -1104992209331408429}
+  - component: {fileID: 796436404305798472}
   m_Layer: 0
   m_Name: Castle
   m_TagString: Untagged
@@ -34,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-7305019217613532620
+--- !u!114 &-1104992209331408429
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,6 +48,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: fff7f5cc8e4e06043bcb6d6bff06fd6b, type: 2}
+--- !u!65 &796436404305798472
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2591747033728977276}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 15.108135, z: 10}
+  m_Center: {x: 0, y: 7.4470034, z: 0}
 --- !u!1 &2739552671836724796
 GameObject:
   m_ObjectHideFlags: 0

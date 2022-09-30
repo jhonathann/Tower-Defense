@@ -286,7 +286,6 @@ public class Grid
                }
           }
           //This is only reachable if there is no possible path
-          Debug.Log("Path not found");
           return null;
      }
 

@@ -9,18 +9,20 @@ public class TerrainController : MonoBehaviour
      public GameObject roadPrefab;
      public GameObject castlePrefab;
      public GameObject portalPrefab;
+     public GameObject grassPrefab;
      private Grid terrain;
      public GameData gameData;
      void Awake()
      {
-          //Function that creates the terrain 
-          createTerrain();
+          //Function that creates the path 
+          createPath();
+          drawGrass(this.gameObject);
      }
      void Update()
      {
 
      }
-     void createTerrain()
+     void createPath()
      {
           //Create the terrain grid
           terrain = new Grid(20, 20);
@@ -91,6 +93,18 @@ public class TerrainController : MonoBehaviour
           foreach (Tile tile in semiPath)
           {
                tile.gameObject = roadPrefab;
+          }
+     }
+
+     void drawGrass(GameObject parent)
+     {
+          foreach (Tile tile in terrain.tiles)
+          {
+               if (tile.gameObject == null)
+               {
+                    tile.gameObject = Object.Instantiate(grassPrefab, new Vector3(tile.x, 0, tile.y) * tile.size, Quaternion.Euler(0, 0, 0), parent.transform);
+                    tile.gameObject.name = tile.x + " " + tile.y;
+               }
           }
      }
 }

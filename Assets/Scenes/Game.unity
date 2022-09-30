@@ -286,6 +286,7 @@ MonoBehaviour:
   roadPrefab: {fileID: 4629774773643938294, guid: c80683e702ed99a438a643767e2a896f, type: 3}
   castlePrefab: {fileID: 2591747033728977276, guid: 931ba3e7cf9a9e14bbb67330469e0d1c, type: 3}
   portalPrefab: {fileID: 2553885266242125370, guid: 1ed7cae8dec62e645b1fa788418d6358, type: 3}
+  grassPrefab: {fileID: 175682910526029466, guid: 0acc937200a3f9043b2f6a1b6ee9d4cd, type: 3}
   gameData: {fileID: 11400000, guid: fff7f5cc8e4e06043bcb6d6bff06fd6b, type: 2}
 --- !u!4 &170276880
 Transform:

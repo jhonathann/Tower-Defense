@@ -4,39 +4,57 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-     public List<Tile> path;
+     public GameData gameData;
      float speed;
      int currentCheckPoint;
      Vector3 direction;
      void Start()
      {
-          //Get the path to travel
-          path = GameObject.Find("Terrain").GetComponent<TerrainController>().path;
-          //Set the starting position to the end of the path
-          currentCheckPoint = path.Count - 1;
-          this.transform.position = path[currentCheckPoint].gameObject.transform.position;
-          speed = 20;
-          direction = Vector3.Normalize(path[currentCheckPoint].gameObject.transform.position - this.transform.position);
+          initializeEnemy();
      }
 
      void Update()
      {
+          travelPath();
+          checkForArrival();
+
+     }
+     void initializeEnemy()
+     {
+          //Set the starting position to the end of the path
+          currentCheckPoint = gameData.path.Count - 1;
+          this.transform.position = gameData.path[currentCheckPoint].gameObject.transform.position;
+          //Sets the speed
+          speed = 20;
+          //Sets the initial direction vector
+          direction = Vector3.Normalize(gameData.path[currentCheckPoint].gameObject.transform.position - this.transform.position);
+     }
+     void travelPath()
+     {
+          //Travels the path
           if (currentCheckPoint >= 0)
           {
                this.transform.Translate(direction * Time.deltaTime * speed);
-               if (Vector3.Distance(this.transform.position, path[currentCheckPoint].gameObject.transform.position) < 0.5f)
+               if (Vector3.Distance(this.transform.position, gameData.path[currentCheckPoint].gameObject.transform.position) < 0.5f)
                {
                     currentCheckPoint--;
+                    //The try-catch block is just for the last case when index gets to -1
                     try
                     {
-                         direction = Vector3.Normalize(path[currentCheckPoint].gameObject.transform.position - this.transform.position);
+                         direction = Vector3.Normalize(gameData.path[currentCheckPoint].gameObject.transform.position - this.transform.position);
                     }
                     catch { }
                }
           }
+     }
+     void checkForArrival()
+     {
+          //When the enemy reaches the castle
           if (currentCheckPoint == 0)
           {
                Destroy(this.gameObject);
+               //Reduces the health
+               gameData.health--;
           }
      }
 }

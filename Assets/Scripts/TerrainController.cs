@@ -10,7 +10,7 @@ public class TerrainController : MonoBehaviour
      public GameObject castlePrefab;
      public GameObject portalPrefab;
      private Grid terrain;
-     public List<Tile> path;
+     public GameData gameData;
      void Awake()
      {
           //Function that creates the terrain 
@@ -26,22 +26,22 @@ public class TerrainController : MonoBehaviour
           terrain = new Grid(20, 20);
 
           //Getting the full path using diferent points (min 2 points start and base)(else it will throw an indexOutOfRange exeption)
-          path = getFullPath(5);
+          gameData.path = getFullPath(5);
 
           //Remove repeated elements from the path
-          path = path.Distinct().ToList();
+          gameData.path = gameData.path.Distinct().ToList();
 
-          Tile castle = path[0];
-          Tile portal = path[path.Count - 1];
+          Tile castle = gameData.path[0];
+          Tile portal = gameData.path[gameData.path.Count - 1];
 
           //Assign the corresponding prefabs to the base and the portal
           castle.gameObject = castlePrefab;
           portal.gameObject = portalPrefab;
 
           //Draw the grid (it uses this.gameobject as a parameter to assign the terrain GameObject as the father of all the tiles)
-          terrain.drawPath(path, this.gameObject);
+          terrain.drawPath(gameData.path, this.gameObject);
 
-          castle.gameObject.transform.LookAt(path[1].gameObject.transform);
+          castle.gameObject.transform.LookAt(gameData.path[1].gameObject.transform);
           portal.gameObject.transform.LookAt(portal.previous.gameObject.transform);
           castle.gameObject.name = "Castle";
           portal.gameObject.name = "Portal";
@@ -290,7 +290,7 @@ public class Grid
           return null;
      }
 
-     //Function that draws the whole grid instantiating the prefab that every tile has
+     //Function that draws the whole grid instantiating the prefab that every tile has and setting each tile to look at the previous tile of the path
      public void drawPath(List<Tile> path, GameObject parent)
      {
           foreach (Tile tile in path)
@@ -305,7 +305,7 @@ public class Grid
           }
      }
 }
-
+//Tile class that is used within the grid
 public class Tile
 {
      public GameObject gameObject;

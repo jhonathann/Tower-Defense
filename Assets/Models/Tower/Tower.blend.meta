@@ -7,8 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Brick
+    second: {fileID: 2100000, guid: c731864105d2ea249b0a98d442bcfe20, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Cristal
     second: {fileID: 2100000, guid: a98522f034c5b564abb7fbc98d741c66, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: f3f007aa3f28e274da1ec9f7c3e6dc6a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stone
+    second: {fileID: 2100000, guid: 3d7d917cb3c07504c8309767986f35e7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

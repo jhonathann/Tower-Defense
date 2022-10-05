@@ -42,7 +42,7 @@ public class TerrainController : MonoBehaviour
           portal.gameObject = portalPrefab;
 
           //Draw the grid (it uses this.gameobject as a parameter to assign the terrain GameObject as the father of all the tiles)
-          terrain.drawPath(gameData.path, this.gameObject);
+          drawPath(gameData.path, this.gameObject);
 
           castle.gameObject.transform.LookAt(gameData.path[1].gameObject.transform);
           portal.gameObject.transform.LookAt(portal.previous.gameObject.transform);
@@ -96,7 +96,20 @@ public class TerrainController : MonoBehaviour
                tile.gameObject = roadPrefab;
           }
      }
-
+     //Function that draws the whole grid instantiating the prefab that every tile has and setting each tile to look at the previous tile of the path
+     public void drawPath(List<Tile> path, GameObject parent)
+     {
+          foreach (Tile tile in path)
+          {
+               try
+               {
+                    tile.gameObject = Object.Instantiate(tile.gameObject, new Vector3(tile.x, 0, tile.y) * tile.size, tile.gameObject.transform.rotation, parent.transform);
+                    tile.gameObject.name = tile.x + " " + tile.y;
+                    tile.gameObject.transform.LookAt(tile.previous.gameObject.transform);
+               }
+               catch { }
+          }
+     }
      void drawGrass(GameObject parent)
      {
           foreach (Tile tile in terrain.tiles)
@@ -303,21 +316,6 @@ public class Grid
           //This is only reachable if there is no possible path
           return null;
      }
-
-     //Function that draws the whole grid instantiating the prefab that every tile has and setting each tile to look at the previous tile of the path
-     public void drawPath(List<Tile> path, GameObject parent)
-     {
-          foreach (Tile tile in path)
-          {
-               try
-               {
-                    tile.gameObject = Object.Instantiate(tile.gameObject, new Vector3(tile.x, 0, tile.y) * tile.size, tile.gameObject.transform.rotation, parent.transform);
-                    tile.gameObject.name = tile.x + " " + tile.y;
-                    tile.gameObject.transform.LookAt(tile.previous.gameObject.transform);
-               }
-               catch { }
-          }
-     }
 }
 //Tile class that is used within the grid
 public class Tile
@@ -327,7 +325,7 @@ public class Tile
      public int y;
      public float size;
      public int f;
-     public int g;
+     public int g = int.MaxValue; //Start with the highest cost
      public Tile previous;
      public Tile(int x, int y, float size = 10)
      {

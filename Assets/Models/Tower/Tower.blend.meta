@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6041440549c8d2c4186cbe7daabf8d0a
+guid: 0559a9959e5cb7c498ef405b33c4e114
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Grass
-    second: {fileID: 2100000, guid: 71f08d210ad7fd74b8a6ebdeacfc785d, type: 2}
+      name: Cristal
+    second: {fileID: 2100000, guid: a98522f034c5b564abb7fbc98d741c66, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -47,8 +47,8 @@ ModelImporter:
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0

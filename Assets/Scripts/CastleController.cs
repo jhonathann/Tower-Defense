@@ -19,17 +19,6 @@ public class CastleController : MonoBehaviour
                Destroy(this.gameObject);
           }
      }
-
-     void OnMouseEnter()
-     {
-          Debug.Log("Entering Castle");
-     }
-
-     void OnMouseExit()
-     {
-          Debug.Log("Exiting Castle");
-     }
-
      void OnTriggerEnter(Collider enteringObjectCollider)
      {
           //Only decreases health if the entering collider belongs to an enemy (this is to considere other adjecent tiles that also have colliders)

@@ -16,6 +16,7 @@ public class TerrainController : MonoBehaviour
      {
           //Function that creates the path 
           createPath();
+          //Function that assigns the remaining terraing to a grass tile
           drawGrass(this.gameObject);
      }
      void Update()

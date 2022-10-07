@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
      public GameData gameData;
      float speed;
-     int currentCheckPoint;
+     int goalCheckPoint;
      Vector3 direction;
      void Start()
      {
@@ -19,35 +19,30 @@ public class EnemyController : MonoBehaviour
      }
      void initializeEnemy()
      {
-          //Set the starting position to the end of the path
-          currentCheckPoint = gameData.path.Count - 1;
-          this.transform.position = gameData.path[currentCheckPoint].gameObject.transform.position;
-          //Sets the speed
+          //Set the starting position to one tile before the end of the path
+          goalCheckPoint = gameData.path.Count - 2;
+          //Set the speed
           speed = 20;
-          //Sets the initial direction vector
-          direction = Vector3.Normalize(gameData.path[currentCheckPoint].gameObject.transform.position - this.transform.position);
+          //Set the starting mov ement direction
+          direction = Vector3.Normalize(gameData.path[goalCheckPoint].gameObject.transform.position - this.transform.position);
      }
      void travelPath()
      {
           //Travels the path
-          if (currentCheckPoint >= 0)
+          if (goalCheckPoint >= 0)
           {
-               this.transform.Translate(direction * Time.deltaTime * speed);
-               if (Vector3.Distance(this.transform.position, gameData.path[currentCheckPoint].gameObject.transform.position) < 1f)
+               this.transform.Translate(direction * Time.deltaTime * speed, Space.World);
+               if (Vector3.Distance(this.transform.position, gameData.path[goalCheckPoint].gameObject.transform.position) < 1f)
                {
-                    currentCheckPoint--;
-                    //The try-catch block is just for the last case when index gets to -1
-                    try
-                    {
-                         direction = Vector3.Normalize(gameData.path[currentCheckPoint].gameObject.transform.position - this.transform.position);
-                    }
-                    catch { }
+                    goalCheckPoint--;
+                    direction = Vector3.Normalize(gameData.path[goalCheckPoint].gameObject.transform.position - this.transform.position);
                }
           }
      }
 
      void OnTriggerEnter(Collider enteringObjectCollider)
      {
+          //Checks if it has reached the castle
           if (enteringObjectCollider.gameObject.name == "Castle")
           {
                Destroy(this.gameObject);

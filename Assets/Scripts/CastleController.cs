@@ -25,7 +25,6 @@ public class CastleController : MonoBehaviour
           if (enteringObjectCollider.gameObject.name == "Enemy(Clone)")
           {
                gameData.health--;
-               Debug.Log(gameData.health);
           }
      }
 }

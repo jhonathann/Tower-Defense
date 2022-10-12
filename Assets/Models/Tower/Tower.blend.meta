@@ -8,7 +8,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Brick
-    second: {fileID: 2100000, guid: c731864105d2ea249b0a98d442bcfe20, type: 2}
+    second: {fileID: 2100000, guid: 86416b9fd2a1abf4bb25276b11eda09e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Channalizer
+    second: {fileID: 2100000, guid: f7027ffdb7afe194eb419e6b0370510f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Channelizer
+    second: {fileID: 2100000, guid: f7027ffdb7afe194eb419e6b0370510f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -22,8 +32,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: 86416b9fd2a1abf4bb25276b11eda09e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Stone
     second: {fileID: 2100000, guid: 3d7d917cb3c07504c8309767986f35e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: 86416b9fd2a1abf4bb25276b11eda09e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

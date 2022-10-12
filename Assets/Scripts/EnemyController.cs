@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
      public GameData gameData;
      float speed;
-     int goalCheckPoint;
+     public int goalCheckPoint;
      Vector3 direction;
      void Start()
      {

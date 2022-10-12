@@ -106,11 +106,13 @@ Material:
     - _AlphaClip: 0
     - _Blend: 0
     - _BlendOp: 0
+    - _Brightness: 0.3
     - _BumpScale: 1
     - _ColorMask: 15
     - _Cull: 2
     - _Culling: 2
     - _Cutoff: 0.5
+    - _Detail: 0.3
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
@@ -132,6 +134,7 @@ Material:
     - _StencilFail: 0
     - _StencilOp: 0
     - _StencilZFail: 0
+    - _Strength: 0.5
     - _Surface: 0
     - _UVSec: 0
     - _UseAoMap: 0

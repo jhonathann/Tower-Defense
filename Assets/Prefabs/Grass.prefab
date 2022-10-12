@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mat1: {fileID: 2100000, guid: 71f08d210ad7fd74b8a6ebdeacfc785d, type: 2}
   Mat2: {fileID: 2100000, guid: 1da883f87fb0fac44b3e3e331ba42835, type: 2}
-  towerPrefab: {fileID: 1599318296282474435, guid: e25bafb784f5ca045b6ce45f3ff7a668, type: 3}
+  towerPrefab: {fileID: 4111053477171976457, guid: e25bafb784f5ca045b6ce45f3ff7a668, type: 3}
 --- !u!1 &1207481045931712177
 GameObject:
   m_ObjectHideFlags: 0

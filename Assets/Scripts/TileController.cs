@@ -19,7 +19,7 @@ public class TileController : MonoBehaviour
 
      void OnMouseEnter()
      {
-          tower = Instantiate(towerPrefab, this.transform.position, towerPrefab.transform.rotation);
+          tower = Instantiate(towerPrefab, this.transform.position + Vector3.up, towerPrefab.transform.rotation);
           tower.gameObject.GetComponentInChildren<Renderer>().material = Mat2;
      }
      void OnMouseExit()
@@ -29,6 +29,6 @@ public class TileController : MonoBehaviour
      }
      void OnMouseUpAsButton()
      {
-          Instantiate(towerPrefab, this.transform.position, towerPrefab.transform.rotation);
+          Instantiate(towerPrefab, this.transform.position + Vector3.up, towerPrefab.transform.rotation);
      }
 }

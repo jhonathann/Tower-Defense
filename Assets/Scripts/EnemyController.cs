@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
      public GameData gameData;
      float speed;
      public int goalCheckPoint;
+     int healt = 5;
      Vector3 direction;
      void Start()
      {
@@ -47,6 +48,15 @@ public class EnemyController : MonoBehaviour
           {
                Destroy(this.gameObject);
           }
+          if (enteringObjectCollider.gameObject.name == "Capsule")
+          {
+               healt--;
+               if (healt <= 0)
+               {
+                    Destroy(this.gameObject);
+               }
+          }
      }
+
 
 }

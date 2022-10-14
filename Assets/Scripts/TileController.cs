@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class TileController : MonoBehaviour
 {
-     public Material Mat1;
-     public Material Mat2;
      public GameObject towerPrefab;
-     GameObject tower;
+     public GameObject towerMockPrefab;
+     GameObject towerMock;
      void Start()
      {
 
@@ -19,13 +18,11 @@ public class TileController : MonoBehaviour
 
      void OnMouseEnter()
      {
-          tower = Instantiate(towerPrefab, this.transform.position + Vector3.up, towerPrefab.transform.rotation);
-          tower.gameObject.GetComponentInChildren<Renderer>().material = Mat2;
+          towerMock = Instantiate(towerMockPrefab, this.transform.position + Vector3.up, towerPrefab.transform.rotation);
      }
      void OnMouseExit()
      {
-          Destroy(tower);
-          tower.gameObject.GetComponentInChildren<Renderer>().material = Mat1;
+          Destroy(towerMock);
      }
      void OnMouseUpAsButton()
      {

@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
      }
      void initializeEnemy()
      {
+          this.gameObject.name = "Enemy";
           //Set the starting position to one tile before the end of the path
           goalCheckPoint = gameData.path.Count - 2;
           //Set the speed

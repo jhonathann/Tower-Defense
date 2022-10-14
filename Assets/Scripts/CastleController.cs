@@ -22,7 +22,7 @@ public class CastleController : MonoBehaviour
      void OnTriggerEnter(Collider enteringObjectCollider)
      {
           //Only decreases health if the entering collider belongs to an enemy (this is to considere other adjecent tiles that also have colliders)
-          if (enteringObjectCollider.gameObject.name == "Enemy(Clone)")
+          if (enteringObjectCollider.gameObject.name == "Enemy")
           {
                gameData.health--;
           }

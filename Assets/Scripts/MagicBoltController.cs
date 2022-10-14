@@ -29,8 +29,7 @@ public class MagicBoltController : MonoBehaviour
      }
      void OnTriggerEnter(Collider enteringObjectCollider)
      {
-          Debug.Log(enteringObjectCollider.gameObject.name);
-          if (enteringObjectCollider.gameObject.name == "Enemy(Clone)")
+          if (enteringObjectCollider.gameObject.name == "Enemy")
           {
                Destroy(this.gameObject);
           }

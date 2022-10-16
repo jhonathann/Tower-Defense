@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/StyleSheets/HUD.uss?fileID=7433441132597879392&amp;guid=d5d1caacb21b2694b8abaf68f451928f&amp;type=3#HUD" />
+    <ui:VisualElement name="GlobalContainer" class="globalContainer">
+        <ui:VisualElement name="TopContainer" class="topContainer">
+            <ui:ProgressBar name="HealthBar" high-value="10" title="Castle Health" class="healthBar" />
+            <ui:Label text="Press Esc to Open the Menu" display-tooltip-when-elided="true" name="EscInfo" class="escInfo" />
+        </ui:VisualElement>
+        <ui:VisualElement name="BottomContainer" class="bottomContainer">
+            <ui:Button text="Next Wave" display-tooltip-when-elided="true" name="NextWaveButton" enable-rich-text="true" class="nextWaveButton" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

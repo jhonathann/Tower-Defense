@@ -5,15 +5,19 @@ using UnityEngine;
 public class PortalController : MonoBehaviour
 {
      public GameObject enemy;
-     public List<Tile> path;
+     public GameData gameData;
      void Start()
      {
-          StartCoroutine(createWave(enemy));
+
      }
 
      void Update()
      {
-
+          if (gameData.sendNextWave)
+          {
+               StartCoroutine(createWave(enemy));
+               gameData.sendNextWave = false;
+          }
      }
 
      IEnumerator createWave(GameObject enemy)

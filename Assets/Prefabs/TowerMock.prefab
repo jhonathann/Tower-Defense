@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f3f007aa3f28e274da1ec9f7c3e6dc6a, type: 2}
+  - {fileID: 2100000, guid: 70ec026ad9bed024fa641271525383bb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -144,7 +144,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f7027ffdb7afe194eb419e6b0370510f, type: 2}
+  - {fileID: 2100000, guid: c2b7b8dea61edfa4dbbb01c07f603221, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -227,7 +227,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3d7d917cb3c07504c8309767986f35e7, type: 2}
+  - {fileID: 2100000, guid: 7f9fe659e78f89e408e1b6ca6fb8fd59, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -310,7 +310,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a98522f034c5b564abb7fbc98d741c66, type: 2}
+  - {fileID: 2100000, guid: e8043ffc49dd00d43b0d76ef20870f36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -341,7 +341,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8276601331173136949}
-  - component: {fileID: 521788684453649801}
   m_Layer: 0
   m_Name: TowerMock
   m_TagString: Untagged
@@ -369,19 +368,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &521788684453649801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8761671314687246479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aaaf6786c13a0a418734f09aebbffb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hologram: {fileID: -6465566751694194690, guid: bd0700aae171a7a478f86c94151c077b, type: 3}
 --- !u!1 &9045259162995366326
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +429,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 86416b9fd2a1abf4bb25276b11eda09e, type: 2}
+  - {fileID: 2100000, guid: 720d5b7ea9c18604eacce547c77aa2c4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

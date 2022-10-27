@@ -57,6 +57,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DiffuseColor:
+        m_Texture: {fileID: 2800000, guid: d9441803fe1862647bee17d384d806bd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -104,6 +108,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
+    - _AmbientStrength: 0.51
     - _Blend: 0
     - _Brightness: 0.51
     - _BumpScale: 1
@@ -116,9 +121,12 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _Falloff_Amount: 0
+    - _Fresnel_Size: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Lighting_Cutoff: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

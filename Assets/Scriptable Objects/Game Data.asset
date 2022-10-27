@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977f3958baa68094b8ef4a9760b35f54, type: 3}
   m_Name: Game Data
   m_EditorClassIdentifier: 
+  health: 10
+  sendNextWave: 0

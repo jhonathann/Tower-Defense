@@ -160,7 +160,7 @@ Camera:
   m_GameObject: {fileID: 169962649}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.6226415, g: 0.4504272, b: 0.24377, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -333,7 +333,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -390,14 +390,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317795755}
-  m_LocalRotation: {x: 0.21011023, y: -0.5141426, z: 0.3097265, w: 0.77173877}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 40, y: -60, z: 20}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!114 &317795758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,7 +451,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 567b9b65d136f174ca6b6afec3166b75, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 5098e56afa54aca45818bec6bfc2b24e, type: 2}
 --- !u!4 &1238911751
 Transform:
   m_ObjectHideFlags: 0

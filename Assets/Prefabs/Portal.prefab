@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d50ca06e78b2e45a95ad063eae7422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 6245211080879677266, guid: 52285c26693188f4fb8393490aa3e2f5, type: 3}
+  enemy: {fileID: 1078639767555062862, guid: dd5f58a67ec22374e8823c1b38d52b54, type: 3}
   gameData: {fileID: 11400000, guid: fff7f5cc8e4e06043bcb6d6bff06fd6b, type: 2}
 --- !u!65 &-3362580395969053551
 BoxCollider:

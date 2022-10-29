@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
      public int goalCheckPoint;
      int healt = 5;
      Vector3 direction;
+     private const float ENEMY_HEIGHT = 1f;
      void Start()
      {
           initializeEnemy();
@@ -18,30 +19,6 @@ public class EnemyController : MonoBehaviour
      {
           travelPath();
      }
-     void initializeEnemy()
-     {
-          this.gameObject.name = "Enemy";
-          //Set the starting position to one tile before the end of the path
-          goalCheckPoint = gameData.path.Count - 2;
-          //Set the speed
-          speed = 20;
-          //Set the starting mov ement direction
-          direction = Vector3.Normalize(gameData.path[goalCheckPoint].gameObject.transform.position - this.transform.position);
-     }
-     void travelPath()
-     {
-          //Travels the path
-          if (goalCheckPoint >= 0)
-          {
-               this.transform.Translate(direction * Time.deltaTime * speed, Space.World);
-               if (Vector3.Distance(this.transform.position, gameData.path[goalCheckPoint].gameObject.transform.position) < 1f)
-               {
-                    goalCheckPoint--;
-                    direction = Vector3.Normalize(gameData.path[goalCheckPoint].gameObject.transform.position - this.transform.position);
-               }
-          }
-     }
-
      void OnTriggerEnter(Collider enteringObjectCollider)
      {
           //Checks if it has reached the castle
@@ -58,6 +35,48 @@ public class EnemyController : MonoBehaviour
                }
           }
      }
+     void initializeEnemy()
+     {
+          //Setting the correct name (used in the collider interactions)
+          this.gameObject.name = "Enemy";
+          //Setting the correct Hight so the enemy does not clip with the ground
+          this.transform.position += Vector3.up * ENEMY_HEIGHT;
+          //Set the starting position to one tile before the end of the path
+          goalCheckPoint = gameData.path.Count - 2;
+          //Set the speed
+          speed = 20;
+          //Set the starting mov ement direction
+          direction = getXZDirection();
+     }
+     void travelPath()
+     {
+          //Travels the path
+          if (goalCheckPoint >= 0)
+          {
+               this.transform.Translate(direction * Time.deltaTime * speed, Space.World);
+               if (calculateXZDistance() < 1f)
+               {
+                    goalCheckPoint--;
+                    direction = getXZDirection();
+               }
+          }
+     }
 
+     // gets the direction in the XZ plane
+     Vector3 getXZDirection()
+     {
+          Vector3 direction = Vector3.Normalize(gameData.path[goalCheckPoint].gameObject.transform.position - this.transform.position);
+          direction.y = 0;
+          return direction;
+     }
 
+     //calculate the distance to the checkpoint ignoring the y component (height);
+     float calculateXZDistance()
+     {
+          Vector3 pointA = this.transform.position;
+          Vector3 pointB = gameData.path[goalCheckPoint].gameObject.transform.position;
+          pointA.y = 0;
+          pointB.y = 0;
+          return Vector3.Distance(pointA, pointB);
+     }
 }

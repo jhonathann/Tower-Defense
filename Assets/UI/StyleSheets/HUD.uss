@@ -47,7 +47,7 @@
     -unity-font-style: bold;
     font-size: 200%;
     -unity-text-align: middle-center;
-    border-radius: 50%;
+    border-radius: 20%;
     border-color: rgb(0, 0, 0);
     border-width: 5px;
     color: white;

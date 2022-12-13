@@ -1,8 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/StyleSheets/StartPanel.uss?fileID=7433441132597879392&amp;guid=e4157f564dbf78040ab9f0eccfa7a732&amp;type=3#StartPanel" />
+    <Style src="project://database/Assets/UI/StyleSheets/GeneralStyles.uss?fileID=7433441132597879392&amp;guid=0ade87dcc933ad14d9080c358e4c0bda&amp;type=3#GeneralStyles" />
     <ui:VisualElement name="GlobalContainer" class="globalContainer">
-        <ui:Button name="StartButton" text="START" class="button" />
-        <ui:Button name="SelectTowersButton" text="SELECT TOWERS" class="button" />
-        <ui:Button text="EXIT" name="ExitButton" class="button" />
+        <ui:VisualElement name="LeftColumn" class="leftColumn">
+            <ui:Button name="StartButton" text="START" class="button" />
+            <ui:Button name="SelectTowersButton" text="SELECT TOWERS" class="button" />
+            <ui:Button text="EXIT" name="ExitButton" class="button" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

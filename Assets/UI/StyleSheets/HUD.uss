@@ -3,30 +3,30 @@
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     height: 100%;
     visibility: hidden;
-    -unity-font-style: bold;
 }
 
 .topContainer{
      flex-direction: row;
-     align-self: center;
      justify-content: space-between;
      width: 90%;
      height: 10%;
 }
 .bottomContainer{
      flex-direction: row;
-     align-self: center;
      justify-content: flex-end;
      width: 90%;
      height: 10%;
 }
 .escInfo{
      visibility: visible;
-     -unity-text-align: middle-center;
-     color: white;
+     -unity-font-style: bold;
+    font-size: 200%;
+    -unity-text-align: middle-center;
+     color: var(--lightColor);
 }
 
 .healthBar{
@@ -37,32 +37,32 @@
 }
 
 .unity-progress-bar__progress{
-     background-color: #800000;
+     background-color: var(--darkColor);
 }
 .nextWaveButton{
      visibility: visible;
+     width: 20%;
+     height: 80%;
      justify-content: center;
-     border-radius: 50%;
-     background-color: rgb(37, 63, 36);
+     background-color: rgba(0,0,0,0);
     -unity-font-style: bold;
     font-size: 200%;
     -unity-text-align: middle-center;
-    border-radius: 20%;
-    border-color: rgb(0, 0, 0);
-    border-width: 5px;
-    color: white;
+    border-width: 0px;
+    color: var(--lightColor);
 }
 
-.netxWaveButton:hover {
+.nextWaveButton:hover {
     transition: 0.25s;
     transition-timing-function: var(--transitionTimingFunction);
-    background-color: rgb(50, 50, 50);
     scale: 1.1;
+    color: var(--darkColor);
+    border-width: 5px;
+    border-color: var(--darkColor);
 }
 
 .nextWaveButton:active {
     transition: 0.25s;
     transition-timing-function: var(--transitionTimingFunction);
-    background-color: rgb(150, 150, 150);
     scale: 0.95;
 }

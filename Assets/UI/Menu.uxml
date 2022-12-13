@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/StyleSheets/Menu.uss?fileID=7433441132597879392&amp;guid=220a9ac230da5fe439f473624701e6b2&amp;type=3#Menu" />
+    <Style src="project://database/Assets/UI/StyleSheets/GeneralStyles.uss?fileID=7433441132597879392&amp;guid=0ade87dcc933ad14d9080c358e4c0bda&amp;type=3#GeneralStyles" />
     <ui:VisualElement name="GlobalContainer" class="globalContainer">
         <ui:VisualElement name="MenuContainer" class="menuContainer">
             <ui:Button text="Continue" display-tooltip-when-elided="true" name="ContinueButton" class="button" />

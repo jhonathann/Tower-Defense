@@ -1,0 +1,9 @@
+/*Repeated values used as variables*/
+:root {
+    --transitionTimingFunction: ease-in-out-back;
+    --darkColor: #10240d;
+    --middleColor: #717a6f;
+    --lightColor: #c0c0c0;
+
+    -unity-font-definition: url(Fonts/NightmarePills.ttf);
+}

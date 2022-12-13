@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/StyleSheets/HUD.uss?fileID=7433441132597879392&amp;guid=d5d1caacb21b2694b8abaf68f451928f&amp;type=3#HUD" />
+    <Style src="project://database/Assets/UI/StyleSheets/GeneralStyles.uss?fileID=7433441132597879392&amp;guid=0ade87dcc933ad14d9080c358e4c0bda&amp;type=3#GeneralStyles" />
     <ui:VisualElement name="GlobalContainer" class="globalContainer">
         <ui:VisualElement name="TopContainer" class="topContainer">
             <ui:ProgressBar name="HealthBar" high-value="10" title="Castle Health" class="healthBar" />

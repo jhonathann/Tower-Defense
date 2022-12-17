@@ -1,0 +1,6 @@
+:root{
+     width: 9.5%;
+     height: 9.5%;
+     background-color: var(--darkColor);
+     margin: 0.5%;
+}

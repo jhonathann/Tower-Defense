@@ -1,0 +1,110 @@
+.globalContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--lightColor);
+  border-width: 10px;
+  border-color: var(--darkColor);
+}
+
+.leftColumn {
+  flex-direction: column;
+  width: 30%;
+  height: 100%;
+  justify-content: space-around;
+  background-color: var(--middleColor);
+}
+
+.rightColumn {
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 70%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentContainer {
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 90%;
+  height: 90%;
+  justify-content: center;
+  background-color: var(--middleColor);
+  border-radius: 1%;
+  visibility: hidden;
+}
+
+.contentContainer:enabled {
+  transition: 0.5s;
+  transition-timing-function: var(--transitionTimingFunction);
+  visibility: visible;
+  scale: 1;
+}
+
+.contentContainer:disabled {
+  transition: 0.5s;
+  transition-timing-function: var(--transitionTimingFunction);
+  visibility: hidden;
+  scale: 0;
+}
+
+.visualizationContainer {
+  flex-direction: row;
+  width: 100%;
+  height: 70%;
+}
+.partsContainer {
+  flex-direction: row;
+  width: 100%;
+  height: 30%;
+}
+.towerPreviewContainer {
+  width: 80%;
+  height: 100%;
+}
+.selectedPartsContainer {
+  flex-direction: column;
+  width: 20%;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.part {
+  width: 80%;
+  height: 25%;
+  background-color: var(--darkColor);
+}
+.button {
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 80%;
+  height: 10%;
+  align-self: center;
+  background-color: rgba(0, 0, 0, 0);
+  -unity-font-style: bold;
+  font-size: 200%;
+  -unity-text-align: middle-left;
+  color: var(--lightColor);
+  border-width: 0px;
+}
+
+.button:hover {
+  transition: 0.25s;
+  transition-timing-function: var(--transitionTimingFunction);
+  scale: 1.1;
+  color: var(--darkColor);
+  border-width: 5px;
+  border-color: var(--darkColor);
+}
+
+.button:active {
+  transition: 0.25s;
+  transition-timing-function: var(--transitionTimingFunction);
+  scale: 0.95;
+}

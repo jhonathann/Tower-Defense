@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/StartPage.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/TowerManager.unity
-    guid: 1f99549d9e63ec34c872fd14ea79955d
-  - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 6556c2c9f0af6da4590be3c51397a786
   m_configObjects: {}

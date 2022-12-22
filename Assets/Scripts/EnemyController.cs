@@ -2,22 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script that controls the behaviour of the enemies
+/// </summary>
 public class EnemyController : MonoBehaviour
 {
+     /// <summary>
+     /// Reference to the gameData Scriptable object
+     /// </summary>
      public GameData gameData;
+     /// <summary>
+     /// Speed of the enemy
+     /// </summary>
      float speed;
+     /// <summary>
+     /// Variable that defines the next checkpoint for parth traveling
+     /// </summary>
      public int goalCheckPoint;
+     /// <summary>
+     /// Health of the enemy
+     /// </summary>
      int healt = 5;
+     /// <summary>
+     /// Used for the direction of the movement
+     /// </summary>
      Vector3 direction;
+     /// <summary>
+     /// constant of the enemi height used to avoid clipping with the terrain
+     /// </summary>
      private const float ENEMY_HEIGHT = 1f;
      void Start()
      {
-          initializeEnemy();
+          InitializeEnemy();
      }
 
      void Update()
      {
-          travelPath();
+          TravelPath();
      }
      void OnTriggerEnter(Collider enteringObjectCollider)
      {
@@ -32,10 +53,15 @@ public class EnemyController : MonoBehaviour
                if (healt <= 0)
                {
                     Destroy(this.gameObject);
+                    Part part = new Part();
+                    Debug.Log(part.rarity + " " + part.type + " " + part.specificTypeInfo);
                }
           }
      }
-     void initializeEnemy()
+     /// <summary>
+     /// Sets the starting conditions of the enemy
+     /// </summary>
+     void InitializeEnemy()
      {
           //Setting the correct name (used in the collider interactions)
           this.gameObject.name = "Enemy";
@@ -46,32 +72,40 @@ public class EnemyController : MonoBehaviour
           //Set the speed
           speed = 20;
           //Set the starting mov ement direction
-          direction = getXZDirection();
+          direction = GetXZDirection();
      }
-     void travelPath()
+
+     /// <summary>
+     /// Updates the logic that enables the travel of the path
+     /// </summary>
+     void TravelPath()
      {
           //Travels the path
           if (goalCheckPoint >= 0)
           {
                this.transform.Translate(direction * Time.deltaTime * speed, Space.World);
-               if (calculateXZDistance() < 1f)
+               if (CalculateXZDistance() < 1f)
                {
                     goalCheckPoint--;
-                    direction = getXZDirection();
+                    direction = GetXZDirection();
                }
           }
      }
-
-     // gets the direction in the XZ plane
-     Vector3 getXZDirection()
+     /// <summary>
+     /// Gets the direction in the XZ plane
+     /// </summary>
+     /// <returns>The direction that the enemi should follow/returns>
+     Vector3 GetXZDirection()
      {
           Vector3 direction = Vector3.Normalize(gameData.path[goalCheckPoint].gameObject.transform.position - this.transform.position);
           direction.y = 0;
           return direction;
      }
-
-     //calculate the distance to the checkpoint ignoring the y component (height);
-     float calculateXZDistance()
+     /// <summary>
+     /// Calculate the distance to the checkpoint ignoring the y component (height)
+     /// </summary>
+     /// <returns>The distance beetween the 2 points</returns>
+     float CalculateXZDistance()
      {
           Vector3 pointA = this.transform.position;
           Vector3 pointB = gameData.path[goalCheckPoint].gameObject.transform.position;

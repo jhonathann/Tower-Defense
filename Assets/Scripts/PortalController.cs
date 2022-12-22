@@ -6,9 +6,12 @@ public class PortalController : MonoBehaviour
 {
      public GameObject enemy;
      public GameData gameData;
+     private int waveCounter;
+     private int waveMultiplier;
      void Start()
      {
-
+          waveCounter = 1;
+          waveMultiplier = 5;
      }
 
      void Update()
@@ -17,16 +20,18 @@ public class PortalController : MonoBehaviour
           {
                StartCoroutine(createWave(enemy));
                gameData.sendNextWave = false;
+               waveCounter++;
           }
      }
 
      IEnumerator createWave(GameObject enemy)
      {
-          int numberOfEnemies = 0;
-          while (numberOfEnemies < 10)
+          int numberOfEnemies = Random.Range(waveCounter * waveMultiplier / 2, waveCounter * waveMultiplier);
+
+          for (int i = 0; i < numberOfEnemies; i++)
           {
                Instantiate(enemy, this.transform.position, this.transform.rotation, this.transform);
-               numberOfEnemies++;
+               i++;
                yield return new WaitForSeconds(1);
           }
      }

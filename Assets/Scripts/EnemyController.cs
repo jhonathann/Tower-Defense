@@ -58,7 +58,7 @@ public class EnemyController : MonoBehaviour
                {
                     Destroy(this.gameObject);
                     Part part = new Part();
-                    Debug.Log(part.rarity + " " + part.type + " " + part.specificTypeInfo);
+                    Debug.Log($"{part.rarity} {part.type} {part.specificTypeInfo}");
                }
           }
      }

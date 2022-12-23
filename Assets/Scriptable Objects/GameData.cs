@@ -15,13 +15,8 @@ public class GameData : ScriptableObject
      /// The health of the player
      /// </summary>
      public int health;
-     /// <summary>
-     /// This enables the next wave
-     /// </summary>
-     public bool sendNextWave;
      void OnEnable()
      {
           health = 10;
-          sendNextWave = false;
      }
 }

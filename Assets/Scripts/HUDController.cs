@@ -30,6 +30,6 @@ public class HUDController : MonoBehaviour
 
      void nextWaveButtonOnClick(ClickEvent evt)
      {
-          gameData.sendNextWave = true;
+          PortalController.NextWave?.Invoke();
      }
 }

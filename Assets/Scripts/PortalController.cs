@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 /// <summary>
 /// Class that controlls the portal behaviour (creating of waves)
@@ -8,28 +9,24 @@ using UnityEngine;
 public class PortalController : MonoBehaviour
 {
      /// <summary>
-     /// Reference to the gameData scriptableObject
-     /// </summary>
-     public GameData gameData;
-     /// <summary>
      /// Controlls the dificulty of the level increasing its value each wave and creating more enemies accordingly
      /// </summary>
      private float difficulty;
+     /// <summary>
+     /// Action that handles the logic of when the nextWave is called
+     /// </summary>
+     public static Action NextWave;
      void Start()
      {
           difficulty = 10; //Sets the start difficulty
+          NextWave += NextWaveCalled;
      }
 
-     void Update()
+     private void NextWaveCalled()
      {
-          if (gameData.sendNextWave)
-          {
-               difficulty = difficulty * 1.2f;
-               StartCoroutine(createWave());
-               gameData.sendNextWave = false;
-          }
+          difficulty = difficulty * 1.2f;
+          StartCoroutine(createWave());
      }
-
      /// <summary>
      /// Coroutine for the creation of the wave
      /// </summary>

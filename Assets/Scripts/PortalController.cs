@@ -2,37 +2,67 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class that controlls the portal behaviour (creating of waves)
+/// </summary>
 public class PortalController : MonoBehaviour
 {
-     public GameObject enemy;
+     /// <summary>
+     /// Reference to the gameData scriptableObject
+     /// </summary>
      public GameData gameData;
-     private int waveCounter;
-     private int waveMultiplier;
+     /// <summary>
+     /// Controlls the dificulty of the level increasing its value each wave and creating more enemies accordingly
+     /// </summary>
+     private float difficulty;
      void Start()
      {
-          waveCounter = 1;
-          waveMultiplier = 5;
+          difficulty = 10; //Sets the start difficulty
      }
 
      void Update()
      {
           if (gameData.sendNextWave)
           {
-               StartCoroutine(createWave(enemy));
+               difficulty = difficulty * 1.2f;
+               StartCoroutine(createWave());
                gameData.sendNextWave = false;
-               waveCounter++;
           }
      }
 
-     IEnumerator createWave(GameObject enemy)
+     /// <summary>
+     /// Coroutine for the creation of the wave
+     /// </summary>
+     /// <returns> The coroutine</returns>
+     IEnumerator createWave()
      {
-          int numberOfEnemies = Random.Range(waveCounter * waveMultiplier / 2, waveCounter * waveMultiplier);
-
-          for (int i = 0; i < numberOfEnemies; i++)
+          // Starting values to control the dificulty
+          float difficultyCount = 0;
+          int difficultyScore = 0;
+          //While loop that stops when the dificulty is met
+          while (difficultyCount + difficultyScore <= difficulty)
           {
-               Instantiate(enemy, this.transform.position, this.transform.rotation, this.transform);
-               i++;
+               //Gets a new random enemytype
+               EnemyType enemyType = UtilityEnum.GetRandomTypeFromAnEnum<EnemyType>();
+               //Gets the difficultyScore of that type of enemy
+               difficultyScore = EnemyStats.GetDifficultyScore(enemyType);
+               //Updates the difficulty count
+               difficultyCount += difficultyScore;
+               //Instantiates the enemy according to the type
+               InstantiateAndConfigureEnemy(enemyType);
+               //Waits a second to generate the next enemy
                yield return new WaitForSeconds(1);
           }
+     }
+     /// <summary>
+     /// Function that instantiates the enemy and sets his stats according to the type
+     /// </summary>
+     /// <param name="enemyType"></param>
+     private void InstantiateAndConfigureEnemy(EnemyType enemyType)
+     {
+          GameObject enemyPrefab = EnemyStats.GetPrefab(enemyType);
+          EnemyController enemy = Instantiate(enemyPrefab, this.transform.position, this.transform.rotation, this.transform).GetComponent<EnemyController>();
+          enemy.healt = EnemyStats.GetHealth(enemyType);
+          enemy.speed = EnemyStats.GetSpeed(enemyType);
      }
 }

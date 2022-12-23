@@ -25,7 +25,7 @@ public class Part
      /// </summary>
      public Part()
      {
-          this.type = GetRandomTypeFromAnEnum<PartType>();
+          this.type = UtilityEnum.GetRandomTypeFromAnEnum<PartType>();
           this.rarity = GetRarity();
           this.specificTypeInfo = GetSpecificTypeInfo();
      }
@@ -54,25 +54,13 @@ public class Part
           switch (this.type)
           {
                case PartType.Source:
-                    return GetRandomTypeFromAnEnum<SourceType>();
+                    return UtilityEnum.GetRandomTypeFromAnEnum<SourceType>();
                case PartType.Structure:
-                    return GetRandomTypeFromAnEnum<StructureType>();
+                    return UtilityEnum.GetRandomTypeFromAnEnum<StructureType>();
                case PartType.Channalizer:
-                    return GetRandomTypeFromAnEnum<ChannalizerType>();
+                    return UtilityEnum.GetRandomTypeFromAnEnum<ChannalizerType>();
                default: return null;
           }
-     }
-
-     /// <summary>
-     /// Helper Function that returns a random value from an specific enum type
-     /// </summary>
-     /// <typeparam name="T">Type of Enum to work with</typeparam>
-     /// <returns>The generated enum value</returns>
-     private T GetRandomTypeFromAnEnum<T>()
-     {
-          Array values = System.Enum.GetValues(typeof(T));
-          T randomValue = (T)values.GetValue(UnityEngine.Random.Range(0, values.Length));
-          return randomValue;
      }
 }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1151549740154007339}
   - component: {fileID: 6840332405197773729}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Bush
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: fff7f5cc8e4e06043bcb6d6bff06fd6b, type: 2}
+  speed: 20
   goalCheckPoint: 0
+  healt: 5
 --- !u!54 &1151549740154007339
 Rigidbody:
   m_ObjectHideFlags: 0

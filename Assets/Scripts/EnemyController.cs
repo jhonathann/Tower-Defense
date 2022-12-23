@@ -14,18 +14,22 @@ public class EnemyController : MonoBehaviour
      /// <summary>
      /// Speed of the enemy
      /// </summary>
-     float speed;
+     [HideInInspector]
+     public int healt;
+     /// <summary>
+     /// Used for the direction of the movement
+     /// </summary>
+     [HideInInspector]
+     public float speed;
      /// <summary>
      /// Variable that defines the next checkpoint for parth traveling
      /// </summary>
+     [HideInInspector]
      public int goalCheckPoint;
      /// <summary>
      /// Health of the enemy
      /// </summary>
-     int healt = 5;
-     /// <summary>
-     /// Used for the direction of the movement
-     /// </summary>
+
      Vector3 direction;
      /// <summary>
      /// constant of the enemi height used to avoid clipping with the terrain
@@ -69,8 +73,6 @@ public class EnemyController : MonoBehaviour
           this.transform.position += Vector3.up * ENEMY_HEIGHT;
           //Set the starting position to one tile before the end of the path
           goalCheckPoint = gameData.path.Count - 2;
-          //Set the speed
-          speed = 20;
           //Set the starting mov ement direction
           direction = GetXZDirection();
      }

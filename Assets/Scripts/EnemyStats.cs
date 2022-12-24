@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 
 /// <summary>
 /// Class that contains the information related to the stats of the enemies
 /// </summary>
-public class EnemyStats
+public class EnemyStats : MonoBehaviour
 {
      //reference to the prefabs of the enemies
-     private static GameObject BushPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Bush.prefab");
-     private static GameObject TreePrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Tree.prefab");
+     private static GameObject BushPrefab = Resources.Load<GameObject>("Bush");
+     private static GameObject TreePrefab = Resources.Load<GameObject>("Tree");
 
      /// <summary>
      /// Dictionaty Containing all the information of the enemies
@@ -20,9 +19,10 @@ public class EnemyStats
      /// <param name="speed">Speed of the enemy</param>
      /// <param name="difficultyScore">Enemy's score of dificulty for the dificulty calculations</param>
      /// <param name="prefab">Prefab associated with the enemy</param>
-     private static readonly Dictionary<EnemyType, (int health, int speed, int difficultyScore, GameObject prefab)> enemyAttributes = new Dictionary<EnemyType, (int health, int speed, int difficultyScore, GameObject prefab)> {
-        {EnemyType.Bush,(health: 5,speed: 20, difficultyScore: 1, prefab: BushPrefab)},
-        {EnemyType.Tree,(health: 10, speed: 10, difficultyScore: 2, prefab: TreePrefab)}
+     /// /// <param name="dropRate">integer that represents the chance (in porcentage) of the enemy dropping a part</param>
+     private static readonly Dictionary<EnemyType, (int health, int speed, int difficultyScore, GameObject prefab, int dropRate)> enemyAttributes = new Dictionary<EnemyType, (int health, int speed, int difficultyScore, GameObject prefab, int dropRate)> {
+        {EnemyType.Bush,(health: 5,speed: 20, difficultyScore: 1, prefab: BushPrefab, dropRate: 10)},
+        {EnemyType.Tree,(health: 10, speed: 10, difficultyScore: 2, prefab: TreePrefab, dropRate: 20)}
      };
      /// <summary>
      /// Function to get an enemy's health
@@ -59,6 +59,15 @@ public class EnemyStats
      public static GameObject GetPrefab(EnemyType enemyType)
      {
           return enemyAttributes[enemyType].prefab;
+     }
+     /// <summary>
+     /// Function to get an enemy's droprate
+     /// </summary>
+     /// <param name="enemyType">Type of the enemy</param>
+     /// <returns>The dropRate of the enemy</returns>
+     public static int GetDropRate(EnemyType enemyType)
+     {
+          return enemyAttributes[enemyType].dropRate;
      }
 }
 

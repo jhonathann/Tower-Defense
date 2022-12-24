@@ -99,9 +99,9 @@ public enum SourceType
 /// </summary>
 public enum StructureType
 {
-     Low,
-     Medium,
-     High
+     Circular,
+     Beam,
+     Cross
 }
 /// <summary>
 /// An Enum representing the especific types within the channalizer type

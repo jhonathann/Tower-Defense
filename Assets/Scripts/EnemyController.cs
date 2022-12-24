@@ -11,28 +11,32 @@ public class EnemyController : MonoBehaviour
      /// Reference to the gameData Scriptable object
      /// </summary>
      public GameData gameData;
+
+     [HideInInspector]
+     public EnemyType type;
      /// <summary>
+     /// Health of the enemy
+     /// </summary>
+     private int healt;
+     /// /// <summary>
      /// Speed of the enemy
      /// </summary>
-     [HideInInspector]
-     public int healt;
+     private float speed;
      /// <summary>
-     /// Used for the direction of the movement
+     /// Chance of the enemy generating a part
      /// </summary>
-     [HideInInspector]
-     public float speed;
+     private int dropRate;
      /// <summary>
      /// Variable that defines the next checkpoint for parth traveling
      /// </summary>
      [HideInInspector]
      public int goalCheckPoint;
      /// <summary>
-     /// Health of the enemy
+     /// Used for the direction of the movement
      /// </summary>
-
      Vector3 direction;
      /// <summary>
-     /// constant of the enemi height used to avoid clipping with the terrain
+     /// constant of the enemy height used to avoid clipping with the terrain
      /// </summary>
      private const float ENEMY_HEIGHT = 1f;
      void Start()
@@ -57,8 +61,7 @@ public class EnemyController : MonoBehaviour
                if (healt <= 0)
                {
                     Destroy(this.gameObject);
-                    Part part = new Part();
-                    Debug.Log($"{part.rarity} {part.type} {part.specificTypeInfo}");
+                    TryGeneratePart();
                }
           }
      }
@@ -67,6 +70,10 @@ public class EnemyController : MonoBehaviour
      /// </summary>
      void InitializeEnemy()
      {
+          //Set the stats of the enemy
+          this.healt = EnemyStats.GetHealth(type);
+          this.speed = EnemyStats.GetSpeed(type);
+          this.dropRate = EnemyStats.GetDropRate(type);
           //Setting the correct name (used in the collider interactions)
           this.gameObject.name = "Enemy";
           //Setting the correct Hight so the enemy does not clip with the ground
@@ -77,6 +84,13 @@ public class EnemyController : MonoBehaviour
           direction = GetXZDirection();
      }
 
+     void TryGeneratePart()
+     {
+          int chance = Random.Range(1, 100);
+          if (chance > dropRate) return;
+          Part part = new Part();
+          Debug.Log($"{part.rarity} {part.type} {part.specificTypeInfo}");
+     }
      /// <summary>
      /// Updates the logic that enables the travel of the path
      /// </summary>

@@ -59,7 +59,6 @@ public class PortalController : MonoBehaviour
      {
           GameObject enemyPrefab = EnemyStats.GetPrefab(enemyType);
           EnemyController enemy = Instantiate(enemyPrefab, this.transform.position, this.transform.rotation, this.transform).GetComponent<EnemyController>();
-          enemy.healt = EnemyStats.GetHealth(enemyType);
-          enemy.speed = EnemyStats.GetSpeed(enemyType);
+          enemy.type = enemyType;
      }
 }

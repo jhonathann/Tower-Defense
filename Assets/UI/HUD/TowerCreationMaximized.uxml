@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/GeneralStyles.uss?fileID=7433441132597879392&amp;guid=0ade87dcc933ad14d9080c358e4c0bda&amp;type=3#GeneralStyles" />
+    <Style src="project://database/Assets/UI/HUD/TowerCreationMaximized.uss?fileID=7433441132597879392&amp;guid=cc3251664eb509b48a5ad0e2e8df3db4&amp;type=3#TowerCreationMaximized" />
+    <ui:VisualElement name="TopPanel" class="topPanel">
+        <ui:Label text="Tower Creation" display-tooltip-when-elided="true" name="TowerCreationLabel" class="towerCreationLabel" />
+    </ui:VisualElement>
+    <ui:VisualElement name="ChannalizerPanel" class="channalizerPanel" />
+    <ui:VisualElement name="StructurePanel" class="structurePanel" />
+    <ui:VisualElement name="SourcePanel" class="sourcePanel" />
+    <ui:VisualElement name="BottomPanel" class="bottomPanel">
+        <ui:Button text="Create Tower" display-tooltip-when-elided="true" name="CreateTowerButton" class="createTowerButton" />
+    </ui:VisualElement>
+</ui:UXML>

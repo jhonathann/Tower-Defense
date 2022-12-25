@@ -1,0 +1,65 @@
+:root {
+  width: 100%;
+  height: 100%;
+}
+.topPanel {
+  flex-direction: row;
+  width: 100%;
+  height: 10%;
+  justify-content: center;
+  background-color: var(--middleColor);
+}
+.towerCreationLabel {
+  -unity-font-style: bold;
+  font-size: 200%;
+  -unity-text-align: middle-center;
+  color: var(--lightColor);
+}
+.channalizerPanel {
+  flex-direction: row;
+  width: 100%;
+  height: 26.6%;
+  background-color: var(--middleColor);
+}
+.structurePanel {
+  flex-direction: row;
+  width: 100%;
+  height: 26.6%;
+  background-color: var(--middleColor);
+}
+.sourcePanel {
+  flex-direction: row;
+  width: 100%;
+  height: 26.6%;
+  background-color: var(--middleColor);
+}
+.bottomPanel {
+  flex-direction: row;
+  justify-content: center;
+  flex-grow: 1; /*To fill the rest of the space*/
+  width: 100%;
+  height: 10%;
+  background-color: var(--middleColor);
+}
+.createTowerButton {
+  margin: 1%;
+  background-color: rgba(0, 0, 0, 0);
+  -unity-font-style: bold;
+  font-size: 200%;
+  -unity-text-align: middle-center;
+  color: var(--lightColor);
+  border-width: 0px;
+}
+.createTowerButton:hover {
+  transition: 0.25s;
+  transition-timing-function: var(--transitionTimingFunction);
+  scale: 1.1;
+  color: var(--darkColor);
+  border-width: 5px;
+  border-color: var(--darkColor);
+}
+.createTowerButton:active {
+  transition: 0.25s;
+  transition-timing-function: var(--transitionTimingFunction);
+  scale: 0.95;
+}

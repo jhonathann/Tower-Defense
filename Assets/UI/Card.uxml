@@ -1,5 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/StyleSheets/GeneralStyles.uss?fileID=7433441132597879392&amp;guid=0ade87dcc933ad14d9080c358e4c0bda&amp;type=3#GeneralStyles" />
-    <Style src="project://database/Assets/UI/StyleSheets/Card.uss?fileID=7433441132597879392&amp;guid=c6ee267f00fc2274cb7d998dc11db6a8&amp;type=3#Card" />
-    <ui:Label text="Label" display-tooltip-when-elided="true" />
-</ui:UXML>

@@ -40,7 +40,7 @@
     background-color: rgba(0,0,0,0);
     -unity-font-style: bold;
     font-size: 200%;
-    -unity-text-align: middle-left;
+    -unity-text-align: middle-center;
     color: var(--lightColor);
     border-width: 0px;
 }

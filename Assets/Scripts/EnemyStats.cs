@@ -12,8 +12,8 @@ public class EnemyStats : MonoBehaviour
      private static GameObject BushPrefab = Resources.Load<GameObject>("Bush");
      private static GameObject TreePrefab = Resources.Load<GameObject>("Tree");
 
-     /// <summary>
-     /// Dictionaty Containing all the information of the enemies
+     /// <summary> 
+     /// Dictionary containing all the information of the enemies
      /// </summary>
      /// <param name="health">Health of the enemy</param>
      /// <param name="speed">Speed of the enemy</param>

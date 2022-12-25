@@ -5,5 +5,5 @@
     --middleColor: #717a6f;
     --lightColor: #c0c0c0;
 
-    -unity-font-definition: url(Fonts/NightmarePills.ttf);
+    -unity-font-definition: url("/Assets/UI/Fonts/NightmarePills.ttf");
 }

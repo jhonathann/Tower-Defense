@@ -1,0 +1,105 @@
+.globalContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+}
+
+.topContainer {
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 10%;
+  padding: 1%;
+}
+.middleContainer {
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  height: 80%;
+}
+.bottomContainer {
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  height: 10%;
+  padding: 1%;
+}
+.escInfo {
+  visibility: visible;
+  -unity-font-style: bold;
+  font-size: 200%;
+  -unity-text-align: middle-center;
+  color: var(--lightColor);
+}
+
+.healthBar {
+  visibility: visible;
+  justify-content: center;
+  width: 20%;
+  color: white;
+}
+
+.unity-progress-bar__progress {
+  background-color: var(--darkColor);
+}
+.nextWaveButton {
+  visibility: visible;
+  width: 20%;
+  height: 80%;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0);
+  -unity-font-style: bold;
+  font-size: 200%;
+  -unity-text-align: middle-center;
+  border-width: 0px;
+  color: var(--lightColor);
+}
+
+.nextWaveButton:hover {
+  transition: 0.25s;
+  transition-timing-function: var(--transitionTimingFunction);
+  scale: 1.1;
+  color: var(--darkColor);
+  border-width: 5px;
+  border-color: var(--darkColor);
+}
+
+.nextWaveButton:active {
+  transition: 0.25s;
+  transition-timing-function: var(--transitionTimingFunction);
+  scale: 0.95;
+}
+
+.towerCreationPanel {
+  visibility: visible;
+  flex-direction: column;
+  width: 40%;
+  height: 100%;
+  background-color: var(--middleColor);
+  border-width: 5px;
+  border-color: var(--darkColor);
+  transition: 0.25s;
+  transition-timing-function: var(--transitionTimingFunction);
+  transform-origin: left;
+  scale: 1;
+}
+.towerCreationPanel-hidden {
+  visibility: visible;
+  transition: 0.25s;
+  transition-timing-function: var(--transitionTimingFunction);
+  flex-direction: column;
+  width: 40%;
+  height: 100%;
+  background-color: var(--middleColor);
+  border-width: 5px;
+  border-color: var(--darkColor);
+  transition: 0.25s;
+  transition-timing-function: var(--transitionTimingFunction);
+  transform-origin: left;
+  scale: 0.1;
+}

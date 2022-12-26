@@ -83,13 +83,14 @@ public class EnemyController : MonoBehaviour
           //Set the starting mov ement direction
           direction = GetXZDirection();
      }
-
+     /// <summary>
+     /// Decides if a part is being generated based on the dropchance of an enemy. And generates such part.
+     /// </summary>
      void TryGeneratePart()
      {
           int chance = Random.Range(1, 100);
           if (chance > dropRate) return;
-          Part part = new Part();
-          Debug.Log($"{part.rarity} {part.type} {part.specificTypeInfo}");
+          gameData.parts.Add(new Part());
      }
      /// <summary>
      /// Updates the logic that enables the travel of the path

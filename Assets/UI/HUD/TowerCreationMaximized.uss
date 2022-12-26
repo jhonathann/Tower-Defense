@@ -4,10 +4,9 @@
 }
 .topPanel {
   flex-direction: row;
+  justify-content: center;
   width: 100%;
   height: 10%;
-  justify-content: center;
-  background-color: var(--middleColor);
 }
 .towerCreationLabel {
   -unity-font-style: bold;
@@ -19,19 +18,16 @@
   flex-direction: row;
   width: 100%;
   height: 26.6%;
-  background-color: var(--middleColor);
 }
 .structurePanel {
   flex-direction: row;
   width: 100%;
   height: 26.6%;
-  background-color: var(--middleColor);
 }
 .sourcePanel {
   flex-direction: row;
   width: 100%;
   height: 26.6%;
-  background-color: var(--middleColor);
 }
 .bottomPanel {
   flex-direction: row;
@@ -39,13 +35,35 @@
   flex-grow: 1; /*To fill the rest of the space*/
   width: 100%;
   height: 10%;
-  background-color: var(--middleColor);
+}
+.partsContainer {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: center;
+  width: 80%;
+  height: 100%;
+}
+.selectionContainer {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: 100%;
+}
+.creationSlot{
+  width: 50%;
+  height: 40%;
+  background-color: #766149;
+  border-width: 3px;
+  border-color: #3b3024;
 }
 .createTowerButton {
   margin: 1%;
   background-color: rgba(0, 0, 0, 0);
   -unity-font-style: bold;
-  font-size: 200%;
+  font-size: 150%;
   -unity-text-align: middle-center;
   color: var(--lightColor);
   border-width: 0px;

@@ -4,9 +4,24 @@
     <ui:VisualElement name="TopPanel" class="topPanel">
         <ui:Label text="Tower Creation" display-tooltip-when-elided="true" name="TowerCreationLabel" class="towerCreationLabel" />
     </ui:VisualElement>
-    <ui:VisualElement name="ChannalizerPanel" class="channalizerPanel" />
-    <ui:VisualElement name="StructurePanel" class="structurePanel" />
-    <ui:VisualElement name="SourcePanel" class="sourcePanel" />
+    <ui:VisualElement name="ChannalizerPanel" class="channalizerPanel">
+        <ui:VisualElement name="PartsContainer" class="partsContainer" />
+        <ui:VisualElement name="SelectionContainer" class="selectionContainer">
+            <ui:VisualElement name="CreationSlot" class="creationSlot" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="StructurePanel" class="structurePanel">
+        <ui:VisualElement name="PartsContainer" class="partsContainer" />
+        <ui:VisualElement name="SelectionContainer" class="selectionContainer">
+            <ui:VisualElement name="CreationSlot" class="creationSlot" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="SourcePanel" class="sourcePanel">
+        <ui:VisualElement name="PartsContainer" class="partsContainer" />
+        <ui:VisualElement name="SelectionContainer" class="selectionContainer">
+            <ui:VisualElement name="CreationSlot" class="creationSlot" />
+        </ui:VisualElement>
+    </ui:VisualElement>
     <ui:VisualElement name="BottomPanel" class="bottomPanel">
         <ui:Button text="Create Tower" display-tooltip-when-elided="true" name="CreateTowerButton" class="createTowerButton" />
     </ui:VisualElement>

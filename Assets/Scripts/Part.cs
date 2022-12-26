@@ -34,7 +34,7 @@ public class Part
      /// Gets the rarity of the part by considered the probability of each option
      /// </summary>
      /// <returns>The randomly obtained rarity</returns>
-     public Rarity GetRarity()
+     private Rarity GetRarity()
      {
           int chance = UnityEngine.Random.Range(1, 100);
           if (chance <= 40) return Rarity.Common; //40% chance of Common

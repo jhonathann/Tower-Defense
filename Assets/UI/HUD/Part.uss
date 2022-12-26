@@ -1,0 +1,34 @@
+:root {
+  width: 10%;
+  height: 33%;
+  margin: 1%;
+}
+.part {
+  width: 100%;
+  height: 100%;
+}
+.commonRarity {
+  background-color: #999999;
+  border-width: 3px;
+  border-color: #4c4c4c;
+}
+.normalRarity {
+  background-color: #5e9f4f;
+  border-width: 3px;
+  border-color: #2f4f27;
+}
+.rareRarity {
+  background-color: #4a539c;
+  border-width: 3px;
+  border-color: #25294e;
+}
+.ultraRareRarity {
+  background-color: #662264;
+  border-width: 3px;
+  border-color: #331132;
+}
+.mythRarity {
+  background-color: #e2cd28;
+  border-width: 3px;
+  border-color: #716614;
+}

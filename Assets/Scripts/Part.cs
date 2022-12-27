@@ -46,7 +46,21 @@ public class Part : VisualElement
           this.AddToClassList(rarityClasses[this.rarity]);
           this.RegisterCallback<ClickEvent>(PartOnClick);
      }
-
+     /// <summary>
+     /// This constructor returns a clone of the part that's passed in (with alteration on the width and height) (the cloned class doesn't have a registered callback) (used for the selectedContainerMockUp)
+     /// </summary>
+     /// <param name="part">Part to be cloned</param>
+     public Part(Part part)
+     {
+          if (part == null) return;
+          this.type = part.type;
+          this.rarity = part.rarity;
+          this.specificTypeInfo = part.specificTypeInfo;
+          template.CloneTree(this);
+          this.AddToClassList(rarityClasses[this.rarity]);
+          this.style.width = new StyleLength(new Length(100, LengthUnit.Percent));
+          this.style.height = new StyleLength(new Length(100, LengthUnit.Percent));
+     }
      /// <summary>
      /// Gets the rarity of the part by considered the probability of each option
      /// </summary>
@@ -81,7 +95,8 @@ public class Part : VisualElement
      }
      void PartOnClick(ClickEvent evt)
      {
-          Debug.Log("1");
+          GameData.OnPartSelection(this);
+          HUDController.RenderPanel?.Invoke();
      }
 }
 

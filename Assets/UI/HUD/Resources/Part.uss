@@ -32,3 +32,9 @@
   border-width: 3px;
   border-color: #716614;
 }
+.selected{
+  transition: 0.25s;
+  transition-timing-function: var(--transitionTimingFunction);
+  scale: 1.2;
+  border-color: #842525;
+}

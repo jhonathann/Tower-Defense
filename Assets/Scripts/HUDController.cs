@@ -33,12 +33,14 @@ public class HUDController : MonoBehaviour
      /// VisualTree of the part
      /// </summary>
      VisualTreeAsset partTemplate;
+     public static Action RenderPanel;
 
      void Start()
      {
           GetElements();
           nextWaveButton.RegisterCallback<ClickEvent>(NextWaveButtonOnClick);
-          RenderCreationPanel();
+          RenderPanel += RenderCreationPanel;
+          RenderPanel?.Invoke();
      }
 
      void Update()
@@ -83,6 +85,8 @@ public class HUDController : MonoBehaviour
           {
                towerCreationPanel.Clear();
                towerCreationPanel.Add(towerCreationPanelMaximized.CloneTree());
+               // Add the currently selected parts to the panel
+               AddSelectedParts();
                //Add all the current parts to the panel
                foreach (Part part in gameData.parts)
                {
@@ -95,6 +99,24 @@ public class HUDController : MonoBehaviour
                towerCreationPanel.Add(towerCreationPanelMinimized.CloneTree());
           }
      }
+     /// <summary>
+     /// Adds a mockup of the part to the creation slot
+     /// </summary>
+     void AddSelectedParts()
+     {
+          VisualElement channalizerPanel = HUD.rootVisualElement.Query<VisualElement>("ChannalizerPanel");
+          VisualElement structurePanel = HUD.rootVisualElement.Query<VisualElement>("StructurePanel");
+          VisualElement sourcePanel = HUD.rootVisualElement.Query<VisualElement>("SourcePanel");
+          VisualElement channalizerCreationSlot = channalizerPanel.Query<VisualElement>("CreationSlot");
+          VisualElement structureCreationSlot = structurePanel.Query<VisualElement>("CreationSlot"); VisualElement sourceCreationSlot = sourcePanel.Query<VisualElement>("CreationSlot");
+          channalizerCreationSlot.Add(new Part(gameData.channalizerSelectedPart));
+          structureCreationSlot.Add(new Part(gameData.structureSelectedPart));
+          sourceCreationSlot.Add(new Part(gameData.sourceSelectedPart));
+     }
+     /// <summary>
+     /// Adds a part to de adequate container in the UI
+     /// </summary>
+     /// <param name="part"></param>
      void AddPartToUI(Part part)
      {
           VisualElement partsContainer;

@@ -97,50 +97,25 @@ public class HUDController : MonoBehaviour
      }
      void AddPartToUI(Part part)
      {
-          VisualElement channalizerPanel = HUD.rootVisualElement.Query<VisualElement>("ChannalizerPanel");
-          VisualElement structurePanel = HUD.rootVisualElement.Query<VisualElement>("StructurePanel");
-          VisualElement sourcePanel = HUD.rootVisualElement.Query<VisualElement>("SourcePanel");
           VisualElement partsContainer;
-          VisualElement addedPart;
-          /// <summary>
-          /// Dictionary that match each rarity with the corresponding USS class
-          /// </summary>
-          /// <value>A string corresponding to the USS class to be assigned</value>
-          Dictionary<Rarity, string> rarityClasses = new Dictionary<Rarity, string>
-          {
-               {Rarity.Common,"commonRarity"},
-               {Rarity.Normal,"normalRarity"},
-               {Rarity.Rare,"rareRarity"},
-               {Rarity.UltraRare,"ultraRareRarity"},
-               {Rarity.Myth,"mythRarity"}
-          };
           switch (part.type)
           {
                case PartType.Channalizer:
+                    VisualElement channalizerPanel = HUD.rootVisualElement.Query<VisualElement>("ChannalizerPanel");
                     partsContainer = channalizerPanel.Query<VisualElement>("PartsContainer");
-                    partsContainer.Add(partTemplate.CloneTree());
-                    ModifyPart(partsContainer);
+                    partsContainer.Add(part);
                     break;
                case PartType.Structure:
+                    VisualElement structurePanel = HUD.rootVisualElement.Query<VisualElement>("StructurePanel");
                     partsContainer = structurePanel.Query<VisualElement>("PartsContainer");
-                    partsContainer.Add(partTemplate.CloneTree());
-                    ModifyPart(partsContainer);
+                    partsContainer.Add(part);
                     break;
                case PartType.Source:
+                    VisualElement sourcePanel = HUD.rootVisualElement.Query<VisualElement>("SourcePanel");
                     partsContainer = sourcePanel.Query<VisualElement>("PartsContainer");
-                    partsContainer.Add(partTemplate.CloneTree());
-                    ModifyPart(partsContainer);
+                    partsContainer.Add(part);
                     break;
           }
-          /// <summary>
-          /// Helper function to add the class corresponding to the rarity and change the name of the part so a new one can be added without problem
-          /// </summary>
-          /// <param name="container"></param>
-          void ModifyPart(VisualElement container)
-          {
-               addedPart = container.Query<VisualElement>("Part");
-               addedPart.AddToClassList(rarityClasses[part.rarity]);
-               addedPart.name = "OldPart"; //to avoid conflict when searching for a new part
-          }
+
      }
 }

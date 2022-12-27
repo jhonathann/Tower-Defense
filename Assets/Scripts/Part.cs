@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using System;
 /// <summary>
 /// Part Class for the parts that the enemies drop and are used to build the towers
 /// </summary>
-public class Part
+public class Part : VisualElement
 {
      /// <summary>
      /// The type of the part
@@ -19,6 +20,19 @@ public class Part
      /// Specific Info about the effect of the part
      /// </summary>
      public Enum specificTypeInfo;
+     public VisualTreeAsset template = Resources.Load<VisualTreeAsset>("Part");
+     /// <summary>
+     /// Dictionary that match each rarity with the corresponding USS class
+     /// </summary>
+     /// <value>A string corresponding to the USS class to be assigned</value>
+     Dictionary<Rarity, string> rarityClasses = new Dictionary<Rarity, string>
+          {
+               {Rarity.Common,"commonRarity"},
+               {Rarity.Normal,"normalRarity"},
+               {Rarity.Rare,"rareRarity"},
+               {Rarity.UltraRare,"ultraRareRarity"},
+               {Rarity.Myth,"mythRarity"}
+          };
 
      /// <summary>
      /// This constructor initialized a new part with random (but weighted) rarity and random values
@@ -28,6 +42,9 @@ public class Part
           this.type = UtilityEnum.GetRandomTypeFromAnEnum<PartType>();
           this.rarity = GetRarity();
           this.specificTypeInfo = GetSpecificTypeInfo();
+          template.CloneTree(this);
+          this.AddToClassList(rarityClasses[this.rarity]);
+          this.RegisterCallback<ClickEvent>(PartOnClick);
      }
 
      /// <summary>
@@ -61,6 +78,10 @@ public class Part
                     return UtilityEnum.GetRandomTypeFromAnEnum<ChannalizerType>();
                default: return null;
           }
+     }
+     void PartOnClick(ClickEvent evt)
+     {
+          Debug.Log("1");
      }
 }
 

@@ -90,7 +90,7 @@ public class EnemyController : MonoBehaviour
      {
           int chance = Random.Range(1, 100);
           if (chance > dropRate) return;
-          gameData.parts.Add(new Part());
+          GameData.AddNewPart?.Invoke();
      }
      /// <summary>
      /// Updates the logic that enables the travel of the path

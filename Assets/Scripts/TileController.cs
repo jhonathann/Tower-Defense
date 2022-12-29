@@ -8,13 +8,6 @@ public class TileController : MonoBehaviour
      public GameObject towerPrefab;
      public GameObject towerMockPrefab;
      GameObject towerMock;
-     void Start()
-     {
-     }
-     void Update()
-     {
-
-     }
 
      void OnMouseEnter()
      {

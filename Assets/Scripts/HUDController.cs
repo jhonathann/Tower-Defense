@@ -92,6 +92,14 @@ public class HUDController : MonoBehaviour
                {
                     AddPartToUI(part);
                }
+               //Register callback in the createTowerButton of the panel
+               Button createTowerButton = HUD.rootVisualElement.Query<Button>("CreateTowerButton");
+               createTowerButton.RegisterCallback<ClickEvent>(createTowerButtonOnClick);
+               void createTowerButtonOnClick(ClickEvent evt)
+               {
+                    Tower.OnCreateTower(new Tower(gameData.channalizerSelectedPart, gameData.structureSelectedPart, gameData.sourceSelectedPart));
+               }
+
           }
           if (towerCreationPanel.ClassListContains("towerCreationPanel-hidden"))
           {

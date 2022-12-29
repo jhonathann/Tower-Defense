@@ -29,12 +29,17 @@ public class GameData : ScriptableObject
      /// <summary>
      /// Action called when a part is clicked
      /// </summary>
-     public static Action<Part> OnPartSelection;
+     public static Action<Part> SelectPart;
+     /// <summary>
+     /// Action called when a new part is added
+     /// </summary>
+     public static Action AddNewPart;
      void OnEnable()
      {
           health = 10;
+          SelectPart += OnSelectPart;
+          AddNewPart += OnAddNewPart;
           AddStartingParts(6);
-          OnPartSelection += newSelectedPart;
      }
      /// <summary>
      /// Adds the starting parts to the gameobject
@@ -44,10 +49,22 @@ public class GameData : ScriptableObject
      {
           for (int i = 0; i < numberOfParts; i++)
           {
-               parts.Add(new Part());
+               GameData.AddNewPart?.Invoke();
           }
      }
-     void newSelectedPart(Part newSelectedPart)
+     /// <summary>
+     /// Adds a new part to the list and re-renders the HUD panel to reflect the change
+     /// </summary>
+     void OnAddNewPart()
+     {
+          parts.Add(new Part());
+          HUDController.RenderPanel?.Invoke();
+     }
+     /// <summary>
+     /// Sets the new selected part to the corresponding field and changes the uss classes of newSelect and the previously selected part
+     /// </summary>
+     /// <param name="newSelectedPart">Part that was selected</param>
+     void OnSelectPart(Part newSelectedPart)
      {
           switch (newSelectedPart.type)
           {

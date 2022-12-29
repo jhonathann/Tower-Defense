@@ -95,7 +95,7 @@ public class Part : VisualElement
      }
      void PartOnClick(ClickEvent evt)
      {
-          GameData.OnPartSelection(this);
+          GameData.SelectPart(this);
           HUDController.RenderPanel?.Invoke();
      }
 }
@@ -128,7 +128,7 @@ public enum SourceType
      Water,
      Fire,
      Earth,
-     Wind
+     Thunder
 }
 /// <summary>
 /// An Enum representing the especific types within the structure type

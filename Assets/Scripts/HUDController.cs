@@ -46,7 +46,10 @@ public class HUDController : MonoBehaviour
      void Update()
      {
           healthBar.value = gameData.health;
-          ToggleTowerCreationPanel();
+          if (Input.GetKeyDown(KeyCode.T))
+          {
+               ToggleTowerCreationPanel();
+          }
      }
 
      /// <summary>
@@ -69,12 +72,9 @@ public class HUDController : MonoBehaviour
      /// </summary>
      void ToggleTowerCreationPanel()
      {
-          if (Input.GetKeyDown(KeyCode.T))
-          {
-               towerCreationPanel.ToggleInClassList("towerCreationPanel");
-               towerCreationPanel.ToggleInClassList("towerCreationPanel-hidden");
-               RenderCreationPanel();
-          }
+          towerCreationPanel.ToggleInClassList("towerCreationPanel");
+          towerCreationPanel.ToggleInClassList("towerCreationPanel-hidden");
+          RenderCreationPanel();
      }
      /// <summary>
      /// Used to render the panel taking according to its state
@@ -97,9 +97,10 @@ public class HUDController : MonoBehaviour
                createTowerButton.RegisterCallback<ClickEvent>(createTowerButtonOnClick);
                void createTowerButtonOnClick(ClickEvent evt)
                {
-                    Tower.OnCreateTower(new Tower(gameData.channalizerSelectedPart, gameData.structureSelectedPart, gameData.sourceSelectedPart));
+                    Tower.OnCreateTower(gameData.channalizerSelectedPart, gameData.structureSelectedPart, gameData.sourceSelectedPart);
+                    //toggle the panel to allow the user to place the tower
+                    ToggleTowerCreationPanel();
                }
-
           }
           if (towerCreationPanel.ClassListContains("towerCreationPanel-hidden"))
           {

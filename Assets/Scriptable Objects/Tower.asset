@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f5d9118d44fcf4499c3b581643ecd7, type: 3}
   m_Name: Tower
   m_EditorClassIdentifier: 
+  gameData: {fileID: 11400000, guid: fff7f5cc8e4e06043bcb6d6bff06fd6b, type: 2}
   areaChannalizerPrefab: {fileID: 919132149155446097, guid: b207239fe88d29141a727dd9e615d470, type: 3}
   fastChannalizerPrefab: {fileID: 919132149155446097, guid: 61fac0521a991234dab5ae42e4bfcb77, type: 3}
   strongChannalizerPrefab: {fileID: 919132149155446097, guid: e761aa647ed386349a34ad7ede5d4712, type: 3}

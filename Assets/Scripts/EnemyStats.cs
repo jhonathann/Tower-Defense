@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// Class that contains the information related to the stats of the enemies
 /// </summary>
-public class EnemyStats : MonoBehaviour
+public class EnemyStats
 {
      //reference to the prefabs of the enemies
      private static GameObject BushPrefab = Resources.Load<GameObject>("Bush");

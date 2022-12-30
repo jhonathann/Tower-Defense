@@ -62,6 +62,19 @@ public class Part : VisualElement
           this.style.height = new StyleLength(new Length(100, LengthUnit.Percent));
      }
      /// <summary>
+     /// This constructor returns a random part of the specifyc type (use to ensure that the player has sufficient parts to create the initial tower)
+     /// </summary>
+     /// <param name="type"></param>
+     public Part(PartType type)
+     {
+          this.type = type;
+          this.rarity = GetRarity();
+          this.specificTypeInfo = GetSpecificTypeInfo();
+          template.CloneTree(this);
+          this.AddToClassList(rarityClasses[this.rarity]);
+          this.RegisterCallback<ClickEvent>(PartOnClick);
+     }
+     /// <summary>
      /// Gets the rarity of the part by considered the probability of each option
      /// </summary>
      /// <returns>The randomly obtained rarity</returns>

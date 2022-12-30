@@ -33,31 +33,49 @@ public class GameData : ScriptableObject
      /// <summary>
      /// Action called when a new part is added
      /// </summary>
-     public static Action AddNewPart;
+     public static Action<Part> AddNewPart;
+     /// <summary>
+     /// Tower to be put on the map
+     /// </summary>
+     public Tower availableTower;
      void OnEnable()
      {
           health = 10;
           SelectPart += OnSelectPart;
           AddNewPart += OnAddNewPart;
-          AddStartingParts(6);
+          //Subscribing to the towerplaced event
+          TileController.TowerPlaced += OnTowerPlaced;
+          AddStartingParts(3);
      }
      /// <summary>
      /// Adds the starting parts to the gameobject
      /// </summary>
-     /// <param name="numberOfParts">The number of starting parts</param>
-     void AddStartingParts(int numberOfParts)
+     /// <param name="numberOfExtraParts">The number of starting parts</param>
+     void AddStartingParts(int numberOfExtraParts)
      {
-          for (int i = 0; i < numberOfParts; i++)
+          //Add a part of each type to ensure that the user is able to place the starting tower
+          GameData.AddNewPart(new Part(PartType.Channalizer));
+          GameData.AddNewPart(new Part(PartType.Structure));
+          GameData.AddNewPart(new Part(PartType.Source));
+          //Add some extra parts
+          for (int i = 0; i < numberOfExtraParts; i++)
           {
-               GameData.AddNewPart?.Invoke();
+               GameData.AddNewPart.Invoke(null);
           }
      }
      /// <summary>
      /// Adds a new part to the list and re-renders the HUD panel to reflect the change
      /// </summary>
-     void OnAddNewPart()
+     void OnAddNewPart(Part part = null)
      {
-          parts.Add(new Part());
+          if (part != null)
+          {
+               parts.Add(part);
+          }
+          else
+          {
+               parts.Add(new Part());
+          }
           HUDController.RenderPanel?.Invoke();
      }
      /// <summary>
@@ -84,5 +102,21 @@ public class GameData : ScriptableObject
                     sourceSelectedPart = newSelectedPart;
                     break;
           }
+     }
+     /// <summary>
+     /// This triggers when a tower is successfully placed
+     /// </summary>
+     void OnTowerPlaced()
+     {
+          //Remove the parts from the part List
+          this.parts.Remove(channalizerSelectedPart);
+          this.parts.Remove(structureSelectedPart);
+          this.parts.Remove(sourceSelectedPart);
+          //Set the selected parts again to null;
+          this.channalizerSelectedPart = null;
+          this.structureSelectedPart = null;
+          this.sourceSelectedPart = null;
+          //Set the available tower again to null
+          this.availableTower = null;
      }
 }

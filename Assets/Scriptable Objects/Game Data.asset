@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Game Data
   m_EditorClassIdentifier: 
   health: 10
-  availableTower: {fileID: 11400000, guid: 778d83c8497540c4a9f44c2ccfa2b9e0, type: 2}
+  Tower: {fileID: 11400000, guid: 778d83c8497540c4a9f44c2ccfa2b9e0, type: 2}
+  towerReady: 1

@@ -47,18 +47,18 @@ public class TileController : MonoBehaviour
      /// </summary>
      private void InstantiateTower()
      {
-          Instantiate(gameData.availableTower.GetChannalizerPrefab(), this.transform.position + Vector3.up * CHANNALIZER_HEIGHT, Quaternion.identity);
-          Instantiate(gameData.availableTower.GetStructurePrefab(), this.transform.position + Vector3.up * STRUCTURE_HEIGHT, Quaternion.identity);
-          Instantiate(gameData.availableTower.GetSourcePrefab(), this.transform.position + Vector3.up * SOURCE_HEIGHT, Quaternion.identity);
+          Instantiate(gameData.Tower.GetChannalizerPrefab(), this.transform.position + Vector3.up * CHANNALIZER_HEIGHT, Quaternion.identity);
+          Instantiate(gameData.Tower.GetStructurePrefab(), this.transform.position + Vector3.up * STRUCTURE_HEIGHT, Quaternion.identity);
+          Instantiate(gameData.Tower.GetSourcePrefab(), this.transform.position + Vector3.up * SOURCE_HEIGHT, Quaternion.identity);
      }
      /// <summary>
      /// Funtion that instantiates the prefabs and holds a refernce to them so they can be deleated
      /// </summary>
      private void InstantiateTowerMock()
      {
-          channalizerMock = Instantiate(gameData.availableTower.GetChannalizerPrefab(), this.transform.position + Vector3.up * CHANNALIZER_HEIGHT, Quaternion.identity);
-          structureMock = Instantiate(gameData.availableTower.GetStructurePrefab(), this.transform.position + Vector3.up * STRUCTURE_HEIGHT, Quaternion.identity);
-          sourceMock = Instantiate(gameData.availableTower.GetSourcePrefab(), this.transform.position + Vector3.up * SOURCE_HEIGHT, Quaternion.identity);
+          channalizerMock = Instantiate(gameData.Tower.GetChannalizerPrefab(), this.transform.position + Vector3.up * CHANNALIZER_HEIGHT, Quaternion.identity);
+          structureMock = Instantiate(gameData.Tower.GetStructurePrefab(), this.transform.position + Vector3.up * STRUCTURE_HEIGHT, Quaternion.identity);
+          sourceMock = Instantiate(gameData.Tower.GetSourcePrefab(), this.transform.position + Vector3.up * SOURCE_HEIGHT, Quaternion.identity);
      }
      /// <summary>
      /// Deletes the prefabs
@@ -83,6 +83,6 @@ public class TileController : MonoBehaviour
      /// <returns>True if there is an available tower and false otherwise</returns>
      private bool isThereATowerToPlace()
      {
-          return gameData.availableTower != null;
+          return gameData.towerReady;
      }
 }

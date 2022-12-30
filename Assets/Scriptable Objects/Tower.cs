@@ -64,7 +64,7 @@ public class Tower : ScriptableObject
           this.channalizer = channalizer;
           this.structure = structure;
           this.source = source;
-          gameData.availableTower = this;
+          gameData.towerReady = true;
      }
      /// <summary>
      /// Returns the prefab associated to the channalizer of the tower

@@ -3,7 +3,12 @@ guid: 61fac0521a991234dab5ae42e4bfcb77
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Channalizer
+    second: {fileID: 2100000, guid: fd6ca4f770802434a861b4c412361efb, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

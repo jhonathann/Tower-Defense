@@ -4,16 +4,16 @@ using UnityEngine;
 using System;
 
 /// <summary>
-/// Scriptable Object to hold the reference to hold handle the tower to be created and the references to the prefabs of the parts
+/// Scriptable Object to hold the reference of the tower to be created and the references to the prefabs of the parts
 /// </summary>
 [CreateAssetMenu]
-public class Tower : ScriptableObject
+public class TowerData : ScriptableObject
 {
      [SerializeField]
      private GameData gameData;
-     private Part channalizer;
-     private Part structure;
-     private Part source;
+     public Part channalizer;
+     public Part structure;
+     public Part source;
      [SerializeField]
      private GameObject areaChannalizerPrefab;
      [SerializeField]
@@ -64,7 +64,7 @@ public class Tower : ScriptableObject
           this.channalizer = channalizer;
           this.structure = structure;
           this.source = source;
-          gameData.towerReady = true;
+          gameData.isTowerReady = true;
      }
      /// <summary>
      /// Returns the prefab associated to the channalizer of the tower

@@ -60,8 +60,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: fff7f5cc8e4e06043bcb6d6bff06fd6b, type: 2}
-  towerPrefab: {fileID: 4111053477171976457, guid: e25bafb784f5ca045b6ce45f3ff7a668, type: 3}
-  towerMockPrefab: {fileID: 8761671314687246479, guid: 2c3136de1dcfba14a8cc8bed58c3206e, type: 3}
 --- !u!1 &1207481045931712177
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,15 +9,14 @@ using System;
 /// </summary>
 public class TileController : MonoBehaviour
 {
+     /// <summary>
+     /// Reference to the gameData
+     /// </summary>
      public GameData gameData;
-     //Constant for the correct instantiation of the prefabs
-     private const float CHANNALIZER_HEIGHT = 18.0f;
-     private const float SOURCE_HEIGHT = 8.0f;
-     private const float STRUCTURE_HEIGHT = 1.0f;
-     //References to the mock prefabs 
-     private GameObject channalizerMock;
-     private GameObject structureMock;
-     private GameObject sourceMock;
+     /// <summary>
+     /// Reference to the mock tower 
+     /// </summary>
+     private GameObject towerMock;
      /// <summary>
      /// Action triggered when the tower is succesfully placed
      /// </summary>
@@ -47,27 +46,28 @@ public class TileController : MonoBehaviour
      /// </summary>
      private void InstantiateTower()
      {
-          Instantiate(gameData.Tower.GetChannalizerPrefab(), this.transform.position + Vector3.up * CHANNALIZER_HEIGHT, Quaternion.identity);
-          Instantiate(gameData.Tower.GetStructurePrefab(), this.transform.position + Vector3.up * STRUCTURE_HEIGHT, Quaternion.identity);
-          Instantiate(gameData.Tower.GetSourcePrefab(), this.transform.position + Vector3.up * SOURCE_HEIGHT, Quaternion.identity);
+          //create the new tower
+          GameObject tower = new GameObject("Tower", typeof(TowerController));
+          //set the reference to the gameData
+          tower.GetComponent<TowerController>().gameData = gameData;
+          //set the right position (cause the GameObject constructor sets the object at origin)
+          tower.transform.position = this.transform.position;
      }
      /// <summary>
      /// Funtion that instantiates the prefabs and holds a refernce to them so they can be deleated
      /// </summary>
      private void InstantiateTowerMock()
      {
-          channalizerMock = Instantiate(gameData.Tower.GetChannalizerPrefab(), this.transform.position + Vector3.up * CHANNALIZER_HEIGHT, Quaternion.identity);
-          structureMock = Instantiate(gameData.Tower.GetStructurePrefab(), this.transform.position + Vector3.up * STRUCTURE_HEIGHT, Quaternion.identity);
-          sourceMock = Instantiate(gameData.Tower.GetSourcePrefab(), this.transform.position + Vector3.up * SOURCE_HEIGHT, Quaternion.identity);
+          towerMock = new GameObject("TowerMock", typeof(TowerController));
+          towerMock.GetComponent<TowerController>().gameData = gameData;
+          towerMock.transform.position = this.transform.position;
      }
      /// <summary>
      /// Deletes the prefabs
      /// </summary>
      private void DestroyMock()
      {
-          Destroy(channalizerMock);
-          Destroy(structureMock);
-          Destroy(sourceMock);
+          Destroy(towerMock);
      }
      /// <summary>
      /// Helper function to know when the mouse is over the UI
@@ -83,6 +83,6 @@ public class TileController : MonoBehaviour
      /// <returns>True if there is an available tower and false otherwise</returns>
      private bool isThereATowerToPlace()
      {
-          return gameData.towerReady;
+          return gameData.isTowerReady;
      }
 }

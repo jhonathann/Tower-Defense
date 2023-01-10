@@ -97,7 +97,7 @@ public class HUDController : MonoBehaviour
                createTowerButton.RegisterCallback<ClickEvent>(createTowerButtonOnClick);
                void createTowerButtonOnClick(ClickEvent evt)
                {
-                    Tower.OnCreateTower(gameData.channalizerSelectedPart, gameData.structureSelectedPart, gameData.sourceSelectedPart);
+                    TowerData.OnCreateTower(gameData.channalizerSelectedPart, gameData.structureSelectedPart, gameData.sourceSelectedPart);
                     //toggle the panel to allow the user to place the tower
                     ToggleTowerCreationPanel();
                }

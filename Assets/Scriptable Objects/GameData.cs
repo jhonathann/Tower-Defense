@@ -37,14 +37,14 @@ public class GameData : ScriptableObject
      /// <summary>
      /// Tower to be put on the map
      /// </summary>
-     public Tower Tower;
-     public bool towerReady;
+     public TowerData towerData;
+     public bool isTowerReady;
      void OnEnable()
      {
           health = 10;
           SelectPart += OnSelectPart;
           AddNewPart += OnAddNewPart;
-          towerReady = false;
+          isTowerReady = false;
           //Subscribing to the towerplaced event
           TileController.TowerPlaced += OnTowerPlaced;
           AddStartingParts(3);
@@ -119,6 +119,6 @@ public class GameData : ScriptableObject
           this.structureSelectedPart = null;
           this.sourceSelectedPart = null;
           //Set the available tower again to null
-          this.towerReady = false;
+          this.isTowerReady = false;
      }
 }

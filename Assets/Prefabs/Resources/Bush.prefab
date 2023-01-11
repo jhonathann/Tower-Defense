@@ -51,9 +51,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: fff7f5cc8e4e06043bcb6d6bff06fd6b, type: 2}
-  speed: 20
+  type: 0
   goalCheckPoint: 0
-  healt: 5
 --- !u!54 &1151549740154007339
 Rigidbody:
   m_ObjectHideFlags: 0

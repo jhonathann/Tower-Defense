@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CastleController : MonoBehaviour
+/// <summary>
+/// Class to control the behaviour of the castle
+/// </summary>
+public class CastleController : MonoBehaviour, IDamagable
 {
      //Access to the gameData
      public GameData gameData;
-     void Update()
-     {
-          checkHealth();
-     }
-
      //Destroys the gameObject when the player health gets to 0
      void checkHealth()
      {
@@ -19,12 +17,13 @@ public class CastleController : MonoBehaviour
                Destroy(this.gameObject);
           }
      }
-     void OnTriggerEnter(Collider enteringObjectCollider)
+     /// <summary>
+     /// Function that destribes how the object takes damage
+     /// </summary>
+     /// <param name="damageAmount">The amount of damage taken</param>
+     void IDamagable.TakeDamage(float damageAmount)
      {
-          //Only decreases health if the entering collider belongs to an enemy (this is to considere other adjecent tiles that also have colliders)
-          if (enteringObjectCollider.gameObject.name == "Enemy")
-          {
-               gameData.health--;
-          }
+          gameData.health = gameData.health - damageAmount;
+          checkHealth();
      }
 }

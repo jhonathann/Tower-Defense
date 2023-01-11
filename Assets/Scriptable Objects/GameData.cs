@@ -15,7 +15,7 @@ public class GameData : ScriptableObject
      /// <summary>
      /// The health of the player
      /// </summary>
-     public int health;
+     public float health;
      /// <summary>
      /// The list of parts that the player currently has
      /// </summary>

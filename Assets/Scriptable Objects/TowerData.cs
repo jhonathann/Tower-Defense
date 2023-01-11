@@ -34,6 +34,12 @@ public class TowerData : ScriptableObject
      private GameObject waterSourcePrefab;
      [SerializeField]
      private GameObject thunderSourcePrefab;
+     [field: SerializeField]
+     public GameObject AreaChannalizerBolt { get; private set; }
+     [field: SerializeField]
+     public GameObject FastChannalizerBolt { get; private set; }
+     [field: SerializeField]
+     public GameObject StrongChannalizerBolt { get; private set; }
      public static Action<Part, Part, Part> OnCreateTower;
      private Dictionary<Enum, GameObject> enumtoGameObject;
      private void OnEnable()

@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Script that controls the behaviour of the enemies
 /// </summary>
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IDamagable
 {
      /// <summary>
      /// Reference to the gameData Scriptable object
@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
      /// <summary>
      /// Health of the enemy
      /// </summary>
-     private int healt;
+     private float healt;
      /// /// <summary>
      /// Speed of the enemy
      /// </summary>
@@ -53,16 +53,8 @@ public class EnemyController : MonoBehaviour
           //Checks if it has reached the castle
           if (enteringObjectCollider.gameObject.name == "Castle")
           {
+               enteringObjectCollider.GetComponent<IDamagable>().TakeDamage(1);
                Destroy(this.gameObject);
-          }
-          if (enteringObjectCollider.gameObject.name == "Capsule")
-          {
-               healt--;
-               if (healt <= 0)
-               {
-                    Destroy(this.gameObject);
-                    TryGeneratePart();
-               }
           }
      }
      /// <summary>
@@ -129,5 +121,18 @@ public class EnemyController : MonoBehaviour
           pointA.y = 0;
           pointB.y = 0;
           return Vector3.Distance(pointA, pointB);
+     }
+     /// <summary>
+     /// Function that destribes how the object takes damage
+     /// </summary>
+     /// <param name="damageAmount">The amount of damage taken</param>
+     void IDamagable.TakeDamage(float damageAmount)
+     {
+          this.healt = this.healt - damageAmount;
+          if (healt <= 0)
+          {
+               Destroy(this.gameObject);
+               TryGeneratePart();
+          }
      }
 }

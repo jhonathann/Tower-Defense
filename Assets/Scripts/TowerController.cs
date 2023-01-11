@@ -22,8 +22,14 @@ public class TowerController : MonoBehaviour
      private const float STRUCTURE_HEIGHT = 1.0f;
      private const float TOWER_HEIGHT = 20.0f;
      private const float TOWER_WIDTH = 10.0f;
-     public GameObject magicBolt;
-     private float timeSince;
+     private GameObject shotPrefab;
+     private float fireRate;
+     private float damage;
+     private List<GameObject> enemiesInRange = new List<GameObject>();
+     /// <summary>
+     /// Variable that keeps track of the time since the last shot (initialized in maximum value so the tower shots immediatly when the first enemy enters)
+     /// </summary>
+     private float timeSinceLastShot = Mathf.Infinity;
      private void Start()
      {
           //Set the gameobject mask so it doesnt trigger the onmouse events
@@ -52,15 +58,48 @@ public class TowerController : MonoBehaviour
           Instantiate(gameData.towerData.GetStructurePrefab(), this.transform.position + Vector3.up * STRUCTURE_HEIGHT, Quaternion.identity, this.transform);
           Instantiate(gameData.towerData.GetSourcePrefab(), this.transform.position + Vector3.up * SOURCE_HEIGHT, Quaternion.identity, this.transform);
      }
+     /// <summary>
+     /// Sets the stats for the fireRate of the tower according to the channalizer
+     /// </summary>
      private void SetChannalizerStats()
      {
           switch (channalizer.specificTypeInfo)
           {
-               case ChannalizerType.Area: break;
-               case ChannalizerType.Fast: break;
-               case ChannalizerType.Strong: break;
+               case ChannalizerType.Area:
+                    SetChannalizerAreaVariables();
+                    break;
+               case ChannalizerType.Fast:
+                    SetChannalizerFastVariables();
+                    break;
+               case ChannalizerType.Strong:
+                    SetChannalizerStrongVariables();
+                    break;
+          }
+
+          void SetChannalizerAreaVariables()
+          {
+               this.shotPrefab = this.gameData.towerData.AreaChannalizerBolt;
+               this.fireRate = TowerStats.areaChannalizerStats[channalizer.rarity].fireRate;
+               this.damage = TowerStats.areaChannalizerStats[channalizer.rarity].damage;
+          }
+
+          void SetChannalizerFastVariables()
+          {
+               this.shotPrefab = this.gameData.towerData.FastChannalizerBolt;
+               this.fireRate = TowerStats.fastChannalizerStats[channalizer.rarity].fireRate;
+               this.damage = TowerStats.fastChannalizerStats[channalizer.rarity].damage;
+          }
+
+          void SetChannalizerStrongVariables()
+          {
+               this.shotPrefab = this.gameData.towerData.StrongChannalizerBolt;
+               this.fireRate = TowerStats.strongChannalizerStats[channalizer.rarity].fireRate;
+               this.damage = TowerStats.strongChannalizerStats[channalizer.rarity].damage;
           }
      }
+     /// <summary>
+     /// Creates the hitZones of the tower based on the structureType
+     /// </summary>
      private void SetStructureStats()
      {
           switch (structure.specificTypeInfo)
@@ -160,7 +199,7 @@ public class TowerController : MonoBehaviour
                hitZone.transform.SetParent(this.transform);
                Destroy(hitZone.GetComponent<Collider>());
                hitZone.transform.position = this.transform.position + Vector3.up * STRUCTURE_HEIGHT;
-               hitZone.transform.localScale = Vector3.one * TowerStats.circularStructureStats[structure.rarity];
+               hitZone.transform.localScale = Vector3.one * TowerStats.circularStructureStats[structure.rarity] * 2;
                //Sets the shader to the material
                hitZone.GetComponent<MeshRenderer>().material.shader = Shader.Find("Shader Graphs/Blinking");
           }
@@ -212,52 +251,54 @@ public class TowerController : MonoBehaviour
      }
      private void Update()
      {
-          GameObject target = SelectTarget();
-          if (timeSince >= 0.5)
+          //Filters Away the destroyed enemies
+          enemiesInRange = enemiesInRange.Where(enemy => enemy != null).ToList();
+          //Gets Ready To Shoot
+          if (timeSinceLastShot >= 1 / fireRate)
           {
+               if (enemiesInRange.Count == 0) return;
+               GameObject target = SelectTarget();
                attack(target);
-               timeSince = 0;
+               timeSinceLastShot = 0;
           }
-          timeSince += Time.deltaTime;
+          timeSinceLastShot += Time.deltaTime;
      }
+     /// <summary>
+     /// Instantiates the shotPrefab Gameobject and sets its stats accordingly
+     /// </summary>
+     /// <param name="target">The target of the shot</param>
      private void attack(GameObject target)
      {
-          if (target == null)
-          {
-               return;
-          }
-          GameObject shoot = Instantiate(magicBolt, this.transform.position, this.transform.rotation);
-          shoot.GetComponent<MagicBoltController>().target = target;
+          GameObject shoot = Instantiate(this.shotPrefab, this.transform.position, this.transform.rotation);
+          shoot.GetComponent<ShotController>().target = target;
+          shoot.GetComponent<ShotController>().damage = this.damage;
      }
+
+     /// <summary>
+     /// Function that determines the target of the tower
+     /// </summary>
+     /// <returns>The target of the tower</returns>
      private GameObject SelectTarget()
      {
-          GameObject target = null;
-          //Get All the enemies
-          GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-          //Filter the enemies in range and order them by the progress toward the castle
-          enemies = enemies.Where(enemy => isInRange(enemy, 30) == true).OrderBy(enemy => enemy.GetComponent<EnemyController>().goalCheckPoint).ToArray();
-          //Check if there are enemies in range
-          if (enemies.Count() > 0)
-          {
-               //Select the enemy that has advanced the most
-               target = enemies[0];
-          }
+          GameObject target;
+          //Filter the enemies in range, ordera them by the progress toward the castle and returns the first
+          target = enemiesInRange.OrderBy(enemy => enemy.GetComponent<EnemyController>().goalCheckPoint).First();
           return target;
      }
-     //Function to know if the enemy is within the range of the tower
-     private bool isInRange(GameObject objective, int alcance)
+     //Adds enemies to the list when they enter the collider
+     void OnTriggerEnter(Collider enteringObjectCollider)
      {
-          if (Vector3.Distance(this.transform.position, objective.transform.position) < alcance)
+          if (enteringObjectCollider.GetComponent<EnemyController>() != null)
           {
-               return true;
-          }
-          else
-          {
-               return false;
+               enemiesInRange.Add(enteringObjectCollider.gameObject);
           }
      }
-     void OnTriggerEnter(Collider collider)
+     //Removes enemies from the list when they leave the collider
+     void OnTriggerExit(Collider exitingObjectCollider)
      {
-          Debug.Log("Works");
+          if (exitingObjectCollider.GetComponent<EnemyController>() != null)
+          {
+               enemiesInRange.Remove(exitingObjectCollider.gameObject);
+          }
      }
 }

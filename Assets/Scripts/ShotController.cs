@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagicBoltController : MonoBehaviour
+public class ShotController : MonoBehaviour
 {
      public GameObject target;
+     public float damage;
      void Start()
      {
           this.gameObject.name = "Bolt";
@@ -29,8 +30,10 @@ public class MagicBoltController : MonoBehaviour
      }
      void OnTriggerEnter(Collider enteringObjectCollider)
      {
-          if (enteringObjectCollider.gameObject.name == "Enemy")
+          IDamagable damageable = enteringObjectCollider.GetComponent<IDamagable>();
+          if (damageable != null)
           {
+               damageable.TakeDamage(this.damage);
                Destroy(this.gameObject);
           }
      }

@@ -23,3 +23,6 @@ MonoBehaviour:
   fireSourcePrefab: {fileID: 2555624041107694200, guid: 5f196af0707b74849af015d34cce6230, type: 3}
   waterSourcePrefab: {fileID: 2020888479189818301, guid: 8d632cae68cc4e442882d087192b39fa, type: 3}
   thunderSourcePrefab: {fileID: 1375894837577484795, guid: 63c059f3d854f734583a79c844ff7fa4, type: 3}
+  <AreaChannalizerBolt>k__BackingField: {fileID: 409294717232431179, guid: c95222a923a904a4eb3b14f41b3d2069, type: 3}
+  <FastChannalizerBolt>k__BackingField: {fileID: 409294717232431179, guid: c95222a923a904a4eb3b14f41b3d2069, type: 3}
+  <StrongChannalizerBolt>k__BackingField: {fileID: 409294717232431179, guid: c95222a923a904a4eb3b14f41b3d2069, type: 3}

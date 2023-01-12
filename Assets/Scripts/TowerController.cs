@@ -8,6 +8,13 @@ using System.Linq;
 /// </summary>
 public class TowerController : MonoBehaviour
 {
+     private enum TowerState
+     {
+          Unplaced,
+          Placed,
+     }
+     private TowerState state = TowerState.Unplaced;
+     public static Quaternion towerRotation = Quaternion.identity;
      /// <summary>
      /// Reference to the gameData
      /// </summary>
@@ -30,6 +37,11 @@ public class TowerController : MonoBehaviour
      /// Variable that keeps track of the time since the last shot (initialized in maximum value so the tower shots immediatly when the first enemy enters)
      /// </summary>
      private float timeSinceLastShot = Mathf.Infinity;
+     private void OnEnable()
+     {
+          //Subscribes to the TowerPlaced event
+          TileController.TowerPlaced += OnTowerPlaced;
+     }
      private void Start()
      {
           //Set the gameobject mask so it doesnt trigger the onmouse events
@@ -39,6 +51,8 @@ public class TowerController : MonoBehaviour
           SetChannalizerStats();
           SetStructureStats();
           SetSourceStats();
+          //Sets the rotation to the saved rotation (must be done last so the hitZones rotate adequately)
+          this.transform.rotation = towerRotation;
      }
      /// <summary>
      /// Stores the references to the parts of the tower
@@ -251,6 +265,28 @@ public class TowerController : MonoBehaviour
      }
      private void Update()
      {
+          if (state == TowerState.Unplaced)
+          {
+               TowerUnplacedUpdate();
+          }
+          if (state == TowerState.Placed)
+          {
+               TowerPlacedUpdate();
+          };
+
+     }
+     private void TowerUnplacedUpdate()
+     {
+          if (Input.GetKeyDown(KeyCode.R))
+          {
+               //Rotates the tower
+               this.transform.Rotate(new Vector3(0, 90, 0));
+               //Saves the new Rotation so the next instantiated tower is instantiated with that rotation
+               towerRotation = this.transform.rotation;
+          }
+     }
+     private void TowerPlacedUpdate()
+     {
           //Filters Away the destroyed enemies
           enemiesInRange = enemiesInRange.Where(enemy => enemy != null).ToList();
           //Gets Ready To Shoot
@@ -300,5 +336,10 @@ public class TowerController : MonoBehaviour
           {
                enemiesInRange.Remove(exitingObjectCollider.gameObject);
           }
+     }
+
+     void OnTowerPlaced()
+     {
+          this.state = TowerState.Placed;
      }
 }

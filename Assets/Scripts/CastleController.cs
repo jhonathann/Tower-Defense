@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 /// <summary>
 /// Class to control the behaviour of the castle
@@ -21,7 +22,7 @@ public class CastleController : MonoBehaviour, IDamagable
      /// Function that destribes how the object takes damage
      /// </summary>
      /// <param name="damageAmount">The amount of damage taken</param>
-     void IDamagable.TakeDamage(float damageAmount)
+     void IDamagable.TakeDamage(float damageAmount, Func<EnemyController, IEnumerator> Effect)
      {
           gameData.health = gameData.health - damageAmount;
           checkHealth();

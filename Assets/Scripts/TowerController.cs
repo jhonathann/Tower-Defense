@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 /// <summary>
 /// This class handels the behaviour of the towers
@@ -29,9 +30,18 @@ public class TowerController : MonoBehaviour
      private const float STRUCTURE_HEIGHT = 1.0f;
      private const float TOWER_HEIGHT = 20.0f;
      private const float TOWER_WIDTH = 10.0f;
+     //Prefab for the instantiation of the shots
      private GameObject shotPrefab;
      private float fireRate;
      private float damage;
+     /// <summary>
+     /// Action that references the correct function for the tower attack type
+     /// </summary>
+     private Action<GameObject> Attack;
+     /// <summary>
+     /// Function that references the effect that will be added to a hitted enemy
+     /// </summary>
+     private Func<EnemyController, IEnumerator> Effect;
      private List<GameObject> enemiesInRange = new List<GameObject>();
      /// <summary>
      /// Variable that keeps track of the time since the last shot (initialized in maximum value so the tower shots immediatly when the first enemy enters)
@@ -95,6 +105,7 @@ public class TowerController : MonoBehaviour
                this.shotPrefab = this.gameData.towerData.AreaChannalizerBolt;
                this.fireRate = TowerStats.areaChannalizerStats[channalizer.rarity].fireRate;
                this.damage = TowerStats.areaChannalizerStats[channalizer.rarity].damage;
+               Attack += AttackArea;
           }
 
           void SetChannalizerFastVariables()
@@ -102,6 +113,7 @@ public class TowerController : MonoBehaviour
                this.shotPrefab = this.gameData.towerData.FastChannalizerBolt;
                this.fireRate = TowerStats.fastChannalizerStats[channalizer.rarity].fireRate;
                this.damage = TowerStats.fastChannalizerStats[channalizer.rarity].damage;
+               Attack += AttackOne;
           }
 
           void SetChannalizerStrongVariables()
@@ -109,6 +121,7 @@ public class TowerController : MonoBehaviour
                this.shotPrefab = this.gameData.towerData.StrongChannalizerBolt;
                this.fireRate = TowerStats.strongChannalizerStats[channalizer.rarity].fireRate;
                this.damage = TowerStats.strongChannalizerStats[channalizer.rarity].damage;
+               Attack += AttackOne;
           }
      }
      /// <summary>
@@ -257,10 +270,18 @@ public class TowerController : MonoBehaviour
      {
           switch (source.specificTypeInfo)
           {
-               case SourceType.Earth: break;
-               case SourceType.Fire: break;
-               case SourceType.Thunder: break;
-               case SourceType.Water: break;
+               case SourceType.Earth:
+                    Effect = TowerStats.earthSourceStats[source.rarity];
+                    break;
+               case SourceType.Fire:
+                    Effect = TowerStats.fireSourceStats[source.rarity];
+                    break;
+               case SourceType.Thunder:
+                    Effect = TowerStats.thunderSourceStats[source.rarity];
+                    break;
+               case SourceType.Water:
+                    Effect = TowerStats.waterSourceStats[source.rarity];
+                    break;
           }
      }
      private void Update()
@@ -273,7 +294,6 @@ public class TowerController : MonoBehaviour
           {
                TowerPlacedUpdate();
           };
-
      }
      private void TowerUnplacedUpdate()
      {
@@ -294,7 +314,7 @@ public class TowerController : MonoBehaviour
           {
                if (enemiesInRange.Count == 0) return;
                GameObject target = SelectTarget();
-               attack(target);
+               Attack(target);
                timeSinceLastShot = 0;
           }
           timeSinceLastShot += Time.deltaTime;
@@ -303,13 +323,24 @@ public class TowerController : MonoBehaviour
      /// Instantiates the shotPrefab Gameobject and sets its stats accordingly
      /// </summary>
      /// <param name="target">The target of the shot</param>
-     private void attack(GameObject target)
+     private void AttackOne(GameObject target)
      {
-          GameObject shoot = Instantiate(this.shotPrefab, this.transform.position, this.transform.rotation);
-          shoot.GetComponent<ShotController>().target = target;
-          shoot.GetComponent<ShotController>().damage = this.damage;
+          ShotController shot = Instantiate(this.shotPrefab, this.transform.position, this.transform.rotation).GetComponent<ShotController>();
+          shot.target = target;
+          shot.damage = this.damage;
+          shot.Effect = this.Effect;
      }
-
+     /// <summary>
+     /// Used when the tower has the area channalizer
+     /// </summary>
+     /// <param name="target">Just used to match the signature of the action (does nothing)</param>
+     private void AttackArea(GameObject target = null)
+     {
+          foreach (GameObject enemy in enemiesInRange)
+          {
+               AttackOne(enemy);
+          }
+     }
      /// <summary>
      /// Function that determines the target of the tower
      /// </summary>

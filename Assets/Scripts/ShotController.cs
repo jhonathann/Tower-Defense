@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ShotController : MonoBehaviour
 {
      public GameObject target;
      public float damage;
+     public Func<EnemyController, IEnumerator> Effect;
      void Start()
      {
           this.gameObject.name = "Bolt";
@@ -33,7 +35,7 @@ public class ShotController : MonoBehaviour
           IDamagable damageable = enteringObjectCollider.GetComponent<IDamagable>();
           if (damageable != null)
           {
-               damageable.TakeDamage(this.damage);
+               damageable.TakeDamage(this.damage, this.Effect);
                Destroy(this.gameObject);
           }
      }

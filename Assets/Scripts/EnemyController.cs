@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 /// <summary>
 /// Script that controls the behaviour of the enemies
@@ -11,9 +12,15 @@ public class EnemyController : MonoBehaviour, IDamagable
      /// Reference to the gameData Scriptable object
      /// </summary>
      public GameData gameData;
-
+     /// <summary>
+     /// type of the enemy
+     /// </summary>
      [HideInInspector]
      public EnemyType type;
+     /// <summary>
+     /// Actions to be executed on the update
+     /// </summary>
+     public Action OnUpdate;
      /// <summary>
      /// Health of the enemy
      /// </summary>
@@ -21,7 +28,7 @@ public class EnemyController : MonoBehaviour, IDamagable
      /// /// <summary>
      /// Speed of the enemy
      /// </summary>
-     private float speed;
+     public float speed;
      /// <summary>
      /// Chance of the enemy generating a part
      /// </summary>
@@ -35,6 +42,7 @@ public class EnemyController : MonoBehaviour, IDamagable
      /// Used for the direction of the movement
      /// </summary>
      Vector3 direction;
+
      /// <summary>
      /// constant of the enemy height used to avoid clipping with the terrain
      /// </summary>
@@ -42,18 +50,19 @@ public class EnemyController : MonoBehaviour, IDamagable
      void Start()
      {
           InitializeEnemy();
+          OnUpdate += TravelPath;
      }
 
      void Update()
      {
-          TravelPath();
+          OnUpdate?.Invoke();
      }
      void OnTriggerEnter(Collider enteringObjectCollider)
      {
           //Checks if it has reached the castle
           if (enteringObjectCollider.gameObject.name == "Castle")
           {
-               enteringObjectCollider.GetComponent<IDamagable>().TakeDamage(1);
+               enteringObjectCollider.GetComponent<IDamagable>().TakeDamage();
                Destroy(this.gameObject);
           }
      }
@@ -75,29 +84,48 @@ public class EnemyController : MonoBehaviour, IDamagable
           //Set the starting mov ement direction
           direction = GetXZDirection();
      }
-     /// <summary>
-     /// Decides if a part is being generated based on the dropchance of an enemy. And generates such part.
-     /// </summary>
-     void TryGeneratePart()
-     {
-          int chance = Random.Range(1, 100);
-          if (chance > dropRate) return;
-          GameData.AddNewPart?.Invoke(null);
-     }
+
      /// <summary>
      /// Updates the logic that enables the travel of the path
      /// </summary>
-     void TravelPath()
+     public void TravelPath()
      {
-          //Travels the path
+          //check for edge case at the start of the path
           if (goalCheckPoint >= 0)
           {
+               direction = GetXZDirection();
+               //Travels the path
                this.transform.Translate(direction * Time.deltaTime * speed, Space.World);
                if (CalculateXZDistance() < 1f)
                {
                     goalCheckPoint--;
-                    direction = GetXZDirection();
                }
+          }
+          else
+          {
+               goalCheckPoint++;
+          }
+
+     }
+     /// <summary>
+     /// Travels the path backwards(used for the thunder effect)
+     /// </summary>
+     public void TravelPathBackwards()
+     {
+          //check for end case at the start of the path
+          if (goalCheckPoint <= gameData.path.Count - 2)
+          {
+               direction = GetXZDirection();
+               //Travels the path
+               this.transform.Translate(direction * Time.deltaTime * speed, Space.World);
+               if (CalculateXZDistance() < 1f)
+               {
+                    goalCheckPoint++;
+               }
+          }
+          else
+          {
+               goalCheckPoint--;
           }
      }
      /// <summary>
@@ -126,7 +154,7 @@ public class EnemyController : MonoBehaviour, IDamagable
      /// Function that destribes how the object takes damage
      /// </summary>
      /// <param name="damageAmount">The amount of damage taken</param>
-     void IDamagable.TakeDamage(float damageAmount)
+     void IDamagable.TakeDamage(float damageAmount, Func<EnemyController, IEnumerator> Effect)
      {
           this.healt = this.healt - damageAmount;
           if (healt <= 0)
@@ -134,5 +162,18 @@ public class EnemyController : MonoBehaviour, IDamagable
                Destroy(this.gameObject);
                TryGeneratePart();
           }
+          if (Effect != null)
+          {
+               StartCoroutine(Effect(this));
+          }
+     }
+     /// <summary>
+     /// Decides if a part is being generated based on the dropchance of an enemy. And generates such part.
+     /// </summary>
+     void TryGeneratePart()
+     {
+          int chance = UnityEngine.Random.Range(1, 100);
+          if (chance > dropRate) return;
+          GameData.AddNewPart?.Invoke(null);
      }
 }

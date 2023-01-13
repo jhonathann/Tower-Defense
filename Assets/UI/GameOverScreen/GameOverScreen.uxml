@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/GeneralStyles.uss?fileID=7433441132597879392&amp;guid=0ade87dcc933ad14d9080c358e4c0bda&amp;type=3#GeneralStyles" />
+    <Style src="project://database/Assets/UI/GameOverScreen/GameOverScreen.uss?fileID=7433441132597879392&amp;guid=fd19908cf146b1c41917f9f362ae3571&amp;type=3#GameOverScreen" />
+    <ui:VisualElement name="GlobalContainer" class="globalContainer">
+        <ui:VisualElement name="MenuContainer" class="menuContainer">
+            <ui:Label text="Game Over" display-tooltip-when-elided="true" name="GameOverText" class="gameOverText" />
+            <ui:Label text="Score: " display-tooltip-when-elided="true" name="ScoreText" class="scoreText" />
+            <ui:Button text="Play Again" display-tooltip-when-elided="true" name="PlayAgainButton" class="button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

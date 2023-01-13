@@ -1,0 +1,64 @@
+.globalContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items:center;
+}
+.menuContainer{
+    flex-wrap: wrap;
+    width: 80%;
+    height: 50%;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--middleColor);
+    border-width: 5px;
+    border-color: var(--darkColor);
+    opacity: 0.8;
+}
+
+.gameOverText {
+  visibility: visible;
+  -unity-font-style: bold;
+  font-size: 300%;
+  -unity-text-align: middle-center;
+  color: var(--lightColor);
+}
+
+.scoreText {
+  visibility: visible;
+  -unity-font-style: bold;
+  font-size: 200%;
+  -unity-text-align: middle-center;
+  color: var(--lightColor);
+}
+
+.button {
+    width: 50%;
+    height: 15%;
+    margin: 1%;
+    padding: 1%;
+    background-color: rgba(0,0,0,0);
+    -unity-font-style: bold;
+    font-size: 200%;
+    -unity-text-align: middle-center;
+    color: var(--lightColor);
+    border-width: 0px;
+}
+
+.button:hover {
+    transition: 0.25s;
+    transition-timing-function: var(--transitionTimingFunction);
+    scale: 1.1;
+    color: var(--darkColor);
+    border-width: 5px;
+    border-color: var(--darkColor);
+}
+
+.button:active {
+    transition: 0.25s;
+    transition-timing-function: var(--transitionTimingFunction);
+    scale: 0.95;
+}

@@ -21,7 +21,13 @@ public class PortalController : MonoBehaviour
           difficulty = 10; //Sets the start difficulty
           NextWave += NextWaveCalled;
      }
-
+     /// <summary>
+     /// Removes the subscription to the static Action when the gameObject is destroyed(when the scene is reloaded)
+     /// </summary>
+     void OnDestroy()
+     {
+          NextWave -= NextWaveCalled;
+     }
      private void NextWaveCalled()
      {
           difficulty = difficulty * 1.2f;

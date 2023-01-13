@@ -8,14 +8,21 @@ using System;
 /// </summary>
 public class CastleController : MonoBehaviour, IDamagable
 {
-     //Access to the gameData
+     /// <summary>
+     /// Access to the gameData
+     /// </summary>
      public GameData gameData;
-     //Destroys the gameObject when the player health gets to 0
+     /// <summary>
+     /// Events that triggers when the castle is destroyed
+     /// </summary>
+     public static event Action CastleDestroyed;
+     //Destroys the gameObject when the player health gets to 0 and triggers the CastleDestroyed event
      void checkHealth()
      {
           if (gameData.health <= 0)
           {
                Destroy(this.gameObject);
+               CastleDestroyed?.Invoke();
           }
      }
      /// <summary>

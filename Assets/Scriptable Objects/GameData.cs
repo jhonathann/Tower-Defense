@@ -9,6 +9,10 @@ using System;
 public class GameData : ScriptableObject
 {
      /// <summary>
+     /// Action that is trigger when the game has started or restarted
+     /// </summary>
+     public static Action GameStarted;
+     /// <summary>
      /// Reference to the generated path
      /// </summary>
      public List<Tile> path;
@@ -16,6 +20,14 @@ public class GameData : ScriptableObject
      /// The health of the player
      /// </summary>
      public float health;
+     /// <summary>
+     /// Count the number of waves
+     /// </summary>
+     public int waveCount;
+     /// <summary>
+     /// Counts the duration of the current game
+     /// </summary>
+     public float gameTime;
      /// <summary>
      /// The list of parts that the player currently has
      /// </summary>
@@ -41,13 +53,27 @@ public class GameData : ScriptableObject
      public bool isTowerReady;
      void OnEnable()
      {
-          health = 10;
+          //Subscribe to the events
+          GameStarted += OnGameStarted;
           SelectPart += OnSelectPart;
           AddNewPart += OnAddNewPart;
-          isTowerReady = false;
-          //Subscribing to the towerplaced event
           TileController.TowerPlaced += OnTowerPlaced;
+          PortalController.NextWave += OnNextWave;
+          CastleController.CastleDestroyed += OnCastleDestroyed;
+     }
+
+     /// <summary>
+     /// Used to reset the variables when the game is started/restarted
+     /// </summary>
+     private void OnGameStarted()
+     {
+          health = 10;
+          waveCount = 0;
+          gameTime = Time.time;
+          parts?.Clear();
+          isTowerReady = false;
           AddStartingParts(3);
+          Time.timeScale = 1; //Unpauses the game (in case of a restart) (idk why but this isnt noticeable in the editor but affects the build)
      }
      /// <summary>
      /// Adds the starting parts to the gameobject
@@ -120,5 +146,19 @@ public class GameData : ScriptableObject
           this.sourceSelectedPart = null;
           //Set the available tower again to null
           this.isTowerReady = false;
+     }
+     /// <summary>
+     /// Triggers when the castle is destroyed
+     /// </summary>
+     void OnCastleDestroyed()
+     {
+          gameTime = Time.time - gameTime;
+     }
+     /// <summary>
+     /// Triggers when a next wave is called
+     /// </summary>
+     void OnNextWave()
+     {
+          waveCount++;
      }
 }

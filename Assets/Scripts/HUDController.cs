@@ -53,6 +53,13 @@ public class HUDController : MonoBehaviour
      }
 
      /// <summary>
+     /// Removes the subscription to the static Action when the gameObject is destroyed(when the scene is reloaded)
+     /// </summary>
+     void OnDestroy()
+     {
+          RenderPanel -= RenderCreationPanel;
+     }
+     /// <summary>
      /// Used to get the reference of each of the individual components
      /// </summary>
      void GetElements()

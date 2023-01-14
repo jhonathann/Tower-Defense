@@ -21,21 +21,27 @@ public class TileController : MonoBehaviour
      /// Action triggered when the tower is succesfully placed
      /// </summary>
      public static Action TowerPlaced;
+     /// <summary>
+     /// Flag to check if the target i ocupied with a tower already
+     /// </summary>
+     private bool isOcupied = false;
      private void OnMouseEnter()
      {
           if (isMouseOverAnUiElement()) return;
           if (!isThereATowerToPlace()) return;
+          if (isOcupied) return;
           InstantiateTowerMock();
      }
      private void OnMouseExit()
      {
-          if (!isThereATowerToPlace()) return;
+          if (towerMock == null) return;
           DestroyMock();
      }
      private void OnMouseUpAsButton()
      {
           if (isMouseOverAnUiElement()) return;
           if (!isThereATowerToPlace()) return;
+          if (isOcupied) return;
           InstantiateTower();
           DestroyMock(); //Destroy the previous mock
           //Trigger the towerplaced event
@@ -52,6 +58,8 @@ public class TileController : MonoBehaviour
           tower.GetComponent<TowerController>().gameData = gameData;
           //set the right position (cause the GameObject constructor sets the object at origin)
           tower.transform.position = this.transform.position;
+          //Set the isOcupied flag to true
+          isOcupied = true;
      }
      /// <summary>
      /// Funtion that instantiates the prefabs and holds a refernce to them so they can be deleated

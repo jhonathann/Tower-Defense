@@ -10,7 +10,7 @@
             <ui:VisualElement name="TowerCreationPanel" class="towerCreationPanel" />
         </ui:VisualElement>
         <ui:VisualElement name="BottomContainer" class="bottomContainer">
-            <ui:Button text="Next Wave" display-tooltip-when-elided="true" name="NextWaveButton" enable-rich-text="true" class="nextWaveButton" />
+            <ui:Label text="Next Wave in 0:0" display-tooltip-when-elided="true" name="NextWaveTimeLabel" class="nextWaveTimeLabel" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

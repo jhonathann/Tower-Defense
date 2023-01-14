@@ -16,7 +16,7 @@ public class HUDController : MonoBehaviour
      //HUD necessary references
      UIDocument HUD;
      ProgressBar healthBar;
-     Button nextWaveButton;
+     Label nextWaveTimeLabel;
      VisualElement towerCreationPanel;
      /// <summary>
      /// VisualTree to be put inside the towerCreationPanel when maximized
@@ -38,7 +38,6 @@ public class HUDController : MonoBehaviour
      void Start()
      {
           GetElements();
-          nextWaveButton.RegisterCallback<ClickEvent>(NextWaveButtonOnClick);
           RenderPanel += RenderCreationPanel;
           RenderPanel?.Invoke();
      }
@@ -46,6 +45,7 @@ public class HUDController : MonoBehaviour
      void Update()
      {
           healthBar.value = gameData.health;
+          nextWaveTimeLabel.text = "Next Wave In: " + gameData.timerString;
           if (Input.GetKeyDown(KeyCode.T))
           {
                ToggleTowerCreationPanel();
@@ -66,13 +66,8 @@ public class HUDController : MonoBehaviour
      {
           HUD = this.GetComponent<UIDocument>();
           healthBar = HUD.rootVisualElement.Query<ProgressBar>("HealthBar");
-          nextWaveButton = HUD.rootVisualElement.Query<Button>("NextWaveButton");
+          nextWaveTimeLabel = HUD.rootVisualElement.Query<Label>("NextWaveTimeLabel");
           towerCreationPanel = HUD.rootVisualElement.Query<VisualElement>("TowerCreationPanel");
-     }
-
-     void NextWaveButtonOnClick(ClickEvent evt)
-     {
-          PortalController.NextWave?.Invoke();
      }
      /// <summary>
      /// Toggles the tower creation panel on and off and re-renders the panel accordingly

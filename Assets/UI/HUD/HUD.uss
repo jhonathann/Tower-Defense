@@ -24,7 +24,7 @@
 }
 .bottomContainer {
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   width: 100%;
   height: 10%;
   padding: 1%;
@@ -47,34 +47,14 @@
 .unity-progress-bar__progress {
   background-color: var(--darkColor);
 }
-.nextWaveButton {
+
+.nextWaveTimeLabel{
   visibility: visible;
-  width: 20%;
-  height: 80%;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0);
   -unity-font-style: bold;
   font-size: 200%;
   -unity-text-align: middle-center;
-  border-width: 0px;
   color: var(--lightColor);
 }
-
-.nextWaveButton:hover {
-  transition: 0.25s;
-  transition-timing-function: var(--transitionTimingFunction);
-  scale: 1.1;
-  color: var(--darkColor);
-  border-width: 5px;
-  border-color: var(--darkColor);
-}
-
-.nextWaveButton:active {
-  transition: 0.25s;
-  transition-timing-function: var(--transitionTimingFunction);
-  scale: 0.95;
-}
-
 .towerCreationPanel {
   visibility: visible;
   flex-direction: column;

@@ -8,6 +8,7 @@ using System;
 /// </summary>
 public class PortalController : MonoBehaviour
 {
+     public GameData gameData;
      /// <summary>
      /// Controlls the dificulty of the level increasing its value each wave and creating more enemies accordingly
      /// </summary>
@@ -16,13 +17,26 @@ public class PortalController : MonoBehaviour
      /// Action that handles the logic of when the nextWave is called
      /// </summary>
      public static Action NextWave;
+     /// <summary>
+     /// Timer that handels the countdown timer for the waves
+     /// </summary>
+     /// <returns></returns>
+     private Timer nextWaveTimer = new Timer();
      void Start()
      {
           difficulty = 10; //Sets the start difficulty
           NextWave += NextWaveCalled;
      }
+     void Update()
+     {
+          if (nextWaveTimer.IsDone)
+          {
+               nextWaveTimer.StartTimer(30, () => NextWave?.Invoke(), this);
+          }
+          gameData.timerString = nextWaveTimer.remainingTimeAsString;
+     }
      /// <summary>
-     /// Removes the subscription to the static Action when the gameObject is destroyed(when the scene is reloaded)
+     /// Removes the subscription to the static Action when the gameObject is destroyed (when the scene is reloaded)
      /// </summary>
      void OnDestroy()
      {

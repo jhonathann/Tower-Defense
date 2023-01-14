@@ -51,6 +51,10 @@ public class GameData : ScriptableObject
      /// </summary>
      public TowerData towerData;
      public bool isTowerReady;
+     /// <summary>
+     /// Text to be shown in the HUD regarding the countdown for the next wave
+     /// </summary>
+     public string timerString;
      void OnEnable()
      {
           //Subscribe to the events

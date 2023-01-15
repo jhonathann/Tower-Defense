@@ -22,7 +22,7 @@ public class Part : VisualElement
      public Enum specificTypeInfo;
      public VisualTreeAsset template = Resources.Load<VisualTreeAsset>("Part");
      /// <summary>
-     /// Dictionary that match each rarity with the corresponding USS class
+     /// Dictionary that matches each rarity with the corresponding USS class
      /// </summary>
      /// <value>A string corresponding to the USS class to be assigned</value>
      Dictionary<Rarity, string> rarityClasses = new Dictionary<Rarity, string>
@@ -33,7 +33,23 @@ public class Part : VisualElement
                {Rarity.UltraRare,"ultraRareRarity"},
                {Rarity.Myth,"mythRarity"}
           };
-
+     /// <summary>
+     /// Dictionary that matches each type with a USS class to display the icons of the elements in the UI 
+     /// </summary>
+     /// <value>A string corresponding to the USS class to be assigned</value>
+     Dictionary<Enum, string> specificTypeClasses = new Dictionary<Enum, string>
+          {
+               {ChannalizerType.Fast,"channalizerFast"},
+               {ChannalizerType.Strong,"channalizerStrong"},
+               {ChannalizerType.Area,"channalizerArea"},
+               {StructureType.Beam,"structureBeam"},
+               {StructureType.Circular,"structureCircular"},
+               {StructureType.Cross,"structureCross"},
+               {SourceType.Earth,"sourceEarth"},
+               {SourceType.Fire,"sourceFire"},
+               {SourceType.Thunder,"sourceThunder"},
+               {SourceType.Water,"sourceWater"}
+          };
      /// <summary>
      /// This constructor initialized a new part with random (but weighted) rarity and random values
      /// </summary>
@@ -44,6 +60,7 @@ public class Part : VisualElement
           this.specificTypeInfo = GetSpecificTypeInfo();
           template.CloneTree(this);
           this.AddToClassList(rarityClasses[this.rarity]);
+          this.AddToClassList(specificTypeClasses[this.specificTypeInfo]);
           this.RegisterCallback<ClickEvent>(PartOnClick);
      }
      /// <summary>
@@ -58,6 +75,7 @@ public class Part : VisualElement
           this.specificTypeInfo = part.specificTypeInfo;
           template.CloneTree(this);
           this.AddToClassList(rarityClasses[this.rarity]);
+          this.AddToClassList(specificTypeClasses[this.specificTypeInfo]);
           this.style.width = new StyleLength(new Length(100, LengthUnit.Percent));
           this.style.height = new StyleLength(new Length(100, LengthUnit.Percent));
      }
@@ -72,6 +90,7 @@ public class Part : VisualElement
           this.specificTypeInfo = GetSpecificTypeInfo();
           template.CloneTree(this);
           this.AddToClassList(rarityClasses[this.rarity]);
+          this.AddToClassList(specificTypeClasses[this.specificTypeInfo]);
           this.RegisterCallback<ClickEvent>(PartOnClick);
      }
      /// <summary>

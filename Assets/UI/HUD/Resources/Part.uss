@@ -32,6 +32,40 @@
   border-width: 3px;
   border-color: #716614;
 }
+
+.channalizerFast{
+  background-image: url("/Assets/UI/HUD/FastChannalizer.png")
+}
+.channalizerStrong{
+  background-image: url("/Assets/UI/HUD/StrongChannalizer.png")
+}
+.channalizerArea{
+  background-image: url("/Assets/UI/HUD/AreaChannalizer.png")
+}
+
+.structureCross{
+  background-image: url("/Assets/UI/HUD/CrossStructure.png")
+}
+.structureCircular{
+  background-image: url("/Assets/UI/HUD/CircularStructure.png")
+}
+.structureBeam{
+  background-image: url("/Assets/UI/HUD/BeamStructure.png")
+}
+
+.sourceFire{
+  background-image: url("/Assets/UI/HUD/FireSource.png")
+}
+.sourceWater{
+  background-image: url("/Assets/UI/HUD/WaterSource.png")
+}
+.sourceEarth{
+  background-image: url("/Assets/UI/HUD/EarthSource.png")
+}
+.sourceThunder{
+  background-image: url("/Assets/UI/HUD/ThunderSource.png")
+}
+
 .selected{
   transition: 0.25s;
   transition-timing-function: var(--transitionTimingFunction);

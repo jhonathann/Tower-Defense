@@ -30,10 +30,6 @@ public class EnemyController : MonoBehaviour, IDamagable
      /// </summary>
      public float speed;
      /// <summary>
-     /// Chance of the enemy generating a part
-     /// </summary>
-     private int dropRate;
-     /// <summary>
      /// Variable that defines the next checkpoint for parth traveling
      /// </summary>
      [HideInInspector]
@@ -74,7 +70,6 @@ public class EnemyController : MonoBehaviour, IDamagable
           //Set the stats of the enemy
           this.healt = EnemyStats.GetHealth(type);
           this.speed = EnemyStats.GetSpeed(type);
-          this.dropRate = EnemyStats.GetDropRate(type);
           //Setting the correct name (used in the collider interactions)
           this.gameObject.name = "Enemy";
           //Setting the correct Hight so the enemy does not clip with the ground
@@ -160,20 +155,10 @@ public class EnemyController : MonoBehaviour, IDamagable
           if (healt <= 0)
           {
                Destroy(this.gameObject);
-               TryGeneratePart();
           }
           if (Effect != null)
           {
                StartCoroutine(Effect(this));
           }
-     }
-     /// <summary>
-     /// Decides if a part is being generated based on the dropchance of an enemy. And generates such part.
-     /// </summary>
-     void TryGeneratePart()
-     {
-          int chance = UnityEngine.Random.Range(1, 100);
-          if (chance > dropRate) return;
-          GameData.AddNewPart?.Invoke(null);
      }
 }

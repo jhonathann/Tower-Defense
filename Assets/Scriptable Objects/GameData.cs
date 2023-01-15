@@ -148,7 +148,7 @@ public class GameData : ScriptableObject
           this.channalizerSelectedPart = null;
           this.structureSelectedPart = null;
           this.sourceSelectedPart = null;
-          //Set the available tower again to null
+          //Set the available tower again to false
           this.isTowerReady = false;
      }
      /// <summary>
@@ -163,6 +163,15 @@ public class GameData : ScriptableObject
      /// </summary>
      void OnNextWave()
      {
+          /// <summary>
+          /// Gives between 1 and 3 new parts each time a wave starts
+          /// </summary>
+          /// <returns></returns>
+          int randomNumberOfParts = UnityEngine.Random.Range(1, 2);
+          for (int i = 0; i < randomNumberOfParts; i++)
+          {
+               GameData.AddNewPart(null);
+          }
           waveCount++;
      }
 }

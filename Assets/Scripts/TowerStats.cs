@@ -32,7 +32,7 @@ public class TowerStats
           { Rarity.UltraRare, (damage: 1.75f*CHANNALIZER_STRONG_BASE_DAMAGE, fireRate: 1.75f*CHANNALIZER_STRONG_BASE_FIRE_RATE) },
           { Rarity.Myth, (damage: 2.0f*CHANNALIZER_STRONG_BASE_DAMAGE, fireRate: 2.0f*CHANNALIZER_STRONG_BASE_FIRE_RATE) }
           };
-     public static readonly float STRUCTURE_BEAM_BASE_RANGE = 30.0f;
+     public static readonly float STRUCTURE_BEAM_BASE_RANGE = 50.0f;
      public static readonly Dictionary<Rarity, float> beamStructureStats = new Dictionary<Rarity, float> {
           { Rarity.Common, 1.0f*STRUCTURE_BEAM_BASE_RANGE },
           { Rarity.Normal,  1.25f *STRUCTURE_BEAM_BASE_RANGE},
@@ -40,7 +40,7 @@ public class TowerStats
           { Rarity.UltraRare, 1.75f*STRUCTURE_BEAM_BASE_RANGE },
           { Rarity.Myth, 2.0f*STRUCTURE_BEAM_BASE_RANGE}
           };
-     public static readonly float STRUCTURE_CIRCULAR_BASE_RADIUS = 20.0f;
+     public static readonly float STRUCTURE_CIRCULAR_BASE_RADIUS = 10.0f;
      public static readonly Dictionary<Rarity, float> circularStructureStats = new Dictionary<Rarity, float> {
           { Rarity.Common, 1.0f*STRUCTURE_CIRCULAR_BASE_RADIUS },
           { Rarity.Normal,  1.25f*STRUCTURE_CIRCULAR_BASE_RADIUS },
@@ -48,7 +48,7 @@ public class TowerStats
           { Rarity.UltraRare, 1.75f*STRUCTURE_CIRCULAR_BASE_RADIUS },
           { Rarity.Myth, 2.0f*STRUCTURE_CIRCULAR_BASE_RADIUS}
           };
-     public static readonly float STRUCTURE_CROSS_BASE_RANGE = 15.0f;
+     public static readonly float STRUCTURE_CROSS_BASE_RANGE = 20.0f;
      public static readonly Dictionary<Rarity, float> crossStructureStats = new Dictionary<Rarity, float> {
           { Rarity.Common, 1.0f*STRUCTURE_CROSS_BASE_RANGE },
           { Rarity.Normal,  1.25f*STRUCTURE_CROSS_BASE_RANGE },
@@ -89,18 +89,18 @@ public class TowerStats
                IDamagable enemyIDamagable = (IDamagable)enemy;
                while (internalTime > 0)
                {
-                    enemyIDamagable.TakeDamage(0.1f);
+                    enemyIDamagable.TakeDamage(0.2f);
                     internalTime -= 0.1f;
                     yield return new WaitForSeconds(0.1f);
                }
           }
      }
      public static readonly Dictionary<Rarity, Func<EnemyController, IEnumerator>> fireSourceStats = new Dictionary<Rarity, Func<EnemyController, IEnumerator>> {
-          { Rarity.Common, FireEffectSetUp(0.1f) },
-          { Rarity.Normal,  FireEffectSetUp(0.2f) },
-          { Rarity.Rare, FireEffectSetUp(0.3f) },
-          { Rarity.UltraRare, FireEffectSetUp(0.4f) },
-          { Rarity.Myth, FireEffectSetUp(0.5f)}
+          { Rarity.Common, FireEffectSetUp(0.2f) },
+          { Rarity.Normal,  FireEffectSetUp(0.4f) },
+          { Rarity.Rare, FireEffectSetUp(0.6f) },
+          { Rarity.UltraRare, FireEffectSetUp(0.8f) },
+          { Rarity.Myth, FireEffectSetUp(1.0f)}
           };
      public static Func<EnemyController, IEnumerator> ThunderEffectSetUp(float time)
      {
@@ -117,11 +117,11 @@ public class TowerStats
           }
      }
      public static readonly Dictionary<Rarity, Func<EnemyController, IEnumerator>> thunderSourceStats = new Dictionary<Rarity, Func<EnemyController, IEnumerator>> {
-          { Rarity.Common, ThunderEffectSetUp(0.1f) },
-          { Rarity.Normal,  ThunderEffectSetUp(0.2f) },
-          { Rarity.Rare, ThunderEffectSetUp(0.3f) },
-          { Rarity.UltraRare, ThunderEffectSetUp(0.4f) },
-          { Rarity.Myth, ThunderEffectSetUp(0.5f)}
+          { Rarity.Common, ThunderEffectSetUp(0.05f) },
+          { Rarity.Normal,  ThunderEffectSetUp(0.10f) },
+          { Rarity.Rare, ThunderEffectSetUp(0.15f) },
+          { Rarity.UltraRare, ThunderEffectSetUp(0.20f) },
+          { Rarity.Myth, ThunderEffectSetUp(0.25f)}
           };
      public static Func<EnemyController, IEnumerator> WaterEffectSetUp(float time)
      {
@@ -140,10 +140,10 @@ public class TowerStats
           }
      }
      public static readonly Dictionary<Rarity, Func<EnemyController, IEnumerator>> waterSourceStats = new Dictionary<Rarity, Func<EnemyController, IEnumerator>> {
-          { Rarity.Common, WaterEffectSetUp(0.1f) },
-          { Rarity.Normal,  WaterEffectSetUp(0.2f) },
-          { Rarity.Rare, WaterEffectSetUp(0.3f) },
-          { Rarity.UltraRare, WaterEffectSetUp(0.4f) },
-          { Rarity.Myth, WaterEffectSetUp(0.5f)}
+          { Rarity.Common, WaterEffectSetUp(0.2f) },
+          { Rarity.Normal,  WaterEffectSetUp(0.4f) },
+          { Rarity.Rare, WaterEffectSetUp(0.6f) },
+          { Rarity.UltraRare, WaterEffectSetUp(0.8f) },
+          { Rarity.Myth, WaterEffectSetUp(1.0f)}
           };
 }

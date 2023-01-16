@@ -5,8 +5,8 @@ using System;
 
 public class TowerStats
 {
-     public static readonly float CHANNALIZER_AREA_BASE_DAMAGE = 0.2f;
-     public static readonly float CHANNALIZER_AREA_BASE_FIRE_RATE = 0.5f;
+     public static readonly float CHANNALIZER_AREA_BASE_DAMAGE = 0.5f;
+     public static readonly float CHANNALIZER_AREA_BASE_FIRE_RATE = 0.25f;
      public static readonly Dictionary<Rarity, (float damage, float fireRate)> areaChannalizerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
           { Rarity.Common, (damage: 1.0f*CHANNALIZER_AREA_BASE_DAMAGE, fireRate: 1.0f*CHANNALIZER_AREA_BASE_FIRE_RATE) },
           { Rarity.Normal, (damage: 1.25f*CHANNALIZER_AREA_BASE_DAMAGE, fireRate: 1.25f*CHANNALIZER_AREA_BASE_FIRE_RATE) },
@@ -32,7 +32,7 @@ public class TowerStats
           { Rarity.UltraRare, (damage: 1.75f*CHANNALIZER_STRONG_BASE_DAMAGE, fireRate: 1.75f*CHANNALIZER_STRONG_BASE_FIRE_RATE) },
           { Rarity.Myth, (damage: 2.0f*CHANNALIZER_STRONG_BASE_DAMAGE, fireRate: 2.0f*CHANNALIZER_STRONG_BASE_FIRE_RATE) }
           };
-     public static readonly float STRUCTURE_BEAM_BASE_RANGE = 50.0f;
+     public static readonly float STRUCTURE_BEAM_BASE_RANGE = 40.0f;
      public static readonly Dictionary<Rarity, float> beamStructureStats = new Dictionary<Rarity, float> {
           { Rarity.Common, 1.0f*STRUCTURE_BEAM_BASE_RANGE },
           { Rarity.Normal,  1.25f *STRUCTURE_BEAM_BASE_RANGE},
@@ -40,7 +40,7 @@ public class TowerStats
           { Rarity.UltraRare, 1.75f*STRUCTURE_BEAM_BASE_RANGE },
           { Rarity.Myth, 2.0f*STRUCTURE_BEAM_BASE_RANGE}
           };
-     public static readonly float STRUCTURE_CIRCULAR_BASE_RADIUS = 10.0f;
+     public static readonly float STRUCTURE_CIRCULAR_BASE_RADIUS = 15.0f;
      public static readonly Dictionary<Rarity, float> circularStructureStats = new Dictionary<Rarity, float> {
           { Rarity.Common, 1.0f*STRUCTURE_CIRCULAR_BASE_RADIUS },
           { Rarity.Normal,  1.25f*STRUCTURE_CIRCULAR_BASE_RADIUS },

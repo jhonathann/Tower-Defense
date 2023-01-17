@@ -20,6 +20,11 @@ public class Part : VisualElement
      /// Specific Info about the effect of the part
      /// </summary>
      public Enum specificTypeInfo;
+     /// <summary>
+     /// template of the part (used to import the classes to be used)
+     /// </summary>
+     /// <typeparam name="VisualTreeAsset"><the uxml file with the classes uss file/typeparam>
+     /// <returns></returns>
      public VisualTreeAsset template = Resources.Load<VisualTreeAsset>("Part");
      /// <summary>
      /// Dictionary that matches each rarity with the corresponding USS class
@@ -62,6 +67,8 @@ public class Part : VisualElement
           this.AddToClassList(rarityClasses[this.rarity]);
           this.AddToClassList(specificTypeClasses[this.specificTypeInfo]);
           this.RegisterCallback<ClickEvent>(PartOnClick);
+          this.RegisterCallback<MouseEnterEvent>(PartOnMouseEnter);
+          this.RegisterCallback<MouseLeaveEvent>(PartOnMouseLeave);
      }
      /// <summary>
      /// This constructor returns a clone of the part that's passed in (with alteration on the width and height) (the cloned class doesn't have a registered callback) (used for the selectedContainerMockUp)
@@ -92,6 +99,8 @@ public class Part : VisualElement
           this.AddToClassList(rarityClasses[this.rarity]);
           this.AddToClassList(specificTypeClasses[this.specificTypeInfo]);
           this.RegisterCallback<ClickEvent>(PartOnClick);
+          this.RegisterCallback<MouseEnterEvent>(PartOnMouseEnter);
+          this.RegisterCallback<MouseLeaveEvent>(PartOnMouseLeave);
      }
      /// <summary>
      /// Gets the rarity of the part by considered the probability of each option
@@ -125,11 +134,104 @@ public class Part : VisualElement
                default: return null;
           }
      }
-     void PartOnClick(ClickEvent evt)
+     /// <summary>
+     /// Callback triggered when the part is clicked
+     /// </summary>
+     /// <param name="evt">(not used)</param>
+     private void PartOnClick(ClickEvent evt)
      {
           GameData.SelectPart(this);
           HUDController.RenderPanel?.Invoke();
      }
+     /// <summary>
+     /// Callback triggered when the mouse enters the part
+     /// </summary>
+     /// <param name="evt">(not used)</param>
+     private void PartOnMouseEnter(MouseEnterEvent evt)
+     {
+          //Doubles the size of the part
+          this.style.width = new StyleLength(new Length(20, LengthUnit.Percent));
+          this.style.height = new StyleLength(new Length(66, LengthUnit.Percent));
+          // Adds the context menu
+          this.Add(CreateContextMenu());
+     }
+     /// <summary>
+     /// Callback triggered when the mouse leaves the part
+     /// </summary>
+     /// <param name="evt">(not used)</param>
+     private void PartOnMouseLeave(MouseLeaveEvent evt)
+     {
+          //Sets the size of the part to normal again
+          this.style.width = new StyleLength(new Length(10, LengthUnit.Percent));
+          this.style.height = new StyleLength(new Length(33, LengthUnit.Percent));
+          //Removes the context menu
+          this.Clear();
+     }
+     //Creates the context menu and adds the corresponding USS classe
+     private VisualElement CreateContextMenu()
+     {
+          VisualElement contextMenu = new VisualElement();
+          contextMenu.AddToClassList("contextMenu");
+          AddStatsLabels(contextMenu);
+          return contextMenu;
+
+          //Switches to the part characteristics and adds the correct labels to the context menu
+          void AddStatsLabels(VisualElement visualElement)
+          {
+               switch (this.type)
+               {
+                    case PartType.Source:
+                         switch (this.specificTypeInfo)
+                         {
+                              case SourceType.Earth:
+                                   visualElement.Add(new Label($"Effect: Stun {TowerStats.earthSourceTimes[this.rarity]} sec"));
+                                   break;
+                              case SourceType.Fire:
+                                   visualElement.Add(new Label($"Effect: Burn {TowerStats.fireSourceTimes[this.rarity]} sec"));
+                                   break;
+                              case SourceType.Thunder:
+                                   visualElement.Add(new Label($"Effect: Confussion {TowerStats.thunderSourceTimes[this.rarity]} sec"));
+                                   break;
+                              case SourceType.Water:
+                                   visualElement.Add(new Label($"Effect: Slow {TowerStats.waterSourceTimes[this.rarity]} sec"));
+                                   break;
+                         }
+                         break;
+                    case PartType.Structure:
+                         switch (this.specificTypeInfo)
+                         {
+                              case StructureType.Beam:
+                                   visualElement.Add(new Label($"Range: {TowerStats.beamStructureStats[this.rarity] / 10} Tiles"));
+                                   break;
+                              case StructureType.Circular:
+                                   visualElement.Add(new Label($"Radius: {TowerStats.circularStructureStats[this.rarity] / 10} Tiles"));
+                                   break;
+                              case StructureType.Cross:
+                                   visualElement.Add(new Label($"Range: {TowerStats.crossStructureStats[this.rarity] / 10} Tiles"));
+                                   break;
+                         }
+                         break;
+                    case PartType.Channalizer:
+                         switch (this.specificTypeInfo)
+                         {
+                              case ChannalizerType.Area:
+                                   visualElement.Add(new Label($"Damage: {TowerStats.areaChannalizerStats[this.rarity].damage}"));
+                                   visualElement.Add(new Label($"Fire Rate: {TowerStats.areaChannalizerStats[this.rarity].fireRate}"));
+                                   break;
+                              case ChannalizerType.Fast:
+                                   visualElement.Add(new Label($"Damage: {TowerStats.fastChannalizerStats[this.rarity].damage}"));
+                                   visualElement.Add(new Label($"Fire Rate: {TowerStats.fastChannalizerStats[this.rarity].fireRate}"));
+                                   break;
+                              case ChannalizerType.Strong:
+                                   visualElement.Add(new Label($"Damage: {TowerStats.strongChannalizerStats[this.rarity].damage}"));
+                                   visualElement.Add(new Label($"Fire Rate: {TowerStats.strongChannalizerStats[this.rarity].fireRate}"));
+                                   break;
+                         }
+                         break;
+               }
+          }
+     }
+
 }
 
 /// <summary>

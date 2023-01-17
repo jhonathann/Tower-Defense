@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Class that acts as a data container and handels all the values regarding the tower stats
+/// </summary>
 public class TowerStats
 {
-     public static readonly float CHANNALIZER_AREA_BASE_DAMAGE = 0.5f;
-     public static readonly float CHANNALIZER_AREA_BASE_FIRE_RATE = 0.25f;
+     private const float CHANNALIZER_AREA_BASE_DAMAGE = 0.5f;
+     private const float CHANNALIZER_AREA_BASE_FIRE_RATE = 0.25f;
      public static readonly Dictionary<Rarity, (float damage, float fireRate)> areaChannalizerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
           { Rarity.Common, (damage: 1.0f*CHANNALIZER_AREA_BASE_DAMAGE, fireRate: 1.0f*CHANNALIZER_AREA_BASE_FIRE_RATE) },
           { Rarity.Normal, (damage: 1.25f*CHANNALIZER_AREA_BASE_DAMAGE, fireRate: 1.25f*CHANNALIZER_AREA_BASE_FIRE_RATE) },
@@ -14,8 +17,8 @@ public class TowerStats
           { Rarity.UltraRare, (damage: 1.75f*CHANNALIZER_AREA_BASE_DAMAGE, fireRate: 1.75f*CHANNALIZER_AREA_BASE_FIRE_RATE) },
           { Rarity.Myth, (damage: 2.0f*CHANNALIZER_AREA_BASE_DAMAGE, fireRate: 2.0f*CHANNALIZER_AREA_BASE_FIRE_RATE) }
           };
-     public static readonly float CHANNALIZER_FAST_BASE_DAMAGE = 1.0f;
-     public static readonly float CHANNALIZER_FAST_BASE_FIRE_RATE = 2.0f;
+     private const float CHANNALIZER_FAST_BASE_DAMAGE = 1.0f;
+     private const float CHANNALIZER_FAST_BASE_FIRE_RATE = 2.0f;
      public static readonly Dictionary<Rarity, (float damage, float fireRate)> fastChannalizerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
           { Rarity.Common, (damage: 1.0f*CHANNALIZER_FAST_BASE_DAMAGE, fireRate: 1.0f*CHANNALIZER_FAST_BASE_FIRE_RATE) },
           { Rarity.Normal, (damage: 1.25f*CHANNALIZER_FAST_BASE_DAMAGE, fireRate: 1.25f*CHANNALIZER_FAST_BASE_FIRE_RATE) },
@@ -23,8 +26,8 @@ public class TowerStats
           { Rarity.UltraRare, (damage: 1.75f*CHANNALIZER_FAST_BASE_DAMAGE, fireRate: 1.75f*CHANNALIZER_FAST_BASE_FIRE_RATE) },
           { Rarity.Myth, (damage: 2.0f*CHANNALIZER_FAST_BASE_DAMAGE, fireRate: 2.0f*CHANNALIZER_FAST_BASE_FIRE_RATE) }
           };
-     public static readonly float CHANNALIZER_STRONG_BASE_DAMAGE = 2.0f;
-     public static readonly float CHANNALIZER_STRONG_BASE_FIRE_RATE = 1.0f;
+     private const float CHANNALIZER_STRONG_BASE_DAMAGE = 2.0f;
+     private const float CHANNALIZER_STRONG_BASE_FIRE_RATE = 1.0f;
      public static readonly Dictionary<Rarity, (float damage, float fireRate)> strongChannalizerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
           { Rarity.Common, (damage: 1.0f*CHANNALIZER_STRONG_BASE_DAMAGE, fireRate: 1.0f*CHANNALIZER_STRONG_BASE_FIRE_RATE) },
           { Rarity.Normal, (damage: 1.25f*CHANNALIZER_STRONG_BASE_DAMAGE, fireRate: 1.25f*CHANNALIZER_STRONG_BASE_FIRE_RATE) },
@@ -32,7 +35,7 @@ public class TowerStats
           { Rarity.UltraRare, (damage: 1.75f*CHANNALIZER_STRONG_BASE_DAMAGE, fireRate: 1.75f*CHANNALIZER_STRONG_BASE_FIRE_RATE) },
           { Rarity.Myth, (damage: 2.0f*CHANNALIZER_STRONG_BASE_DAMAGE, fireRate: 2.0f*CHANNALIZER_STRONG_BASE_FIRE_RATE) }
           };
-     public static readonly float STRUCTURE_BEAM_BASE_RANGE = 40.0f;
+     private const float STRUCTURE_BEAM_BASE_RANGE = 40.0f;
      public static readonly Dictionary<Rarity, float> beamStructureStats = new Dictionary<Rarity, float> {
           { Rarity.Common, 1.0f*STRUCTURE_BEAM_BASE_RANGE },
           { Rarity.Normal,  1.25f *STRUCTURE_BEAM_BASE_RANGE},
@@ -40,7 +43,7 @@ public class TowerStats
           { Rarity.UltraRare, 1.75f*STRUCTURE_BEAM_BASE_RANGE },
           { Rarity.Myth, 2.0f*STRUCTURE_BEAM_BASE_RANGE}
           };
-     public static readonly float STRUCTURE_CIRCULAR_BASE_RADIUS = 15.0f;
+     private const float STRUCTURE_CIRCULAR_BASE_RADIUS = 15.0f;
      public static readonly Dictionary<Rarity, float> circularStructureStats = new Dictionary<Rarity, float> {
           { Rarity.Common, 1.0f*STRUCTURE_CIRCULAR_BASE_RADIUS },
           { Rarity.Normal,  1.25f*STRUCTURE_CIRCULAR_BASE_RADIUS },
@@ -48,7 +51,7 @@ public class TowerStats
           { Rarity.UltraRare, 1.75f*STRUCTURE_CIRCULAR_BASE_RADIUS },
           { Rarity.Myth, 2.0f*STRUCTURE_CIRCULAR_BASE_RADIUS}
           };
-     public static readonly float STRUCTURE_CROSS_BASE_RANGE = 20.0f;
+     private const float STRUCTURE_CROSS_BASE_RANGE = 20.0f;
      public static readonly Dictionary<Rarity, float> crossStructureStats = new Dictionary<Rarity, float> {
           { Rarity.Common, 1.0f*STRUCTURE_CROSS_BASE_RANGE },
           { Rarity.Normal,  1.25f*STRUCTURE_CROSS_BASE_RANGE },
@@ -56,7 +59,7 @@ public class TowerStats
           { Rarity.UltraRare, 1.75f*STRUCTURE_CROSS_BASE_RANGE },
           { Rarity.Myth, 2.0f*STRUCTURE_CROSS_BASE_RANGE}
           };
-     public static Func<EnemyController, IEnumerator> EarthEffectSetUp(float time)
+     private static Func<EnemyController, IEnumerator> EarthEffectSetUp(float time)
      {
           return EarthEffect;
           IEnumerator EarthEffect(EnemyController enemy)
@@ -72,15 +75,23 @@ public class TowerStats
                }
           }
      }
+     private const float EARTH_BASE_TIME = 0.1f;
+     public static readonly Dictionary<Rarity, float> earthSourceTimes = new Dictionary<Rarity, float> {
+          { Rarity.Common, EARTH_BASE_TIME * 1.0f },
+          { Rarity.Normal, EARTH_BASE_TIME * 2.0f },
+          { Rarity.Rare, EARTH_BASE_TIME * 3.0f },
+          { Rarity.UltraRare, EARTH_BASE_TIME * 4.0f },
+          { Rarity.Myth, EARTH_BASE_TIME * 5.0f },
+      };
      public static readonly Dictionary<Rarity, Func<EnemyController, IEnumerator>> earthSourceStats = new Dictionary<Rarity, Func<EnemyController, IEnumerator>> {
-          { Rarity.Common, EarthEffectSetUp(0.1f) },
-          { Rarity.Normal,  EarthEffectSetUp(0.2f) },
-          { Rarity.Rare, EarthEffectSetUp(0.3f) },
-          { Rarity.UltraRare, EarthEffectSetUp(0.4f) },
-          { Rarity.Myth, EarthEffectSetUp(0.5f)}
+          { Rarity.Common, EarthEffectSetUp(earthSourceTimes[Rarity.Common]) },
+          { Rarity.Normal,  EarthEffectSetUp(earthSourceTimes[Rarity.Normal]) },
+          { Rarity.Rare, EarthEffectSetUp(earthSourceTimes[Rarity.Rare]) },
+          { Rarity.UltraRare, EarthEffectSetUp(earthSourceTimes[Rarity.UltraRare]) },
+          { Rarity.Myth, EarthEffectSetUp(earthSourceTimes[Rarity.Myth])}
           };
 
-     public static Func<EnemyController, IEnumerator> FireEffectSetUp(float time)
+     private static Func<EnemyController, IEnumerator> FireEffectSetUp(float time)
      {
           return FireEffect;
           IEnumerator FireEffect(EnemyController enemy)
@@ -95,14 +106,22 @@ public class TowerStats
                }
           }
      }
+     private const float FIRE_BASE_TIME = 0.2f;
+     public static readonly Dictionary<Rarity, float> fireSourceTimes = new Dictionary<Rarity, float> {
+          { Rarity.Common, FIRE_BASE_TIME * 1.0f },
+          { Rarity.Normal, FIRE_BASE_TIME * 2.0f },
+          { Rarity.Rare, FIRE_BASE_TIME * 3.0f },
+          { Rarity.UltraRare, FIRE_BASE_TIME * 4.0f },
+          { Rarity.Myth, FIRE_BASE_TIME * 5.0f },
+      };
      public static readonly Dictionary<Rarity, Func<EnemyController, IEnumerator>> fireSourceStats = new Dictionary<Rarity, Func<EnemyController, IEnumerator>> {
-          { Rarity.Common, FireEffectSetUp(0.2f) },
-          { Rarity.Normal,  FireEffectSetUp(0.4f) },
-          { Rarity.Rare, FireEffectSetUp(0.6f) },
-          { Rarity.UltraRare, FireEffectSetUp(0.8f) },
-          { Rarity.Myth, FireEffectSetUp(1.0f)}
+          { Rarity.Common, FireEffectSetUp(fireSourceTimes[Rarity.Common]) },
+          { Rarity.Normal,  FireEffectSetUp(fireSourceTimes[Rarity.Normal]) },
+          { Rarity.Rare, FireEffectSetUp(fireSourceTimes[Rarity.Rare]) },
+          { Rarity.UltraRare, FireEffectSetUp(fireSourceTimes[Rarity.UltraRare]) },
+          { Rarity.Myth, FireEffectSetUp(fireSourceTimes[Rarity.Myth])}
           };
-     public static Func<EnemyController, IEnumerator> ThunderEffectSetUp(float time)
+     private static Func<EnemyController, IEnumerator> ThunderEffectSetUp(float time)
      {
           return ThunderEffect;
           IEnumerator ThunderEffect(EnemyController enemy)
@@ -116,14 +135,22 @@ public class TowerStats
                enemy.OnUpdate = enemy.TravelPath;
           }
      }
+     private const float THUNDER_BASE_TIME = 0.05f;
+     public static readonly Dictionary<Rarity, float> thunderSourceTimes = new Dictionary<Rarity, float> {
+          { Rarity.Common, THUNDER_BASE_TIME * 1.0f },
+          { Rarity.Normal, THUNDER_BASE_TIME * 2.0f },
+          { Rarity.Rare, THUNDER_BASE_TIME * 3.0f },
+          { Rarity.UltraRare, THUNDER_BASE_TIME * 4.0f },
+          { Rarity.Myth, THUNDER_BASE_TIME * 5.0f },
+      };
      public static readonly Dictionary<Rarity, Func<EnemyController, IEnumerator>> thunderSourceStats = new Dictionary<Rarity, Func<EnemyController, IEnumerator>> {
-          { Rarity.Common, ThunderEffectSetUp(0.05f) },
-          { Rarity.Normal,  ThunderEffectSetUp(0.10f) },
-          { Rarity.Rare, ThunderEffectSetUp(0.15f) },
-          { Rarity.UltraRare, ThunderEffectSetUp(0.20f) },
-          { Rarity.Myth, ThunderEffectSetUp(0.25f)}
+          { Rarity.Common, ThunderEffectSetUp(thunderSourceTimes[Rarity.Common]) },
+          { Rarity.Normal,  ThunderEffectSetUp(thunderSourceTimes[Rarity.Normal]) },
+          { Rarity.Rare, ThunderEffectSetUp(thunderSourceTimes[Rarity.Rare]) },
+          { Rarity.UltraRare, ThunderEffectSetUp(thunderSourceTimes[Rarity.UltraRare]) },
+          { Rarity.Myth, ThunderEffectSetUp(thunderSourceTimes[Rarity.Myth])}
           };
-     public static Func<EnemyController, IEnumerator> WaterEffectSetUp(float time)
+     private static Func<EnemyController, IEnumerator> WaterEffectSetUp(float time)
      {
           return WaterEffect;
           IEnumerator WaterEffect(EnemyController enemy)
@@ -139,11 +166,19 @@ public class TowerStats
                }
           }
      }
+     private const float WATER_BASE_TIME = 0.2f;
+     public static readonly Dictionary<Rarity, float> waterSourceTimes = new Dictionary<Rarity, float> {
+          { Rarity.Common, WATER_BASE_TIME * 1.0f },
+          { Rarity.Normal, WATER_BASE_TIME * 2.0f },
+          { Rarity.Rare, WATER_BASE_TIME * 3.0f },
+          { Rarity.UltraRare, WATER_BASE_TIME * 4.0f },
+          { Rarity.Myth, WATER_BASE_TIME * 5.0f },
+      };
      public static readonly Dictionary<Rarity, Func<EnemyController, IEnumerator>> waterSourceStats = new Dictionary<Rarity, Func<EnemyController, IEnumerator>> {
-          { Rarity.Common, WaterEffectSetUp(0.2f) },
-          { Rarity.Normal,  WaterEffectSetUp(0.4f) },
-          { Rarity.Rare, WaterEffectSetUp(0.6f) },
-          { Rarity.UltraRare, WaterEffectSetUp(0.8f) },
-          { Rarity.Myth, WaterEffectSetUp(1.0f)}
+          { Rarity.Common, WaterEffectSetUp(waterSourceTimes[Rarity.Common]) },
+          { Rarity.Normal,  WaterEffectSetUp(waterSourceTimes[Rarity.Normal]) },
+          { Rarity.Rare, WaterEffectSetUp(waterSourceTimes[Rarity.Rare]) },
+          { Rarity.UltraRare, WaterEffectSetUp(waterSourceTimes[Rarity.UltraRare]) },
+          { Rarity.Myth, WaterEffectSetUp(waterSourceTimes[Rarity.Myth])}
           };
 }

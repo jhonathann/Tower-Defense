@@ -3,10 +3,6 @@
   height: 33%;
   margin: 1%;
 }
-.part {
-  width: 100%;
-  height: 100%;
-}
 .commonRarity {
   background-color: #999999;
   border-width: 3px;
@@ -71,4 +67,19 @@
   transition-timing-function: var(--transitionTimingFunction);
   scale: 1.2;
   border-color: #842525;
+}
+.contextMenu{
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: rgba(0,0,0,0.4);
+}
+Label{
+  -unity-font-style: bold;
+  font-size: 100%;
+  -unity-text-align: middle-center;
+  color: var(--lightColor);
+  white-space: normal; /*To allow text wrapping*/
 }

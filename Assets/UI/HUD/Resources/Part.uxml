@@ -1,5 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/GeneralStyles.uss?fileID=7433441132597879392&amp;guid=0ade87dcc933ad14d9080c358e4c0bda&amp;type=3#GeneralStyles" />
-    <Style src="project://database/Assets/UI/HUD/Part.uss?fileID=7433441132597879392&amp;guid=ba3c5e8bb9d1b1946aeca1cd724c27e1&amp;type=3#Part" />
-    <ui:VisualElement name="Part" class="part" />
+    <Style src="project://database/Assets/UI/HUD/Resources/Part.uss?fileID=7433441132597879392&amp;guid=ba3c5e8bb9d1b1946aeca1cd724c27e1&amp;type=3#Part" />
 </ui:UXML>

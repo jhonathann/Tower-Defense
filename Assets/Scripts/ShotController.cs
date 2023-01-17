@@ -43,16 +43,23 @@ public class ShotController : MonoBehaviour
           }
           else
           {
+               //If the target is destroyed the shot is destroyed
                Destroy(this.gameObject);
           }
      }
      void OnTriggerEnter(Collider enteringObjectCollider)
      {
           IDamagable damageable = enteringObjectCollider.GetComponent<IDamagable>();
-          if (damageable != null)
+          //Checks if the object implements the damageable interface
+          if (damageable is not null)
           {
-               damageable.TakeDamage(this.damage, this.Effect);
-               Destroy(this.gameObject);
+               //Checks if the object is the target (used for the case where the shot goes through several enemies)
+               EnemyController enemy = damageable as EnemyController;
+               if (enemy.gameObject == target)
+               {
+                    damageable.TakeDamage(this.gameObject, this.damage, this.Effect);
+                    Destroy(this.gameObject);
+               }
           }
      }
 }

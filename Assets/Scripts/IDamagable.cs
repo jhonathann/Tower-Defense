@@ -7,5 +7,5 @@ using System;
 /// </summary>
 public interface IDamagable
 {
-     void TakeDamage(float damageAmount = 1, Func<EnemyController, IEnumerator> Effect = null);
+     void TakeDamage(GameObject damager, float damageAmount = 1, Func<EnemyController, IEnumerator> Effect = null);
 }

@@ -100,7 +100,7 @@ public class TowerStats
                IDamagable enemyIDamagable = (IDamagable)enemy;
                while (internalTime > 0)
                {
-                    enemyIDamagable.TakeDamage(0.2f);
+                    enemyIDamagable.TakeDamage(enemy.gameObject, 0.2f);
                     internalTime -= 0.1f;
                     yield return new WaitForSeconds(0.1f);
                }
@@ -129,10 +129,14 @@ public class TowerStats
                if (enemy.OnUpdate != enemy.TravelPathBackwards)
                {
                     enemy.goalCheckPoint++;
+                    enemy.OnUpdate = enemy.TravelPathBackwards;
                }
-               enemy.OnUpdate = enemy.TravelPathBackwards;
                yield return new WaitForSeconds(time);
-               enemy.OnUpdate = enemy.TravelPath;
+               if (enemy.OnUpdate != enemy.TravelPath)
+               {
+                    enemy.goalCheckPoint--;
+                    enemy.OnUpdate = enemy.TravelPath;
+               }
           }
      }
      private const float THUNDER_BASE_TIME = 0.05f;

@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour, IDamagable
      /// <summary>
      /// Health of the enemy
      /// </summary>
-     private float healt;
+     private float health;
      /// /// <summary>
      /// Speed of the enemy
      /// </summary>
@@ -55,10 +55,9 @@ public class EnemyController : MonoBehaviour, IDamagable
      }
      void OnTriggerEnter(Collider enteringObjectCollider)
      {
-          //Checks if it has reached the castle
-          if (enteringObjectCollider.gameObject.name == "Castle")
+          if (enteringObjectCollider.GetComponent<CastleController>() is not null)
           {
-               enteringObjectCollider.GetComponent<IDamagable>().TakeDamage();
+               enteringObjectCollider.GetComponent<IDamagable>().TakeDamage(this.gameObject);
                Destroy(this.gameObject);
           }
      }
@@ -68,7 +67,7 @@ public class EnemyController : MonoBehaviour, IDamagable
      void InitializeEnemy()
      {
           //Set the stats of the enemy
-          this.healt = EnemyStats.GetHealth(type);
+          this.health = EnemyStats.GetHealth(type);
           this.speed = EnemyStats.GetSpeed(type);
           //Setting the correct name (used in the collider interactions)
           this.gameObject.name = "Enemy";
@@ -149,16 +148,19 @@ public class EnemyController : MonoBehaviour, IDamagable
      /// Function that destribes how the object takes damage
      /// </summary>
      /// <param name="damageAmount">The amount of damage taken</param>
-     void IDamagable.TakeDamage(float damageAmount, Func<EnemyController, IEnumerator> Effect)
+     void IDamagable.TakeDamage(GameObject damager, float damageAmount, Func<EnemyController, IEnumerator> Effect)
      {
-          this.healt = this.healt - damageAmount;
-          if (healt <= 0)
+          if (damager.GetComponent<ShotController>() is not null)
           {
-               Destroy(this.gameObject);
-          }
-          if (Effect != null)
-          {
-               StartCoroutine(Effect(this));
+               this.health = this.health - damageAmount;
+               if (health <= 0)
+               {
+                    Destroy(this.gameObject);
+               }
+               if (Effect != null)
+               {
+                    StartCoroutine(Effect(this));
+               }
           }
      }
 }

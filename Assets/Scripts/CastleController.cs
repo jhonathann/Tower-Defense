@@ -29,9 +29,13 @@ public class CastleController : MonoBehaviour, IDamagable
      /// Function that destribes how the object takes damage
      /// </summary>
      /// <param name="damageAmount">The amount of damage taken</param>
-     void IDamagable.TakeDamage(float damageAmount, Func<EnemyController, IEnumerator> Effect)
+     void IDamagable.TakeDamage(GameObject damager, float damageAmount, Func<EnemyController, IEnumerator> Effect)
      {
-          gameData.health = gameData.health - damageAmount;
-          checkHealth();
+          //if the damager is an enemy (used for cases where a shot goes through the castle)
+          if (damager.GetComponent<EnemyController>() is not null)
+          {
+               gameData.health = gameData.health - damageAmount;
+               checkHealth();
+          }
      }
 }

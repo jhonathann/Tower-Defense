@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977f3958baa68094b8ef4a9760b35f54, type: 3}
   m_Name: Game Data
   m_EditorClassIdentifier: 
+  gameState: {fileID: 11400000, guid: 04b357e5ed111c0458afd2b3000550d3, type: 2}
   health: 10
+  waveCount: 11
   towerData: {fileID: 11400000, guid: 778d83c8497540c4a9f44c2ccfa2b9e0, type: 2}
   isTowerReady: 1
+  timerString: 0:3

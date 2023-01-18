@@ -67,23 +67,23 @@ public class MenuController : MonoBehaviour
                if (CanBePaused())
                {
                     globalContainer.SetEnabled(true);
-                    gameData.State = GameState.Paused;
+                    gameData.gameState.TrySetState(GameStateType.Paused);
                     return;
                }
                if (IsPaused())
                {
                     globalContainer.SetEnabled(false);
-                    gameData.State = GameState.Running;
+                    gameData.gameState.TrySetState(GameStateType.Running);
                     return;
                }
           }
           bool CanBePaused()
           {
-               return gameData.State == GameState.Running;
+               return gameData.gameState.State == GameStateType.Running || gameData.gameState.State == GameStateType.PlacingTower;
           }
           bool IsPaused()
           {
-               return gameData.State == GameState.Paused;
+               return gameData.gameState.State == GameStateType.Paused;
           }
      }
      /// <summary>

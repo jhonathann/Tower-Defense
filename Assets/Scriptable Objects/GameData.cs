@@ -9,28 +9,9 @@ using System;
 public class GameData : ScriptableObject
 {
      /// <summary>
-     /// Private field that holds the state of the game
+     /// Reference to the scriptable object that handles the state od the game
      /// </summary>
-     private GameState state;
-     /// <summary>
-     /// Public property to access the state of the game
-     /// </summary>
-     public GameState State
-     {
-          get
-          {
-               return state;
-          }
-          set
-          {
-               state = value;
-               StateChange?.Invoke();
-          }
-     }
-     /// <summary>
-     /// Action triggered when there is a change on the state
-     /// </summary>
-     private Action StateChange;
+     public GameState gameState;
      /// <summary>
      /// Action that is trigger when the game has started or restarted
      /// </summary>
@@ -77,43 +58,18 @@ public class GameData : ScriptableObject
      void OnEnable()
      {
           //Subscribe to the events
-          StateChange += OnStateChange;
           GameStarted += OnGameStarted;
           SelectPart += OnSelectPart;
           AddNewPart += OnAddNewPart;
           TileController.TowerPlaced += OnTowerPlaced;
           PortalController.NextWave += OnNextWave;
-          State = GameState.Unstarted;
-     }
-     /// <summary>
-     /// Used when there is a change of the state of the game
-     /// </summary>
-     private void OnStateChange()
-     {
-          Debug.Log(State);
-          switch (State)
-          {
-               case GameState.Unstarted:
-                    break;
-               case GameState.Running:
-                    Time.timeScale = 1;
-                    break;
-               case GameState.Paused:
-                    Time.timeScale = 0;
-                    break;
-               case GameState.PlacingTower:
-                    break;
-               case GameState.GameOver:
-                    Time.timeScale = 0;
-                    break;
-          }
      }
      /// <summary>
      /// Used to reset the variables when the game is started/restarted
      /// </summary>
      private void OnGameStarted()
      {
-          State = GameState.Running;
+          gameState.TrySetState(GameStateType.Running);
           health = 10;
           waveCount = 0;
           parts?.Clear();
@@ -191,7 +147,7 @@ public class GameData : ScriptableObject
           this.sourceSelectedPart = null;
           //Set the available tower again to false
           this.isTowerReady = false;
-          State = GameState.Running;
+          gameState.TrySetState(GameStateType.Running);
      }
      /// <summary>
      /// Triggers when a next wave is called
@@ -209,12 +165,4 @@ public class GameData : ScriptableObject
           }
           waveCount++;
      }
-}
-public enum GameState
-{
-     Unstarted,
-     Running,
-     Paused,
-     PlacingTower,
-     GameOver
 }

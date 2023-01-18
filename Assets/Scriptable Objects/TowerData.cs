@@ -71,7 +71,7 @@ public class TowerData : ScriptableObject
           this.structure = structure;
           this.source = source;
           gameData.isTowerReady = true;
-          gameData.State = GameState.PlacingTower;
+          gameData.gameState.TrySetState(GameStateType.PlacingTower);
      }
      /// <summary>
      /// Returns the prefab associated to the channalizer of the tower

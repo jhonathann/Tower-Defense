@@ -46,7 +46,7 @@ public class HUDController : MonoBehaviour
           if (Input.GetKeyDown(KeyCode.T))
           {
                //Allows the toggle only when the game is Running(to avoid changes when player is placing a tower of when the game is over)
-               if (gameData.State == GameState.Running)
+               if (gameData.gameState.State == GameStateType.Running)
                {
                     ToggleTowerCreationPanel();
                }

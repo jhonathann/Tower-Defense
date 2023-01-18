@@ -16,6 +16,7 @@ public class HUDController : MonoBehaviour
      //HUD necessary references
      UIDocument HUD;
      ProgressBar healthBar;
+     Label waveCountLabel;
      Label nextWaveTimeLabel;
      VisualElement towerCreationPanel;
      /// <summary>
@@ -28,11 +29,6 @@ public class HUDController : MonoBehaviour
      /// </summary>
      [SerializeField]
      VisualTreeAsset towerCreationPanelMinimized;
-     [SerializeField]
-     /// <summary>
-     /// VisualTree of the part
-     /// </summary>
-     VisualTreeAsset partTemplate;
      public static Action RenderPanel;
 
      void Start()
@@ -46,6 +42,7 @@ public class HUDController : MonoBehaviour
      {
           healthBar.value = gameData.health;
           nextWaveTimeLabel.text = "Next Wave In: " + gameData.timerString;
+          waveCountLabel.text = "Wave " + gameData.waveCount;
           if (Input.GetKeyDown(KeyCode.T))
           {
                ToggleTowerCreationPanel();
@@ -67,6 +64,7 @@ public class HUDController : MonoBehaviour
           HUD = this.GetComponent<UIDocument>();
           healthBar = HUD.rootVisualElement.Query<ProgressBar>("HealthBar");
           nextWaveTimeLabel = HUD.rootVisualElement.Query<Label>("NextWaveTimeLabel");
+          waveCountLabel = HUD.rootVisualElement.Query<Label>("WaveCountLabel");
           towerCreationPanel = HUD.rootVisualElement.Query<VisualElement>("TowerCreationPanel");
      }
      /// <summary>

@@ -4,6 +4,7 @@
     <ui:VisualElement name="GlobalContainer" class="globalContainer">
         <ui:VisualElement name="TopContainer" class="topContainer">
             <ui:ProgressBar name="HealthBar" high-value="10" title="Castle Health" class="healthBar" />
+            <ui:Label text="Wave: " display-tooltip-when-elided="true" name="WaveCountLabel" class="waveCountLabel" />
             <ui:Label text="Press Esc to Open the Menu" display-tooltip-when-elided="true" name="EscInfo" class="escInfo" />
         </ui:VisualElement>
         <ui:VisualElement name="MiddleContainer" class="middleContainer">

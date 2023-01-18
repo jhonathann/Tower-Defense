@@ -47,7 +47,13 @@
 .unity-progress-bar__progress {
   background-color: var(--darkColor);
 }
-
+.waveCountLabel{
+  visibility: visible;
+  -unity-font-style: bold;
+  font-size: 200%;
+  -unity-text-align: middle-center;
+  color: var(--lightColor);
+}
 .nextWaveTimeLabel{
   visibility: visible;
   -unity-font-style: bold;

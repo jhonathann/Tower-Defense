@@ -35,7 +35,7 @@ public class GameOverScreenController : MonoBehaviour
           //Shows the gameOverScreen
           globalContainer.style.display = DisplayStyle.Flex;
           //Sets the adequate score text
-          scoreText.text = $"You survived {gameData.waveCount} waves and lasted {gameData.gameTime} Seconds";
+          scoreText.text = $"You survived for {gameData.waveCount} waves";
      }
      private void Start()
      {

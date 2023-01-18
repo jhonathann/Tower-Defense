@@ -9,7 +9,7 @@
 }
 .menuContainer{
     flex-wrap: wrap;
-    width: 80%;
+    width: 50%;
     height: 50%;
     justify-content: space-around;
     align-items: center;

@@ -25,10 +25,6 @@ public class GameData : ScriptableObject
      /// </summary>
      public int waveCount;
      /// <summary>
-     /// Counts the duration of the current game
-     /// </summary>
-     public float gameTime;
-     /// <summary>
      /// The list of parts that the player currently has
      /// </summary>
      /// <typeparam name="Part">The Part Class</typeparam>
@@ -63,7 +59,6 @@ public class GameData : ScriptableObject
           AddNewPart += OnAddNewPart;
           TileController.TowerPlaced += OnTowerPlaced;
           PortalController.NextWave += OnNextWave;
-          CastleController.CastleDestroyed += OnCastleDestroyed;
      }
 
      /// <summary>
@@ -73,7 +68,6 @@ public class GameData : ScriptableObject
      {
           health = 10;
           waveCount = 0;
-          gameTime = Time.time;
           parts?.Clear();
           isTowerReady = false;
           AddStartingParts(3);
@@ -150,13 +144,6 @@ public class GameData : ScriptableObject
           this.sourceSelectedPart = null;
           //Set the available tower again to false
           this.isTowerReady = false;
-     }
-     /// <summary>
-     /// Triggers when the castle is destroyed
-     /// </summary>
-     void OnCastleDestroyed()
-     {
-          gameTime = Time.time - gameTime;
      }
      /// <summary>
      /// Triggers when a next wave is called

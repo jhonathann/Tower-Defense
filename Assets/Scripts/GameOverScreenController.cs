@@ -30,8 +30,8 @@ public class GameOverScreenController : MonoBehaviour
      /// </summary>
      private void OnCastleDestroy()
      {
-          //Stops the game
-          Time.timeScale = 0;
+          //Change the state of the game to GameOver
+          gameData.State = GameState.GameOver;
           //Shows the gameOverScreen
           globalContainer.style.display = DisplayStyle.Flex;
           //Sets the adequate score text

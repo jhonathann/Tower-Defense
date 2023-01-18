@@ -45,7 +45,11 @@ public class HUDController : MonoBehaviour
           waveCountLabel.text = "Wave " + gameData.waveCount;
           if (Input.GetKeyDown(KeyCode.T))
           {
-               ToggleTowerCreationPanel();
+               //Allows the toggle only when the game is Running(to avoid changes when player is placing a tower of when the game is over)
+               if (gameData.State == GameState.Running)
+               {
+                    ToggleTowerCreationPanel();
+               }
           }
      }
 

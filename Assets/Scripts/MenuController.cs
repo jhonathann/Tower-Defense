@@ -8,6 +8,10 @@ using UnityEngine.UIElements;
 /// </summary>
 public class MenuController : MonoBehaviour
 {
+     /// <summary>
+     /// Reference to the gameData
+     /// </summary>
+     public GameData gameData;
      //References to the Ui elements
      private UIDocument menu;
      private VisualElement globalContainer;
@@ -54,14 +58,32 @@ public class MenuController : MonoBehaviour
           exitButton.RegisterCallback<ClickEvent>(ExitButtonOnClick);
      }
      /// <summary>
-     /// Toggles the menu on and off when esc is pressed and pauses/unpauses the game accordingly
+     /// Toggles the menu on and off when esc is pressed and when the state of the game allows it
      /// </summary>
      private void ToggleMenu()
      {
           if (Input.GetKeyDown(KeyCode.Escape))
           {
-               globalContainer.SetEnabled(!globalContainer.enabledInHierarchy);
-               Time.timeScale = System.Convert.ToSingle(!globalContainer.enabledInHierarchy);
+               if (CanBePaused())
+               {
+                    globalContainer.SetEnabled(true);
+                    gameData.State = GameState.Paused;
+                    return;
+               }
+               if (IsPaused())
+               {
+                    globalContainer.SetEnabled(false);
+                    gameData.State = GameState.Running;
+                    return;
+               }
+          }
+          bool CanBePaused()
+          {
+               return gameData.State == GameState.Running;
+          }
+          bool IsPaused()
+          {
+               return gameData.State == GameState.Paused;
           }
      }
      /// <summary>

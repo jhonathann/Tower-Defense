@@ -693,6 +693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998de77cceee9354c92f289ccde49f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameData: {fileID: 11400000, guid: fff7f5cc8e4e06043bcb6d6bff06fd6b, type: 2}
 --- !u!1 &2056780043
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,4 +758,3 @@ MonoBehaviour:
   gameData: {fileID: 11400000, guid: fff7f5cc8e4e06043bcb6d6bff06fd6b, type: 2}
   towerCreationPanelMaximized: {fileID: 9197481963319205126, guid: e81c09714d02a5a4aa6fd313f9366ec5, type: 3}
   towerCreationPanelMinimized: {fileID: 9197481963319205126, guid: b8da9715c4acb01459cb9d97dd2b5b20, type: 3}
-  partTemplate: {fileID: 9197481963319205126, guid: 54d7ea4dd4b845e44b5493d97be600af, type: 3}

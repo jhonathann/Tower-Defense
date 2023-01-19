@@ -30,6 +30,7 @@ public class Part : VisualElement
      /// Dictionary that matches each rarity with the corresponding USS class
      /// </summary>
      /// <value>A string corresponding to the USS class to be assigned</value>
+     private VisualElement contextMenu;
      Dictionary<Rarity, string> rarityClasses = new Dictionary<Rarity, string>
           {
                {Rarity.Common,"commonRarity"},
@@ -66,9 +67,8 @@ public class Part : VisualElement
           template.CloneTree(this);
           this.AddToClassList(rarityClasses[this.rarity]);
           this.AddToClassList(specificTypeClasses[this.specificTypeInfo]);
-          this.RegisterCallback<ClickEvent>(PartOnClick);
-          this.RegisterCallback<MouseEnterEvent>(PartOnMouseEnter);
-          this.RegisterCallback<MouseLeaveEvent>(PartOnMouseLeave);
+          SetCallBacks();
+          SetContextMenu();
      }
      /// <summary>
      /// This constructor returns a clone of the part that's passed in (with alteration on the width and height) (the cloned class doesn't have a registered callback) (used for the selectedContainerMockUp)
@@ -98,9 +98,8 @@ public class Part : VisualElement
           template.CloneTree(this);
           this.AddToClassList(rarityClasses[this.rarity]);
           this.AddToClassList(specificTypeClasses[this.specificTypeInfo]);
-          this.RegisterCallback<ClickEvent>(PartOnClick);
-          this.RegisterCallback<MouseEnterEvent>(PartOnMouseEnter);
-          this.RegisterCallback<MouseLeaveEvent>(PartOnMouseLeave);
+          SetCallBacks();
+          SetContextMenu();
      }
      /// <summary>
      /// Gets the rarity of the part by considered the probability of each option
@@ -135,6 +134,23 @@ public class Part : VisualElement
           }
      }
      /// <summary>
+     /// Sets the callback function for the part (used in the constructor)
+     /// </summary>
+     private void SetCallBacks()
+     {
+          this.RegisterCallback<ClickEvent>(PartOnClick);
+          this.RegisterCallback<MouseEnterEvent>(PartOnMouseEnter);
+          this.RegisterCallback<MouseLeaveEvent>(PartOnMouseLeave);
+     }
+     /// <summary>
+     /// Configures and adds the context menu to the part
+     /// </summary>
+     private void SetContextMenu()
+     {
+          this.contextMenu = CreateContextMenu();
+          this.Add(contextMenu);
+     }
+     /// <summary>
      /// Callback triggered when the part is clicked
      /// </summary>
      /// <param name="evt">(not used)</param>
@@ -150,10 +166,10 @@ public class Part : VisualElement
      private void PartOnMouseEnter(MouseEnterEvent evt)
      {
           //Doubles the size of the part
-          this.style.width = new StyleLength(new Length(20, LengthUnit.Percent));
-          this.style.height = new StyleLength(new Length(66, LengthUnit.Percent));
+          this.AddToClassList("partBigger");
           // Adds the context menu
-          this.Add(CreateContextMenu());
+          this.contextMenu.ToggleInClassList("contextMenu-show");
+          this.contextMenu.ToggleInClassList("contextMenu-hidden");
      }
      /// <summary>
      /// Callback triggered when the mouse leaves the part
@@ -162,16 +178,16 @@ public class Part : VisualElement
      private void PartOnMouseLeave(MouseLeaveEvent evt)
      {
           //Sets the size of the part to normal again
-          this.style.width = new StyleLength(new Length(10, LengthUnit.Percent));
-          this.style.height = new StyleLength(new Length(33, LengthUnit.Percent));
-          //Removes the context menu
-          this.Clear();
+          this.RemoveFromClassList("partBigger");
+          //Toggles the context menu classes
+          this.contextMenu.ToggleInClassList("contextMenu-show");
+          this.contextMenu.ToggleInClassList("contextMenu-hidden");
      }
      //Creates the context menu and adds the corresponding USS classe
      private VisualElement CreateContextMenu()
      {
           VisualElement contextMenu = new VisualElement();
-          contextMenu.AddToClassList("contextMenu");
+          contextMenu.AddToClassList("contextMenu-hidden");
           AddStatsLabels(contextMenu);
           return contextMenu;
 

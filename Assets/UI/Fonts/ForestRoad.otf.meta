@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7763b44cd6d5f5d43a44900c1b821978
+guid: 0e827cdddbd552c40a686ae5bef1d480
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Da Pandora
+  - f Forest Road
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

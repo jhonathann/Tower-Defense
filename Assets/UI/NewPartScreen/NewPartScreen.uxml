@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/GeneralStyles.uss?fileID=7433441132597879392&amp;guid=0ade87dcc933ad14d9080c358e4c0bda&amp;type=3#GeneralStyles" />
+    <Style src="project://database/Assets/UI/NewPartScreen/NewPartScreen.uss?fileID=7433441132597879392&amp;guid=902af96dbb8a13b48ada9412ce08db17&amp;type=3#NewPartScreen" />
+    <ui:VisualElement name="GlobalContainer" focusable="true" class="globalContainer">
+        <ui:VisualElement name="NewPartAddedScreenContainer" class="newPartAddedScreenContainer">
+            <ui:Label text="You Have Gotten New Parts" display-tooltip-when-elided="true" name="Title" class="title" />
+            <ui:VisualElement name="PartContainer" class="partContainer" />
+            <ui:Button text="OK" display-tooltip-when-elided="true" name="OkButton" class="button gotItButton okButton" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

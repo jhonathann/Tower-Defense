@@ -43,9 +43,13 @@ public class GameData : ScriptableObject
      /// </summary>
      public static Action<Part> SelectPart;
      /// <summary>
-     /// Action called when a new part is added
+     /// Function called when a new part is added (returns the part that was created and added)
      /// </summary>
-     public static Action<Part> AddNewPart;
+     public static Func<Part, Part> AddNewPart;
+     /// <summary>
+     /// Event triggered each time a new part (or parts) is added
+     /// </summary>
+     public static Action<List<Part>> NewPartsAdded;
      /// <summary>
      /// Tower to be put on the map
      /// </summary>
@@ -93,19 +97,22 @@ public class GameData : ScriptableObject
           }
      }
      /// <summary>
-     /// Adds a new part to the list and re-renders the HUD panel to reflect the change
+     /// Adds a new part to the list and re-renders the HUD panel to reflect the change (returns the added part)
      /// </summary>
-     void OnAddNewPart(Part part = null)
+     Part OnAddNewPart(Part part = null)
      {
-          if (part != null)
+          Part partToBeAdded = part;
+          if (partToBeAdded != null)
           {
-               parts.Add(part);
+               parts.Add(partToBeAdded);
           }
           else
           {
-               parts.Add(new Part());
+               partToBeAdded = new Part();
+               parts.Add(partToBeAdded);
           }
           HUDController.RenderPanel?.Invoke();
+          return partToBeAdded;
      }
      /// <summary>
      /// Sets the new selected part to the corresponding field and changes the uss classes of newSelect and the previously selected part
@@ -154,15 +161,16 @@ public class GameData : ScriptableObject
      /// </summary>
      void OnNextWave()
      {
-          /// <summary>
-          /// Gives between 1 and 3 new parts each time a wave starts
-          /// </summary>
-          /// <returns></returns>
-          int randomNumberOfParts = UnityEngine.Random.Range(1, 2);
+          waveCount++;
+          List<Part> addedParts = new List<Part>();
+          // Gives between 1 and 3 new parts each time a wave starts
+          int randomNumberOfParts = UnityEngine.Random.Range(1, 4);
           for (int i = 0; i < randomNumberOfParts; i++)
           {
-               GameData.AddNewPart(null);
+               //Triggers the AddNewPart event and adds the created part to the addedPartsList
+               addedParts.Add(GameData.AddNewPart?.Invoke(null));
           }
-          waveCount++;
+          //Trigger the new parts added event
+          NewPartsAdded?.Invoke(addedParts);
      }
 }

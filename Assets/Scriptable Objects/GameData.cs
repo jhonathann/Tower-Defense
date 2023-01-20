@@ -78,23 +78,20 @@ public class GameData : ScriptableObject
           waveCount = 0;
           parts?.Clear();
           isTowerReady = false;
-          AddStartingParts(3);
+          AddStartingParts();
      }
      /// <summary>
      /// Adds the starting parts to the gameobject
      /// </summary>
-     /// <param name="numberOfExtraParts">The number of starting parts</param>
-     void AddStartingParts(int numberOfExtraParts)
+     void AddStartingParts()
      {
           //Add a part of each type to ensure that the user is able to place the starting tower
           GameData.AddNewPart(new Part(PartType.Channalizer));
           GameData.AddNewPart(new Part(PartType.Structure));
           GameData.AddNewPart(new Part(PartType.Source));
-          //Add some extra parts
-          for (int i = 0; i < numberOfExtraParts; i++)
-          {
-               GameData.AddNewPart.Invoke(null);
-          }
+          GameData.AddNewPart(new Part(PartType.Channalizer));
+          GameData.AddNewPart(new Part(PartType.Structure));
+          GameData.AddNewPart(new Part(PartType.Source));
      }
      /// <summary>
      /// Adds a new part to the list and re-renders the HUD panel to reflect the change (returns the added part)
@@ -163,8 +160,8 @@ public class GameData : ScriptableObject
      {
           waveCount++;
           List<Part> addedParts = new List<Part>();
-          // Gives between 1 and 3 new parts each time a wave starts
-          int randomNumberOfParts = UnityEngine.Random.Range(1, 4);
+          // Gives between 1 and 2 new parts each time a wave starts
+          int randomNumberOfParts = UnityEngine.Random.Range(1, 3);
           for (int i = 0; i < randomNumberOfParts; i++)
           {
                //Triggers the AddNewPart event and adds the created part to the addedPartsList

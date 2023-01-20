@@ -107,7 +107,7 @@ public class Part : VisualElement
      /// <returns>The randomly obtained rarity</returns>
      private Rarity GetRarity()
      {
-          int chance = UnityEngine.Random.Range(1, 100);
+          int chance = UnityEngine.Random.Range(0, 100);
           if (chance <= 40) return Rarity.Common; //40% chance of Common
           if (chance <= 70) return Rarity.Normal; // 30% chance of Normal
           if (chance <= 85) return Rarity.Rare; //15% chance of Rare

@@ -32,42 +32,33 @@ public class GameState : ScriptableObject
                case GameStateType.Unstarted:
                     switch (newState)
                     {
-                         case GameStateType.Unstarted:
-                              break;
                          case GameStateType.Running:
                               SetRunningState();
                               break;
-                         case GameStateType.Paused:
-                              break;
-                         case GameStateType.PlacingTower:
-                              break;
-                         case GameStateType.GameOver:
-                              break;
+                         default: break;
                     }
                     break;
                case GameStateType.Running:
                     switch (newState)
                     {
-                         case GameStateType.Unstarted:
-                              break;
-                         case GameStateType.Running:
-                              break;
                          case GameStateType.Paused:
                               SetPausedState(false);
                               break;
                          case GameStateType.PlacingTower:
                               SetPlacingTowerState();
                               break;
+                         case GameStateType.OnNewPartAddedScreen:
+                              SetOnNewPartAddedScreenState(false);
+                              break;
                          case GameStateType.GameOver:
                               SetGameOverState();
                               break;
+                         default: break;
                     }
                     break;
                case GameStateType.Paused:
                     switch (newState)
                     {
-                         case GameStateType.Unstarted:
-                              break;
                          case GameStateType.Running:
                               if (pausedWhilePlacingTower)
                               {
@@ -78,46 +69,50 @@ public class GameState : ScriptableObject
                                    SetRunningState();
                               }
                               break;
-                         case GameStateType.Paused:
-                              break;
-                         case GameStateType.PlacingTower:
-                              break;
-                         case GameStateType.GameOver:
-                              break;
+                         default: break;
                     }
                     break;
                case GameStateType.PlacingTower:
                     switch (newState)
                     {
-                         case GameStateType.Unstarted:
-                              break;
                          case GameStateType.Running:
                               SetRunningState();
                               break;
                          case GameStateType.Paused:
                               SetPausedState(true);
                               break;
-                         case GameStateType.PlacingTower:
+                         case GameStateType.OnNewPartAddedScreen:
+                              SetOnNewPartAddedScreenState(true);
                               break;
                          case GameStateType.GameOver:
                               SetGameOverState();
                               break;
+                         default: break;
+                    }
+                    break;
+               case GameStateType.OnNewPartAddedScreen:
+                    switch (newState)
+                    {
+                         case GameStateType.Running:
+                              if (pausedWhilePlacingTower)
+                              {
+                                   SetPlacingTowerState();
+                              }
+                              else
+                              {
+                                   SetRunningState();
+                              }
+                              break;
+                         default: break;
                     }
                     break;
                case GameStateType.GameOver:
                     switch (newState)
                     {
-                         case GameStateType.Unstarted:
-                              break;
                          case GameStateType.Running:
                               SetRunningState();
                               break;
-                         case GameStateType.Paused:
-                              break;
-                         case GameStateType.PlacingTower:
-                              break;
-                         case GameStateType.GameOver:
-                              break;
+                         default: break;
                     }
                     break;
           }
@@ -143,6 +138,12 @@ public class GameState : ScriptableObject
           State = GameStateType.PlacingTower;
           Time.timeScale = 1;
      }
+     private void SetOnNewPartAddedScreenState(bool pausedWhilePlacingTower)
+     {
+          State = GameStateType.OnNewPartAddedScreen;
+          this.pausedWhilePlacingTower = pausedWhilePlacingTower;
+          Time.timeScale = 0;
+     }
      private void SetGameOverState()
      {
           State = GameStateType.GameOver;
@@ -156,5 +157,6 @@ public enum GameStateType
      Running,
      Paused,
      PlacingTower,
+     OnNewPartAddedScreen,
      GameOver
 }

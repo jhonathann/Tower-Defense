@@ -82,7 +82,7 @@ public class NewPartScreenController : MonoBehaviour
      private void OnNewPartsAdded(List<Part> addedParts)
      {
           globalContainer.style.display = DisplayStyle.Flex;
-          gameData.gameState.TrySetState(GameStateType.Paused);
+          gameData.gameState.TrySetState(GameStateType.OnNewPartAddedScreen);
           foreach (Part part in addedParts)
           {
                //Generates a mirage of the part and adds it to the partContainer

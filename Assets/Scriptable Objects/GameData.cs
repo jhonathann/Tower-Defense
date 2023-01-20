@@ -77,6 +77,9 @@ public class GameData : ScriptableObject
           health = 10;
           waveCount = 0;
           parts?.Clear();
+          channalizerSelectedPart = null;
+          structureSelectedPart = null;
+          sourceSelectedPart = null;
           isTowerReady = false;
           AddStartingParts();
      }

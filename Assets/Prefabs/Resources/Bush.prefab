@@ -52,7 +52,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: fff7f5cc8e4e06043bcb6d6bff06fd6b, type: 2}
   type: 0
+  speed: 0
   goalCheckPoint: 0
+  damageTextPrefab: {fileID: 5452039094792156648, guid: 9a7d09aea8fea43488077a030bdf4700, type: 3}
 --- !u!54 &1151549740154007339
 Rigidbody:
   m_ObjectHideFlags: 0

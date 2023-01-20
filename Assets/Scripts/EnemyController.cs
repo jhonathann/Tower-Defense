@@ -39,6 +39,8 @@ public class EnemyController : MonoBehaviour, IDamagable
      /// </summary>
      Vector3 direction;
 
+     [SerializeField]
+     private GameObject damageTextPrefab;
      /// <summary>
      /// constant of the enemy height used to avoid clipping with the terrain
      /// </summary>
@@ -153,6 +155,7 @@ public class EnemyController : MonoBehaviour, IDamagable
           if (damager.GetComponent<ShotController>() is not null)
           {
                this.health = this.health - damageAmount;
+               CreateDamageText();
                if (health <= 0)
                {
                     Destroy(this.gameObject);
@@ -161,6 +164,14 @@ public class EnemyController : MonoBehaviour, IDamagable
                {
                     StartCoroutine(Effect(this));
                }
+          }
+          /// <summary>
+          /// Function that creates the damage text and sets the damage amount
+          /// </summary>
+          void CreateDamageText()
+          {
+               DamageTextController damageText = Instantiate(damageTextPrefab, this.transform.position, Quaternion.identity, this.transform).GetComponent<DamageTextController>();
+               damageText.SetUp(damageAmount);
           }
      }
 }

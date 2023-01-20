@@ -20,8 +20,8 @@ public class EnemyStats
      /// <param name="difficultyScore">Enemy's score of dificulty for the dificulty calculations</param>
      /// <param name="prefab">Prefab associated with the enemy</param>
      private static readonly Dictionary<EnemyType, (int health, int speed, int difficultyScore, GameObject prefab)> enemyAttributes = new Dictionary<EnemyType, (int health, int speed, int difficultyScore, GameObject prefab)> {
-        {EnemyType.Bush,(health: 5,speed: 20, difficultyScore: 1, prefab: BushPrefab)},
-        {EnemyType.Tree,(health: 10, speed: 10, difficultyScore: 2, prefab: TreePrefab)}
+        {EnemyType.Bush,(health: 50,speed: 20, difficultyScore: 1, prefab: BushPrefab)},
+        {EnemyType.Tree,(health: 100, speed: 10, difficultyScore: 2, prefab: TreePrefab)}
      };
      /// <summary>
      /// Function to get an enemy's health

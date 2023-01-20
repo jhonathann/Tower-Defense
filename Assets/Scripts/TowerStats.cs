@@ -8,7 +8,7 @@ using System;
 /// </summary>
 public class TowerStats
 {
-     private const float CHANNALIZER_AREA_BASE_DAMAGE = 0.5f;
+     private const float CHANNALIZER_AREA_BASE_DAMAGE = 5.0f;
      private const float CHANNALIZER_AREA_BASE_FIRE_RATE = 0.25f;
      public static readonly Dictionary<Rarity, (float damage, float fireRate)> areaChannalizerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
           { Rarity.Common, (damage: 1.0f*CHANNALIZER_AREA_BASE_DAMAGE, fireRate: 1.0f*CHANNALIZER_AREA_BASE_FIRE_RATE) },
@@ -17,7 +17,7 @@ public class TowerStats
           { Rarity.UltraRare, (damage: 1.75f*CHANNALIZER_AREA_BASE_DAMAGE, fireRate: 1.75f*CHANNALIZER_AREA_BASE_FIRE_RATE) },
           { Rarity.Myth, (damage: 2.0f*CHANNALIZER_AREA_BASE_DAMAGE, fireRate: 2.0f*CHANNALIZER_AREA_BASE_FIRE_RATE) }
           };
-     private const float CHANNALIZER_FAST_BASE_DAMAGE = 1.0f;
+     private const float CHANNALIZER_FAST_BASE_DAMAGE = 10.0f;
      private const float CHANNALIZER_FAST_BASE_FIRE_RATE = 2.0f;
      public static readonly Dictionary<Rarity, (float damage, float fireRate)> fastChannalizerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
           { Rarity.Common, (damage: 1.0f*CHANNALIZER_FAST_BASE_DAMAGE, fireRate: 1.0f*CHANNALIZER_FAST_BASE_FIRE_RATE) },
@@ -26,7 +26,7 @@ public class TowerStats
           { Rarity.UltraRare, (damage: 1.75f*CHANNALIZER_FAST_BASE_DAMAGE, fireRate: 1.75f*CHANNALIZER_FAST_BASE_FIRE_RATE) },
           { Rarity.Myth, (damage: 2.0f*CHANNALIZER_FAST_BASE_DAMAGE, fireRate: 2.0f*CHANNALIZER_FAST_BASE_FIRE_RATE) }
           };
-     private const float CHANNALIZER_STRONG_BASE_DAMAGE = 2.0f;
+     private const float CHANNALIZER_STRONG_BASE_DAMAGE = 20.0f;
      private const float CHANNALIZER_STRONG_BASE_FIRE_RATE = 1.0f;
      public static readonly Dictionary<Rarity, (float damage, float fireRate)> strongChannalizerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
           { Rarity.Common, (damage: 1.0f*CHANNALIZER_STRONG_BASE_DAMAGE, fireRate: 1.0f*CHANNALIZER_STRONG_BASE_FIRE_RATE) },

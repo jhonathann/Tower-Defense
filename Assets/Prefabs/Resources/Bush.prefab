@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078639767555062862}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -54,6 +54,7 @@ MonoBehaviour:
   type: 0
   speed: 0
   goalCheckPoint: 0
+  healthBar: {fileID: 7397452457243240687, guid: bca4b1a9de4e69e478e453a7097db0ac, type: 3}
   damageTextPrefab: {fileID: 5452039094792156648, guid: 9a7d09aea8fea43488077a030bdf4700, type: 3}
 --- !u!54 &1151549740154007339
 Rigidbody:

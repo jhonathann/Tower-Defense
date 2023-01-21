@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour, IDamagable
      /// <summary>
      /// Health of the enemy
      /// </summary>
-     private float health;
+     public float health;
      /// /// <summary>
      /// Speed of the enemy
      /// </summary>
@@ -38,7 +38,13 @@ public class EnemyController : MonoBehaviour, IDamagable
      /// Used for the direction of the movement
      /// </summary>
      Vector3 direction;
+     /// <summary>
+     /// Variable that checks if the enemy hasnt been damaged
+     /// </summary>
+     private bool undamaged;
 
+     [SerializeField]
+     private GameObject healthBar;
      [SerializeField]
      private GameObject damageTextPrefab;
      /// <summary>
@@ -54,7 +60,16 @@ public class EnemyController : MonoBehaviour, IDamagable
      void Update()
      {
           OnUpdate?.Invoke();
+          LookTowardsGoal();
      }
+     /// <summary>
+     /// Sets the rotation towards the current goal
+     /// </summary>
+     private void LookTowardsGoal()
+     {
+          this.transform.LookAt(new Vector3(gameData.path[goalCheckPoint].gameObject.transform.position.x, this.transform.position.y, gameData.path[goalCheckPoint].gameObject.transform.position.z));
+     }
+
      void OnTriggerEnter(Collider enteringObjectCollider)
      {
           if (enteringObjectCollider.GetComponent<CastleController>() is not null)
@@ -68,6 +83,7 @@ public class EnemyController : MonoBehaviour, IDamagable
      /// </summary>
      void InitializeEnemy()
      {
+          this.undamaged = true;
           //Set the stats of the enemy
           this.health = EnemyStats.GetHealth(type);
           this.speed = EnemyStats.GetSpeed(type);
@@ -155,6 +171,8 @@ public class EnemyController : MonoBehaviour, IDamagable
           if (damager.GetComponent<ShotController>() is not null)
           {
                this.health = this.health - damageAmount;
+               ///creates the healthbar and the text damage
+               CreateHealthBar();
                CreateDamageText();
                if (health <= 0)
                {
@@ -172,6 +190,14 @@ public class EnemyController : MonoBehaviour, IDamagable
           {
                DamageTextController damageText = Instantiate(damageTextPrefab, this.transform.position, Quaternion.identity, this.transform).GetComponent<DamageTextController>();
                damageText.SetUp(damageAmount);
+          }
+          void CreateHealthBar()
+          {
+               if (undamaged)
+               {
+                    Instantiate(healthBar, this.transform.position, Quaternion.identity, this.transform);
+                    undamaged = false;
+               }
           }
      }
 }

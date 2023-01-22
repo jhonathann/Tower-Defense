@@ -19,17 +19,14 @@ public class TerrainController : MonoBehaviour
           //Function that assigns the remaining terraing to a grass tile
           drawGrass(this.gameObject);
      }
-     void Update()
-     {
 
-     }
      void createPath()
      {
           //Create the terrain grid
           terrain = new Grid(20, 20);
 
           //Getting the full path using diferent points (min 2 points start and base)(else it will throw an indexOutOfRange exeption)
-          gameData.path = getFullPath(5);
+          gameData.path = getFullPath(50);
 
           //Remove repeated elements from the path
           gameData.path = gameData.path.Distinct().ToList();
@@ -49,27 +46,47 @@ public class TerrainController : MonoBehaviour
           castle.gameObject.name = "Castle";
           portal.gameObject.name = "Portal";
      }
-     //This function returns random tiles from the terrain grid
-     Tile getRandomTile()
+     //This function returns random tiles from the terrain grid and considers the special cases for the start and the end tiles
+     Tile getRandomTile(bool isStart = false, bool isEnd = false)
      {
           int x = Random.Range(0, terrain.width);
           int y = Random.Range(0, terrain.height);
+          if (isStart)
+          {
+               return terrain.tiles[0, y];
+          }
+          if (isEnd)
+          {
+               return terrain.tiles[terrain.width - 1, y];
+          }
           return terrain.tiles[x, y];
      }
 
      //Function used to optain the path beetween all the points
-     List<Tile> getFullPath(int numberOfPoints)
+     List<Tile> getFullPath(int MinPathLenght, int recursionCount = 0)
      {
+          //Variable used to break the while loop when the conditions are met
+          bool isTheLastOne = false;
           List<Tile> path = new List<Tile>();
-          Tile start = getRandomTile();
-          int i = 0;
-          while (i < numberOfPoints)
+          Tile start = getRandomTile(isStart: true);
+          //Variable that keeps track of the failed attemps of the A* algorithm
+          int numberOfFailedTries = 0;
+          while (!isTheLastOne)
           {
-               Tile goal = getRandomTile();
+               Tile goal;
+               if (path.Count > MinPathLenght)
+               {
+                    goal = getRandomTile(isEnd: true);
+                    isTheLastOne = true;
+               }
+               else
+               {
+                    goal = getRandomTile();
+               }
                //Check to see if the obteined Tile isn't already in the path
                if (goal.gameObject == null)
                {
-                    List<Tile> semiPath = semiPath = terrain.AStar(start, goal);
+                    List<Tile> semiPath = terrain.AStar(start, goal);
 
                     //Check to see if the a* algorithm returned a valid path
                     if (semiPath != null)
@@ -77,11 +94,32 @@ public class TerrainController : MonoBehaviour
                          assignatePrefab(semiPath);
                          path.AddRange(semiPath);
                          start = goal;
-                         i++;
                     }
-                    else //If the algorithm did'nt return a valid path, that still add to the count (just for the sake of increasing randomizing)
+                    else //If the algorithm did'nt return a valid path, add to the numberOfFailedTries variable. If 10 failed attempts are reached. The algorith resets the terrain runs and runs all over again (recursively) till it gets a suitable path
                     {
-                         i++;
+                         if (isTheLastOne)
+                         {
+                              isTheLastOne = false;
+                         }
+                         numberOfFailedTries++;
+                         if (numberOfFailedTries > 10)
+                         {
+                              terrain = new Grid(20, 20);
+                              return getFullPath(MinPathLenght, recursionCount++);
+                         }
+                    }
+               }
+               else//If the tile is already in the path, add to the numberOfFailedTries variable. If 10 failed attempts are reached. The algorith resets the terrain runs and runs all over again (recursively) till it gets a suitable path
+               {
+                    if (isTheLastOne)
+                    {
+                         isTheLastOne = false;
+                    }
+                    numberOfFailedTries++;
+                    if (numberOfFailedTries > 10)
+                    {
+                         terrain = new Grid(20, 20);
+                         return getFullPath(MinPathLenght);
                     }
                }
           }

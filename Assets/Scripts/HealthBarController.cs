@@ -24,6 +24,6 @@ public class HealthBarController : MonoBehaviour
      void Update()
      {
           float health = enemy.health;
-          healthBar.fillAmount = health / 100;//|100 is the max current enemy health
+          healthBar.fillAmount = health / 100;//100 is the max current enemy health
      }
 }

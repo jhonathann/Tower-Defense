@@ -195,7 +195,7 @@ public class EnemyController : MonoBehaviour, IDamagable
           {
                if (undamaged)
                {
-                    Instantiate(healthBar, this.transform.position, Quaternion.identity, this.transform);
+                    Instantiate(healthBar, this.transform.position, this.transform.rotation, this.transform);
                     undamaged = false;
                }
           }

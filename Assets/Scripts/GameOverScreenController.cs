@@ -18,6 +18,8 @@ public class GameOverScreenController : MonoBehaviour
      private VisualElement globalContainer;
      private Label scoreText;
      private Button playAgainButton;
+     private Button goToStartPageButton;
+     private Button exitButton;
      private void OnEnable()
      {
           GetElements();
@@ -60,7 +62,8 @@ public class GameOverScreenController : MonoBehaviour
           //.Query search for especific elements in the visual tree (short .Q) in this case by the name of the element
           scoreText = gameOverScreen.rootVisualElement.Query<Label>("ScoreText");
           playAgainButton = gameOverScreen.rootVisualElement.Query<Button>("PlayAgainButton");
-
+          goToStartPageButton = gameOverScreen.rootVisualElement.Query<Button>("GoToStartPageButton");
+          exitButton = gameOverScreen.rootVisualElement.Query<Button>("ExitButton");
      }
      /// <summary>
      /// Sets the buttons to trigger certain functions as a response to an especific event
@@ -68,6 +71,8 @@ public class GameOverScreenController : MonoBehaviour
      private void RegisterEvents()
      {
           playAgainButton.RegisterCallback<ClickEvent>(PlayAgainButtonOnClick);
+          goToStartPageButton.RegisterCallback<ClickEvent>(GoToStartPageButtonOnClick);
+          exitButton.RegisterCallback<ClickEvent>(ExitButtonOnClick);
      }
      /// <summary>
      /// Removes the callbacks from the buttons (when the UI document gets disabled)
@@ -75,14 +80,32 @@ public class GameOverScreenController : MonoBehaviour
      private void UnregisterEvents()
      {
           playAgainButton.UnregisterCallback<ClickEvent>(PlayAgainButtonOnClick);
+          goToStartPageButton.UnregisterCallback<ClickEvent>(GoToStartPageButtonOnClick);
+          exitButton.UnregisterCallback<ClickEvent>(ExitButtonOnClick);
      }
      /// <summary>
-     /// Called when the PlayAgainButton is clicked. Fires the GameSatarted event and reloads the gameScene
+     /// Called when the PlayAgainButton is clicked. Fires the GameStarted event and reloads the gameScene
      /// </summary>
      /// <param name="evt">The click event information (unused)</param>
      private void PlayAgainButtonOnClick(ClickEvent evt)
      {
           GameData.GameStarted?.Invoke();
           SceneManager.LoadSceneAsync("Game"); //Make sure the scene is already in the build settings
+     }
+     /// <summary>
+     /// Called when the GoToStartPageButton is clicked. Loads the StartPage scene
+     /// </summary>
+     /// <param name="evt">The click event information (unused)</param>
+     private void GoToStartPageButtonOnClick(ClickEvent evt)
+     {
+          SceneManager.LoadSceneAsync("StartPage");
+     }
+     /// <summary>
+     /// Called when the ExitButton is clicked. Closes the game
+     /// </summary>
+     /// <param name="evt">The click event information (unused)</param>
+     private void ExitButtonOnClick(ClickEvent evt)
+     {
+          Application.Quit();
      }
 }

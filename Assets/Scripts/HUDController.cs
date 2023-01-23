@@ -45,11 +45,7 @@ public class HUDController : MonoBehaviour
           waveCountLabel.text = "Wave " + gameData.waveCount;
           if (Input.GetKeyDown(KeyCode.T))
           {
-               //Allows the toggle only when the game is Running(to avoid changes when player is placing a tower of when the game is over)
-               if (gameData.gameState.State == GameStateType.Running)
-               {
-                    ToggleTowerCreationPanel();
-               }
+               ToggleTowerCreationPanel();
           }
      }
 
@@ -76,9 +72,13 @@ public class HUDController : MonoBehaviour
      /// </summary>
      void ToggleTowerCreationPanel()
      {
-          towerCreationPanel.ToggleInClassList("towerCreationPanel");
-          towerCreationPanel.ToggleInClassList("towerCreationPanel-hidden");
-          RenderCreationPanel();
+          //Allows the toggle only when the game is Running(to avoid changes when player is placing a tower of when the game is over)
+          if (gameData.gameState.State == GameStateType.Running)
+          {
+               towerCreationPanel.ToggleInClassList("towerCreationPanel");
+               towerCreationPanel.ToggleInClassList("towerCreationPanel-hidden");
+               RenderCreationPanel();
+          }
      }
      /// <summary>
      /// Used to render the panel taking according to its state
@@ -87,6 +87,7 @@ public class HUDController : MonoBehaviour
      {
           if (towerCreationPanel.ClassListContains("towerCreationPanel"))
           {
+               towerCreationPanel.UnregisterCallback<ClickEvent>(towerCreationPanelMinimizedOnClick);
                towerCreationPanel.Clear();
                towerCreationPanel.Add(towerCreationPanelMaximized.CloneTree());
                // Add the currently selected parts to the panel
@@ -108,8 +109,14 @@ public class HUDController : MonoBehaviour
           }
           if (towerCreationPanel.ClassListContains("towerCreationPanel-hidden"))
           {
+               towerCreationPanel.RegisterCallback<ClickEvent>(towerCreationPanelMinimizedOnClick);
                towerCreationPanel.Clear();
                towerCreationPanel.Add(towerCreationPanelMinimized.CloneTree());
+          }
+          //This function is used to allow the user to open the towercreation panel by clicking on the minimized version
+          void towerCreationPanelMinimizedOnClick(ClickEvent evt)
+          {
+               ToggleTowerCreationPanel();
           }
      }
      /// <summary>

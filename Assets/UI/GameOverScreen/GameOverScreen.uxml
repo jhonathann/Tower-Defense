@@ -6,6 +6,8 @@
             <ui:Label text="Game Over" display-tooltip-when-elided="true" name="GameOverText" class="gameOverText" />
             <ui:Label text="Score: " display-tooltip-when-elided="true" name="ScoreText" class="scoreText" />
             <ui:Button text="Play Again" display-tooltip-when-elided="true" name="PlayAgainButton" class="button" />
+            <ui:Button text="Go To Start Page" display-tooltip-when-elided="true" name="GoToStartPageButton" class="button" />
+            <ui:Button text="Exit" display-tooltip-when-elided="true" name="ExitButton" class="button" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

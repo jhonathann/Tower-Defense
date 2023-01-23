@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Script that controlls the behaviour of the menu
@@ -16,6 +17,7 @@ public class MenuController : MonoBehaviour
      private UIDocument menu;
      private VisualElement globalContainer;
      private Button continueButton;
+     private Button restartButton;
      private Button exitButton;
      private void OnEnable()
      {
@@ -46,6 +48,7 @@ public class MenuController : MonoBehaviour
           //Search for the buttons inside the menu
           //.Query search for especific elements in the visual tree (short .Q) in this case by the name of the element
           continueButton = menu.rootVisualElement.Query<Button>("ContinueButton");
+          restartButton = menu.rootVisualElement.Query<Button>("RestartButton");
           exitButton = menu.rootVisualElement.Query<Button>("ExitButton");
 
      }
@@ -55,6 +58,7 @@ public class MenuController : MonoBehaviour
      private void RegisterEvents()
      {
           continueButton.RegisterCallback<ClickEvent>(ContinueButtonOnClick);
+          restartButton.RegisterCallback<ClickEvent>(RestartButoonOnClick);
           exitButton.RegisterCallback<ClickEvent>(ExitButtonOnClick);
      }
      /// <summary>
@@ -92,6 +96,7 @@ public class MenuController : MonoBehaviour
      private void UnregisterEvents()
      {
           continueButton.UnregisterCallback<ClickEvent>(ContinueButtonOnClick);
+          restartButton.UnregisterCallback<ClickEvent>(RestartButoonOnClick);
           exitButton.UnregisterCallback<ClickEvent>(ExitButtonOnClick);
      }
      /// <summary>
@@ -101,7 +106,12 @@ public class MenuController : MonoBehaviour
      private void ContinueButtonOnClick(ClickEvent evt)
      {
           globalContainer.SetEnabled(false); //deactivates the game object of the menu
-          Time.timeScale = 1;//unpauses the game
+          gameData.gameState.TrySetState(GameStateType.Running);
+     }
+     private void RestartButoonOnClick(ClickEvent evt)
+     {
+          GameData.GameStarted?.Invoke();
+          SceneManager.LoadSceneAsync("Game");
      }
      /// <summary>
      /// Function that triggers when the exitButton gets clicked

@@ -66,12 +66,17 @@ public class TowerData : ScriptableObject
      /// <param name="source">The source part</param>
      private void CreateTower(Part channalizer, Part structure, Part source)
      {
-          if (channalizer == null || structure == null || source == null) return;
+          if (channalizer == null || structure == null || source == null)
+          {
+               GameData.DisplayInformation?.Invoke("A tower must have all 3 parts", 2);
+               return;
+          }
           this.channalizer = channalizer;
           this.structure = structure;
           this.source = source;
           gameData.isTowerReady = true;
           gameData.gameState.TrySetState(GameStateType.PlacingTower);
+          GameData.DisplayInformation?.Invoke("You can press R to rotate the tower", 2);
      }
      /// <summary>
      /// Returns the prefab associated to the channalizer of the tower

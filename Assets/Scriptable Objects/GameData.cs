@@ -59,12 +59,21 @@ public class GameData : ScriptableObject
      /// Text to be shown in the HUD regarding the countdown for the next wave
      /// </summary>
      public string timerString;
+     /// <summary>
+     /// UiDocument used to pass information in certain points in the game
+     /// </summary>
+     public GameObject informationScreenPrefab;
+     /// <summary>
+     /// Action that triggers the informationMessage
+     /// </summary>
+     public static Action<string, float> DisplayInformation;
      void OnEnable()
      {
           //Subscribe to the events
           GameStarted += OnGameStarted;
           SelectPart += OnSelectPart;
           AddNewPart += OnAddNewPart;
+          DisplayInformation += OnDisplayInformation;
           TileController.TowerPlaced += OnTowerPlaced;
           PortalController.NextWave += OnNextWave;
      }
@@ -172,5 +181,15 @@ public class GameData : ScriptableObject
           }
           //Trigger the new parts added event
           NewPartsAdded?.Invoke(addedParts);
+     }
+     /// <summary>
+     /// Used when a new information message needs to be displayed
+     /// </summary>
+     /// <param name="text">The message to be displayed</param>
+     /// <param name="destroyTime">the time of the message</param>
+     public void OnDisplayInformation(string text, float destroyTime)
+     {
+          InformationScreenController informationScreen = Instantiate(informationScreenPrefab).GetComponent<InformationScreenController>();
+          informationScreen.SetUp(text, destroyTime);
      }
 }

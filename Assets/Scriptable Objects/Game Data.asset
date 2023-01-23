@@ -18,3 +18,4 @@ MonoBehaviour:
   towerData: {fileID: 11400000, guid: 778d83c8497540c4a9f44c2ccfa2b9e0, type: 2}
   isTowerReady: 1
   timerString: 0:3
+  informationScreenPrefab: {fileID: 261661376733846066, guid: 3d4ec70f2b1524e4d86ed5a60c5a86bb, type: 3}

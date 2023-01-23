@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/GeneralStyles.uss?fileID=7433441132597879392&amp;guid=0ade87dcc933ad14d9080c358e4c0bda&amp;type=3#GeneralStyles" />
+    <Style src="project://database/Assets/UI/InformationScreen/InformationScreen.uss?fileID=7433441132597879392&amp;guid=131c3b15fdadc26478bbe98c9e621e07&amp;type=3#InformationScreen" />
+    <ui:VisualElement name="GlobalContainer" class="globalContainer">
+        <ui:VisualElement name="DisplayContainer" class="displayContainer">
+            <ui:Label text="Test Text Looking Fine" display-tooltip-when-elided="true" name="InformationText" class="informationText" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -45,7 +45,11 @@ public class HUDController : MonoBehaviour
           waveCountLabel.text = "Wave " + gameData.waveCount;
           if (Input.GetKeyDown(KeyCode.T))
           {
-               ToggleTowerCreationPanel();
+               //Allows the toggle only when the game is Running(to avoid changes when player is placing a tower of when the game is over)
+               if (gameData.gameState.State == GameStateType.Running)
+               {
+                    ToggleTowerCreationPanel();
+               }
           }
      }
 
@@ -72,13 +76,9 @@ public class HUDController : MonoBehaviour
      /// </summary>
      void ToggleTowerCreationPanel()
      {
-          //Allows the toggle only when the game is Running(to avoid changes when player is placing a tower of when the game is over)
-          if (gameData.gameState.State == GameStateType.Running)
-          {
-               towerCreationPanel.ToggleInClassList("towerCreationPanel");
-               towerCreationPanel.ToggleInClassList("towerCreationPanel-hidden");
-               RenderCreationPanel();
-          }
+          towerCreationPanel.ToggleInClassList("towerCreationPanel");
+          towerCreationPanel.ToggleInClassList("towerCreationPanel-hidden");
+          RenderCreationPanel();
      }
      /// <summary>
      /// Used to render the panel taking according to its state
@@ -116,7 +116,11 @@ public class HUDController : MonoBehaviour
           //This function is used to allow the user to open the towercreation panel by clicking on the minimized version
           void towerCreationPanelMinimizedOnClick(ClickEvent evt)
           {
-               ToggleTowerCreationPanel();
+               //Allows the toggle only when the game is Running(to avoid changes when player is placing a tower of when the game is over)
+               if (gameData.gameState.State == GameStateType.Running)
+               {
+                    ToggleTowerCreationPanel();
+               }
           }
      }
      /// <summary>

@@ -145,27 +145,27 @@ public class NewPartScreenController : MonoBehaviour
                                    break;
                          }
                          break;
-                    case PartType.Channalizer:
+                    case PartType.Channeler:
                          switch (part.specificTypeInfo)
                          {
-                              case ChannalizerType.Area:
+                              case ChannelerType.Area:
                                    visualElement.Add(new Label($"{part.rarity} {part.type}"));
                                    visualElement.Add(new Label($"{part.specificTypeInfo}"));
                                    visualElement.Add(new Label($"Attacks all the enemies in range"));
-                                   visualElement.Add(new Label($"Damage: {TowerStats.areaChannalizerStats[part.rarity].damage}"));
-                                   visualElement.Add(new Label($"Fire Rate: {TowerStats.areaChannalizerStats[part.rarity].fireRate} Shots/sec"));
+                                   visualElement.Add(new Label($"Damage: {TowerStats.areaChannelerStats[part.rarity].damage}"));
+                                   visualElement.Add(new Label($"Fire Rate: {TowerStats.areaChannelerStats[part.rarity].fireRate} Shots/sec"));
                                    break;
-                              case ChannalizerType.Fast:
+                              case ChannelerType.Fast:
                                    visualElement.Add(new Label($"{part.rarity} {part.type}"));
                                    visualElement.Add(new Label($"{part.specificTypeInfo}"));
-                                   visualElement.Add(new Label($"Damage: {TowerStats.fastChannalizerStats[part.rarity].damage}"));
-                                   visualElement.Add(new Label($"Fire Rate: {TowerStats.fastChannalizerStats[part.rarity].fireRate} Shots/second"));
+                                   visualElement.Add(new Label($"Damage: {TowerStats.fastChannelerStats[part.rarity].damage}"));
+                                   visualElement.Add(new Label($"Fire Rate: {TowerStats.fastChannelerStats[part.rarity].fireRate} Shots/second"));
                                    break;
-                              case ChannalizerType.Strong:
+                              case ChannelerType.Strong:
                                    visualElement.Add(new Label($"{part.rarity} {part.type}"));
                                    visualElement.Add(new Label($"{part.specificTypeInfo}"));
-                                   visualElement.Add(new Label($"Damage: {TowerStats.strongChannalizerStats[part.rarity].damage}"));
-                                   visualElement.Add(new Label($"Fire Rate: {TowerStats.strongChannalizerStats[part.rarity].fireRate} Shots/second"));
+                                   visualElement.Add(new Label($"Damage: {TowerStats.strongChannelerStats[part.rarity].damage}"));
+                                   visualElement.Add(new Label($"Fire Rate: {TowerStats.strongChannelerStats[part.rarity].fireRate} Shots/second"));
                                    break;
                          }
                          break;

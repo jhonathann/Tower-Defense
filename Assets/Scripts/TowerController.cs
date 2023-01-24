@@ -21,11 +21,11 @@ public class TowerController : MonoBehaviour
      /// </summary>
      public GameData gameData;
      //References to the parts of the tower
-     private Part channalizer;
+     private Part channeler;
      private Part structure;
      private Part source;
      //Constant for the correct instantiation of the prefabs
-     private const float CHANNALIZER_HEIGHT = 18.0f;
+     private const float CHANNELER_HEIGHT = 18.0f;
      private const float SOURCE_HEIGHT = 8.0f;
      private const float STRUCTURE_HEIGHT = 1.0f;
      private const float TOWER_HEIGHT = 20.0f;
@@ -58,7 +58,7 @@ public class TowerController : MonoBehaviour
           this.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
           StoreParts();
           InstantiateModels();
-          SetChannalizerStats();
+          SetChannelerStats();
           SetStructureStats();
           SetSourceStats();
           //Sets the rotation to the saved rotation (must be done last so the hitZones rotate adequately)
@@ -69,7 +69,7 @@ public class TowerController : MonoBehaviour
      /// </summary>
      private void StoreParts()
      {
-          this.channalizer = gameData.towerData.channalizer;
+          this.channeler = gameData.towerData.channeler;
           this.structure = gameData.towerData.structure;
           this.source = gameData.towerData.source;
      }
@@ -78,49 +78,49 @@ public class TowerController : MonoBehaviour
      /// </summary>
      private void InstantiateModels()
      {
-          Instantiate(gameData.towerData.GetChannalizerPrefab(), this.transform.position + Vector3.up * CHANNALIZER_HEIGHT, Quaternion.identity, this.transform);
+          Instantiate(gameData.towerData.GetChannelerPrefab(), this.transform.position + Vector3.up * CHANNELER_HEIGHT, Quaternion.identity, this.transform);
           Instantiate(gameData.towerData.GetStructurePrefab(), this.transform.position + Vector3.up * STRUCTURE_HEIGHT, Quaternion.identity, this.transform);
           Instantiate(gameData.towerData.GetSourcePrefab(), this.transform.position + Vector3.up * SOURCE_HEIGHT, Quaternion.identity, this.transform);
      }
      /// <summary>
-     /// Sets the stats for the fireRate of the tower according to the channalizer
+     /// Sets the stats for the fireRate of the tower according to the channeler
      /// </summary>
-     private void SetChannalizerStats()
+     private void SetChannelerStats()
      {
-          switch (channalizer.specificTypeInfo)
+          switch (channeler.specificTypeInfo)
           {
-               case ChannalizerType.Area:
-                    SetChannalizerAreaVariables();
+               case ChannelerType.Area:
+                    SetChannelerAreaVariables();
                     break;
-               case ChannalizerType.Fast:
-                    SetChannalizerFastVariables();
+               case ChannelerType.Fast:
+                    SetChannelerFastVariables();
                     break;
-               case ChannalizerType.Strong:
-                    SetChannalizerStrongVariables();
+               case ChannelerType.Strong:
+                    SetChannelerStrongVariables();
                     break;
           }
 
-          void SetChannalizerAreaVariables()
+          void SetChannelerAreaVariables()
           {
-               this.shotPrefab = this.gameData.towerData.AreaChannalizerBolt;
-               this.fireRate = TowerStats.areaChannalizerStats[channalizer.rarity].fireRate;
-               this.damage = TowerStats.areaChannalizerStats[channalizer.rarity].damage;
+               this.shotPrefab = this.gameData.towerData.AreaChannelerBolt;
+               this.fireRate = TowerStats.areaChannelerStats[channeler.rarity].fireRate;
+               this.damage = TowerStats.areaChannelerStats[channeler.rarity].damage;
                Attack += AttackArea;
           }
 
-          void SetChannalizerFastVariables()
+          void SetChannelerFastVariables()
           {
-               this.shotPrefab = this.gameData.towerData.FastChannalizerBolt;
-               this.fireRate = TowerStats.fastChannalizerStats[channalizer.rarity].fireRate;
-               this.damage = TowerStats.fastChannalizerStats[channalizer.rarity].damage;
+               this.shotPrefab = this.gameData.towerData.FastChannelerBolt;
+               this.fireRate = TowerStats.fastChannelerStats[channeler.rarity].fireRate;
+               this.damage = TowerStats.fastChannelerStats[channeler.rarity].damage;
                Attack += AttackOne;
           }
 
-          void SetChannalizerStrongVariables()
+          void SetChannelerStrongVariables()
           {
-               this.shotPrefab = this.gameData.towerData.StrongChannalizerBolt;
-               this.fireRate = TowerStats.strongChannalizerStats[channalizer.rarity].fireRate;
-               this.damage = TowerStats.strongChannalizerStats[channalizer.rarity].damage;
+               this.shotPrefab = this.gameData.towerData.StrongChannelerBolt;
+               this.fireRate = TowerStats.strongChannelerStats[channeler.rarity].fireRate;
+               this.damage = TowerStats.strongChannelerStats[channeler.rarity].damage;
                Attack += AttackOne;
           }
      }
@@ -331,7 +331,7 @@ public class TowerController : MonoBehaviour
           shot.Effect = this.Effect;
      }
      /// <summary>
-     /// Used when the tower has the area channalizer
+     /// Used when the tower has the area channeler
      /// </summary>
      /// <param name="target">Just used to match the signature of the action (does nothing)</param>
      private void AttackArea(GameObject target = null)

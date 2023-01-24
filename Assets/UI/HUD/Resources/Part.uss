@@ -35,14 +35,14 @@
   border-color: #716614;
 }
 
-.channalizerFast{
-  background-image: url("/Assets/UI/HUD/FastChannalizer.png")
+.channelerFast{
+  background-image: url("/Assets/UI/HUD/FastChanneler.png")
 }
-.channalizerStrong{
-  background-image: url("/Assets/UI/HUD/StrongChannalizer.png")
+.channelerStrong{
+  background-image: url("/Assets/UI/HUD/StrongChanneler.png")
 }
-.channalizerArea{
-  background-image: url("/Assets/UI/HUD/AreaChannalizer.png")
+.channelerArea{
+  background-image: url("/Assets/UI/HUD/AreaChanneler.png")
 }
 
 .structureCross{

@@ -11,15 +11,15 @@ public class TowerData : ScriptableObject
 {
      [SerializeField]
      private GameData gameData;
-     public Part channalizer;
+     public Part channeler;
      public Part structure;
      public Part source;
      [SerializeField]
-     private GameObject areaChannalizerPrefab;
+     private GameObject areaChannelerPrefab;
      [SerializeField]
-     private GameObject fastChannalizerPrefab;
+     private GameObject fastChannelerPrefab;
      [SerializeField]
-     private GameObject strongChannalizerPrefab;
+     private GameObject strongChannelerPrefab;
      [SerializeField]
      private GameObject beamStructurePrefab;
      [SerializeField]
@@ -35,11 +35,11 @@ public class TowerData : ScriptableObject
      [SerializeField]
      private GameObject thunderSourcePrefab;
      [field: SerializeField]
-     public GameObject AreaChannalizerBolt { get; private set; }
+     public GameObject AreaChannelerBolt { get; private set; }
      [field: SerializeField]
-     public GameObject FastChannalizerBolt { get; private set; }
+     public GameObject FastChannelerBolt { get; private set; }
      [field: SerializeField]
-     public GameObject StrongChannalizerBolt { get; private set; }
+     public GameObject StrongChannelerBolt { get; private set; }
      public static Action<Part, Part, Part> OnCreateTower;
      private Dictionary<Enum, GameObject> enumtoGameObject;
      private void OnEnable()
@@ -47,9 +47,9 @@ public class TowerData : ScriptableObject
           OnCreateTower += CreateTower;
           //Load the prefabs to the dictionary
           enumtoGameObject = new Dictionary<Enum, GameObject>
-          {{ChannalizerType.Area,areaChannalizerPrefab},
-          {ChannalizerType.Fast,fastChannalizerPrefab},
-          {ChannalizerType.Strong,strongChannalizerPrefab},
+          {{ChannelerType.Area,areaChannelerPrefab},
+          {ChannelerType.Fast,fastChannelerPrefab},
+          {ChannelerType.Strong,strongChannelerPrefab},
           {StructureType.Beam,beamStructurePrefab},
           {StructureType.Circular,circularStructurePrefab},
           {StructureType.Cross,crossStructurePrefab},
@@ -61,17 +61,17 @@ public class TowerData : ScriptableObject
      /// <summary>
      /// Function that sets this parts to the tower SO when there are 3 parts
      /// </summary>
-     /// <param name="channalizer">The channalizer part</param>
+     /// <param name="channeler">The channeler part</param>
      /// <param name="structure">The structure part</param>
      /// <param name="source">The source part</param>
-     private void CreateTower(Part channalizer, Part structure, Part source)
+     private void CreateTower(Part channeler, Part structure, Part source)
      {
-          if (channalizer == null || structure == null || source == null)
+          if (channeler == null || structure == null || source == null)
           {
                GameData.DisplayInformation?.Invoke("A tower must have all 3 parts", 2);
                return;
           }
-          this.channalizer = channalizer;
+          this.channeler = channeler;
           this.structure = structure;
           this.source = source;
           gameData.isTowerReady = true;
@@ -79,12 +79,12 @@ public class TowerData : ScriptableObject
           GameData.DisplayInformation?.Invoke("You can press R to rotate the tower", 2);
      }
      /// <summary>
-     /// Returns the prefab associated to the channalizer of the tower
+     /// Returns the prefab associated to the channeler of the tower
      /// </summary>
-     /// <returns>The prefab for the channalizer</returns>
-     public GameObject GetChannalizerPrefab()
+     /// <returns>The prefab for the channeler</returns>
+     public GameObject GetChannelerPrefab()
      {
-          return enumtoGameObject[channalizer.specificTypeInfo];
+          return enumtoGameObject[channeler.specificTypeInfo];
      }
      /// <summary>
      /// Returns the prefab associated to the structure of the tower

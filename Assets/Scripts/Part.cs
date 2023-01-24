@@ -45,9 +45,9 @@ public class Part : VisualElement
      /// <value>A string corresponding to the USS class to be assigned</value>
      Dictionary<Enum, string> specificTypeClasses = new Dictionary<Enum, string>
           {
-               {ChannalizerType.Fast,"channalizerFast"},
-               {ChannalizerType.Strong,"channalizerStrong"},
-               {ChannalizerType.Area,"channalizerArea"},
+               {ChannelerType.Fast,"channelerFast"},
+               {ChannelerType.Strong,"channelerStrong"},
+               {ChannelerType.Area,"channelerArea"},
                {StructureType.Beam,"structureBeam"},
                {StructureType.Circular,"structureCircular"},
                {StructureType.Cross,"structureCross"},
@@ -108,11 +108,11 @@ public class Part : VisualElement
      private Rarity GetRarity()
      {
           int chance = UnityEngine.Random.Range(0, 100);
-          if (chance <= 40) return Rarity.Common; //40% chance of Common
-          if (chance <= 70) return Rarity.Normal; // 30% chance of Normal
-          if (chance <= 85) return Rarity.Rare; //15% chance of Rare
-          if (chance <= 95) return Rarity.UltraRare; // 10% chance of UltraRare
-          if (chance <= 100) return Rarity.Myth; //5% chance of Myth
+          if (chance < 40) return Rarity.Common; //40% chance of Common
+          if (chance < 70) return Rarity.Normal; // 30% chance of Normal
+          if (chance < 85) return Rarity.Rare; //15% chance of Rare
+          if (chance < 95) return Rarity.UltraRare; // 10% chance of UltraRare
+          if (chance < 100) return Rarity.Myth; //5% chance of Myth
           return Rarity.Common;
      }
 
@@ -128,8 +128,8 @@ public class Part : VisualElement
                     return UtilityEnum.GetRandomTypeFromAnEnum<SourceType>();
                case PartType.Structure:
                     return UtilityEnum.GetRandomTypeFromAnEnum<StructureType>();
-               case PartType.Channalizer:
-                    return UtilityEnum.GetRandomTypeFromAnEnum<ChannalizerType>();
+               case PartType.Channeler:
+                    return UtilityEnum.GetRandomTypeFromAnEnum<ChannelerType>();
                default: return null;
           }
      }
@@ -227,20 +227,20 @@ public class Part : VisualElement
                                    break;
                          }
                          break;
-                    case PartType.Channalizer:
+                    case PartType.Channeler:
                          switch (this.specificTypeInfo)
                          {
-                              case ChannalizerType.Area:
-                                   visualElement.Add(new Label($"Damage: {TowerStats.areaChannalizerStats[this.rarity].damage}"));
-                                   visualElement.Add(new Label($"Fire Rate: {TowerStats.areaChannalizerStats[this.rarity].fireRate}"));
+                              case ChannelerType.Area:
+                                   visualElement.Add(new Label($"Damage: {TowerStats.areaChannelerStats[this.rarity].damage}"));
+                                   visualElement.Add(new Label($"Fire Rate: {TowerStats.areaChannelerStats[this.rarity].fireRate}"));
                                    break;
-                              case ChannalizerType.Fast:
-                                   visualElement.Add(new Label($"Damage: {TowerStats.fastChannalizerStats[this.rarity].damage}"));
-                                   visualElement.Add(new Label($"Fire Rate: {TowerStats.fastChannalizerStats[this.rarity].fireRate}"));
+                              case ChannelerType.Fast:
+                                   visualElement.Add(new Label($"Damage: {TowerStats.fastChannelerStats[this.rarity].damage}"));
+                                   visualElement.Add(new Label($"Fire Rate: {TowerStats.fastChannelerStats[this.rarity].fireRate}"));
                                    break;
-                              case ChannalizerType.Strong:
-                                   visualElement.Add(new Label($"Damage: {TowerStats.strongChannalizerStats[this.rarity].damage}"));
-                                   visualElement.Add(new Label($"Fire Rate: {TowerStats.strongChannalizerStats[this.rarity].fireRate}"));
+                              case ChannelerType.Strong:
+                                   visualElement.Add(new Label($"Damage: {TowerStats.strongChannelerStats[this.rarity].damage}"));
+                                   visualElement.Add(new Label($"Fire Rate: {TowerStats.strongChannelerStats[this.rarity].fireRate}"));
                                    break;
                          }
                          break;
@@ -257,7 +257,7 @@ public enum PartType
 {
      Source,
      Structure,
-     Channalizer,
+     Channeler,
 }
 /// <summary>
 /// An Enum representing the different rarities of parts
@@ -290,9 +290,9 @@ public enum StructureType
      Cross
 }
 /// <summary>
-/// An Enum representing the especific types within the channalizer type
+/// An Enum representing the especific types within the channeler type
 /// </summary>
-public enum ChannalizerType
+public enum ChannelerType
 {
      Fast,
      Strong,

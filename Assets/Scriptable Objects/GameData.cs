@@ -35,7 +35,7 @@ public class GameData : ScriptableObject
      /// <returns></returns>
      public List<Part> parts = new List<Part>();
      //Slots for the three selected parts
-     public Part channalizerSelectedPart;
+     public Part channelerSelectedPart;
      public Part structureSelectedPart;
      public Part sourceSelectedPart;
      /// <summary>
@@ -86,7 +86,7 @@ public class GameData : ScriptableObject
           health = 10;
           waveCount = 0;
           parts?.Clear();
-          channalizerSelectedPart = null;
+          channelerSelectedPart = null;
           structureSelectedPart = null;
           sourceSelectedPart = null;
           isTowerReady = false;
@@ -98,10 +98,10 @@ public class GameData : ScriptableObject
      void AddStartingParts()
      {
           //Add a part of each type to ensure that the user is able to place the starting tower
-          GameData.AddNewPart(new Part(PartType.Channalizer));
+          GameData.AddNewPart(new Part(PartType.Channeler));
           GameData.AddNewPart(new Part(PartType.Structure));
           GameData.AddNewPart(new Part(PartType.Source));
-          GameData.AddNewPart(new Part(PartType.Channalizer));
+          GameData.AddNewPart(new Part(PartType.Channeler));
           GameData.AddNewPart(new Part(PartType.Structure));
           GameData.AddNewPart(new Part(PartType.Source));
      }
@@ -131,10 +131,10 @@ public class GameData : ScriptableObject
      {
           switch (newSelectedPart.type)
           {
-               case PartType.Channalizer:
-                    channalizerSelectedPart?.RemoveFromClassList("selected");
+               case PartType.Channeler:
+                    channelerSelectedPart?.RemoveFromClassList("selected");
                     newSelectedPart.AddToClassList("selected");
-                    channalizerSelectedPart = newSelectedPart;
+                    channelerSelectedPart = newSelectedPart;
                     break;
                case PartType.Structure:
                     structureSelectedPart?.RemoveFromClassList("selected");
@@ -154,11 +154,11 @@ public class GameData : ScriptableObject
      void OnTowerPlaced()
      {
           //Remove the parts from the part List
-          this.parts.Remove(channalizerSelectedPart);
+          this.parts.Remove(channelerSelectedPart);
           this.parts.Remove(structureSelectedPart);
           this.parts.Remove(sourceSelectedPart);
           //Set the selected parts again to null;
-          this.channalizerSelectedPart = null;
+          this.channelerSelectedPart = null;
           this.structureSelectedPart = null;
           this.sourceSelectedPart = null;
           //Set the available tower again to false

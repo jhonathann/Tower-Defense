@@ -102,7 +102,7 @@ public class HUDController : MonoBehaviour
                createTowerButton.RegisterCallback<ClickEvent>(createTowerButtonOnClick);
                void createTowerButtonOnClick(ClickEvent evt)
                {
-                    TowerData.OnCreateTower(gameData.channalizerSelectedPart, gameData.structureSelectedPart, gameData.sourceSelectedPart);
+                    TowerData.OnCreateTower(gameData.channelerSelectedPart, gameData.structureSelectedPart, gameData.sourceSelectedPart);
                     //toggle the panel to allow the user to place the tower
                     ToggleTowerCreationPanel();
                }
@@ -128,12 +128,12 @@ public class HUDController : MonoBehaviour
      /// </summary>
      void AddSelectedParts()
      {
-          VisualElement channalizerPanel = HUD.rootVisualElement.Query<VisualElement>("ChannalizerPanel");
+          VisualElement channelerPanel = HUD.rootVisualElement.Query<VisualElement>("ChannelerPanel");
           VisualElement structurePanel = HUD.rootVisualElement.Query<VisualElement>("StructurePanel");
           VisualElement sourcePanel = HUD.rootVisualElement.Query<VisualElement>("SourcePanel");
-          VisualElement channalizerCreationSlot = channalizerPanel.Query<VisualElement>("CreationSlot");
+          VisualElement channelerCreationSlot = channelerPanel.Query<VisualElement>("CreationSlot");
           VisualElement structureCreationSlot = structurePanel.Query<VisualElement>("CreationSlot"); VisualElement sourceCreationSlot = sourcePanel.Query<VisualElement>("CreationSlot");
-          channalizerCreationSlot.Add(new Part(gameData.channalizerSelectedPart));
+          channelerCreationSlot.Add(new Part(gameData.channelerSelectedPart));
           structureCreationSlot.Add(new Part(gameData.structureSelectedPart));
           sourceCreationSlot.Add(new Part(gameData.sourceSelectedPart));
      }
@@ -146,9 +146,9 @@ public class HUDController : MonoBehaviour
           VisualElement partsContainer;
           switch (part.type)
           {
-               case PartType.Channalizer:
-                    VisualElement channalizerPanel = HUD.rootVisualElement.Query<VisualElement>("ChannalizerPanel");
-                    partsContainer = channalizerPanel.Query<VisualElement>("PartsContainer");
+               case PartType.Channeler:
+                    VisualElement channelerPanel = HUD.rootVisualElement.Query<VisualElement>("ChannelerPanel");
+                    partsContainer = channelerPanel.Query<VisualElement>("PartsContainer");
                     partsContainer.Add(part);
                     break;
                case PartType.Structure:

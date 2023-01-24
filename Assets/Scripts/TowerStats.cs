@@ -8,32 +8,32 @@ using System;
 /// </summary>
 public class TowerStats
 {
-     private const float CHANNALIZER_AREA_BASE_DAMAGE = 5.0f;
-     private const float CHANNALIZER_AREA_BASE_FIRE_RATE = 0.25f;
-     public static readonly Dictionary<Rarity, (float damage, float fireRate)> areaChannalizerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
-          { Rarity.Common, (damage: 1.0f*CHANNALIZER_AREA_BASE_DAMAGE, fireRate: 1.0f*CHANNALIZER_AREA_BASE_FIRE_RATE) },
-          { Rarity.Normal, (damage: 1.25f*CHANNALIZER_AREA_BASE_DAMAGE, fireRate: 1.25f*CHANNALIZER_AREA_BASE_FIRE_RATE) },
-          { Rarity.Rare, (damage: 1.5f*CHANNALIZER_AREA_BASE_DAMAGE, fireRate: 1.5f*CHANNALIZER_AREA_BASE_FIRE_RATE) },
-          { Rarity.UltraRare, (damage: 1.75f*CHANNALIZER_AREA_BASE_DAMAGE, fireRate: 1.75f*CHANNALIZER_AREA_BASE_FIRE_RATE) },
-          { Rarity.Myth, (damage: 2.0f*CHANNALIZER_AREA_BASE_DAMAGE, fireRate: 2.0f*CHANNALIZER_AREA_BASE_FIRE_RATE) }
+     private const float CHANNELER_AREA_BASE_DAMAGE = 5.0f;
+     private const float CHANNELER_AREA_BASE_FIRE_RATE = 0.25f;
+     public static readonly Dictionary<Rarity, (float damage, float fireRate)> areaChannelerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
+          { Rarity.Common, (damage: 1.0f*CHANNELER_AREA_BASE_DAMAGE, fireRate: 1.0f*CHANNELER_AREA_BASE_FIRE_RATE) },
+          { Rarity.Normal, (damage: 1.25f*CHANNELER_AREA_BASE_DAMAGE, fireRate: 1.25f*CHANNELER_AREA_BASE_FIRE_RATE) },
+          { Rarity.Rare, (damage: 1.5f*CHANNELER_AREA_BASE_DAMAGE, fireRate: 1.5f*CHANNELER_AREA_BASE_FIRE_RATE) },
+          { Rarity.UltraRare, (damage: 1.75f*CHANNELER_AREA_BASE_DAMAGE, fireRate: 1.75f*CHANNELER_AREA_BASE_FIRE_RATE) },
+          { Rarity.Myth, (damage: 2.0f*CHANNELER_AREA_BASE_DAMAGE, fireRate: 2.0f*CHANNELER_AREA_BASE_FIRE_RATE) }
           };
-     private const float CHANNALIZER_FAST_BASE_DAMAGE = 10.0f;
-     private const float CHANNALIZER_FAST_BASE_FIRE_RATE = 2.0f;
-     public static readonly Dictionary<Rarity, (float damage, float fireRate)> fastChannalizerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
-          { Rarity.Common, (damage: 1.0f*CHANNALIZER_FAST_BASE_DAMAGE, fireRate: 1.0f*CHANNALIZER_FAST_BASE_FIRE_RATE) },
-          { Rarity.Normal, (damage: 1.25f*CHANNALIZER_FAST_BASE_DAMAGE, fireRate: 1.25f*CHANNALIZER_FAST_BASE_FIRE_RATE) },
-          { Rarity.Rare, (damage: 1.5f*CHANNALIZER_FAST_BASE_DAMAGE, fireRate: 1.5f*CHANNALIZER_FAST_BASE_FIRE_RATE) },
-          { Rarity.UltraRare, (damage: 1.75f*CHANNALIZER_FAST_BASE_DAMAGE, fireRate: 1.75f*CHANNALIZER_FAST_BASE_FIRE_RATE) },
-          { Rarity.Myth, (damage: 2.0f*CHANNALIZER_FAST_BASE_DAMAGE, fireRate: 2.0f*CHANNALIZER_FAST_BASE_FIRE_RATE) }
+     private const float CHANNELER_FAST_BASE_DAMAGE = 10.0f;
+     private const float CHANNELER_FAST_BASE_FIRE_RATE = 2.0f;
+     public static readonly Dictionary<Rarity, (float damage, float fireRate)> fastChannelerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
+          { Rarity.Common, (damage: 1.0f*CHANNELER_FAST_BASE_DAMAGE, fireRate: 1.0f*CHANNELER_FAST_BASE_FIRE_RATE) },
+          { Rarity.Normal, (damage: 1.25f*CHANNELER_FAST_BASE_DAMAGE, fireRate: 1.25f*CHANNELER_FAST_BASE_FIRE_RATE) },
+          { Rarity.Rare, (damage: 1.5f*CHANNELER_FAST_BASE_DAMAGE, fireRate: 1.5f*CHANNELER_FAST_BASE_FIRE_RATE) },
+          { Rarity.UltraRare, (damage: 1.75f*CHANNELER_FAST_BASE_DAMAGE, fireRate: 1.75f*CHANNELER_FAST_BASE_FIRE_RATE) },
+          { Rarity.Myth, (damage: 2.0f*CHANNELER_FAST_BASE_DAMAGE, fireRate: 2.0f*CHANNELER_FAST_BASE_FIRE_RATE) }
           };
-     private const float CHANNALIZER_STRONG_BASE_DAMAGE = 20.0f;
-     private const float CHANNALIZER_STRONG_BASE_FIRE_RATE = 1.0f;
-     public static readonly Dictionary<Rarity, (float damage, float fireRate)> strongChannalizerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
-          { Rarity.Common, (damage: 1.0f*CHANNALIZER_STRONG_BASE_DAMAGE, fireRate: 1.0f*CHANNALIZER_STRONG_BASE_FIRE_RATE) },
-          { Rarity.Normal, (damage: 1.25f*CHANNALIZER_STRONG_BASE_DAMAGE, fireRate: 1.25f*CHANNALIZER_STRONG_BASE_FIRE_RATE) },
-          { Rarity.Rare, (damage: 1.5f*CHANNALIZER_STRONG_BASE_DAMAGE, fireRate: 1.5f*CHANNALIZER_STRONG_BASE_FIRE_RATE) },
-          { Rarity.UltraRare, (damage: 1.75f*CHANNALIZER_STRONG_BASE_DAMAGE, fireRate: 1.75f*CHANNALIZER_STRONG_BASE_FIRE_RATE) },
-          { Rarity.Myth, (damage: 2.0f*CHANNALIZER_STRONG_BASE_DAMAGE, fireRate: 2.0f*CHANNALIZER_STRONG_BASE_FIRE_RATE) }
+     private const float CHANNELER_STRONG_BASE_DAMAGE = 20.0f;
+     private const float CHANNELER_STRONG_BASE_FIRE_RATE = 1.0f;
+     public static readonly Dictionary<Rarity, (float damage, float fireRate)> strongChannelerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
+          { Rarity.Common, (damage: 1.0f*CHANNELER_STRONG_BASE_DAMAGE, fireRate: 1.0f*CHANNELER_STRONG_BASE_FIRE_RATE) },
+          { Rarity.Normal, (damage: 1.25f*CHANNELER_STRONG_BASE_DAMAGE, fireRate: 1.25f*CHANNELER_STRONG_BASE_FIRE_RATE) },
+          { Rarity.Rare, (damage: 1.5f*CHANNELER_STRONG_BASE_DAMAGE, fireRate: 1.5f*CHANNELER_STRONG_BASE_FIRE_RATE) },
+          { Rarity.UltraRare, (damage: 1.75f*CHANNELER_STRONG_BASE_DAMAGE, fireRate: 1.75f*CHANNELER_STRONG_BASE_FIRE_RATE) },
+          { Rarity.Myth, (damage: 2.0f*CHANNELER_STRONG_BASE_DAMAGE, fireRate: 2.0f*CHANNELER_STRONG_BASE_FIRE_RATE) }
           };
      private const float STRUCTURE_BEAM_BASE_RANGE = 40.0f;
      public static readonly Dictionary<Rarity, float> beamStructureStats = new Dictionary<Rarity, float> {

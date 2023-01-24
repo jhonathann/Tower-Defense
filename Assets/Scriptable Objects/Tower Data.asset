@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Tower Data
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: fff7f5cc8e4e06043bcb6d6bff06fd6b, type: 2}
-  areaChannalizerPrefab: {fileID: 919132149155446097, guid: b207239fe88d29141a727dd9e615d470, type: 3}
-  fastChannalizerPrefab: {fileID: 919132149155446097, guid: 61fac0521a991234dab5ae42e4bfcb77, type: 3}
-  strongChannalizerPrefab: {fileID: 919132149155446097, guid: e761aa647ed386349a34ad7ede5d4712, type: 3}
+  areaChannelerPrefab: {fileID: 919132149155446097, guid: b207239fe88d29141a727dd9e615d470, type: 3}
+  fastChannelerPrefab: {fileID: 919132149155446097, guid: 61fac0521a991234dab5ae42e4bfcb77, type: 3}
+  strongChannelerPrefab: {fileID: 919132149155446097, guid: e761aa647ed386349a34ad7ede5d4712, type: 3}
   beamStructurePrefab: {fileID: 919132149155446097, guid: 3e7a50f32936d0d4eb0b31f5c2f9716c, type: 3}
   circularStructurePrefab: {fileID: 919132149155446097, guid: c906a88a3ea7f16409604560a2b68569, type: 3}
   crossStructurePrefab: {fileID: 919132149155446097, guid: 440ee9e6331f07f4c93f71270a29f5a6, type: 3}
@@ -23,6 +23,6 @@ MonoBehaviour:
   fireSourcePrefab: {fileID: 2555624041107694200, guid: 5f196af0707b74849af015d34cce6230, type: 3}
   waterSourcePrefab: {fileID: 2020888479189818301, guid: 8d632cae68cc4e442882d087192b39fa, type: 3}
   thunderSourcePrefab: {fileID: 1375894837577484795, guid: 63c059f3d854f734583a79c844ff7fa4, type: 3}
-  <AreaChannalizerBolt>k__BackingField: {fileID: 409294717232431179, guid: c95222a923a904a4eb3b14f41b3d2069, type: 3}
-  <FastChannalizerBolt>k__BackingField: {fileID: 409294717232431179, guid: c95222a923a904a4eb3b14f41b3d2069, type: 3}
-  <StrongChannalizerBolt>k__BackingField: {fileID: 409294717232431179, guid: c95222a923a904a4eb3b14f41b3d2069, type: 3}
+  <AreaChannelerBolt>k__BackingField: {fileID: 409294717232431179, guid: c95222a923a904a4eb3b14f41b3d2069, type: 3}
+  <FastChannelerBolt>k__BackingField: {fileID: 409294717232431179, guid: c95222a923a904a4eb3b14f41b3d2069, type: 3}
+  <StrongChannelerBolt>k__BackingField: {fileID: 409294717232431179, guid: c95222a923a904a4eb3b14f41b3d2069, type: 3}

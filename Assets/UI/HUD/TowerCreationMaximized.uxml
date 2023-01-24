@@ -4,7 +4,7 @@
     <ui:VisualElement name="TopPanel" class="topPanel">
         <ui:Label text="Tower Creation" display-tooltip-when-elided="true" name="TowerCreationLabel" class="towerCreationLabel" />
     </ui:VisualElement>
-    <ui:VisualElement name="ChannalizerPanel" class="channalizerPanel">
+    <ui:VisualElement name="ChannelerPanel" class="channelerPanel">
         <ui:VisualElement name="PartsContainer" class="partsContainer" />
         <ui:VisualElement name="SelectionContainer" class="selectionContainer">
             <ui:VisualElement name="CreationSlot" class="creationSlot" />

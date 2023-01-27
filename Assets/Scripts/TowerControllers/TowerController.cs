@@ -246,9 +246,7 @@ public class TowerController : MonoBehaviour
      void OnTowerPlaced()
      {
           this.state = TowerState.Placed;
-          foreach (GameObject hitzone in hitZoneGameObjects)
-          {
-               hitzone.SetActive(!hitzone.activeSelf);
-          }
+          //Unsubscribes from the towerPlaced event 
+          TileController.TowerPlaced -= OnTowerPlaced;
      }
 }

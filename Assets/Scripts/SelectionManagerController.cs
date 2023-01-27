@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// Class that controls the raycast of the mouse when it is clicked in the world
@@ -12,6 +13,7 @@ public class SelectionManagerController : MonoBehaviour
 
      private void Update()
      {
+          if (isMouseOverAnUiElement()) return;
           if (!Input.GetMouseButtonDown(0)) return;
           Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
           RaycastHit[] rayCastHits = Physics.RaycastAll(ray, Mathf.Infinity, LayerMask.NameToLayer("IgnoreRaycast"));
@@ -22,5 +24,13 @@ public class SelectionManagerController : MonoBehaviour
                     towerSelected?.Invoke(rayCastHit);
                }
           }
+     }
+     /// <summary>
+     /// Helper function to know when the mouse is over the UI
+     /// </summary>
+     /// <returns>True if the mouse is over an UI element and false otherwise</returns>
+     private bool isMouseOverAnUiElement()
+     {
+          return EventSystem.current.IsPointerOverGameObject();
      }
 }

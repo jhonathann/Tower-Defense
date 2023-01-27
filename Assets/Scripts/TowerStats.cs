@@ -8,6 +8,12 @@ using System;
 /// </summary>
 public class TowerStats
 {
+     public static float CHANNELER_HEIGHT = 18.0f;
+     public static float SOURCE_HEIGHT = 8.0f;
+     public static float STRUCTURE_HEIGHT = 1.0f;
+     public static float TOWER_HEIGHT = 20.0f;
+     public static float TOWER_WIDTH = 10.0f;
+
      private const float CHANNELER_AREA_BASE_DAMAGE = 5.0f;
      private const float CHANNELER_AREA_BASE_FIRE_RATE = 0.25f;
      public static readonly Dictionary<Rarity, (float damage, float fireRate)> areaChannelerStats = new Dictionary<Rarity, (float damage, float fireRate)> {

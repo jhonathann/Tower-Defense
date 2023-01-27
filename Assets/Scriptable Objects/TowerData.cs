@@ -11,6 +11,7 @@ public class TowerData : ScriptableObject
 {
      [SerializeField]
      private GameData gameData;
+     public GameObject tower;
      public Part channeler;
      public Part structure;
      public Part source;
@@ -74,6 +75,12 @@ public class TowerData : ScriptableObject
           this.channeler = channeler;
           this.structure = structure;
           this.source = source;
+          //create the new tower
+          this.tower = new GameObject("Tower", typeof(TowerController));
+          //set the reference to the gameData
+          tower.GetComponent<TowerController>().gameData = gameData;
+          //set the tower in an unwatchable position (cause the GameObject constructor sets the object at origin)
+          tower.transform.position = Vector3.one * 1000;
           gameData.isTowerReady = true;
           gameData.gameState.TrySetState(GameStateType.PlacingTower);
           GameData.DisplayInformation?.Invoke("You can press R to rotate the tower", 2);

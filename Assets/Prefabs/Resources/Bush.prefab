@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: fff7f5cc8e4e06043bcb6d6bff06fd6b, type: 2}
   type: 0
+  health: 0
   speed: 0
   goalCheckPoint: 0
   healthBar: {fileID: 7397452457243240687, guid: bca4b1a9de4e69e478e453a7097db0ac, type: 3}

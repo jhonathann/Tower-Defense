@@ -92,7 +92,7 @@ public class NewPartScreenController : MonoBehaviour
                partToBeAdded.AddToClassList("part");
                VisualElement description = new VisualElement();
                description.AddToClassList("description");
-               partToBeAdded.Add(description);
+               partToBeAdded.iconContainer.Add(description);
                AddStatsLabels(description, partToBeAdded);
                this.partContainer.Add(partToBeAdded);
           }

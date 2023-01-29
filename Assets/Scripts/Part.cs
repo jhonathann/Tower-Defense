@@ -27,10 +27,17 @@ public class Part : VisualElement
      /// <returns></returns>
      public VisualTreeAsset template = Resources.Load<VisualTreeAsset>("Part");
      /// <summary>
+     /// VisualElement where the icon regarding the especifType of the part will be displayed
+     /// </summary>
+     public VisualElement iconContainer;
+     /// <summary>
+     /// Context Menu that will apear when the used howers over the part
+     /// </summary>
+     private VisualElement contextMenu;
+     /// <summary>
      /// Dictionary that matches each rarity with the corresponding USS class
      /// </summary>
      /// <value>A string corresponding to the USS class to be assigned</value>
-     private VisualElement contextMenu;
      Dictionary<Rarity, string> rarityClasses = new Dictionary<Rarity, string>
           {
                {Rarity.Common,"commonRarity"},
@@ -66,7 +73,8 @@ public class Part : VisualElement
           this.specificTypeInfo = GetSpecificTypeInfo();
           template.CloneTree(this);
           this.AddToClassList(rarityClasses[this.rarity]);
-          this.AddToClassList(specificTypeClasses[this.specificTypeInfo]);
+          SetIconContainerElement();
+          iconContainer.AddToClassList(specificTypeClasses[this.specificTypeInfo]);
           SetCallBacks();
           SetContextMenu();
      }
@@ -81,10 +89,10 @@ public class Part : VisualElement
           this.rarity = part.rarity;
           this.specificTypeInfo = part.specificTypeInfo;
           template.CloneTree(this);
+          this.AddToClassList("partMock");
           this.AddToClassList(rarityClasses[this.rarity]);
-          this.AddToClassList(specificTypeClasses[this.specificTypeInfo]);
-          this.style.width = new StyleLength(new Length(100, LengthUnit.Percent));
-          this.style.height = new StyleLength(new Length(100, LengthUnit.Percent));
+          SetIconContainerElement();
+          iconContainer.AddToClassList(specificTypeClasses[this.specificTypeInfo]);
      }
      /// <summary>
      /// This constructor returns a random part of the specifyc type (use to ensure that the player has sufficient parts to create the initial tower)
@@ -97,7 +105,8 @@ public class Part : VisualElement
           this.specificTypeInfo = GetSpecificTypeInfo();
           template.CloneTree(this);
           this.AddToClassList(rarityClasses[this.rarity]);
-          this.AddToClassList(specificTypeClasses[this.specificTypeInfo]);
+          SetIconContainerElement();
+          iconContainer.AddToClassList(specificTypeClasses[this.specificTypeInfo]);
           SetCallBacks();
           SetContextMenu();
      }
@@ -148,7 +157,16 @@ public class Part : VisualElement
      private void SetContextMenu()
      {
           this.contextMenu = CreateContextMenu();
-          this.Add(contextMenu);
+          this.iconContainer.Add(contextMenu);
+     }
+     /// <summary>
+     /// Adds the IconContainer to the part
+     /// </summary>
+     private void SetIconContainerElement()
+     {
+          iconContainer = new VisualElement();
+          iconContainer.AddToClassList("iconContainer");
+          this.Add(iconContainer);
      }
      /// <summary>
      /// Callback triggered when the part is clicked

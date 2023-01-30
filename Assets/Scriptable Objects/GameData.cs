@@ -56,6 +56,10 @@ public class GameData : ScriptableObject
      public TowerData towerData;
      public bool isTowerReady;
      /// <summary>
+     /// Scriptable Object of the sprites for the towerWorldUI
+     /// </summary>
+     public TowerUIData towerUiData;
+     /// <summary>
      /// Text to be shown in the HUD regarding the countdown for the next wave
      /// </summary>
      public string timerString;

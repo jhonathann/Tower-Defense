@@ -21,9 +21,9 @@ public class TowerController : MonoBehaviour
      /// </summary>
      public GameData gameData;
      //References to the parts of the tower
-     private Part channeler;
-     private Part structure;
-     private Part source;
+     public Part channeler;
+     public Part structure;
+     public Part source;
      /// <summary>
      /// reference to the hitzoneGameObjects that show the range of the tower
      /// </summary>
@@ -49,7 +49,7 @@ public class TowerController : MonoBehaviour
           InstantiateModels();
           SetStructureStats();
           towerAttackHandler.Setup(this.channeler, this.source, this.gameData);
-          towerSelectionHandler.Setup(AddSelectionCollider(), hitZoneGameObjects);
+          towerSelectionHandler.Setup(AddSelectionCollider(), hitZoneGameObjects, gameData.towerUiData.GetWorldUIPrefab());
      }
      /// <summary>
      /// Stores the references to the parts of the tower

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Tower Data
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: fff7f5cc8e4e06043bcb6d6bff06fd6b, type: 2}
+  tower: {fileID: 0}
   areaChannelerPrefab: {fileID: 919132149155446097, guid: b207239fe88d29141a727dd9e615d470, type: 3}
   fastChannelerPrefab: {fileID: 919132149155446097, guid: 61fac0521a991234dab5ae42e4bfcb77, type: 3}
   strongChannelerPrefab: {fileID: 919132149155446097, guid: e761aa647ed386349a34ad7ede5d4712, type: 3}
@@ -26,3 +27,4 @@ MonoBehaviour:
   <AreaChannelerBolt>k__BackingField: {fileID: 409294717232431179, guid: c95222a923a904a4eb3b14f41b3d2069, type: 3}
   <FastChannelerBolt>k__BackingField: {fileID: 409294717232431179, guid: c95222a923a904a4eb3b14f41b3d2069, type: 3}
   <StrongChannelerBolt>k__BackingField: {fileID: 409294717232431179, guid: c95222a923a904a4eb3b14f41b3d2069, type: 3}
+  <WorldUI>k__BackingField: {fileID: 2764493669405819879, guid: a68f465562c44b643ad0a4cf14ff42e7, type: 3}

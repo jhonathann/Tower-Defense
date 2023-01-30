@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fb1c3e5c68333d408e18ed9bd392f0b, type: 3}
+  m_Name: TowerUiData
+  m_EditorClassIdentifier: 
+  worldUIPrefab: {fileID: 2764493669405819879, guid: a68f465562c44b643ad0a4cf14ff42e7, type: 3}
+  mythBackground: {fileID: 21300000, guid: 32b53959d0e29d740acc640a4e5958e5, type: 3}
+  ultraRareBackground: {fileID: 21300000, guid: 9f31f4f63f99cfc4cad022ce5a1a6bbe, type: 3}
+  rareBackground: {fileID: 21300000, guid: 50ebd75282365c441b9a384fbbe96528, type: 3}
+  normalBackground: {fileID: 21300000, guid: b35ca7e738eea7444b687154a32cea81, type: 3}
+  commonBackground: {fileID: 21300000, guid: 4f6a94d76b2bd9548ab700b892d8e72e, type: 3}
+  channelerStrongIcon: {fileID: 21300000, guid: f97cedceadbbc7e4a8a65edb098cfcc8, type: 3}
+  channelerFastIcon: {fileID: 21300000, guid: e6e2139f93f466e49b0d698e2bebabac, type: 3}
+  channelerAreaIcon: {fileID: 21300000, guid: 454fc58a58bd162469d3b0c576b51b77, type: 3}
+  structureBeamIcon: {fileID: 21300000, guid: d771927c799679d4c8987f276f91936d, type: 3}
+  structureCircularIcon: {fileID: 21300000, guid: dcf90a18144c7904b984e45bcddd9b3c, type: 3}
+  structureCrossIcon: {fileID: 21300000, guid: dbd13334b3c1efd4ba02952ae6eeae54, type: 3}
+  sourceEarthIcon: {fileID: 21300000, guid: e63d33d4feac7804ab315dac5205fe58, type: 3}
+  sourceFireIcon: {fileID: 21300000, guid: 6e628fe688dede944ab2efd5c7c43d69, type: 3}
+  sourceWaterIcon: {fileID: 21300000, guid: de77d333fdb1c5b4ebab849ad96c308f, type: 3}
+  sourceThunderIcon: {fileID: 21300000, guid: 6eaa1e386d1c7e34a80027a7474d8c28, type: 3}

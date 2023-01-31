@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 672469618249562635}
   - component: {fileID: 714603052376030416}
   - component: {fileID: 396570413017105833}
-  - component: {fileID: 3094068282071467392}
   - component: {fileID: 259776449}
+  - component: {fileID: 3094068282071467392}
   m_Layer: 0
   m_Name: DamageText
   m_TagString: Untagged
@@ -174,18 +174,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 714603052376030416}
   m_maskType: 0
---- !u!114 &3094068282071467392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5452039094792156648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe7f323d938909942a86b871c0ceab18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &259776449
 Animator:
   serializedVersion: 5
@@ -206,3 +194,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &3094068282071467392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5452039094792156648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe7f323d938909942a86b871c0ceab18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

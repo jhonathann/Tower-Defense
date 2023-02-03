@@ -16,11 +16,18 @@ public class StartPageController : MonoBehaviour
      public HighScoresManager highScoresManager;
      private UIDocument startPage;
      private Button startButton;
+     private Button highScoresButton;
      private Button exitButton;
+     private VisualElement contentContainer;
      private void OnEnable()
      {
           GetElements();
           RegisterEvents();
+     }
+     private void Start()
+     {
+          //Starts with the contentContainer disabled
+          contentContainer.SetEnabled(false);
      }
      private void OnDisable()
      {
@@ -36,7 +43,9 @@ public class StartPageController : MonoBehaviour
           //Search for the buttons inside the menu
           //.Query search for especific elements in the visual tree (short .Q) in this case by the name of the element
           startButton = startPage.rootVisualElement.Query<Button>("StartButton");
+          highScoresButton = startPage.rootVisualElement.Query<Button>("HighScoresButton");
           exitButton = startPage.rootVisualElement.Query<Button>("ExitButton");
+          contentContainer = startPage.rootVisualElement.Query<VisualElement>("ContentContainer");
 
      }
      /// <summary>
@@ -45,6 +54,7 @@ public class StartPageController : MonoBehaviour
      private void RegisterEvents()
      {
           startButton.RegisterCallback<ClickEvent>(StartButtonOnClick);
+          highScoresButton.RegisterCallback<ClickEvent>(HighScoresButtonOnClick);
           exitButton.RegisterCallback<ClickEvent>(ExitButtonOnClick);
      }
      /// <summary>
@@ -53,6 +63,7 @@ public class StartPageController : MonoBehaviour
      private void UnregisterEvents()
      {
           startButton.UnregisterCallback<ClickEvent>(StartButtonOnClick);
+          highScoresButton.UnregisterCallback<ClickEvent>(HighScoresButtonOnClick);
           exitButton.UnregisterCallback<ClickEvent>(ExitButtonOnClick);
      }
      /// <summary>
@@ -63,6 +74,48 @@ public class StartPageController : MonoBehaviour
      {
           GameData.GameStarted?.Invoke();
           SceneManager.LoadSceneAsync("Game"); //Make sure the scene is already in the build settings
+     }
+     /// <summary>
+     /// Function that triggers when the highScoresButton gets clicked. displays the highscores
+     /// </summary>
+     /// <param name="evt">Click event that triggered the callback</param>
+     private void HighScoresButtonOnClick(ClickEvent evt)
+     {
+          if (IsAlreadyOpen()) return;
+
+          contentContainer.SetEnabled(true);
+          AddTitle();
+          AddHighScores();
+
+          bool IsAlreadyOpen()
+          {
+               return contentContainer.enabledInHierarchy;
+          }
+
+          void AddTitle()
+          {
+               Label title = new Label("HIGH SCORES");
+               title.AddToClassList("highScoresTitle");
+               contentContainer.Add(title);
+          }
+
+          void AddHighScores()
+          {
+               foreach (int highScore in highScoresManager
+                         .highScores)
+               {
+                    VisualElement highScoreContainer = new VisualElement();
+                    highScoreContainer.AddToClassList("highScoreContainer");
+                    int position = highScoresManager.highScores.IndexOf(highScore) + 1;
+                    Label highScorePositionText = new Label($"#{position}");
+                    highScorePositionText.AddToClassList("highScorePositionText");
+                    Label highScoreText = new Label($"{highScore} Waves");
+                    highScoreText.AddToClassList("highScoreText");
+                    highScoreContainer.Add(highScorePositionText);
+                    highScoreContainer.Add(highScoreText);
+                    contentContainer.Add(highScoreContainer);
+               }
+          }
      }
      /// <summary>
      /// Function that triggers when the exitButton gets clicked

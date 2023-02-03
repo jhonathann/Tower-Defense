@@ -4,7 +4,11 @@
     <ui:VisualElement name="GlobalContainer" class="globalContainer">
         <ui:VisualElement name="LeftColumn" class="leftColumn">
             <ui:Button name="StartButton" text="START" class="button" />
+            <ui:Button text="HIGH SCORES" display-tooltip-when-elided="true" name="HighScoresButton" class="button" />
             <ui:Button text="EXIT" name="ExitButton" class="button" />
+        </ui:VisualElement>
+        <ui:VisualElement name="RightColumn" class="rightColumn">
+            <ui:VisualElement name="ContentContainer" class="contentContainer" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

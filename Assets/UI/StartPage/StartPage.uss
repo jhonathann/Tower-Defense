@@ -33,7 +33,8 @@
   flex-wrap: wrap;
   width: 90%;
   height: 90%;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
   background-color: var(--middleColor);
   border-radius: 1%;
   visibility: hidden;
@@ -53,33 +54,6 @@
   scale: 0;
 }
 
-.visualizationContainer {
-  flex-direction: row;
-  width: 100%;
-  height: 70%;
-}
-.partsContainer {
-  flex-direction: row;
-  width: 100%;
-  height: 30%;
-}
-.towerPreviewContainer {
-  width: 80%;
-  height: 100%;
-}
-.selectedPartsContainer {
-  flex-direction: column;
-  width: 20%;
-  height: 100%;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.part {
-  width: 80%;
-  height: 25%;
-  background-color: var(--darkColor);
-}
 .button {
   flex-direction: row;
   flex-wrap: wrap;
@@ -107,4 +81,38 @@
   transition: 0.25s;
   transition-timing-function: var(--transitionTimingFunction);
   scale: 0.95;
+}
+
+.highScoreContainer{
+  width: 50%;
+  height: 10%;
+  margin: 1%;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: var(--darkColor);
+  border-radius: 10px;
+}
+
+.highScoresTitle{
+  margin: 5%;
+  -unity-font-style: bold;
+  font-size: 300%;
+  -unity-text-align: middle-left;
+  color: var(--lightColor);
+}
+
+.highScorePositionText{
+  margin-left: 5%;
+  -unity-font-style: bold;
+  font-size: 250%;
+  -unity-text-align: middle-left;
+  color: var(--lightColor);
+}
+
+.highScoreText{
+  margin-left: 20%;
+  -unity-font-style: bold;
+  font-size: 200%;
+  -unity-text-align: middle-left;
+  color: var(--lightColor);
 }

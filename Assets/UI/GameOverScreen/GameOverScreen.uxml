@@ -4,6 +4,7 @@
     <ui:VisualElement name="GlobalContainer" class="globalContainer">
         <ui:VisualElement name="MenuContainer" class="menuContainer">
             <ui:Label text="Game Over" display-tooltip-when-elided="true" name="GameOverText" class="gameOverText" />
+            <ui:Label text="New Highscore" display-tooltip-when-elided="true" name="HighScoreText" class="highScoreText" />
             <ui:Label text="Score: " display-tooltip-when-elided="true" name="ScoreText" class="scoreText" />
             <ui:Button text="Play Again" display-tooltip-when-elided="true" name="PlayAgainButton" class="button" />
             <ui:Button text="Go To Start Page" display-tooltip-when-elided="true" name="GoToStartPageButton" class="button" />

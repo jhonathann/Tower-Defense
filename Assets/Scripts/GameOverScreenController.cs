@@ -16,6 +16,7 @@ public class GameOverScreenController : MonoBehaviour
      //References to the ui elements
      private UIDocument gameOverScreen;
      private VisualElement globalContainer;
+     private Label highScoreText;
      private Label scoreText;
      private Button playAgainButton;
      private Button goToStartPageButton;
@@ -38,6 +39,19 @@ public class GameOverScreenController : MonoBehaviour
           globalContainer.style.display = DisplayStyle.Flex;
           //Sets the adequate score text
           scoreText.text = $"You survived for {gameData.waveCount} waves";
+          //Check if the score made a highscore and 
+          if (IsHighScore())
+          {
+               highScoreText.style.display = DisplayStyle.Flex;
+          }
+          else
+          {
+               highScoreText.style.display = DisplayStyle.None;
+          }
+          bool IsHighScore()
+          {
+               return HighScoresManager.CheckForHighScore(gameData.waveCount);
+          }
      }
      private void Start()
      {
@@ -60,6 +74,7 @@ public class GameOverScreenController : MonoBehaviour
           globalContainer = gameOverScreen.rootVisualElement.Query<VisualElement>("GlobalContainer");
           //Search for the buttons inside the menu
           //.Query search for especific elements in the visual tree (short .Q) in this case by the name of the element
+          highScoreText = gameOverScreen.rootVisualElement.Query<Label>("HighScoreText");
           scoreText = gameOverScreen.rootVisualElement.Query<Label>("ScoreText");
           playAgainButton = gameOverScreen.rootVisualElement.Query<Button>("PlayAgainButton");
           goToStartPageButton = gameOverScreen.rootVisualElement.Query<Button>("GoToStartPageButton");

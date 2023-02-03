@@ -9,8 +9,8 @@
 }
 .menuContainer{
     flex-wrap: wrap;
-    width: 50%;
-    height: 50%;
+    width: 70%;
+    height: 70%;
     justify-content: space-around;
     align-items: center;
     background-color: var(--middleColor);
@@ -23,6 +23,14 @@
   visibility: visible;
   -unity-font-style: bold;
   font-size: 300%;
+  -unity-text-align: middle-center;
+  color: var(--lightColor);
+}
+
+.highScoreText {
+  display: none;
+  -unity-font-style: bold;
+  font-size: 250%;
   -unity-text-align: middle-center;
   color: var(--lightColor);
 }

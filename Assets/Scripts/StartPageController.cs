@@ -13,6 +13,7 @@ public class StartPageController : MonoBehaviour
      /// Used reference to gameData so that the gameData scriptable object is created in the startpage scene (else it won't work in the build)
      /// </summary>
      public GameData gameData;
+     public HighScoresManager highScoresManager;
      private UIDocument startPage;
      private Button startButton;
      private Button exitButton;
@@ -57,7 +58,7 @@ public class StartPageController : MonoBehaviour
      /// <summary>
      /// Function that triggers when the startButton gets clicked.Loads the gameScene and fires the GameStarted event
      /// </summary>
-     /// <param name="evt"> Click event that triggered the callback</param>
+     /// <param name="evt">Click event that triggered the callback</param>
      private void StartButtonOnClick(ClickEvent evt)
      {
           GameData.GameStarted?.Invoke();

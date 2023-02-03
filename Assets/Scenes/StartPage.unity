@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: fff7f5cc8e4e06043bcb6d6bff06fd6b, type: 2}
+  highScoresManager: {fileID: 11400000, guid: 283ec8d5578422548b3c9f1a3eb5cec0, type: 2}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

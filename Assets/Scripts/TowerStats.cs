@@ -14,8 +14,8 @@ public class TowerStats
      public static float TOWER_HEIGHT = 20.0f;
      public static float TOWER_WIDTH = 10.0f;
 
-     private const float CHANNELER_AREA_BASE_DAMAGE = 5.0f;
-     private const float CHANNELER_AREA_BASE_FIRE_RATE = 0.25f;
+     private const float CHANNELER_AREA_BASE_DAMAGE = 10.0f;
+     private const float CHANNELER_AREA_BASE_FIRE_RATE = 0.125f;
      public static readonly Dictionary<Rarity, (float damage, float fireRate)> areaChannelerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
           { Rarity.Common, (damage: 1.0f*CHANNELER_AREA_BASE_DAMAGE, fireRate: 1.0f*CHANNELER_AREA_BASE_FIRE_RATE) },
           { Rarity.Normal, (damage: 1.25f*CHANNELER_AREA_BASE_DAMAGE, fireRate: 1.25f*CHANNELER_AREA_BASE_FIRE_RATE) },
@@ -23,8 +23,8 @@ public class TowerStats
           { Rarity.UltraRare, (damage: 1.75f*CHANNELER_AREA_BASE_DAMAGE, fireRate: 1.75f*CHANNELER_AREA_BASE_FIRE_RATE) },
           { Rarity.Myth, (damage: 2.0f*CHANNELER_AREA_BASE_DAMAGE, fireRate: 2.0f*CHANNELER_AREA_BASE_FIRE_RATE) }
           };
-     private const float CHANNELER_FAST_BASE_DAMAGE = 10.0f;
-     private const float CHANNELER_FAST_BASE_FIRE_RATE = 2.0f;
+     private const float CHANNELER_FAST_BASE_DAMAGE = 20.0f;
+     private const float CHANNELER_FAST_BASE_FIRE_RATE = 1.0f;
      public static readonly Dictionary<Rarity, (float damage, float fireRate)> fastChannelerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
           { Rarity.Common, (damage: 1.0f*CHANNELER_FAST_BASE_DAMAGE, fireRate: 1.0f*CHANNELER_FAST_BASE_FIRE_RATE) },
           { Rarity.Normal, (damage: 1.25f*CHANNELER_FAST_BASE_DAMAGE, fireRate: 1.25f*CHANNELER_FAST_BASE_FIRE_RATE) },
@@ -32,8 +32,8 @@ public class TowerStats
           { Rarity.UltraRare, (damage: 1.75f*CHANNELER_FAST_BASE_DAMAGE, fireRate: 1.75f*CHANNELER_FAST_BASE_FIRE_RATE) },
           { Rarity.Myth, (damage: 2.0f*CHANNELER_FAST_BASE_DAMAGE, fireRate: 2.0f*CHANNELER_FAST_BASE_FIRE_RATE) }
           };
-     private const float CHANNELER_STRONG_BASE_DAMAGE = 20.0f;
-     private const float CHANNELER_STRONG_BASE_FIRE_RATE = 1.0f;
+     private const float CHANNELER_STRONG_BASE_DAMAGE = 40.0f;
+     private const float CHANNELER_STRONG_BASE_FIRE_RATE = 0.5f;
      public static readonly Dictionary<Rarity, (float damage, float fireRate)> strongChannelerStats = new Dictionary<Rarity, (float damage, float fireRate)> {
           { Rarity.Common, (damage: 1.0f*CHANNELER_STRONG_BASE_DAMAGE, fireRate: 1.0f*CHANNELER_STRONG_BASE_FIRE_RATE) },
           { Rarity.Normal, (damage: 1.25f*CHANNELER_STRONG_BASE_DAMAGE, fireRate: 1.25f*CHANNELER_STRONG_BASE_FIRE_RATE) },
@@ -81,7 +81,7 @@ public class TowerStats
                }
           }
      }
-     private const float EARTH_BASE_TIME = 0.1f;
+     private const float EARTH_BASE_TIME = 0.2f;
      public static readonly Dictionary<Rarity, float> earthSourceTimes = new Dictionary<Rarity, float> {
           { Rarity.Common, EARTH_BASE_TIME * 1.0f },
           { Rarity.Normal, EARTH_BASE_TIME * 2.0f },
@@ -106,13 +106,14 @@ public class TowerStats
                IDamagable enemyIDamagable = (IDamagable)enemy;
                while (internalTime > 0)
                {
-                    enemyIDamagable.TakeDamage(enemy.gameObject, 0.2f);
+                    enemyIDamagable.TakeDamage(enemy.gameObject, FIRE_BURN_DAMAGE);
                     internalTime -= 0.1f;
                     yield return new WaitForSeconds(0.1f);
                }
           }
      }
-     private const float FIRE_BASE_TIME = 0.2f;
+     private const float FIRE_BASE_TIME = 0.4f;
+     public const float FIRE_BURN_DAMAGE = 2.0f;
      public static readonly Dictionary<Rarity, float> fireSourceTimes = new Dictionary<Rarity, float> {
           { Rarity.Common, FIRE_BASE_TIME * 1.0f },
           { Rarity.Normal, FIRE_BASE_TIME * 2.0f },
@@ -145,7 +146,7 @@ public class TowerStats
                }
           }
      }
-     private const float THUNDER_BASE_TIME = 0.05f;
+     private const float THUNDER_BASE_TIME = 0.1f;
      public static readonly Dictionary<Rarity, float> thunderSourceTimes = new Dictionary<Rarity, float> {
           { Rarity.Common, THUNDER_BASE_TIME * 1.0f },
           { Rarity.Normal, THUNDER_BASE_TIME * 2.0f },
@@ -176,7 +177,7 @@ public class TowerStats
                }
           }
      }
-     private const float WATER_BASE_TIME = 0.2f;
+     private const float WATER_BASE_TIME = 0.4f;
      public static readonly Dictionary<Rarity, float> waterSourceTimes = new Dictionary<Rarity, float> {
           { Rarity.Common, WATER_BASE_TIME * 1.0f },
           { Rarity.Normal, WATER_BASE_TIME * 2.0f },

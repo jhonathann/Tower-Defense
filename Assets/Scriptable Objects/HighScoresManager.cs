@@ -40,7 +40,7 @@ public class HighScoresManager : ScriptableObject
           catch { }
 
           //Subscribes to the CheckForHigScore Func
-          CheckForHighScore += OnCheckForHighScore;
+          CheckForHighScore = OnCheckForHighScore;
      }
 
      private bool OnCheckForHighScore(int score)

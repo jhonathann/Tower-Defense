@@ -48,6 +48,7 @@ public class GameOverScreenController : MonoBehaviour
           {
                highScoreText.style.display = DisplayStyle.None;
           }
+
           bool IsHighScore()
           {
                return HighScoresManager.CheckForHighScore(gameData.waveCount);
@@ -62,6 +63,7 @@ public class GameOverScreenController : MonoBehaviour
      private void OnDisable()
      {
           UnregisterEvents();
+          CastleController.CastleDestroyed -= OnCastleDestroy;
      }
      /// <summary>
      /// Gets the UI elements from the panel 

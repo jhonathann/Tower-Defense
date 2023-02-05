@@ -40,9 +40,13 @@ public class HighScoresManager : ScriptableObject
           catch { }
 
           //Subscribes to the CheckForHigScore Func
-          CheckForHighScore = OnCheckForHighScore;
+          CheckForHighScore += OnCheckForHighScore;
      }
-
+     private void OnDisable()
+     {
+          //Unsubscribes to the CheckForHigScore Func
+          CheckForHighScore -= OnCheckForHighScore;
+     }
      private bool OnCheckForHighScore(int score)
      {
           if (IsBelowMaxHighScores() || IsAHighScore(score))

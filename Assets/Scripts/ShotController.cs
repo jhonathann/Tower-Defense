@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 /// <summary>
-/// Class that controlles the behaviour of the shots
+/// Class that controlls the behaviour of the shots
 /// </summary>
 public class ShotController : MonoBehaviour
 {
@@ -17,13 +17,17 @@ public class ShotController : MonoBehaviour
      /// </summary>
      public float damage;
      /// <summary>
-     /// The effect the show will aplly
+     /// The effect the shot will apply
      /// </summary>
      public Func<EnemyController, IEnumerator> Effect;
      /// <summary>
-     /// The height at wich the show will start
+     /// The height at which the show will start
      /// </summary>
      private const float SHOT_SPAWN_HEIGHT = 20.0f;
+     /// <summary>
+     /// The Speed of the proyectile
+     /// </summary>
+     private const float SPEED = 75.0f;
      void Start()
      {
           this.gameObject.name = "Shot";
@@ -39,7 +43,7 @@ public class ShotController : MonoBehaviour
           if (target != null)
           {
                this.transform.LookAt(target.transform);
-               this.transform.Translate(Vector3.forward * Time.deltaTime * 100);
+               this.transform.Translate(Vector3.forward * Time.deltaTime * SPEED);
           }
           else
           {

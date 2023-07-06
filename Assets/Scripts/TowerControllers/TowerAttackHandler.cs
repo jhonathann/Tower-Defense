@@ -17,6 +17,7 @@ public class TowerAttackHandler : MonoBehaviour
      private GameObject shotPrefab;
      private float fireRate;
      private float damage;
+     private SourceType shotType;
      /// <summary>
      /// Action that references the correct function for the tower attack type
      /// </summary>
@@ -101,7 +102,7 @@ public class TowerAttackHandler : MonoBehaviour
           }
      }
      /// <summary>
-     /// Sets the effect according with the source
+     /// Sets the effect and the shotType according with the source
      /// </summary>
      /// <param name="source">the source part</param>
      private void SetSourceStats(Part source)
@@ -110,15 +111,19 @@ public class TowerAttackHandler : MonoBehaviour
           {
                case SourceType.Earth:
                     Effect = TowerStats.earthSourceStats[source.rarity];
+                    this.shotType = SourceType.Earth;
                     break;
                case SourceType.Fire:
                     Effect = TowerStats.fireSourceStats[source.rarity];
+                    this.shotType = SourceType.Fire;
                     break;
                case SourceType.Thunder:
                     Effect = TowerStats.thunderSourceStats[source.rarity];
+                    this.shotType = SourceType.Thunder;
                     break;
                case SourceType.Water:
                     Effect = TowerStats.waterSourceStats[source.rarity];
+                    this.shotType = SourceType.Water;
                     break;
           }
      }
@@ -143,6 +148,8 @@ public class TowerAttackHandler : MonoBehaviour
      private void AttackOne(GameObject target)
      {
           ShotController shot = Instantiate(this.shotPrefab, this.transform.position, this.transform.rotation).GetComponent<ShotController>();
+          ShotAppearance shotAppearance = shot.gameObject.GetComponent<ShotAppearance>();
+          shotAppearance.type = this.shotType;
           shot.target = target;
           shot.damage = this.damage;
           shot.Effect = this.Effect;

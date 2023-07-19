@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4005187136684369377}
   - component: {fileID: -7638820424599148803}
-  - component: {fileID: 615115440103971449}
   - component: {fileID: 1884612689927226057}
+  - component: {fileID: 615115440103971449}
   m_Layer: 0
   m_Name: AreaBolt
   m_TagString: Untagged
@@ -63,20 +63,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &615115440103971449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409294717232431179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c31514e1310aee4aae9a8067a859424, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  damage: 0
 --- !u!114 &1884612689927226057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +72,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 409294717232431179}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb3ec36db416e484ea106e64764362fc, type: 3}
+  m_Script: {fileID: 11500000, guid: aa55f60493d540f42917e746acb98565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  damage: 0
+--- !u!114 &615115440103971449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409294717232431179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7358baeb309575144b580f7b56f4c194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0

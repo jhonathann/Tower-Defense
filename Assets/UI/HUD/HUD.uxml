@@ -5,10 +5,15 @@
         <ui:VisualElement name="TopContainer" class="topContainer">
             <ui:ProgressBar name="HealthBar" high-value="10" title="Castle Health" class="healthBar" />
             <ui:Label text="Wave: " display-tooltip-when-elided="true" name="WaveCountLabel" class="waveCountLabel" />
-            <ui:Label text="Press Esc to Open the Menu" display-tooltip-when-elided="true" name="EscInfo" class="escInfo" />
+            <ui:Button text="X1" display-tooltip-when-elided="true" name="TimeSpeedButton" class="button" />
         </ui:VisualElement>
         <ui:VisualElement name="MiddleContainer" class="middleContainer">
             <ui:VisualElement name="TowerCreationPanel" class="towerCreationPanel" />
+            <ui:VisualElement name="IntructionsPanel" class="instructionsPanel">
+                <ui:Label text="Press Esc to Open the Menu" display-tooltip-when-elided="true" name="EscInfo" class="InstructionsLabels" />
+                <ui:Label text="Camera Movement: W/A/S/D" display-tooltip-when-elided="true" name="CameraMovementInfo" class="InstructionsLabels" />
+                <ui:Label text="Camera Rotation: Q/E" display-tooltip-when-elided="true" name="CameraRotationInfo" class="InstructionsLabels" />
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="BottomContainer" class="bottomContainer">
             <ui:Label text="Next Wave in 0:0" display-tooltip-when-elided="true" name="NextWaveTimeLabel" class="nextWaveTimeLabel" />

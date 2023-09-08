@@ -18,6 +18,7 @@ public class HUDController : MonoBehaviour
      ProgressBar healthBar;
      Label waveCountLabel;
      Label nextWaveTimeLabel;
+     Button timeSpeedButton;
      VisualElement towerCreationPanel;
      /// <summary>
      /// VisualTree to be put inside the towerCreationPanel when maximized
@@ -36,6 +37,7 @@ public class HUDController : MonoBehaviour
           GetElements();
           RenderPanel += RenderCreationPanel;
           RenderPanel?.Invoke();
+          RegisterEvents();
      }
 
      void Update()
@@ -52,7 +54,10 @@ public class HUDController : MonoBehaviour
                }
           }
      }
-
+     void OnDisable()
+     {
+          UnregisterEvents();
+     }
      /// <summary>
      /// Removes the subscription to the static Action when the gameObject is destroyed(when the scene is reloaded)
      /// </summary>
@@ -68,8 +73,41 @@ public class HUDController : MonoBehaviour
           HUD = this.GetComponent<UIDocument>();
           healthBar = HUD.rootVisualElement.Query<ProgressBar>("HealthBar");
           nextWaveTimeLabel = HUD.rootVisualElement.Query<Label>("NextWaveTimeLabel");
+          timeSpeedButton = HUD.rootVisualElement.Query<Button>("TimeSpeedButton");
           waveCountLabel = HUD.rootVisualElement.Query<Label>("WaveCountLabel");
           towerCreationPanel = HUD.rootVisualElement.Query<VisualElement>("TowerCreationPanel");
+     }
+     /// <summary>
+     /// Registers Events to Buttons
+     /// </summary>
+     void RegisterEvents()
+     {
+          timeSpeedButton.RegisterCallback<ClickEvent>(TimeSpeedButtonOnClick);
+     }
+     /// <summary>
+     /// Unrergister Events of Buttons
+     /// </summary>
+     void UnregisterEvents()
+     {
+          timeSpeedButton.UnregisterCallback<ClickEvent>(TimeSpeedButtonOnClick);
+     }
+     /// <summary>
+     /// Function Called when the TimeSpeed Button is clicked, it toggles between x1 and x2 speed, and calls the gamestate functions to set it.
+     /// </summary>
+     /// <param name="evt">Click Event information</param>
+     private void TimeSpeedButtonOnClick(ClickEvent evt)
+     {
+          if (timeSpeedButton.text == "X1")
+          {
+               timeSpeedButton.text = "X2";
+               GameState.TimeSpeed = 2;
+          }
+          else if (timeSpeedButton.text == "X2")
+          {
+               timeSpeedButton.text = "X1";
+               GameState.TimeSpeed = 1;
+          }
+          gameData.gameState.TrySetState(GameStateType.Running);
      }
      /// <summary>
      /// Toggles the tower creation panel on and off and re-renders the panel accordingly

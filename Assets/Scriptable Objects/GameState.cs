@@ -16,7 +16,10 @@ public class GameState : ScriptableObject
      /// Variable that stores whether the game enter in the paused state while in placingtower state or not
      /// </summary>
      private bool pausedWhilePlacingTower = false;
-
+     /// <summary>
+     /// Variable that is used to stablish the Speed at which the game will run. The TimeScale will be set at this value.
+     /// </summary>
+     public static float TimeSpeed = 1.0f;
      private void OnEnable()
      {
           SetUnstartedState(); //Initialization of the state variable
@@ -41,6 +44,9 @@ public class GameState : ScriptableObject
                case GameStateType.Running:
                     switch (newState)
                     {
+                         case GameStateType.Running: //Used for the timeSpeed actualization
+                              SetRunningState();
+                              break;
                          case GameStateType.Paused:
                               SetPausedState(false);
                               break;
@@ -125,7 +131,7 @@ public class GameState : ScriptableObject
      private void SetRunningState()
      {
           State = GameStateType.Running;
-          Time.timeScale = 1;
+          Time.timeScale = TimeSpeed;
      }
      private void SetPausedState(bool pausedWhilePlacingTower)
      {
@@ -136,7 +142,7 @@ public class GameState : ScriptableObject
      private void SetPlacingTowerState()
      {
           State = GameStateType.PlacingTower;
-          Time.timeScale = 1;
+          Time.timeScale = TimeSpeed;
      }
      private void SetOnNewPartAddedScreenState(bool pausedWhilePlacingTower)
      {

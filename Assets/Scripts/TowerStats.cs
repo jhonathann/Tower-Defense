@@ -105,10 +105,10 @@ public class TowerStats
           IEnumerator FireEffect(EnemyController enemy)
           {
                float internalTime = time; //Needed because if the time were to be altered directly the next coroutines will be afected as well. 
-               IDamagable enemyIDamagable = (IDamagable)enemy;
+               IDamageable enemyIDamageable = enemy;
                while (internalTime > 0)
                {
-                    enemyIDamagable.TakeDamage(enemy.gameObject, FIRE_BURN_DAMAGE);
+                    enemyIDamageable.TakeDamage(FIRE_BURN_DAMAGE);
                     internalTime -= 0.1f;
                     yield return new WaitForSeconds(0.1f);
                }

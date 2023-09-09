@@ -5,7 +5,7 @@ using System;
 /// <summary>
 /// Interface that must be implemented by objects that can be damaged
 /// </summary>
-public interface IDamagable
+public interface IDamageable
 {
-     void TakeDamage(GameObject damager, float damageAmount = 1, Func<EnemyController, IEnumerator> Effect = null);
+     void TakeDamage(float damageAmount = 1, Func<EnemyController, IEnumerator> Effect = null);
 }

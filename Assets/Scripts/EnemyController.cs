@@ -6,7 +6,7 @@ using System;
 /// <summary>
 /// Script that controls the behaviour of the enemies
 /// </summary>
-public class EnemyController : MonoBehaviour, IDamagable
+public class EnemyController : MonoBehaviour, IDamageable
 {
      /// <summary>
      /// Reference to the gameData Scriptable object
@@ -72,10 +72,14 @@ public class EnemyController : MonoBehaviour, IDamagable
 
      void OnTriggerEnter(Collider enteringObjectCollider)
      {
-          if (enteringObjectCollider.GetComponent<CastleController>() is not null)
+          if (isNotTheCastle()) return;
+
+          enteringObjectCollider.GetComponent<IDamageable>().TakeDamage();
+          Destroy(this.gameObject);
+
+          bool isNotTheCastle()
           {
-               enteringObjectCollider.GetComponent<IDamagable>().TakeDamage(this.gameObject);
-               Destroy(this.gameObject);
+               return enteringObjectCollider.GetComponent<CastleController>() is null;
           }
      }
      /// <summary>
@@ -163,25 +167,22 @@ public class EnemyController : MonoBehaviour, IDamagable
           return Vector3.Distance(pointA, pointB);
      }
      /// <summary>
-     /// Function that destribes how the object takes damage
+     /// Function that describes how the object takes damage
      /// </summary>
      /// <param name="damageAmount">The amount of damage taken</param>
-     void IDamagable.TakeDamage(GameObject damager, float damageAmount, Func<EnemyController, IEnumerator> Effect)
+     void IDamageable.TakeDamage(float damageAmount, Func<EnemyController, IEnumerator> Effect)
      {
-          if (damager.GetComponent<ShotController>() is not null)
+          this.health = this.health - damageAmount;
+          ///creates the healthbar and the text damage
+          CreateHealthBar();
+          CreateDamageText();
+          if (health <= 0)
           {
-               this.health = this.health - damageAmount;
-               ///creates the healthbar and the text damage
-               CreateHealthBar();
-               CreateDamageText();
-               if (health <= 0)
-               {
-                    Destroy(this.gameObject);
-               }
-               if (Effect != null)
-               {
-                    StartCoroutine(Effect(this));
-               }
+               Destroy(this.gameObject);
+          }
+          if (Effect != null)
+          {
+               StartCoroutine(Effect(this));
           }
           /// <summary>
           /// Function that creates the damage text and sets the damage amount

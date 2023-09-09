@@ -6,7 +6,7 @@ using System;
 /// <summary>
 /// Class to control the behaviour of the castle
 /// </summary>
-public class CastleController : MonoBehaviour, IDamagable
+public class CastleController : MonoBehaviour, IDamageable
 {
      /// <summary>
      /// Access to the gameData
@@ -29,13 +29,9 @@ public class CastleController : MonoBehaviour, IDamagable
      /// Function that destribes how the object takes damage
      /// </summary>
      /// <param name="damageAmount">The amount of damage taken</param>
-     void IDamagable.TakeDamage(GameObject damager, float damageAmount, Func<EnemyController, IEnumerator> Effect)
+     void IDamageable.TakeDamage(float damageAmount, Func<EnemyController, IEnumerator> Effect)
      {
-          //if the damager is an enemy (used for cases where a shot goes through the castle)
-          if (damager.GetComponent<EnemyController>() is not null)
-          {
-               gameData.health = gameData.health - damageAmount;
-               checkHealth();
-          }
+          gameData.health = gameData.health - damageAmount;
+          checkHealth();
      }
 }

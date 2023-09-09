@@ -53,17 +53,21 @@ public class ShotController : MonoBehaviour
      }
      void OnTriggerEnter(Collider enteringObjectCollider)
      {
-          IDamagable damageable = enteringObjectCollider.GetComponent<IDamagable>();
-          //Checks if the object implements the damageable interface
-          if (damageable is not null)
+          if (isNotAnEnemy()) return;
+
+          IDamageable damageable = enteringObjectCollider.GetComponent<IDamageable>();
+
+          //Checks if the object is the target (used for the case where the shot goes through several enemies)
+          EnemyController enemy = damageable as EnemyController;
+          if (enemy.gameObject == target)
           {
-               //Checks if the object is the target (used for the case where the shot goes through several enemies)
-               EnemyController enemy = damageable as EnemyController;
-               if (enemy.gameObject == target)
-               {
-                    damageable.TakeDamage(this.gameObject, this.damage, this.Effect);
-                    Destroy(this.gameObject);
-               }
+               damageable.TakeDamage(this.damage, this.Effect);
+               Destroy(this.gameObject);
+          }
+
+          bool isNotAnEnemy()
+          {
+               return enteringObjectCollider.GetComponent<EnemyController>() is null;
           }
      }
 }

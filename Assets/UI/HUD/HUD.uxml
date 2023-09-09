@@ -13,6 +13,7 @@
                 <ui:Label text="Press Esc to Open the Menu" display-tooltip-when-elided="true" name="EscInfo" class="InstructionsLabels" />
                 <ui:Label text="Camera Movement: W/A/S/D" display-tooltip-when-elided="true" name="CameraMovementInfo" class="InstructionsLabels" />
                 <ui:Label text="Camera Rotation: Q/E" display-tooltip-when-elided="true" name="CameraRotationInfo" class="InstructionsLabels" />
+                <ui:Label text="Camera Zoom: Space/Alt" display-tooltip-when-elided="true" name="CameraZoomInfo" class="InstructionsLabels" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="BottomContainer" class="bottomContainer">

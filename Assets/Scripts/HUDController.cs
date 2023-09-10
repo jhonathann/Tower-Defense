@@ -131,7 +131,7 @@ public class HUDController : MonoBehaviour
                // Add the currently selected parts to the panel
                AddSelectedParts();
                //Add all the current parts to the panel
-               foreach (Part part in gameData.parts)
+               foreach (Part part in gameData.partsManager.parts)
                {
                     AddPartToUI(part);
                }

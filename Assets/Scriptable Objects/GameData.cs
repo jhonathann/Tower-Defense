@@ -13,6 +13,10 @@ public class GameData : ScriptableObject
      /// </summary>
      public GameState gameState;
      /// <summary>
+     /// Reference to the scriptable object that manage the parts
+     /// </summary>
+     public PartsManager partsManager;
+     /// <summary>
      /// Action that is trigger when the game has started or restarted
      /// </summary>
      public static Action GameStarted;
@@ -28,12 +32,6 @@ public class GameData : ScriptableObject
      /// Count the number of waves
      /// </summary>
      public int waveCount;
-     /// <summary>
-     /// The list of parts that the player currently has
-     /// </summary>
-     /// <typeparam name="Part">The Part Class</typeparam>
-     /// <returns></returns>
-     public List<Part> parts = new List<Part>();
      //Slots for the three selected parts
      public Part channelerSelectedPart;
      public Part structureSelectedPart;
@@ -42,14 +40,6 @@ public class GameData : ScriptableObject
      /// Action called when a part is clicked
      /// </summary>
      public static Action<Part> SelectPart;
-     /// <summary>
-     /// Function called when a new part is added (returns the part that was created and added)
-     /// </summary>
-     public static Func<Part, Part> AddNewPart;
-     /// <summary>
-     /// Event triggered each time a new part (or parts) is added
-     /// </summary>
-     public static Action<List<Part>> NewPartsAdded;
      /// <summary>
      /// Tower to be put on the map
      /// </summary>
@@ -76,7 +66,6 @@ public class GameData : ScriptableObject
           //Subscribe to the events
           GameStarted += OnGameStarted;
           SelectPart += OnSelectPart;
-          AddNewPart += OnAddNewPart;
           DisplayInformation += OnDisplayInformation;
           TileController.TowerPlaced += OnTowerPlaced;
           PortalController.NextWave += OnNextWave;
@@ -89,43 +78,10 @@ public class GameData : ScriptableObject
           gameState.TrySetState(GameStateType.Running);
           health = 10;
           waveCount = 0;
-          parts?.Clear();
           channelerSelectedPart = null;
           structureSelectedPart = null;
           sourceSelectedPart = null;
           isTowerReady = false;
-          AddStartingParts();
-     }
-     /// <summary>
-     /// Adds the starting parts to the gameobject
-     /// </summary>
-     void AddStartingParts()
-     {
-          //Add a part of each type to ensure that the user is able to place the starting tower
-          GameData.AddNewPart(new Part(PartType.Channeler));
-          GameData.AddNewPart(new Part(PartType.Structure));
-          GameData.AddNewPart(new Part(PartType.Source));
-          GameData.AddNewPart(new Part(PartType.Channeler));
-          GameData.AddNewPart(new Part(PartType.Structure));
-          GameData.AddNewPart(new Part(PartType.Source));
-     }
-     /// <summary>
-     /// Adds a new part to the list and re-renders the HUD panel to reflect the change (returns the added part)
-     /// </summary>
-     Part OnAddNewPart(Part part = null)
-     {
-          Part partToBeAdded = part;
-          if (partToBeAdded != null)
-          {
-               parts.Add(partToBeAdded);
-          }
-          else
-          {
-               partToBeAdded = new Part();
-               parts.Add(partToBeAdded);
-          }
-          HUDController.RenderPanel?.Invoke();
-          return partToBeAdded;
      }
      /// <summary>
      /// Sets the new selected part to the corresponding field and changes the uss classes of newSelect and the previously selected part
@@ -158,9 +114,9 @@ public class GameData : ScriptableObject
      void OnTowerPlaced()
      {
           //Remove the parts from the part List
-          this.parts.Remove(channelerSelectedPart);
-          this.parts.Remove(structureSelectedPart);
-          this.parts.Remove(sourceSelectedPart);
+          partsManager.parts.Remove(channelerSelectedPart);
+          partsManager.parts.Remove(structureSelectedPart);
+          partsManager.parts.Remove(sourceSelectedPart);
           //Set the selected parts again to null;
           this.channelerSelectedPart = null;
           this.structureSelectedPart = null;
@@ -175,16 +131,6 @@ public class GameData : ScriptableObject
      void OnNextWave()
      {
           waveCount++;
-          List<Part> addedParts = new List<Part>();
-          // Gives between 1 and 2 new parts each time a wave starts
-          int randomNumberOfParts = UnityEngine.Random.Range(1, 3);
-          for (int i = 0; i < randomNumberOfParts; i++)
-          {
-               //Triggers the AddNewPart event and adds the created part to the addedPartsList
-               addedParts.Add(GameData.AddNewPart?.Invoke(null));
-          }
-          //Trigger the new parts added event
-          NewPartsAdded?.Invoke(addedParts);
      }
      /// <summary>
      /// Used when a new information message needs to be displayed

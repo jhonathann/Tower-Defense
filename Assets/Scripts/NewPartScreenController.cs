@@ -49,7 +49,7 @@ public class NewPartScreenController : MonoBehaviour
           //Starts the game with the screen undisplayed
           globalContainer.style.display = DisplayStyle.None;
           //Subscribe to the new parts added event
-          GameData.NewPartsAdded += OnNewPartsAdded;
+          PartsManager.NewPartsAdded += OnNewPartsAdded;
      }
      private void OnDisable()
      {

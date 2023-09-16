@@ -15,18 +15,18 @@ public class TerrainController : MonoBehaviour
      void Awake()
      {
           //Function that creates the path 
-          createPath();
+          CreatePath();
           //Function that assigns the remaining terraing to a grass tile
-          drawGrass(this.gameObject);
+          DrawGrass(this.gameObject);
      }
 
-     void createPath()
+     void CreatePath()
      {
           //Create the terrain grid
           terrain = new Grid(20, 20);
 
           //Getting the full path using diferent points (min 2 points start and base)(else it will throw an indexOutOfRange exeption)
-          gameData.path = getFullPath(50);
+          gameData.path = GetFullPath(50);
 
           //Remove repeated elements from the path
           gameData.path = gameData.path.Distinct().ToList();
@@ -39,7 +39,7 @@ public class TerrainController : MonoBehaviour
           portal.gameObject = portalPrefab;
 
           //Draw the grid (it uses this.gameobject as a parameter to assign the terrain GameObject as the father of all the tiles)
-          drawPath(gameData.path, this.gameObject);
+          DrawPath(gameData.path, this.gameObject);
 
           castle.gameObject.transform.LookAt(gameData.path[1].gameObject.transform);
           portal.gameObject.transform.LookAt(portal.previous.gameObject.transform);
@@ -47,7 +47,7 @@ public class TerrainController : MonoBehaviour
           portal.gameObject.name = "Portal";
      }
      //This function returns random tiles from the terrain grid and considers the special cases for the start and the end tiles
-     Tile getRandomTile(bool isStart = false, bool isEnd = false)
+     Tile GetRandomTile(bool isStart = false, bool isEnd = false)
      {
           int x = Random.Range(0, terrain.width);
           int y = Random.Range(0, terrain.height);
@@ -63,12 +63,12 @@ public class TerrainController : MonoBehaviour
      }
 
      //Function used to optain the path beetween all the points
-     List<Tile> getFullPath(int MinPathLenght, int recursionCount = 0)
+     List<Tile> GetFullPath(int MinPathLenght, int recursionCount = 0)
      {
           //Variable used to break the while loop when the conditions are met
           bool isTheLastOne = false;
           List<Tile> path = new List<Tile>();
-          Tile start = getRandomTile(isStart: true);
+          Tile start = GetRandomTile(isStart: true);
           //Variable that keeps track of the failed attemps of the A* algorithm
           int numberOfFailedTries = 0;
           while (!isTheLastOne)
@@ -76,12 +76,12 @@ public class TerrainController : MonoBehaviour
                Tile goal;
                if (path.Count > MinPathLenght)
                {
-                    goal = getRandomTile(isEnd: true);
+                    goal = GetRandomTile(isEnd: true);
                     isTheLastOne = true;
                }
                else
                {
-                    goal = getRandomTile();
+                    goal = GetRandomTile();
                }
                //Check to see if the obteined Tile isn't already in the path
                if (goal.gameObject == null)
@@ -91,7 +91,7 @@ public class TerrainController : MonoBehaviour
                     //Check to see if the a* algorithm returned a valid path
                     if (semiPath != null)
                     {
-                         assignatePrefab(semiPath);
+                         AssignatePrefab(semiPath);
                          path.AddRange(semiPath);
                          start = goal;
                     }
@@ -105,7 +105,7 @@ public class TerrainController : MonoBehaviour
                          if (numberOfFailedTries > 10)
                          {
                               terrain = new Grid(20, 20);
-                              return getFullPath(MinPathLenght, recursionCount++);
+                              return GetFullPath(MinPathLenght, recursionCount++);
                          }
                     }
                }
@@ -119,7 +119,7 @@ public class TerrainController : MonoBehaviour
                     if (numberOfFailedTries > 10)
                     {
                          terrain = new Grid(20, 20);
-                         return getFullPath(MinPathLenght);
+                         return GetFullPath(MinPathLenght);
                     }
                }
           }
@@ -127,7 +127,7 @@ public class TerrainController : MonoBehaviour
      }
 
      // Function used to assignate the respective prefab when the semipaths are being generated
-     void assignatePrefab(List<Tile> semiPath)
+     void AssignatePrefab(List<Tile> semiPath)
      {
           foreach (Tile tile in semiPath)
           {
@@ -135,7 +135,7 @@ public class TerrainController : MonoBehaviour
           }
      }
      //Function that draws the whole grid instantiating the prefab that every tile has and setting each tile to look at the previous tile of the path
-     public void drawPath(List<Tile> path, GameObject parent)
+     public void DrawPath(List<Tile> path, GameObject parent)
      {
           foreach (Tile tile in path)
           {
@@ -148,7 +148,7 @@ public class TerrainController : MonoBehaviour
                catch { }
           }
      }
-     void drawGrass(GameObject parent)
+     void DrawGrass(GameObject parent)
      {
           foreach (Tile tile in terrain.tiles)
           {
@@ -182,7 +182,7 @@ public class Grid
      }
 
      //Function used to compare the f of 2 tiles. Used inside de A* algorithm
-     private int compareFs(Tile a, Tile b)
+     private int CompareFs(Tile a, Tile b)
      {
           if (a.f > b.f) return 1;
 
@@ -194,7 +194,7 @@ public class Grid
      }
 
      //Determines the total estimated cost beetween two tiles.
-     private int determineH(Tile current, Tile goal)
+     private int DetermineH(Tile current, Tile goal)
      {
           //We don't use movement cost cause for all tile the movement cost is 1.
           return Mathf.Abs(current.x - goal.x) + Mathf.Abs(current.y - goal.y);
@@ -251,7 +251,7 @@ public class Grid
                               if (!unsearchedTiles.Contains(neighbour))
                               {
                                    neighbour.g = currentTile.g + 1;
-                                   neighbour.f = determineH(neighbour, goal) + neighbour.g;
+                                   neighbour.f = DetermineH(neighbour, goal) + neighbour.g;
                                    neighbour.previous = currentTile;
                                    unsearchedTiles.Add(neighbour);
                               }
@@ -262,7 +262,7 @@ public class Grid
                                    {
                                         neighbour.previous = currentTile;
                                         neighbour.g = tentativeG;
-                                        neighbour.f = determineH(neighbour, goal) + neighbour.g;
+                                        neighbour.f = DetermineH(neighbour, goal) + neighbour.g;
                                    }
                               }
                          }
@@ -277,7 +277,7 @@ public class Grid
                               if (!unsearchedTiles.Contains(neighbour))
                               {
                                    neighbour.g = currentTile.g + 1;
-                                   neighbour.f = determineH(neighbour, goal) + neighbour.g;
+                                   neighbour.f = DetermineH(neighbour, goal) + neighbour.g;
                                    neighbour.previous = currentTile;
                                    unsearchedTiles.Add(neighbour);
                               }
@@ -288,7 +288,7 @@ public class Grid
                                    {
                                         neighbour.previous = currentTile;
                                         neighbour.g = tentativeG;
-                                        neighbour.f = determineH(neighbour, goal) + neighbour.g;
+                                        neighbour.f = DetermineH(neighbour, goal) + neighbour.g;
                                    }
                               }
                          }
@@ -303,7 +303,7 @@ public class Grid
                               if (!unsearchedTiles.Contains(neighbour))
                               {
                                    neighbour.g = currentTile.g + 1;
-                                   neighbour.f = determineH(neighbour, goal) + neighbour.g;
+                                   neighbour.f = DetermineH(neighbour, goal) + neighbour.g;
                                    neighbour.previous = currentTile;
                                    unsearchedTiles.Add(neighbour);
                               }
@@ -314,7 +314,7 @@ public class Grid
                                    {
                                         neighbour.previous = currentTile;
                                         neighbour.g = tentativeG;
-                                        neighbour.f = determineH(neighbour, goal) + neighbour.g;
+                                        neighbour.f = DetermineH(neighbour, goal) + neighbour.g;
                                    }
                               }
                          }
@@ -329,7 +329,7 @@ public class Grid
                               if (!unsearchedTiles.Contains(neighbour))
                               {
                                    neighbour.g = currentTile.g + 1;
-                                   neighbour.f = determineH(neighbour, goal) + neighbour.g;
+                                   neighbour.f = DetermineH(neighbour, goal) + neighbour.g;
                                    neighbour.previous = currentTile;
                                    unsearchedTiles.Add(neighbour);
                               }
@@ -340,7 +340,7 @@ public class Grid
                                    {
                                         neighbour.previous = currentTile;
                                         neighbour.g = tentativeG;
-                                        neighbour.f = determineH(neighbour, goal) + neighbour.g;
+                                        neighbour.f = DetermineH(neighbour, goal) + neighbour.g;
                                    }
                               }
                          }
@@ -348,7 +348,7 @@ public class Grid
                     catch { }
 
                     //Sort the list to keep the tile with lowest f as the element 0 of the list
-                    unsearchedTiles.Sort(compareFs);
+                    unsearchedTiles.Sort(CompareFs);
                }
           }
           //This is only reachable if there is no possible path

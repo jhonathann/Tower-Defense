@@ -23,22 +23,22 @@ public class TileController : MonoBehaviour
      private bool isOcupied = false;
      private void OnMouseEnter()
      {
-          if (isMouseOverAnUiElement()) return;
-          if (!isThereATowerToPlace()) return;
+          if (IsMouseOverAnUiElement()) return;
+          if (!IsThereATowerToPlace()) return;
           if (isOcupied) return;
           gameData.towerData.tower.transform.position = this.transform.position;
      }
      private void OnMouseExit()
      {
-          if (isMouseOverAnUiElement()) return;
-          if (!isThereATowerToPlace()) return;
+          if (IsMouseOverAnUiElement()) return;
+          if (!IsThereATowerToPlace()) return;
           //Sets the tower in an unwatchable position
           gameData.towerData.tower.transform.position = Vector3.one * 1000;
      }
      private void OnMouseUpAsButton()
      {
-          if (isMouseOverAnUiElement()) return;
-          if (!isThereATowerToPlace()) return;
+          if (IsMouseOverAnUiElement()) return;
+          if (!IsThereATowerToPlace()) return;
           if (isOcupied) return;
           //mark the tile as ocupied
           isOcupied = true;
@@ -49,7 +49,7 @@ public class TileController : MonoBehaviour
      /// Helper function to know when the mouse is over the UI
      /// </summary>
      /// <returns>True if the mouse is over an UI element and false otherwise</returns>
-     private bool isMouseOverAnUiElement()
+     private bool IsMouseOverAnUiElement()
      {
           return EventSystem.current.IsPointerOverGameObject();
      }
@@ -57,7 +57,7 @@ public class TileController : MonoBehaviour
      /// Helper function to know if there is an available tower to be placed
      /// </summary>
      /// <returns>True if there is an available tower and false otherwise</returns>
-     private bool isThereATowerToPlace()
+     private bool IsThereATowerToPlace()
      {
           return gameData.isTowerReady;
      }

@@ -15,7 +15,7 @@ public static class UtilityEnum
      /// <returns>The generated enum value</returns>
      public static T GetRandomTypeFromAnEnum<T>()
      {
-          Array values = System.Enum.GetValues(typeof(T));
+          Array values = Enum.GetValues(typeof(T));
           T randomValue = (T)values.GetValue(UnityEngine.Random.Range(0, values.Length));
           return randomValue;
      }

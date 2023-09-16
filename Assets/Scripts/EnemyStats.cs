@@ -1,16 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
+
 /// <summary>
 /// Class that contains the information related to the stats of the enemies
 /// </summary>
-public class EnemyStats
+public static class EnemyStats
 {
      //reference to the prefabs of the enemies
-     private static GameObject BushPrefab = Resources.Load<GameObject>("Bush");
-     private static GameObject TreePrefab = Resources.Load<GameObject>("Tree");
+     private static readonly GameObject BushPrefab = Resources.Load<GameObject>("Bush");
+
+     private static readonly GameObject TreePrefab = Resources.Load<GameObject>("Tree");
 
      /// <summary> 
      /// Dictionary containing all the information of the enemies

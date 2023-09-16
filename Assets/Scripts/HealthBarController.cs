@@ -9,9 +9,7 @@ using UnityEngine.UI;
 public class HealthBarController : MonoBehaviour
 {
      private Image healthBar;
-     private float baseHealth;
      private EnemyController enemy;
-     private float heightOffset = 5.0f;
      void Awake()
      {
           healthBar = this.GetComponentInChildren<Image>();
@@ -19,12 +17,12 @@ public class HealthBarController : MonoBehaviour
      }
      void Start()
      {
-          this.transform.position += Vector3.up * heightOffset;
+          this.transform.position += Vector3.up * EnemyStats.GetHeight(enemy.type);
      }
      void Update()
      {
           float health = enemy.health;
-          healthBar.fillAmount = health / 100;//100 is the max current enemy health
+          healthBar.fillAmount = health / EnemyStats.GetHealth(enemy.type);
           RotateTowardsCameraInYAxis();
      }
 

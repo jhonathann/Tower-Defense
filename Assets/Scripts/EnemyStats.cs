@@ -12,9 +12,8 @@ public static class EnemyStats
 {
      //reference to the prefabs of the enemies
      private static readonly GameObject BushPrefab = Resources.Load<GameObject>("Bush");
-
      private static readonly GameObject TreePrefab = Resources.Load<GameObject>("Tree");
-
+     private static readonly GameObject ElderPrefab = Resources.Load<GameObject>("Elder");
      /// <summary> 
      /// Dictionary containing all the information of the enemies
      /// </summary>
@@ -22,9 +21,11 @@ public static class EnemyStats
      /// <param name="speed">Speed of the enemy</param>
      /// <param name="difficultyScore">Enemy's score of dificulty for the dificulty calculations</param>
      /// <param name="prefab">Prefab associated with the enemy</param>
-     private static readonly Dictionary<EnemyType, (int health, int speed, int difficultyScore, GameObject prefab)> enemyAttributes = new Dictionary<EnemyType, (int health, int speed, int difficultyScore, GameObject prefab)> {
-        {EnemyType.Bush,(health: 50,speed: 20, difficultyScore: 1, prefab: BushPrefab)},
-        {EnemyType.Tree,(health: 100, speed: 10, difficultyScore: 2, prefab: TreePrefab)}
+     private static readonly Dictionary<EnemyType, (int health, int speed, int difficultyScore, GameObject prefab, float height)> enemyAttributes = new()
+     {
+        {EnemyType.Bush,(health: 50,speed: 20, difficultyScore: 1, prefab: BushPrefab,height: 2.5f)},
+        {EnemyType.Tree,(health: 100, speed: 10, difficultyScore: 2, prefab: TreePrefab,height: 5.0f)},
+        {EnemyType.Elder,(health: 200, speed: 5, difficultyScore: 3, prefab: ElderPrefab,height: 10.0f)}
      };
      /// <summary>
      /// Function to get an enemy's health
@@ -62,6 +63,15 @@ public static class EnemyStats
      {
           return enemyAttributes[enemyType].prefab;
      }
+     /// <summary>
+     /// Function to get an enemy's Prefab
+     /// </summary>
+     /// <param name="enemyType">Type of the enemy</param>
+     /// <returns>The prefab associated to the enemy</returns>
+     public static float GetHeight(EnemyType enemyType)
+     {
+          return enemyAttributes[enemyType].height;
+     }
 }
 
 /// <summary>
@@ -70,5 +80,6 @@ public static class EnemyStats
 public enum EnemyType
 {
      Bush,
-     Tree
+     Tree,
+     Elder
 }

@@ -13,7 +13,7 @@ public class SelectionManagerController : MonoBehaviour
 
      private void Update()
      {
-          if (isMouseOverAnUiElement()) return;
+          if (IsMouseOverAnUiElement()) return;
           if (!Input.GetMouseButtonDown(0)) return;
           Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
           RaycastHit[] rayCastHits = Physics.RaycastAll(ray, Mathf.Infinity, LayerMask.NameToLayer("IgnoreRaycast"));
@@ -29,7 +29,7 @@ public class SelectionManagerController : MonoBehaviour
      /// Helper function to know when the mouse is over the UI
      /// </summary>
      /// <returns>True if the mouse is over an UI element and false otherwise</returns>
-     private bool isMouseOverAnUiElement()
+     private bool IsMouseOverAnUiElement()
      {
           return EventSystem.current.IsPointerOverGameObject();
      }

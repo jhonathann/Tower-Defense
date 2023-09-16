@@ -17,7 +17,7 @@ public class CastleController : MonoBehaviour, IDamageable
      /// </summary>
      public static event Action CastleDestroyed;
      //Destroys the gameObject when the player health gets to 0 and triggers the CastleDestroyed event
-     void checkHealth()
+     void CheckHealth()
      {
           if (gameData.health <= 0)
           {
@@ -31,7 +31,7 @@ public class CastleController : MonoBehaviour, IDamageable
      /// <param name="damageAmount">The amount of damage taken</param>
      void IDamageable.TakeDamage(float damageAmount, Func<EnemyController, IEnumerator> Effect)
      {
-          gameData.health = gameData.health - damageAmount;
-          checkHealth();
+          gameData.health -= damageAmount;
+          CheckHealth();
      }
 }

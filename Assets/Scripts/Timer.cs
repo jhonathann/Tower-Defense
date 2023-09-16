@@ -42,7 +42,7 @@ public class Timer
           IsDone = false;
           while (time > 0)
           {
-               remainingTimeAsString = (RemainingTimeToString(time));
+               remainingTimeAsString = RemainingTimeToString(time);
                time -= Time.deltaTime;
                yield return null;
           }

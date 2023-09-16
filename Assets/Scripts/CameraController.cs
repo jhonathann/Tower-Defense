@@ -20,9 +20,8 @@ public class CameraController : MonoBehaviour
      }
      private void Move()
      {
-          float movementInX, movementInY, movementInZ;
 
-          GetInputs(out movementInX, out movementInY, out movementInZ);
+          GetInputs(out float movementInX, out float movementInY, out float movementInZ);
           MakeMovement(movementInX, movementInY, movementInZ);
           CorrectMovementWithBoundaries();
 
@@ -90,7 +89,7 @@ public class CameraController : MonoBehaviour
           /// </summary>
           /// <param name="eulerRotation">eulerRotation to be changed</param>
           /// <returns>The eulerAngles within the new range</returns>
-          Vector3 ChangeAnglesRange(Vector3 eulerRotation)
+          static Vector3 ChangeAnglesRange(Vector3 eulerRotation)
           {
                for (int i = 0; i < 3; i++)
                {

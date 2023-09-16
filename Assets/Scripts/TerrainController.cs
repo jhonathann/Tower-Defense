@@ -141,7 +141,7 @@ public class TerrainController : MonoBehaviour
           {
                try
                {
-                    tile.gameObject = Object.Instantiate(tile.gameObject, new Vector3(tile.x, 0, tile.y) * tile.size, tile.gameObject.transform.rotation, parent.transform);
+                    tile.gameObject = Instantiate(tile.gameObject, new Vector3(tile.x, 0, tile.y) * tile.size, tile.gameObject.transform.rotation, parent.transform);
                     tile.gameObject.name = tile.x + " " + tile.y;
                     tile.gameObject.transform.LookAt(tile.previous.gameObject.transform);
                }
@@ -154,7 +154,7 @@ public class TerrainController : MonoBehaviour
           {
                if (tile.gameObject == null)
                {
-                    tile.gameObject = Object.Instantiate(grassPrefab, new Vector3(tile.x, 0, tile.y) * tile.size, Quaternion.Euler(0, 0, 0), parent.transform);
+                    tile.gameObject = Instantiate(grassPrefab, new Vector3(tile.x, 0, tile.y) * tile.size, Quaternion.Euler(0, 0, 0), parent.transform);
                     tile.gameObject.name = tile.x + " " + tile.y;
                }
           }
@@ -203,11 +203,12 @@ public class Grid
      //Implementation of A* algorithm to find a path beetween 2 tiles of the grid
      public List<Tile> AStar(Tile start, Tile goal)
      {
-          List<Tile> searchedTiles = new List<Tile>();
-          List<Tile> unsearchedTiles = new List<Tile>();
-
-          //Add start node to the search Queue;
-          unsearchedTiles.Add(start);
+          List<Tile> searchedTiles = new();
+          List<Tile> unsearchedTiles = new()
+          {
+              //Add start node to the search Queue;
+              start
+          };
 
           //Continue while there are still tiles in the queue
           while (unsearchedTiles.Count > 0)

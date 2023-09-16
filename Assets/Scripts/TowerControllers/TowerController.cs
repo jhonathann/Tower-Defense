@@ -27,7 +27,7 @@ public class TowerController : MonoBehaviour
      /// <summary>
      /// reference to the hitzoneGameObjects that show the range of the tower
      /// </summary>
-     private List<GameObject> hitZoneGameObjects = new List<GameObject>();
+     private readonly List<GameObject> hitZoneGameObjects = new();
 
      private void Awake()
      {

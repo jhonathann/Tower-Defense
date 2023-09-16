@@ -111,7 +111,7 @@ public class EnemyController : MonoBehaviour, IDamageable
           {
                direction = GetXZDirection();
                //Travels the path
-               this.transform.Translate(direction * Time.deltaTime * speed, Space.World);
+               this.transform.Translate(speed * Time.deltaTime * direction, Space.World);
                if (CalculateXZDistance() < 1f)
                {
                     goalCheckPoint--;
@@ -133,7 +133,7 @@ public class EnemyController : MonoBehaviour, IDamageable
           {
                direction = GetXZDirection();
                //Travels the path
-               this.transform.Translate(direction * Time.deltaTime * speed, Space.World);
+               this.transform.Translate(speed * Time.deltaTime * direction, Space.World);
                if (CalculateXZDistance() < 1f)
                {
                     goalCheckPoint++;

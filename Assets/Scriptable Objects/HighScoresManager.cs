@@ -25,7 +25,7 @@ public class HighScoresManager : ScriptableObject
      /// <summary>
      /// Creates a symetric encription algorithm acording to the Advance Encryption Standar (generates a new key and iv each session)
      /// </summary>
-     private Aes advanceEncryptionStandard = Aes.Create();
+     private readonly Aes advanceEncryptionStandard = Aes.Create();
      void OnEnable()
      {
           // Creates the highscores file path
@@ -108,16 +108,10 @@ public class HighScoresManager : ScriptableObject
      /// <param name="text">json string of the data to be encrypted</param>
      private void EncryptAndSave(string text)
      {
-          using (FileStream fileStream = new FileStream(HIGH_SCORES_PATH, FileMode.Create, FileAccess.Write))
-          {
-               using (CryptoStream cryptoStream = new CryptoStream(fileStream, advanceEncryptionStandard.CreateEncryptor(), CryptoStreamMode.Write))
-               {
-                    using (StreamWriter streamWriter = new StreamWriter(cryptoStream))
-                    {
-                         streamWriter.Write(text);
-                    }
-               }
-          }
+          using FileStream fileStream = new(HIGH_SCORES_PATH, FileMode.Create, FileAccess.Write);
+          using CryptoStream cryptoStream = new(fileStream, advanceEncryptionStandard.CreateEncryptor(), CryptoStreamMode.Write);
+          using StreamWriter streamWriter = new(cryptoStream);
+          streamWriter.Write(text);
      }
 
      /// <summary>
@@ -129,15 +123,11 @@ public class HighScoresManager : ScriptableObject
           byte[] key = Convert.FromBase64String(PlayerPrefs.GetString("key"));
           byte[] iv = Convert.FromBase64String(PlayerPrefs.GetString("iv"));
 
-          using (FileStream fileStream = new FileStream(HIGH_SCORES_PATH, FileMode.Open, FileAccess.Read))
+          using (FileStream fileStream = new(HIGH_SCORES_PATH, FileMode.Open, FileAccess.Read))
           {
-               using (CryptoStream cryptoStream = new CryptoStream(fileStream, advanceEncryptionStandard.CreateDecryptor(key, iv), CryptoStreamMode.Read))
-               {
-                    using (StreamReader streamReader = new StreamReader(cryptoStream))
-                    {
-                         return streamReader.ReadToEnd();
-                    }
-               }
+               using CryptoStream cryptoStream = new(fileStream, advanceEncryptionStandard.CreateDecryptor(key, iv), CryptoStreamMode.Read);
+               using StreamReader streamReader = new(cryptoStream);
+               return streamReader.ReadToEnd();
           }
      }
      //Wrapper to enable serialization of the list(cause unity serialization doesnt work on lists but it does in classes)

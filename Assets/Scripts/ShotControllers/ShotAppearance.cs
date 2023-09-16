@@ -40,7 +40,7 @@ public class ShotAppearance : MonoBehaviour
      {
           ParticleSystem.MainModule mainModule = particle.main; // Get the main module of the particle system.
 
-          Color32 shotColor = new Color32(); // The color of the shot.
+          Color32 shotColor = new(); // The color of the shot.
 
           // Determine the color based on the source type.
           switch (type)

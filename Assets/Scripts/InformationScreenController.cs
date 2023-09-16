@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using System;
 
 /// <summary>
 /// Scripts that controlls the informationScreen

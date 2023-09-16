@@ -71,7 +71,7 @@ public class PartsManager : ScriptableObject
     /// </summary>
     private void OnNextWave()
     {
-        List<Part> addedParts = new List<Part>();
+        List<Part> addedParts = new();
         // Gives between 1 and 2 new parts each time a wave starts
         int randomNumberOfParts = UnityEngine.Random.Range(1, 3);
         for (int i = 0; i < randomNumberOfParts; i++)

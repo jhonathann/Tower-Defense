@@ -86,11 +86,11 @@ public class NewPartScreenController : MonoBehaviour
           foreach (Part part in addedParts)
           {
                //Generates a mirage of the part and adds it to the partContainer
-               Part partToBeAdded = new Part(part);
+               Part partToBeAdded = new(part);
                partToBeAdded.style.width = new StyleLength(new Length(30, LengthUnit.Percent));
                partToBeAdded.style.height = new StyleLength(new Length(100, LengthUnit.Percent));
                partToBeAdded.AddToClassList("part");
-               VisualElement description = new VisualElement();
+               VisualElement description = new();
                description.AddToClassList("description");
                partToBeAdded.iconContainer.Add(description);
                AddStatsLabels(description, partToBeAdded);

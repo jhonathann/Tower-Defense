@@ -38,8 +38,8 @@ public class Part : VisualElement
      /// Dictionary that matches each rarity with the corresponding USS class
      /// </summary>
      /// <value>A string corresponding to the USS class to be assigned</value>
-     Dictionary<Rarity, string> rarityClasses = new Dictionary<Rarity, string>
-          {
+     readonly Dictionary<Rarity, string> rarityClasses = new()
+     {
                {Rarity.Common,"commonRarity"},
                {Rarity.Normal,"normalRarity"},
                {Rarity.Rare,"rareRarity"},
@@ -50,8 +50,8 @@ public class Part : VisualElement
      /// Dictionary that matches each type with a USS class to display the icons of the elements in the UI 
      /// </summary>
      /// <value>A string corresponding to the USS class to be assigned</value>
-     Dictionary<Enum, string> specificTypeClasses = new Dictionary<Enum, string>
-          {
+     readonly Dictionary<Enum, string> specificTypeClasses = new()
+     {
                {ChannelerType.Fast,"channelerFast"},
                {ChannelerType.Strong,"channelerStrong"},
                {ChannelerType.Area,"channelerArea"},
@@ -131,16 +131,13 @@ public class Part : VisualElement
      /// <returns>An Enum with one of the three specific types</returns>
      private Enum GetSpecificTypeInfo()
      {
-          switch (this.type)
+          return this.type switch
           {
-               case PartType.Source:
-                    return UtilityEnum.GetRandomTypeFromAnEnum<SourceType>();
-               case PartType.Structure:
-                    return UtilityEnum.GetRandomTypeFromAnEnum<StructureType>();
-               case PartType.Channeler:
-                    return UtilityEnum.GetRandomTypeFromAnEnum<ChannelerType>();
-               default: return null;
-          }
+               PartType.Source => UtilityEnum.GetRandomTypeFromAnEnum<SourceType>(),
+               PartType.Structure => UtilityEnum.GetRandomTypeFromAnEnum<StructureType>(),
+               PartType.Channeler => UtilityEnum.GetRandomTypeFromAnEnum<ChannelerType>(),
+               _ => null,
+          };
      }
      /// <summary>
      /// Sets the callback function for the part (used in the constructor)
@@ -204,7 +201,7 @@ public class Part : VisualElement
      //Creates the context menu and adds the corresponding USS classe
      private VisualElement CreateContextMenu()
      {
-          VisualElement contextMenu = new VisualElement();
+          VisualElement contextMenu = new();
           contextMenu.AddToClassList("contextMenu-hidden");
           AddStatsLabels(contextMenu);
           return contextMenu;

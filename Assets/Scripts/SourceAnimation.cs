@@ -48,7 +48,7 @@ public class SourceAnimation : MonoBehaviour
                movementDirectionZ = Random.Range(-1.0f, 1.0f); ;
           }
           // Moves the object whith the correspondent direction
-          this.gameObject.transform.Translate(new Vector3(movementDirectionX, movementDirectionY, movementDirectionZ) * Time.deltaTime * TRANSLATION_SPEED);
+          this.gameObject.transform.Translate(Time.deltaTime * TRANSLATION_SPEED * new Vector3(movementDirectionX, movementDirectionY, movementDirectionZ));
 
           bool HasReachedUpperBoundary()
           {

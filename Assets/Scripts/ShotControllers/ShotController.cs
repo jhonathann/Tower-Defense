@@ -43,7 +43,7 @@ public class ShotController : MonoBehaviour
           if (target != null)
           {
                this.transform.LookAt(target.transform);
-               this.transform.Translate(Vector3.forward * Time.deltaTime * SPEED);
+               this.transform.Translate(SPEED * Time.deltaTime * Vector3.forward);
           }
           else
           {

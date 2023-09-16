@@ -94,7 +94,7 @@ public class StartPageController : MonoBehaviour
 
           void AddTitle()
           {
-               Label title = new Label("HIGH SCORES");
+               Label title = new("HIGH SCORES");
                title.AddToClassList("highScoresTitle");
                contentContainer.Add(title);
           }
@@ -104,12 +104,12 @@ public class StartPageController : MonoBehaviour
                foreach (int highScore in highScoresManager
                          .highScores)
                {
-                    VisualElement highScoreContainer = new VisualElement();
+                    VisualElement highScoreContainer = new();
                     highScoreContainer.AddToClassList("highScoreContainer");
                     int position = highScoresManager.highScores.IndexOf(highScore) + 1;
-                    Label highScorePositionText = new Label($"#{position}");
+                    Label highScorePositionText = new($"#{position}");
                     highScorePositionText.AddToClassList("highScorePositionText");
-                    Label highScoreText = new Label($"{highScore} Waves");
+                    Label highScoreText = new($"{highScore} Waves");
                     highScoreText.AddToClassList("highScoreText");
                     highScoreContainer.Add(highScorePositionText);
                     highScoreContainer.Add(highScoreText);

@@ -21,7 +21,7 @@ public class PortalController : MonoBehaviour
      /// Timer that handels the countdown timer for the waves
      /// </summary>
      /// <returns></returns>
-     private Timer nextWaveTimer = new Timer();
+     private readonly Timer nextWaveTimer = new();
      void Start()
      {
           difficulty = 10; //Sets the start difficulty
@@ -44,14 +44,14 @@ public class PortalController : MonoBehaviour
      }
      private void NextWaveCalled()
      {
-          difficulty = difficulty * 1.2f;
-          StartCoroutine(createWave());
+          difficulty *= 1.2f;
+          StartCoroutine(CreateWave());
      }
      /// <summary>
      /// Coroutine for the creation of the wave
      /// </summary>
      /// <returns> The coroutine</returns>
-     IEnumerator createWave()
+     IEnumerator CreateWave()
      {
           // Starting values to control the dificulty
           float difficultyCount = 0;

@@ -26,7 +26,7 @@ public class TowerAttackHandler : MonoBehaviour
      /// Function that references the effect that will be added to a hitted enemy
      /// </summary>
      private Func<EnemyController, IEnumerator> Effect;
-     private List<GameObject> enemiesInRange = new List<GameObject>();
+     private List<GameObject> enemiesInRange = new();
      /// <summary>
      /// Variable that keeps track of the time since the last shot (initialized in maximum value so the tower shots immediatly when the first enemy enters)
      /// </summary>

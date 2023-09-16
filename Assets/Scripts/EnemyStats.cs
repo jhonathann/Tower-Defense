@@ -64,10 +64,10 @@ public static class EnemyStats
           return enemyAttributes[enemyType].prefab;
      }
      /// <summary>
-     /// Function to get an enemy's Prefab
+     /// Function to get an enemy's height
      /// </summary>
      /// <param name="enemyType">Type of the enemy</param>
-     /// <returns>The prefab associated to the enemy</returns>
+     /// <returns>The height associated to the enemy</returns>
      public static float GetHeight(EnemyType enemyType)
      {
           return enemyAttributes[enemyType].height;

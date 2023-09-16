@@ -26,10 +26,10 @@ public class TowerSelectionHandler : MonoBehaviour
      {
           if (raycastHit.collider == this.selectionCollider)
           {
-               toggleSelectionOfTower();
+               ToggleSelectionOfTower();
           }
      }
-     private void toggleSelectionOfTower()
+     private void ToggleSelectionOfTower()
      {
           //Toggles the meshes of the hitZones
           foreach (GameObject hitzone in hitZoneGameObjects)

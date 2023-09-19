@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Brick
-  m_Shader: {fileID: 4800000, guid: 0e9d5a909a1f7e84882a534d0d11e49f, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: ec677787299d56e4c9076f10293f689d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -38,6 +38,10 @@ Material:
     m_TexEnvs:
     - _BASE_COLOR_MAP:
         m_Texture: {fileID: 2800000, guid: 5e590f65a83854344a3ba4fbf9c22d30, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseColor:
+        m_Texture: {fileID: 2800000, guid: 09cd2ed9357160c4bb61d183f26b27e1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -156,11 +160,13 @@ Material:
     - _Diffuse_Color: 12.67
     - _DstBlend: 0
     - _Falloff_Amount: 0
+    - _Fresnel_Outline_Strenght: 0.7
     - _Fresnel_Size: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossinessSource: 0
     - _GlossyReflections: 1
+    - _LightCutOff_Value: 0
     - _Lighting_Cutoff: -3.69
     - _METALNESS: 0
     - _Metallic: 0

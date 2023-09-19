@@ -28,7 +28,10 @@ public class TowerController : MonoBehaviour
      /// reference to the hitzoneGameObjects that show the range of the tower
      /// </summary>
      private readonly List<GameObject> hitZoneGameObjects = new();
-
+     /// <summary>
+     /// Name of the shader that the meshes of the HitZones are going to use
+     /// </summary>
+     private const string ShaderHitZoneName = "Shader Graphs/Blinking";
      private void Awake()
      {
           // Adds the components to the tower gameobject
@@ -176,7 +179,7 @@ public class TowerController : MonoBehaviour
                //Properly adjust the scale
                hitZone.transform.localScale = new Vector3(TowerStats.TOWER_WIDTH, TowerStats.TOWER_HEIGHT, TowerStats.beamStructureStats[structure.rarity]);
                //Sets the shader to the material
-               hitZone.GetComponent<MeshRenderer>().material.shader = Shader.Find("Shader Graphs/Blinking");
+               hitZone.GetComponent<MeshRenderer>().material.shader = Shader.Find(ShaderHitZoneName);
                //Adds the gameobject to the hitzoneGameObjects list so it can be accesed
                hitZoneGameObjects.Add(hitZone);
           }
@@ -188,7 +191,7 @@ public class TowerController : MonoBehaviour
                hitZone.transform.position = this.transform.position + Vector3.up * TowerStats.STRUCTURE_HEIGHT;
                hitZone.transform.localScale = Vector3.one * TowerStats.circularStructureStats[structure.rarity] * 2;
                //Sets the shader to the material
-               hitZone.GetComponent<MeshRenderer>().material.shader = Shader.Find("Shader Graphs/Blinking");
+               hitZone.GetComponent<MeshRenderer>().material.shader = Shader.Find(ShaderHitZoneName);
                hitZoneGameObjects.Add(hitZone);
           }
           void CreateCrossHitZoneMesh()
@@ -200,7 +203,7 @@ public class TowerController : MonoBehaviour
                hitZone.transform.position = this.transform.position + Vector3.forward * (TowerStats.crossStructureStats[structure.rarity] / 2 + TowerStats.TOWER_WIDTH / 2) + Vector3.up * (TowerStats.STRUCTURE_HEIGHT + TowerStats.TOWER_HEIGHT / 2);
                hitZone.transform.localScale = new Vector3(TowerStats.TOWER_WIDTH, TowerStats.TOWER_HEIGHT, TowerStats.crossStructureStats[structure.rarity]);
                //Sets the shader to the material
-               hitZone.GetComponent<MeshRenderer>().material.shader = Shader.Find("Shader Graphs/Blinking");
+               hitZone.GetComponent<MeshRenderer>().material.shader = Shader.Find(ShaderHitZoneName);
                hitZoneGameObjects.Add(hitZone);
                //Add back zone
                hitZone = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -209,7 +212,7 @@ public class TowerController : MonoBehaviour
                hitZone.transform.position = this.transform.position + Vector3.back * (TowerStats.crossStructureStats[structure.rarity] / 2 + TowerStats.TOWER_WIDTH / 2) + Vector3.up * (TowerStats.STRUCTURE_HEIGHT + TowerStats.TOWER_HEIGHT / 2);
                hitZone.transform.localScale = new Vector3(TowerStats.TOWER_WIDTH, TowerStats.TOWER_HEIGHT, TowerStats.crossStructureStats[structure.rarity]);
                //Sets the shader to the material
-               hitZone.GetComponent<MeshRenderer>().material.shader = Shader.Find("Shader Graphs/Blinking");
+               hitZone.GetComponent<MeshRenderer>().material.shader = Shader.Find(ShaderHitZoneName);
                hitZoneGameObjects.Add(hitZone);
                //Add right zone
                hitZone = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -218,7 +221,7 @@ public class TowerController : MonoBehaviour
                hitZone.transform.position = this.transform.position + Vector3.right * (TowerStats.crossStructureStats[structure.rarity] / 2 + TowerStats.TOWER_WIDTH / 2) + Vector3.up * (TowerStats.STRUCTURE_HEIGHT + TowerStats.TOWER_HEIGHT / 2);
                hitZone.transform.localScale = new Vector3(TowerStats.crossStructureStats[structure.rarity], TowerStats.TOWER_HEIGHT, TowerStats.TOWER_WIDTH);
                //Sets the shader to the material
-               hitZone.GetComponent<MeshRenderer>().material.shader = Shader.Find("Shader Graphs/Blinking");
+               hitZone.GetComponent<MeshRenderer>().material.shader = Shader.Find(ShaderHitZoneName);
                hitZoneGameObjects.Add(hitZone);
                //Add left zone
                hitZone = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -227,7 +230,7 @@ public class TowerController : MonoBehaviour
                hitZone.transform.position = this.transform.position + Vector3.left * (TowerStats.crossStructureStats[structure.rarity] / 2 + TowerStats.TOWER_WIDTH / 2) + Vector3.up * (TowerStats.STRUCTURE_HEIGHT + TowerStats.TOWER_HEIGHT / 2);
                hitZone.transform.localScale = new Vector3(TowerStats.crossStructureStats[structure.rarity], TowerStats.TOWER_HEIGHT, TowerStats.TOWER_WIDTH);
                //Sets the shader to the material
-               hitZone.GetComponent<MeshRenderer>().material.shader = Shader.Find("Shader Graphs/Blinking");
+               hitZone.GetComponent<MeshRenderer>().material.shader = Shader.Find(ShaderHitZoneName);
                hitZoneGameObjects.Add(hitZone);
           }
      }

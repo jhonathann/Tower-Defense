@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SourceEarth
-  m_Shader: {fileID: -6465566751694194690, guid: b1610b60690e56942a4877de3b520221, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: ec677787299d56e4c9076f10293f689d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -23,6 +23,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseColor:
+        m_Texture: {fileID: 2800000, guid: 66cce9dad4beb96478a737c6765e321a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -84,6 +88,7 @@ Material:
     - _AlphaClip: 0
     - _Blend: 0
     - _BottomLine: 0.65
+    - _Brightness: 0.5
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -94,9 +99,11 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _FresnelStrenght: 3
+    - _Fresnel_Outline_Strenght: 0.9
     - _GlossMapScale: 1
     - _Glossiness: 0.5590909
     - _GlossyReflections: 1
+    - _LightCutOff_Value: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

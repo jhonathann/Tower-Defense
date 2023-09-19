@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Channeler
-  m_Shader: {fileID: -6465566751694194690, guid: e59c03c0b0649a340bfb3454bff0959b, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: ec677787299d56e4c9076f10293f689d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -36,6 +36,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseColor:
+        m_Texture: {fileID: 2800000, guid: 180fa82d9a3bf0b4d8dc8d8d00e5dea9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 180fa82d9a3bf0b4d8dc8d8d00e5dea9, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -72,6 +76,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -101,6 +109,7 @@ Material:
     - _Alpha: 1
     - _AlphaClip: 0
     - _Blend: 0
+    - _Brightness: 1
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -111,9 +120,11 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _FresnelStrenght: 2
+    - _Fresnel_Outline_Strenght: 0.8
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _LightCutOff_Value: -0.2
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

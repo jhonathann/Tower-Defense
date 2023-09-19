@@ -110,11 +110,11 @@ Material:
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _FresnelStrenght: 2
-    - _Fresnel_Outline_Strenght: 0.9
+    - _Fresnel_Outline_Strenght: 0.7
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LightCutOff_Value: -0.7
+    - _LightCutOff_Value: -0.3
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

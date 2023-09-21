@@ -22,12 +22,14 @@ public class TowerSelectionHandler : MonoBehaviour
           this.hitZoneGameObjects = hitZoneGameObjects;
           this.worldUI = Instantiate(worldUIPrefab, this.transform.position + Vector3.up * WORLD_UI_HEIGHT, Quaternion.identity, this.transform);
      }
-     private void OnTowerSelected(RaycastHit raycastHit)
+     private bool OnTowerSelected(RaycastHit raycastHit)
      {
           if (raycastHit.collider == this.selectionCollider)
           {
                ToggleSelectionOfTower();
+               return true;
           }
+          return false;
      }
      private void ToggleSelectionOfTower()
      {

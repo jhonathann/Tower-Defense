@@ -172,7 +172,7 @@ public class EnemyController : MonoBehaviour, IDamageable
      /// <param name="damageAmount">The amount of damage taken</param>
      void IDamageable.TakeDamage(float damageAmount, Func<EnemyController, IEnumerator> Effect)
      {
-          this.health = this.health - damageAmount;
+          this.health -= damageAmount;
           ///creates the healthbar and the text damage
           CreateHealthBar();
           CreateDamageText();

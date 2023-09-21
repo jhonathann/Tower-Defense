@@ -72,18 +72,16 @@ public class TowerUIController : MonoBehaviour
      }
      void Update()
      {
-          RotateTowardsCameraInYAxis();
+          RotateWithCameraInYAxis();
      }
 
      /// <summary>
      /// Rotates the tower in the Y axis to always look at the camera
      /// </summary>
-     private void RotateTowardsCameraInYAxis()
+     private void RotateWithCameraInYAxis()
      {
-          transform.LookAt(Camera.main.transform);
-          Vector3 rotationJustInY = transform.rotation.eulerAngles;
-          rotationJustInY.x = 0;
-          rotationJustInY.z = 0;
-          transform.rotation = Quaternion.Euler(rotationJustInY);
+          transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, Camera.main.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+          ;
+          return;
      }
 }

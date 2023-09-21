@@ -20,10 +20,10 @@ MonoBehaviour:
   beamStructurePrefab: {fileID: 919132149155446097, guid: 3e7a50f32936d0d4eb0b31f5c2f9716c, type: 3}
   circularStructurePrefab: {fileID: 919132149155446097, guid: c906a88a3ea7f16409604560a2b68569, type: 3}
   crossStructurePrefab: {fileID: 919132149155446097, guid: 440ee9e6331f07f4c93f71270a29f5a6, type: 3}
-  earthSourcePrefab: {fileID: 8306262626948469163, guid: 08274bb928ddb7f4ab0b7636e6eee101, type: 3}
-  fireSourcePrefab: {fileID: 2555624041107694200, guid: 5f196af0707b74849af015d34cce6230, type: 3}
-  waterSourcePrefab: {fileID: 2020888479189818301, guid: 8d632cae68cc4e442882d087192b39fa, type: 3}
-  thunderSourcePrefab: {fileID: 1375894837577484795, guid: 63c059f3d854f734583a79c844ff7fa4, type: 3}
+  earthSourcePrefab: {fileID: 2094952327389466935, guid: 08274bb928ddb7f4ab0b7636e6eee101, type: 3}
+  fireSourcePrefab: {fileID: 8242997345278998900, guid: 5f196af0707b74849af015d34cce6230, type: 3}
+  waterSourcePrefab: {fileID: 3210365695745500215, guid: 8d632cae68cc4e442882d087192b39fa, type: 3}
+  thunderSourcePrefab: {fileID: 1486388966828283449, guid: 63c059f3d854f734583a79c844ff7fa4, type: 3}
   <AreaChannelerBolt>k__BackingField: {fileID: 409294717232431179, guid: c95222a923a904a4eb3b14f41b3d2069, type: 3}
   <FastChannelerBolt>k__BackingField: {fileID: 6917548952993554884, guid: 6dcb10cfc8e711d458d6fe51a80f8884, type: 3}
   <StrongChannelerBolt>k__BackingField: {fileID: 4178967791955142186, guid: 18aab5f36bb43e54aaef2c02797617da, type: 3}

@@ -111,7 +111,7 @@ public class NewPartScreenController : MonoBehaviour
                               case SourceType.Fire:
                                    visualElement.Add(new Label($"{part.rarity} {part.type}"));
                                    visualElement.Add(new Label($"{part.specificTypeInfo}"));
-                                   visualElement.Add(new Label($"Effect: Burn for {TowerStats.fireSourceTimes[part.rarity]} sec making the enemy take {TowerStats.FIRE_BURN_DAMAGE} damage each 0.1 sec"));
+                                   visualElement.Add(new Label($"Effect: Burn for {TowerStats.fireSourceTimes[part.rarity]} sec making the enemy take {TowerStats.FIRE_BURN_DAMAGE} damage each {TowerStats.FIRE_BURN_INTERVAL_TIME} sec"));
                                    break;
                               case SourceType.Thunder:
                                    visualElement.Add(new Label($"{part.rarity} {part.type}"));

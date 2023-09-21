@@ -102,7 +102,8 @@ public class TowerStats
           };
 
      private const float FIRE_BASE_TIME = 0.5f;
-     public const float FIRE_BURN_DAMAGE = 2.0f;
+     public const float FIRE_BURN_DAMAGE = 5.0f;
+     public const float FIRE_BURN_INTERVAL_TIME = 0.25f;
      private static Func<EnemyController, IEnumerator> FireEffectSetUp(float time)
      {
           return FireEffect;
@@ -113,8 +114,8 @@ public class TowerStats
                while (internalTime > 0)
                {
                     enemyIDamageable.TakeDamage(FIRE_BURN_DAMAGE);
-                    internalTime -= 0.1f;
-                    yield return new WaitForSeconds(0.1f);
+                    internalTime -= FIRE_BURN_INTERVAL_TIME;
+                    yield return new WaitForSeconds(FIRE_BURN_INTERVAL_TIME);
                }
           }
      }

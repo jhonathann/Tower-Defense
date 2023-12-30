@@ -7,5 +7,5 @@ using System;
 /// </summary>
 public interface IDamageable
 {
-     void TakeDamage(float damageAmount = 1, Func<EnemyController, IEnumerator> Effect = null);
+     void TakeDamage(float damageAmount = 1, Func<EnemyController, IEnumerator> Effect = null, Element element = Element.Water);
 }

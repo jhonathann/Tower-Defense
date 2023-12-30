@@ -30,6 +30,10 @@ public class EnemyController : MonoBehaviour, IDamageable
      /// </summary>
      public float speed;
      /// <summary>
+     /// The element of the enemy
+     /// </summary>
+     public Element Element { get; set; }
+     /// <summary>
      /// Variable that defines the next checkpoint for parth traveling
      /// </summary>
      [HideInInspector]
@@ -37,7 +41,7 @@ public class EnemyController : MonoBehaviour, IDamageable
      /// <summary>
      /// Used for the direction of the movement
      /// </summary>
-     Vector3 direction;
+     private Vector3 direction;
      /// <summary>
      /// Variable that checks if the enemy hasnt been damaged
      /// </summary>
@@ -61,6 +65,10 @@ public class EnemyController : MonoBehaviour, IDamageable
      {
           OnUpdate?.Invoke();
           LookTowardsGoal();
+     }
+     void OnDestroy()
+     {
+          PortalController.UpdateWaveResult(this);
      }
      /// <summary>
      /// Sets the rotation towards the current goal
@@ -97,8 +105,31 @@ public class EnemyController : MonoBehaviour, IDamageable
           this.transform.position += Vector3.up * ENEMY_HEIGHT;
           //Set the starting position to one tile before the end of the path
           goalCheckPoint = gameData.path.Count - 2;
-          //Set the starting mov ement direction
+          //Set the starting movement direction
           direction = GetXZDirection();
+          //Set the color of the particles according to the element
+          SetParticleColor();
+
+          void SetParticleColor()
+          {
+               ParticleSystem.ColorOverLifetimeModule colorOverLifetimeModule = this.GetComponentInChildren<ParticleSystem>().colorOverLifetime;
+               switch (Element)
+               {
+                    case Element.Water:
+                         colorOverLifetimeModule.color = new ParticleSystem.MinMaxGradient(new Color32(20, 40, 125, 255), new Color32(120, 192, 210, 255));
+                         break;
+                    case Element.Fire:
+                         colorOverLifetimeModule.color = new ParticleSystem.MinMaxGradient(new Color32(104, 10, 10, 255), new Color32(168, 99, 46, 255));
+                         break;
+                    case Element.Earth:
+                         colorOverLifetimeModule.color = new ParticleSystem.MinMaxGradient(new Color32(12, 64, 3, 255), new Color32(66, 144, 52, 255));
+                         break;
+                    case Element.Thunder:
+                         colorOverLifetimeModule.color = new ParticleSystem.MinMaxGradient(new Color32(80, 9, 135, 255), new Color32(122, 69, 163, 255));
+                         break;
+               }
+
+          }
      }
 
      /// <summary>
@@ -170,8 +201,14 @@ public class EnemyController : MonoBehaviour, IDamageable
      /// Function that describes how the object takes damage
      /// </summary>
      /// <param name="damageAmount">The amount of damage taken</param>
-     void IDamageable.TakeDamage(float damageAmount, Func<EnemyController, IEnumerator> Effect)
+     void IDamageable.TakeDamage(float damageAmount, Func<EnemyController, IEnumerator> Effect, Element element)
      {
+          //If the enemy is the same element as the shot, the damage is halved and the effect doesn't trigger;
+          if (this.Element == element)
+          {
+               damageAmount *= 0.5f;
+               Effect = null;
+          };
           this.health -= damageAmount;
           ///creates the healthbar and the text damage
           CreateHealthBar();

@@ -54,10 +54,10 @@ public class TowerData : ScriptableObject
           {StructureType.Beam,beamStructurePrefab},
           {StructureType.Circular,circularStructurePrefab},
           {StructureType.Cross,crossStructurePrefab},
-          {SourceType.Earth,earthSourcePrefab},
-          {SourceType.Fire,fireSourcePrefab},
-          {SourceType.Thunder,thunderSourcePrefab},
-          {SourceType.Water,waterSourcePrefab}};
+          {Element.Earth,earthSourcePrefab},
+          {Element.Fire,fireSourcePrefab},
+          {Element.Thunder,thunderSourcePrefab},
+          {Element.Water,waterSourcePrefab}};
      }
      /// <summary>
      /// Function that sets this parts to the tower SO when there are 3 parts

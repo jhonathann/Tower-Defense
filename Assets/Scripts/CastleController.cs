@@ -29,7 +29,7 @@ public class CastleController : MonoBehaviour, IDamageable
      /// Function that destribes how the object takes damage
      /// </summary>
      /// <param name="damageAmount">The amount of damage taken</param>
-     void IDamageable.TakeDamage(float damageAmount, Func<EnemyController, IEnumerator> Effect)
+     void IDamageable.TakeDamage(float damageAmount, Func<EnemyController, IEnumerator> Effect, Element element)
      {
           gameData.health -= damageAmount;
           CheckHealth();

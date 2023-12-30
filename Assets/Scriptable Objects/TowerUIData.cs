@@ -70,10 +70,10 @@ public class TowerUIData : ScriptableObject
             {StructureType.Beam,structureBeamIcon},
             {StructureType.Circular,structureCircularIcon},
             {StructureType.Cross,structureCrossIcon},
-            {SourceType.Earth,sourceEarthIcon},
-            {SourceType.Fire,sourceFireIcon},
-            {SourceType.Thunder,sourceThunderIcon},
-            {SourceType.Water,sourceWaterIcon}
+            {Element.Earth,sourceEarthIcon},
+            {Element.Fire,sourceFireIcon},
+            {Element.Thunder,sourceThunderIcon},
+            {Element.Water,sourceWaterIcon}
           };
      }
 

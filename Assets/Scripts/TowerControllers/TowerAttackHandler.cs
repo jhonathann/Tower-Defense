@@ -17,7 +17,7 @@ public class TowerAttackHandler : MonoBehaviour
      private GameObject shotPrefab;
      private float fireRate;
      private float damage;
-     private SourceType shotType;
+     private Element shotType;
      /// <summary>
      /// Action that references the correct function for the tower attack type
      /// </summary>
@@ -109,21 +109,21 @@ public class TowerAttackHandler : MonoBehaviour
      {
           switch (source.specificTypeInfo)
           {
-               case SourceType.Earth:
+               case Element.Earth:
                     Effect = TowerStats.earthSourceStats[source.rarity];
-                    this.shotType = SourceType.Earth;
+                    this.shotType = Element.Earth;
                     break;
-               case SourceType.Fire:
+               case Element.Fire:
                     Effect = TowerStats.fireSourceStats[source.rarity];
-                    this.shotType = SourceType.Fire;
+                    this.shotType = Element.Fire;
                     break;
-               case SourceType.Thunder:
+               case Element.Thunder:
                     Effect = TowerStats.thunderSourceStats[source.rarity];
-                    this.shotType = SourceType.Thunder;
+                    this.shotType = Element.Thunder;
                     break;
-               case SourceType.Water:
+               case Element.Water:
                     Effect = TowerStats.waterSourceStats[source.rarity];
-                    this.shotType = SourceType.Water;
+                    this.shotType = Element.Water;
                     break;
           }
      }
@@ -152,6 +152,7 @@ public class TowerAttackHandler : MonoBehaviour
           shotAppearance.type = this.shotType;
           shot.target = target;
           shot.damage = this.damage;
+          shot.element = this.shotType;
           shot.Effect = this.Effect;
      }
      /// <summary>

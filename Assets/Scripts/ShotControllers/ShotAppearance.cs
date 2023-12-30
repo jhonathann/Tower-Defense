@@ -10,7 +10,7 @@ public class ShotAppearance : MonoBehaviour
      /// <summary>
      /// The type of the shot
      /// </summary>
-     public SourceType type;
+     public Element type;
      /// <summary>
      /// Reference to the particle system component
      /// </summary>
@@ -45,16 +45,16 @@ public class ShotAppearance : MonoBehaviour
           // Determine the color based on the source type.
           switch (type)
           {
-               case SourceType.Earth:
+               case Element.Earth:
                     shotColor = new Color32(7, 77, 0, 255);
                     break;
-               case SourceType.Fire:
+               case Element.Fire:
                     shotColor = new Color32(200, 41, 0, 255);
                     break;
-               case SourceType.Thunder:
+               case Element.Thunder:
                     shotColor = new Color32(45, 3, 147, 255);
                     break;
-               case SourceType.Water:
+               case Element.Water:
                     shotColor = new Color32(16, 97, 152, 255);
                     break;
           }

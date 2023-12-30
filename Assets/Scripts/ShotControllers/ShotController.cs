@@ -17,6 +17,10 @@ public class ShotController : MonoBehaviour
      /// </summary>
      public float damage;
      /// <summary>
+     /// The element of the shot
+     /// </summary>
+     public Element element;
+     /// <summary>
      /// The effect the shot will apply
      /// </summary>
      public Func<EnemyController, IEnumerator> Effect;
@@ -61,7 +65,7 @@ public class ShotController : MonoBehaviour
           EnemyController enemy = damageable as EnemyController;
           if (enemy.gameObject == target)
           {
-               damageable.TakeDamage(this.damage, this.Effect);
+               damageable.TakeDamage(this.damage, this.Effect, this.element);
                Destroy(this.gameObject);
           }
 

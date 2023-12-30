@@ -58,10 +58,10 @@ public class Part : VisualElement
                {StructureType.Beam,"structureBeam"},
                {StructureType.Circular,"structureCircular"},
                {StructureType.Cross,"structureCross"},
-               {SourceType.Earth,"sourceEarth"},
-               {SourceType.Fire,"sourceFire"},
-               {SourceType.Thunder,"sourceThunder"},
-               {SourceType.Water,"sourceWater"}
+               {Element.Earth,"sourceEarth"},
+               {Element.Fire,"sourceFire"},
+               {Element.Thunder,"sourceThunder"},
+               {Element.Water,"sourceWater"}
           };
      /// <summary>
      /// This constructor initialized a new part with random (but weighted) rarity and random values
@@ -133,7 +133,7 @@ public class Part : VisualElement
      {
           return this.type switch
           {
-               PartType.Source => UtilityEnum.GetRandomTypeFromAnEnum<SourceType>(),
+               PartType.Source => UtilityEnum.GetRandomTypeFromAnEnum<Element>(),
                PartType.Structure => UtilityEnum.GetRandomTypeFromAnEnum<StructureType>(),
                PartType.Channeler => UtilityEnum.GetRandomTypeFromAnEnum<ChannelerType>(),
                _ => null,
@@ -214,16 +214,16 @@ public class Part : VisualElement
                     case PartType.Source:
                          switch (this.specificTypeInfo)
                          {
-                              case SourceType.Earth:
+                              case Element.Earth:
                                    visualElement.Add(new Label($"Effect: Stun {TowerStats.earthSourceTimes[this.rarity]} sec"));
                                    break;
-                              case SourceType.Fire:
+                              case Element.Fire:
                                    visualElement.Add(new Label($"Effect: Burn {TowerStats.fireSourceTimes[this.rarity]} sec"));
                                    break;
-                              case SourceType.Thunder:
+                              case Element.Thunder:
                                    visualElement.Add(new Label($"Effect: Confussion {TowerStats.thunderSourceTimes[this.rarity]} sec"));
                                    break;
-                              case SourceType.Water:
+                              case Element.Water:
                                    visualElement.Add(new Label($"Effect: Slow {TowerStats.waterSourceTimes[this.rarity]} sec"));
                                    break;
                          }
@@ -288,7 +288,7 @@ public enum Rarity
 /// <summary>
 /// An Enum representing the especific types within the source type
 /// </summary>
-public enum SourceType
+public enum Element
 {
      Water,
      Fire,

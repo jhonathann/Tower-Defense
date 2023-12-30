@@ -103,22 +103,22 @@ public class NewPartScreenController : MonoBehaviour
                     case PartType.Source:
                          switch (part.specificTypeInfo)
                          {
-                              case SourceType.Earth:
+                              case Element.Earth:
                                    visualElement.Add(new Label($"{part.rarity} {part.type}"));
                                    visualElement.Add(new Label($"{part.specificTypeInfo}"));
                                    visualElement.Add(new Label($"Effect: Stun for {TowerStats.earthSourceTimes[part.rarity]} sec making the enemy unable to move"));
                                    break;
-                              case SourceType.Fire:
+                              case Element.Fire:
                                    visualElement.Add(new Label($"{part.rarity} {part.type}"));
                                    visualElement.Add(new Label($"{part.specificTypeInfo}"));
                                    visualElement.Add(new Label($"Effect: Burn for {TowerStats.fireSourceTimes[part.rarity]} sec making the enemy take {TowerStats.FIRE_BURN_DAMAGE} damage each {TowerStats.FIRE_BURN_INTERVAL_TIME} sec"));
                                    break;
-                              case SourceType.Thunder:
+                              case Element.Thunder:
                                    visualElement.Add(new Label($"{part.rarity} {part.type}"));
                                    visualElement.Add(new Label($"{part.specificTypeInfo}"));
                                    visualElement.Add(new Label($"Effect: Confussion for {TowerStats.thunderSourceTimes[part.rarity]} sec making the enemy go in the opposite direction"));
                                    break;
-                              case SourceType.Water:
+                              case Element.Water:
                                    visualElement.Add(new Label($"{part.rarity} {part.type}"));
                                    visualElement.Add(new Label($"{part.specificTypeInfo}"));
                                    visualElement.Add(new Label($"Effect: Slow for {TowerStats.waterSourceTimes[part.rarity]} sec halving the enemy speed"));

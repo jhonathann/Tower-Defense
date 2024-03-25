@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 /// <summary>
 /// Script that handles the behaviour of the damage text
@@ -20,6 +21,7 @@ public class DamageTextController : MonoBehaviour
      }
      public void SetUp(float damageAmount)
      {
+          damageAmount = MathF.Round(damageAmount); //To avoid decimals in the text
           textMesh.SetText(damageAmount.ToString());
      }
      /// <summary>
@@ -28,7 +30,5 @@ public class DamageTextController : MonoBehaviour
      private void RotateWithCameraInYAxis()
      {
           transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, Camera.main.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-          ;
-          return;
      }
 }

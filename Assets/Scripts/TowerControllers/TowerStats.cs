@@ -14,8 +14,8 @@ public class TowerStats
      public static float TOWER_HEIGHT = 20.0f;
      public static float TOWER_WIDTH = 10.0f;
 
-     private const float CHANNELER_AREA_BASE_DAMAGE = 10.0f;
-     private const float CHANNELER_AREA_BASE_FIRE_RATE = 0.125f;
+     private const float CHANNELER_AREA_BASE_DAMAGE = 12.5f;
+     private const float CHANNELER_AREA_BASE_FIRE_RATE = 0.25f;
      public static readonly Dictionary<Rarity, (float damage, float fireRate)> areaChannelerStats = new()
      {
           { Rarity.Common, (damage: 1.0f*CHANNELER_AREA_BASE_DAMAGE, fireRate: 1.0f*CHANNELER_AREA_BASE_FIRE_RATE) },
@@ -24,7 +24,7 @@ public class TowerStats
           { Rarity.UltraRare, (damage: 1.75f*CHANNELER_AREA_BASE_DAMAGE, fireRate: 1.75f*CHANNELER_AREA_BASE_FIRE_RATE) },
           { Rarity.Myth, (damage: 2.0f*CHANNELER_AREA_BASE_DAMAGE, fireRate: 2.0f*CHANNELER_AREA_BASE_FIRE_RATE) }
           };
-     private const float CHANNELER_FAST_BASE_DAMAGE = 20.0f;
+     private const float CHANNELER_FAST_BASE_DAMAGE = 25.0f;
      private const float CHANNELER_FAST_BASE_FIRE_RATE = 1.0f;
      public static readonly Dictionary<Rarity, (float damage, float fireRate)> fastChannelerStats = new()
      {
@@ -34,7 +34,7 @@ public class TowerStats
           { Rarity.UltraRare, (damage: 1.75f*CHANNELER_FAST_BASE_DAMAGE, fireRate: 1.75f*CHANNELER_FAST_BASE_FIRE_RATE) },
           { Rarity.Myth, (damage: 2.0f*CHANNELER_FAST_BASE_DAMAGE, fireRate: 2.0f*CHANNELER_FAST_BASE_FIRE_RATE) }
           };
-     private const float CHANNELER_STRONG_BASE_DAMAGE = 40.0f;
+     private const float CHANNELER_STRONG_BASE_DAMAGE = 50.0f;
      private const float CHANNELER_STRONG_BASE_FIRE_RATE = 0.5f;
      public static readonly Dictionary<Rarity, (float damage, float fireRate)> strongChannelerStats = new() {
           { Rarity.Common, (damage: 1.0f*CHANNELER_STRONG_BASE_DAMAGE, fireRate: 1.0f*CHANNELER_STRONG_BASE_FIRE_RATE) },
@@ -178,14 +178,16 @@ public class TowerStats
           return WaterEffect;
           IEnumerator WaterEffect(EnemyController enemy)
           {
-               if (enemy.speed == EnemyStats.GetSpeed(enemy.type))
+               if (!enemy.frozen)
                {
                     enemy.speed /= 2;
+                    enemy.frozen = true;
                }
                yield return new WaitForSeconds(time);
-               if (enemy.speed != EnemyStats.GetSpeed(enemy.type))
+               if (enemy.frozen)
                {
                     enemy.speed *= 2;
+                    enemy.frozen = false;
                }
           }
      }

@@ -17,12 +17,13 @@ public class HealthBarController : MonoBehaviour
      }
      void Start()
      {
-          this.transform.position += Vector3.up * EnemyStats.GetHeight(enemy.type);
+          //The height calculation is a line that crosses (1,3) y (10,30)
+          this.transform.position += Vector3.up * (enemy.gameObject.transform.localScale.y * 3);
+
      }
      void Update()
      {
-          float health = enemy.health;
-          healthBar.fillAmount = health / EnemyStats.GetHealth(enemy.type);
+          healthBar.fillAmount = enemy.health / enemy.originalHealth;
           RotateWithCameraInYAxis();
      }
 
@@ -32,7 +33,5 @@ public class HealthBarController : MonoBehaviour
      private void RotateWithCameraInYAxis()
      {
           transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, Camera.main.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-          ;
-          return;
      }
 }

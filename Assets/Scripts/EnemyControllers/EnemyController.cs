@@ -13,14 +13,17 @@ public class EnemyController : MonoBehaviour, IDamageable
      /// </summary>
      public GameData gameData;
      /// <summary>
-     /// type of the enemy
-     /// </summary>
-     [HideInInspector]
-     public EnemyType type;
-     /// <summary>
      /// Actions to be executed on the update
      /// </summary>
      public Action OnUpdate;
+     /// <summary>
+     /// The associated wavemember
+     /// </summary>
+     public WaveMember member;
+     /// <summary>
+     /// The original health of the enemy (used for healthbar calculations)
+     /// </summary>
+     public float originalHealth;
      /// <summary>
      /// Health of the enemy
      /// </summary>
@@ -39,6 +42,10 @@ public class EnemyController : MonoBehaviour, IDamageable
      [HideInInspector]
      public int goalCheckPoint;
      /// <summary>
+     /// says wheather the enemy has been frozen or not(used for effects calculations)
+     /// </summary>
+     public bool frozen = false;
+     /// <summary>
      /// Used for the direction of the movement
      /// </summary>
      private Vector3 direction;
@@ -46,7 +53,6 @@ public class EnemyController : MonoBehaviour, IDamageable
      /// Variable that checks if the enemy hasnt been damaged
      /// </summary>
      private bool undamaged;
-
      [SerializeField]
      private GameObject healthBar;
      [SerializeField]
@@ -57,7 +63,6 @@ public class EnemyController : MonoBehaviour, IDamageable
      private const float ENEMY_HEIGHT = 1f;
      void Start()
      {
-          InitializeEnemy();
           OnUpdate += TravelPath;
      }
 
@@ -68,7 +73,8 @@ public class EnemyController : MonoBehaviour, IDamageable
      }
      void OnDestroy()
      {
-          PortalController.UpdateWaveResult(this);
+          member.DistanceReached = goalCheckPoint;
+          member.OnDestroyCallback?.Invoke();
      }
      /// <summary>
      /// Sets the rotation towards the current goal
@@ -93,16 +99,23 @@ public class EnemyController : MonoBehaviour, IDamageable
      /// <summary>
      /// Sets the starting conditions of the enemy
      /// </summary>
-     void InitializeEnemy()
+     public void InitializeEnemy(WaveMember member)
      {
+          //Assign the reference to the member
+          this.member = member;
+          //Wheather the enemy is undamaged or not(for healthbar display)
           this.undamaged = true;
           //Set the stats of the enemy
-          this.health = EnemyStats.GetHealth(type);
-          this.speed = EnemyStats.GetSpeed(type);
+          this.health = member.Health;
+          this.originalHealth = this.health;
+          this.speed = member.Speed;
+          this.Element = member.Element;
           //Setting the correct name (used in the collider interactions)
           this.gameObject.name = "Enemy";
           //Setting the correct Hight so the enemy does not clip with the ground
           this.transform.position += Vector3.up * ENEMY_HEIGHT;
+          //The scale is given by the line what goes through (50,1) and (500/10)
+          this.transform.localScale = Vector3.one * health / 50;
           //Set the starting position to one tile before the end of the path
           goalCheckPoint = gameData.path.Count - 2;
           //Set the starting movement direction

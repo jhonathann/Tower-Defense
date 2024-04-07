@@ -32,14 +32,6 @@ public class GameData : ScriptableObject
      /// Count the number of waves
      /// </summary>
      public int waveCount;
-     //Slots for the three selected parts
-     public Part channelerSelectedPart;
-     public Part structureSelectedPart;
-     public Part sourceSelectedPart;
-     /// <summary>
-     /// Action called when a part is clicked
-     /// </summary>
-     public static Action<Part> SelectPart;
      /// <summary>
      /// Tower to be put on the map
      /// </summary>
@@ -65,7 +57,6 @@ public class GameData : ScriptableObject
      {
           //Subscribe to the events
           GameStarted += OnGameStarted;
-          SelectPart += OnSelectPart;
           DisplayInformation += OnDisplayInformation;
           TileController.TowerPlaced += OnTowerPlaced;
           PortalController.NextWave += OnNextWave;
@@ -78,49 +69,13 @@ public class GameData : ScriptableObject
           gameState.TrySetState(GameStateType.Running);
           health = 10;
           waveCount = 0;
-          channelerSelectedPart = null;
-          structureSelectedPart = null;
-          sourceSelectedPart = null;
           isTowerReady = false;
-     }
-     /// <summary>
-     /// Sets the new selected part to the corresponding field and changes the uss classes of newSelect and the previously selected part
-     /// </summary>
-     /// <param name="newSelectedPart">Part that was selected</param>
-     void OnSelectPart(Part newSelectedPart)
-     {
-          switch (newSelectedPart.type)
-          {
-               case PartType.Channeler:
-                    channelerSelectedPart?.RemoveFromClassList("selected");
-                    newSelectedPart.AddToClassList("selected");
-                    channelerSelectedPart = newSelectedPart;
-                    break;
-               case PartType.Structure:
-                    structureSelectedPart?.RemoveFromClassList("selected");
-                    newSelectedPart.AddToClassList("selected");
-                    structureSelectedPart = newSelectedPart;
-                    break;
-               case PartType.Source:
-                    sourceSelectedPart?.RemoveFromClassList("selected");
-                    newSelectedPart.AddToClassList("selected");
-                    sourceSelectedPart = newSelectedPart;
-                    break;
-          }
      }
      /// <summary>
      /// This triggers when a tower is successfully placed
      /// </summary>
      void OnTowerPlaced()
      {
-          //Remove the parts from the part List
-          partsManager.parts.Remove(channelerSelectedPart);
-          partsManager.parts.Remove(structureSelectedPart);
-          partsManager.parts.Remove(sourceSelectedPart);
-          //Set the selected parts again to null;
-          this.channelerSelectedPart = null;
-          this.structureSelectedPart = null;
-          this.sourceSelectedPart = null;
           //Set the available tower again to false
           this.isTowerReady = false;
           gameState.TrySetState(GameStateType.Running);

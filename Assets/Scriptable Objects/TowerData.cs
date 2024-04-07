@@ -41,11 +41,10 @@ public class TowerData : ScriptableObject
      public GameObject FastChannelerBolt { get; private set; }
      [field: SerializeField]
      public GameObject StrongChannelerBolt { get; private set; }
-     public static Action<Part, Part, Part> OnCreateTower;
      private Dictionary<Enum, GameObject> enumtoGameObject;
      private void OnEnable()
      {
-          OnCreateTower += CreateTower;
+          HUDController.CreateTowerTriggered += CreateTower;
           //Load the prefabs to the dictionary
           enumtoGameObject = new Dictionary<Enum, GameObject>
           {{ChannelerType.Area,areaChannelerPrefab},
@@ -60,13 +59,14 @@ public class TowerData : ScriptableObject
           {Element.Water,waterSourcePrefab}};
      }
      /// <summary>
-     /// Function that sets this parts to the tower SO when there are 3 parts
+     /// Function that sets this parts to the tower Scriptable Object when there are 3 parts
      /// </summary>
-     /// <param name="channeler">The channeler part</param>
-     /// <param name="structure">The structure part</param>
-     /// <param name="source">The source part</param>
-     private void CreateTower(Part channeler, Part structure, Part source)
+     private void CreateTower()
      {
+          Part channeler = gameData.partsManager.channelerSelectedPart;
+          Part structure = gameData.partsManager.structureSelectedPart;
+          Part source = gameData.partsManager.sourceSelectedPart;
+
           if (channeler == null || structure == null || source == null)
           {
                GameData.DisplayInformation?.Invoke("A tower must have all 3 parts", 2);

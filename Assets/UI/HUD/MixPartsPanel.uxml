@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/HUD/MixPartsPanel.uss?fileID=7433441132597879392&amp;guid=5f1af54d33ff85c4584e341ecd8bfb81&amp;type=3#MixPartsPanel" />
+    <Style src="project://database/Assets/UI/GeneralStyles.uss?fileID=7433441132597879392&amp;guid=0ade87dcc933ad14d9080c358e4c0bda&amp;type=3#GeneralStyles" />
+    <ui:VisualElement name="SelectionPanel" class="selectionPanel">
+        <ui:VisualElement name="Part1" class="mixPartSlot" />
+        <ui:VisualElement name="Part2" class="mixPartSlot" />
+        <ui:VisualElement name="Part3" class="mixPartSlot" />
+    </ui:VisualElement>
+    <ui:VisualElement name="PartsPanel" class="partsPanel" />
+    <ui:VisualElement name="BottomPanel" class="bottomPanel">
+        <ui:Button text="Mix" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MixPartsButton" class="mixPartsButton" />
+    </ui:VisualElement>
+</ui:UXML>

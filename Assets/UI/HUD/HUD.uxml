@@ -8,12 +8,21 @@
             <ui:Button text="X1" display-tooltip-when-elided="true" name="TimeSpeedButton" class="button" />
         </ui:VisualElement>
         <ui:VisualElement name="MiddleContainer" class="middleContainer">
-            <ui:VisualElement name="TowerCreationPanel" class="towerCreationPanel" />
+            <ui:VisualElement name="PartsPanel" class="partsPanel">
+                <ui:VisualElement name="SelectionTabsContainer" class="selectionTabsContainer">
+                    <ui:Button text="Create Tower" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CreateTowerTab" class="tab" />
+                    <ui:Button text="Mix Parts" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MixPartsTab" class="tab" />
+                    <ui:Button text="X" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CloseButton" class="button closeButton" />
+                </ui:VisualElement>
+                <ui:VisualElement name="BodyContainer" class="bodyContainer" />
+            </ui:VisualElement>
             <ui:VisualElement name="IntructionsPanel" class="instructionsPanel">
                 <ui:Label text="Press Esc to Open the Menu" display-tooltip-when-elided="true" name="EscInfo" class="InstructionsLabels" />
                 <ui:Label text="Camera Movement: W/A/S/D" display-tooltip-when-elided="true" name="CameraMovementInfo" class="InstructionsLabels" />
                 <ui:Label text="Camera Rotation: Q/E" display-tooltip-when-elided="true" name="CameraRotationInfo" class="InstructionsLabels" />
                 <ui:Label text="Camera Zoom: Scroll Wheel" display-tooltip-when-elided="true" name="CameraZoomInfo" class="InstructionsLabels" />
+                <ui:Label text="Change Speed: Space" display-tooltip-when-elided="true" name="ChangeSpeedInfo" class="InstructionsLabels" />
+                <ui:Label text="Toggle Part Panel: T" display-tooltip-when-elided="true" name="TToToggle" class="InstructionsLabels" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="BottomContainer" class="bottomContainer">

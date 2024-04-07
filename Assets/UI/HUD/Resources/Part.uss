@@ -1,4 +1,6 @@
 :root {
+  transition: 0.25s;
+  transition-timing-function: var(--transitionTimingFunction);
   width: 10%;
   height: 33%;
   margin: 1%;
@@ -85,7 +87,7 @@
   border-color: #842525;
 }
 .contextMenu-show{
-  transition: 0.25s;
+  transition: 0.25s all;
   transition-timing-function: var(--transitionTimingFunction);
   display: flex;
   font-size: 100%;

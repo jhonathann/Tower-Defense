@@ -1,0 +1,57 @@
+:root{
+     width:100%;
+     height:100%;
+}
+.selectionPanel{
+     width:100%;
+     height:30%;
+     flex-direction: row;
+     justify-content:space-around;
+     align-items:center;
+}
+.mixPartSlot{
+  width: 20%;
+  height: 80%;
+  background-color: #766149;
+  border-width: 3px;
+  border-color: #3b3024;
+}
+.partsPanel{
+     width:100%;
+     height:60%;
+     flex-direction:row;
+     flex-wrap: wrap;
+     border-width: 0;
+}
+.bottomPanel{
+     width:100%;
+     height:10%;
+     flex-direction: row;
+     justify-content: center;
+     align-items:center;
+}
+.mixPartsButton{
+     width:30%;
+     height:80%;
+     padding:0;
+     margin: 1%;
+     background-color: rgba(0, 0, 0, 0);
+     -unity-font-style: bold;
+     font-size: 150%;
+     -unity-text-align: middle-center;
+     color: var(--lightColor);
+     border-width: 0px;
+}
+.mixPartsButton:hover {
+  transition: 0.25s;
+  transition-timing-function: var(--transitionTimingFunction);
+  scale: 1.1;
+  color: var(--darkColor);
+  border-width: 5px;
+  border-color: var(--darkColor);
+}
+.mixPartsButton:active {
+  transition: 0.25s;
+  transition-timing-function: var(--transitionTimingFunction);
+  scale: 0.95;
+}

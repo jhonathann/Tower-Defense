@@ -79,7 +79,7 @@ public class Part : VisualElement
           SetContextMenu();
      }
      /// <summary>
-     /// This constructor returns a clone of the part that's passed in (with alteration on the width and height) (the cloned class doesn't have a registered callback) (used for the selectedContainerMockUp)
+     /// This constructor returns a clone of the part that's passed in (the cloned class doesn't have a registered callback) (used when the parts are selected)
      /// </summary>
      /// <param name="part">Part to be cloned</param>
      public Part(Part part)
@@ -97,11 +97,27 @@ public class Part : VisualElement
      /// <summary>
      /// This constructor returns a random part of the specifyc type (use to ensure that the player has sufficient parts to create the initial tower)
      /// </summary>
-     /// <param name="type"></param>
+     /// <param name="type">The type of the resulting part</param>
      public Part(PartType type)
      {
           this.type = type;
           this.rarity = GetRarity();
+          this.specificTypeInfo = GetSpecificTypeInfo();
+          template.CloneTree(this);
+          this.AddToClassList(rarityClasses[this.rarity]);
+          SetIconContainerElement();
+          iconContainer.AddToClassList(specificTypeClasses[this.specificTypeInfo]);
+          SetCallBacks();
+          SetContextMenu();
+     }
+     /// <summary>
+     /// This constructor returns a random part of the specifyc rarity (use for part mixture)
+     /// </summary>
+     /// <param name="rarity">The rarity of the resulting part/param>
+     public Part(Rarity rarity)
+     {
+          this.type = UtilityEnum.GetRandomTypeFromAnEnum<PartType>();
+          this.rarity = rarity;
           this.specificTypeInfo = GetSpecificTypeInfo();
           template.CloneTree(this);
           this.AddToClassList(rarityClasses[this.rarity]);
@@ -171,7 +187,7 @@ public class Part : VisualElement
      /// <param name="evt">(not used)</param>
      private void PartOnClick(ClickEvent evt)
      {
-          GameData.SelectPart(this);
+          PartsManager.SelectPart(this);
           HUDController.RenderPanel?.Invoke();
      }
      /// <summary>
@@ -183,8 +199,8 @@ public class Part : VisualElement
           //Doubles the size of the part
           this.AddToClassList("partBigger");
           // Adds the context menu
-          this.contextMenu.ToggleInClassList("contextMenu-show");
-          this.contextMenu.ToggleInClassList("contextMenu-hidden");
+          this.contextMenu.AddToClassList("contextMenu-show");
+          this.contextMenu.RemoveFromClassList("contextMenu-hidden");
      }
      /// <summary>
      /// Callback triggered when the mouse leaves the part
@@ -195,8 +211,8 @@ public class Part : VisualElement
           //Sets the size of the part to normal again
           this.RemoveFromClassList("partBigger");
           //Toggles the context menu classes
-          this.contextMenu.ToggleInClassList("contextMenu-show");
-          this.contextMenu.ToggleInClassList("contextMenu-hidden");
+          this.contextMenu.RemoveFromClassList("contextMenu-show");
+          this.contextMenu.AddToClassList("contextMenu-hidden");
      }
      //Creates the context menu and adds the corresponding USS classe
      private VisualElement CreateContextMenu()

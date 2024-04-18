@@ -18,14 +18,14 @@ public class TileController : MonoBehaviour
      /// </summary>
      public static Action TowerPlaced;
      /// <summary>
-     /// Flag to check if the target ocupied with a tower already
+     /// Reference to the tower that is on the tile
      /// </summary>
-     private bool isOcupied = false;
+     private TowerController tower;
      private void OnMouseEnter()
      {
           if (IsMouseOverAnUiElement()) return;
           if (!IsThereATowerToPlace()) return;
-          if (isOcupied) return;
+          if (IsOcupied()) return;
           gameData.towerData.tower.transform.position = this.transform.position;
      }
      private void OnMouseExit()
@@ -39,11 +39,22 @@ public class TileController : MonoBehaviour
      {
           if (IsMouseOverAnUiElement()) return;
           if (!IsThereATowerToPlace()) return;
-          if (isOcupied) return;
-          //mark the tile as ocupied
-          isOcupied = true;
-          //trigers the towerPlaced event
+          if (IsOcupied()) return;
+          //set the reference to the tower
+          this.tower = gameData.towerData.tower.GetComponent<TowerController>();
+          //Subscribes to the tower relocated event
+          tower.TowerRelocated += OnTowerRelocated;
+          //Sets tower state to placed
+          tower.State = TowerState.Placed;
+          //triggers the towerPlaced event
           TowerPlaced?.Invoke();
+     }
+     /// <summary>
+     /// Function to be triggered when the tower of the tile is relocated
+     /// </summary>
+     private void OnTowerRelocated()
+     {
+          tower = null;
      }
      /// <summary>
      /// Helper function to know when the mouse is over the UI
@@ -60,5 +71,13 @@ public class TileController : MonoBehaviour
      private bool IsThereATowerToPlace()
      {
           return gameData.isTowerReady;
+     }
+     /// <summary>
+     /// Helper function to know if the Tile already has a tower in it
+     /// </summary>
+     /// <returns>True if the there is already a tower in the tile</returns>
+     private bool IsOcupied()
+     {
+          return tower is not null;
      }
 }

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 /// <summary>
 /// This class handels the behaviour of the towers
 /// </summary>
@@ -10,12 +10,7 @@ public class TowerController : MonoBehaviour
      private TowerSelectionHandler towerSelectionHandler;
      private TowerAttackHandler towerAttackHandler;
      private TowerRotationHandler towerRotationHandler;
-     private enum TowerState
-     {
-          Unplaced,
-          Placed
-     }
-     private TowerState state = TowerState.Unplaced;
+     public TowerState State { get; set; } = TowerState.Unplaced;
      /// <summary>
      /// Reference to the gameData
      /// </summary>
@@ -24,6 +19,7 @@ public class TowerController : MonoBehaviour
      public Part channeler;
      public Part structure;
      public Part source;
+     public Action TowerRelocated;
      /// <summary>
      /// reference to the hitzoneGameObjects that show the range of the tower
      /// </summary>
@@ -38,11 +34,6 @@ public class TowerController : MonoBehaviour
           towerSelectionHandler = this.gameObject.AddComponent<TowerSelectionHandler>();
           towerAttackHandler = this.gameObject.AddComponent<TowerAttackHandler>();
           towerRotationHandler = this.gameObject.AddComponent<TowerRotationHandler>();
-     }
-     private void OnEnable()
-     {
-          //Subscribes to the TowerPlaced event
-          TileController.TowerPlaced += OnTowerPlaced;
      }
      private void Start()
      {
@@ -236,20 +227,18 @@ public class TowerController : MonoBehaviour
      }
      private void Update()
      {
-          if (state == TowerState.Unplaced)
+          if (State == TowerState.Unplaced)
           {
                towerRotationHandler.RotateTower?.Invoke();
           }
-          if (state == TowerState.Placed)
+          if (State == TowerState.Placed)
           {
                towerAttackHandler.CheckForAttack?.Invoke();
           };
      }
-
-     void OnTowerPlaced()
-     {
-          this.state = TowerState.Placed;
-          //Unsubscribes from the towerPlaced event 
-          TileController.TowerPlaced -= OnTowerPlaced;
-     }
+}
+public enum TowerState
+{
+     Unplaced,
+     Placed
 }

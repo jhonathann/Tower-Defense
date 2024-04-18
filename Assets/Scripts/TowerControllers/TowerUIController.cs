@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,25 +10,37 @@ public class TowerUIController : MonoBehaviour
      private Part channeler;
      private Part structure;
      private Part source;
+     private Canvas canvas;
      private Image channelerBackground;
      private Image channelerIcon;
      private Image structureBackground;
      private Image structureIcon;
      private Image sourceBackground;
      private Image sourceIcon;
+     private Button moveTower;
+     private Button channelerButton;
+     private Button structureButton;
+     private Button sourceButton;
      void Start()
      {
           TowerController towerController = this.GetComponentInParent<TowerController>();
-          this.gameData = towerController.gameData;
-          this.channeler = towerController.channeler;
-          this.structure = towerController.structure;
-          this.source = towerController.source;
+          gameData = towerController.gameData;
+          channeler = towerController.channeler;
+          structure = towerController.structure;
+          source = towerController.source;
+          //Set the main camera to the canvas (to be able to use events)
+          canvas = GetComponentInParent<Canvas>();
+          canvas.worldCamera = Camera.main;
           SetImageReferences(this.GetComponentsInChildren<Image>());
+          SetButtonReferences(this.GetComponentsInChildren<Button>());
           SetImages();
+          SetOnClickFunctions();
      }
 
+
+
      /// <summary>
-     /// Sets the aproppiate image reference (necesary cause the GetComponentsInChildren function does not guarantees an order)
+     /// Sets the aproppiate image reference (necesary cause the GetComponentsInChildren function does not guarantee an order)
      /// </summary>
      /// <param name="imageReferences">the array of imageReferences</param>
      private void SetImageReferences(Image[] imageReferences)
@@ -70,6 +83,60 @@ public class TowerUIController : MonoBehaviour
           sourceBackground.sprite = gameData.towerUiData.rarityToSprite[source.rarity];
           sourceIcon.sprite = gameData.towerUiData.specificTypeToSprite[source.specificTypeInfo];
      }
+     private void SetButtonReferences(Button[] buttonReferences)
+     {
+          foreach (Button button in buttonReferences)
+          {
+               switch (button.name)
+               {
+                    case ("MoveTower"):
+                         moveTower = button;
+                         break;
+                    case ("Channeler"):
+                         channelerButton = button;
+                         break;
+                    case ("Structure"):
+                         structureButton = button;
+                         break;
+                    case ("Source"):
+                         sourceButton = button;
+                         break;
+                    default: break;
+               }
+          }
+     }
+     private void SetOnClickFunctions()
+     {
+          moveTower.onClick.AddListener(MoveTowerOnClick);
+          channelerButton.onClick.AddListener(ChannelerOnClick);
+          structureButton.onClick.AddListener(StructureOnClick);
+          sourceButton.onClick.AddListener(SourceOnClick);
+          void MoveTowerOnClick()
+          {
+               TowerController tower = GetComponentInParent<TowerController>();
+               tower.State = TowerState.Unplaced;
+               tower.TowerRelocated?.Invoke();
+               //Set the tower to be placed
+               gameData.towerData.tower = tower.gameObject;
+               //Notify there is a tower to be placed
+               gameData.isTowerReady = true;
+               //Change game state
+               gameData.gameState.TrySetState(GameStateType.PlacingTower);
+          }
+          void ChannelerOnClick()
+          {
+               Debug.Log("Channeler");
+          }
+          void StructureOnClick()
+          {
+               Debug.Log("Structure");
+          }
+          void SourceOnClick()
+          {
+               Debug.Log("Source");
+          }
+     }
+
      void Update()
      {
           RotateWithCameraInYAxis();
@@ -81,7 +148,6 @@ public class TowerUIController : MonoBehaviour
      private void RotateWithCameraInYAxis()
      {
           transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, Camera.main.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-          ;
           return;
      }
 }

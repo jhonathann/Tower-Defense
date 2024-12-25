@@ -188,13 +188,13 @@ public class HUDController : MonoBehaviour
           {
                case CreationPanelState.Hidden:
                     partsPanel.AddToClassList("partsPanel-hidden");
-                    partsPanel.RegisterCallback<ClickEvent>(TowerCreationHiddenOnClick);
+                    partsPanel.RegisterCallback<MouseDownEvent>(TowerCreationHiddenOnClick);
                     break;
                case CreationPanelState.TowerCreation:
                     partsPanel.RemoveFromClassList("partsPanel-hidden");
                     createTowerTab.AddToClassList("tab-selectedOne");
                     mixPartsTab.RemoveFromClassList("tab-selectedOne");
-                    partsPanel.UnregisterCallback<ClickEvent>(TowerCreationHiddenOnClick);
+                    partsPanel.UnregisterCallback<MouseDownEvent>(TowerCreationHiddenOnClick);
                     bodyContainer.Clear();
                     bodyContainer.Add(towerCreationPanel.CloneTree());
                     // Add the currently selected parts to the panel
@@ -218,7 +218,7 @@ public class HUDController : MonoBehaviour
                     partsPanel.RemoveFromClassList("partsPanel-hidden");
                     mixPartsTab.AddToClassList("tab-selectedOne");
                     createTowerTab.RemoveFromClassList("tab-selectedOne");
-                    partsPanel.UnregisterCallback<ClickEvent>(TowerCreationHiddenOnClick);
+                    partsPanel.UnregisterCallback<MouseDownEvent>(TowerCreationHiddenOnClick);
                     bodyContainer.Clear();
                     bodyContainer.Add(mixPartsPanel.CloneTree());
                     // Add the currently selected parts to the panel
@@ -238,7 +238,7 @@ public class HUDController : MonoBehaviour
                default: break;
           }
           //This function is used to allow the user to open the towercreation panel by clicking on the hidden version
-          void TowerCreationHiddenOnClick(ClickEvent evt)
+          void TowerCreationHiddenOnClick(MouseDownEvent evt)
           {
                //Allows the toggle only when the game is Running(to avoid changes when player is placing a tower of when the game is over)
                if (gameData.gameState.State == GameStateType.Running)

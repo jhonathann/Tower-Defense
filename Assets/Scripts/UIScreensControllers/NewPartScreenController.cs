@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 /// <summary>
-/// Control the behaviour of the new part Screen
+/// Controls the behaviour of the new part Screen
 /// </summary>
 public class NewPartScreenController : MonoBehaviour
 {
@@ -12,8 +11,8 @@ public class NewPartScreenController : MonoBehaviour
      /// Access to the gameData
      /// </summary>
      public GameData gameData;
-     //References to the ui elements
-     private UIDocument newPartScren;
+     //References to the UI elements
+     private UIDocument newPartScreen;
      private VisualElement globalContainer;
      private VisualElement partContainer;
      private Button okButton;
@@ -28,17 +27,16 @@ public class NewPartScreenController : MonoBehaviour
      private void GetElements()
      {
           //Get the UI component (the element that has the script attached)
-          newPartScren = GetComponent<UIDocument>();
-          //Get the GlobalContainer VisualElement diferente a rootVisualElement
-          globalContainer = newPartScren.rootVisualElement.Query<VisualElement>("GlobalContainer");
+          newPartScreen = GetComponent<UIDocument>();
+          globalContainer = newPartScreen.rootVisualElement.Query<VisualElement>("GlobalContainer");
           //Search for the buttons inside the menu
-          //.Query search for especific elements in the visual tree (short .Q) in this case by the name of the element
-          partContainer = newPartScren.rootVisualElement.Query<VisualElement>("PartContainer");
-          okButton = newPartScren.rootVisualElement.Query<Button>("OkButton");
+          //.Query search for specific elements in the visual tree (short .Q) in this case by the name of the element
+          partContainer = newPartScreen.rootVisualElement.Query<VisualElement>("PartContainer");
+          okButton = newPartScreen.rootVisualElement.Query<Button>("OkButton");
 
      }
      /// <summary>
-     /// Sets the buttons to trigger certain functions as a response to an especific event
+     /// Sets the buttons to trigger certain functions as a response to a specific event
      /// </summary>
      private void RegisterEvents()
      {
@@ -71,7 +69,7 @@ public class NewPartScreenController : MonoBehaviour
      {
           globalContainer.style.display = DisplayStyle.None;
           gameData.gameState.TrySetState(GameStateType.Running);
-          ///clears the cointainer for the next call 
+          //clears the container for the next call 
           this.partContainer.Clear();
      }
 
@@ -86,14 +84,14 @@ public class NewPartScreenController : MonoBehaviour
           foreach (Part part in addedParts)
           {
                //Generates a mirage of the part and adds it to the partContainer
-               Part partToBeAdded = new(part);
+               VisualElement partToBeAdded = PartVisualElementFactory.CreateVisualElement(part,isMock:true);
                partToBeAdded.style.width = new StyleLength(new Length(30, LengthUnit.Percent));
                partToBeAdded.style.height = new StyleLength(new Length(100, LengthUnit.Percent));
                partToBeAdded.AddToClassList("part");
                VisualElement description = new();
                description.AddToClassList("description");
-               partToBeAdded.iconContainer.Add(description);
-               AddStatsLabels(description, partToBeAdded);
+               partToBeAdded.ElementAt(0).Add(description);//Grabs the first children of the Element (the iconContainer)
+               AddStatsLabels(description, part);
                this.partContainer.Add(partToBeAdded);
           }
           void AddStatsLabels(VisualElement visualElement, Part part)
@@ -116,7 +114,7 @@ public class NewPartScreenController : MonoBehaviour
                               case Element.Thunder:
                                    visualElement.Add(new Label($"{part.rarity} {part.type}"));
                                    visualElement.Add(new Label($"{part.specificTypeInfo}"));
-                                   visualElement.Add(new Label($"Effect: Confussion for {TowerStats.thunderSourceTimes[part.rarity]} sec making the enemy go in the opposite direction"));
+                                   visualElement.Add(new Label($"Effect: Confusion for {TowerStats.thunderSourceTimes[part.rarity]} sec making the enemy go in the opposite direction"));
                                    break;
                               case Element.Water:
                                    visualElement.Add(new Label($"{part.rarity} {part.type}"));

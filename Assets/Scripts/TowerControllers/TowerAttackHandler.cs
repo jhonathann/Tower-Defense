@@ -12,6 +12,7 @@ public class TowerAttackHandler : MonoBehaviour
      /// <summary>
      /// Action used to take the check for attack logic
      /// </summary>
+     // ReSharper disable once InconsistentNaming
      public Action CheckForAttack;
      //Prefab for the instantiation of the shots
      private GameObject shotPrefab;
@@ -21,14 +22,16 @@ public class TowerAttackHandler : MonoBehaviour
      /// <summary>
      /// Action that references the correct function for the tower attack type
      /// </summary>
+     // ReSharper disable once InconsistentNaming
      private Action<GameObject> Attack;
      /// <summary>
-     /// Function that references the effect that will be added to a hitted enemy
+     /// Function that references the effect that will be added to a hit enemy
      /// </summary>
+     // ReSharper disable once InconsistentNaming
      private Func<EnemyController, IEnumerator> Effect;
      private List<GameObject> enemiesInRange = new();
      /// <summary>
-     /// Variable that keeps track of the time since the last shot (initialized in maximum value so the tower shots immediatly when the first enemy enters)
+     /// Variable that keeps track of the time since the last shot (initialized in maximum value so the tower shots immediately when the first enemy enters)
      /// </summary>
      private float timeSinceLastShot = Mathf.Infinity;
 
@@ -58,6 +61,7 @@ public class TowerAttackHandler : MonoBehaviour
      {
           SetChannelerStats(channeler, gameData);
           SetSourceStats(source);
+          enemiesInRange.Clear(); //Used in case a partChange is triggered when there are still enemies inside the old collider
      }
      /// <summary>
      /// Sets the stats for the fireRate of the tower according to the channeler
@@ -77,12 +81,14 @@ public class TowerAttackHandler : MonoBehaviour
                     break;
           }
 
+          return;
+
           void SetChannelerAreaVariables(GameData gameData)
           {
                this.shotPrefab = gameData.towerData.AreaChannelerBolt;
                this.fireRate = TowerStats.areaChannelerStats[channeler.rarity].fireRate;
                this.damage = TowerStats.areaChannelerStats[channeler.rarity].damage;
-               Attack += AttackArea;
+               Attack = AttackArea;
           }
 
           void SetChannelerFastVariables(GameData gameData)
@@ -90,7 +96,7 @@ public class TowerAttackHandler : MonoBehaviour
                this.shotPrefab = gameData.towerData.FastChannelerBolt;
                this.fireRate = TowerStats.fastChannelerStats[channeler.rarity].fireRate;
                this.damage = TowerStats.fastChannelerStats[channeler.rarity].damage;
-               Attack += AttackOne;
+               Attack = AttackOne;
           }
 
           void SetChannelerStrongVariables(GameData gameData)
@@ -98,11 +104,11 @@ public class TowerAttackHandler : MonoBehaviour
                this.shotPrefab = gameData.towerData.StrongChannelerBolt;
                this.fireRate = TowerStats.strongChannelerStats[channeler.rarity].fireRate;
                this.damage = TowerStats.strongChannelerStats[channeler.rarity].damage;
-               Attack += AttackOne;
+               Attack = AttackOne;
           }
      }
      /// <summary>
-     /// Sets the effect and the shotType according with the source
+     /// Sets the effect and the shotType according to the source
      /// </summary>
      /// <param name="source">the source part</param>
      private void SetSourceStats(Part source)
@@ -142,7 +148,7 @@ public class TowerAttackHandler : MonoBehaviour
           timeSinceLastShot += Time.deltaTime;
      }
      /// <summary>
-     /// Instantiates the shotPrefab Gameobject and sets its stats accordingly
+     /// Instantiates the shotPrefab GameObject and sets its stats accordingly
      /// </summary>
      /// <param name="target">The target of the shot</param>
      private void AttackOne(GameObject target)
@@ -172,9 +178,9 @@ public class TowerAttackHandler : MonoBehaviour
      /// <returns>The target of the tower</returns>
      private GameObject SelectTarget()
      {
-          GameObject target;
-          //Filter the enemies in range, ordera them by the progress toward the castle and returns the first
-          target = enemiesInRange.OrderBy(enemy => enemy.GetComponent<EnemyController>().goalCheckPoint).First();
+          //Filter the enemies in range, order them by the progress toward the castle and returns the first
+          GameObject target =
+               enemiesInRange.OrderBy(enemy => enemy.GetComponent<EnemyController>().goalCheckPoint).First();
           return target;
      }
 

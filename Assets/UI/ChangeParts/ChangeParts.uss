@@ -1,0 +1,24 @@
+.globalContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items:center;
+    visibility: hidden;
+}
+.changePartsContextMenu{
+    visibility: visible;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 30%;
+    height: 30%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: absolute;
+    background-color: var(--middleColor);
+    border-width: 5px;
+    border-color: var(--darkColor);
+    opacity: 0.8;
+}

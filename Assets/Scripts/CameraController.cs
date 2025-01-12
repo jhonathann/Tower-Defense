@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 /// <summary>
@@ -11,14 +8,14 @@ public class CameraController : MonoBehaviour
      private const float MOVEMENT_SPEED = 100.0f;
      private const float ROTATION_SPEED = 50.0f;
      private const float ZOOM_SENSITIVITY = 10.0f;
-     private readonly Vector2 X_BOUNDARIES = new(-300, 300);
-     private readonly Vector2 Z_BOUNDARIES = new(-300, 300);
-     private readonly Vector2 ZOOM_BOUNDARIES = new(10, 130);
-     private Camera ortografic_Camera;
+     private readonly Vector2 xBoundaries = new(-300, 300);
+     private readonly Vector2 zBoundaries = new(-300, 300);
+     private readonly Vector2 zoomBoundaries = new(10, 130);
+     private Camera ortograficCamera;
 
      private void Start()
      {
-          ortografic_Camera = this.gameObject.GetComponent<Camera>();
+          ortograficCamera = this.gameObject.GetComponent<Camera>();
      }
 
      private void Update()
@@ -61,10 +58,10 @@ public class CameraController : MonoBehaviour
 
                Vector3 CheckForPositionBoundaries(Vector3 position)
                {
-                    if (position.x < X_BOUNDARIES.x) position.x = X_BOUNDARIES.x;
-                    if (position.x > X_BOUNDARIES.y) position.x = X_BOUNDARIES.y;
-                    if (position.z < Z_BOUNDARIES.x) position.z = Z_BOUNDARIES.x;
-                    if (position.z > Z_BOUNDARIES.y) position.z = Z_BOUNDARIES.y;
+                    if (position.x < xBoundaries.x) position.x = xBoundaries.x;
+                    if (position.x > xBoundaries.y) position.x = xBoundaries.y;
+                    if (position.z < zBoundaries.x) position.z = zBoundaries.x;
+                    if (position.z > zBoundaries.y) position.z = zBoundaries.y;
                     return position;
                }
           }
@@ -81,7 +78,7 @@ public class CameraController : MonoBehaviour
 
           void ApplyZoom(float zoom)
           {
-               ortografic_Camera.orthographicSize += zoom;
+               ortograficCamera.orthographicSize += zoom;
           }
 
           static float GetZoomAmount()
@@ -91,10 +88,10 @@ public class CameraController : MonoBehaviour
 
           void CorrectForBoundaries()
           {
-               if (ortografic_Camera.orthographicSize < ZOOM_BOUNDARIES.x)
-                    ortografic_Camera.orthographicSize = ZOOM_BOUNDARIES.x;
-               if (ortografic_Camera.orthographicSize > ZOOM_BOUNDARIES.y)
-                    ortografic_Camera.orthographicSize = ZOOM_BOUNDARIES.y;
+               if (ortograficCamera.orthographicSize < zoomBoundaries.x)
+                    ortograficCamera.orthographicSize = zoomBoundaries.x;
+               if (ortograficCamera.orthographicSize > zoomBoundaries.y)
+                    ortograficCamera.orthographicSize = zoomBoundaries.y;
           }
      }
 
@@ -113,7 +110,7 @@ public class CameraController : MonoBehaviour
 
           void MakeRotation(float rotation)
           {
-               this.gameObject.transform.Rotate(new Vector3(0, rotation, 0), Space.World);//Only rotates in y axis for correct isometric control
+               this.gameObject.transform.Rotate(new Vector3(0, rotation, 0), Space.World);//Only rotates in y-axis for correct isometric control
           }
      }
 }

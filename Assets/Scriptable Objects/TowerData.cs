@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -41,12 +40,12 @@ public class TowerData : ScriptableObject
      public GameObject FastChannelerBolt { get; private set; }
      [field: SerializeField]
      public GameObject StrongChannelerBolt { get; private set; }
-     private Dictionary<Enum, GameObject> enumtoGameObject;
+     private Dictionary<Enum, GameObject> enumToGameObject;
      private void OnEnable()
      {
           HUDController.CreateTowerTriggered += CreateTower;
           //Load the prefabs to the dictionary
-          enumtoGameObject = new Dictionary<Enum, GameObject>
+          enumToGameObject = new Dictionary<Enum, GameObject>
           {{ChannelerType.Area,areaChannelerPrefab},
           {ChannelerType.Fast,fastChannelerPrefab},
           {ChannelerType.Strong,strongChannelerPrefab},
@@ -89,24 +88,27 @@ public class TowerData : ScriptableObject
      /// Returns the prefab associated to the channeler of the tower
      /// </summary>
      /// <returns>The prefab for the channeler</returns>
-     public GameObject GetChannelerPrefab()
+     public GameObject GetChannelerPrefab(Part channelerPart)
      {
-          return enumtoGameObject[channeler.specificTypeInfo];
+          if(channelerPart.type != PartType.Channeler) return null;
+          return enumToGameObject[channelerPart.specificTypeInfo];
      }
      /// <summary>
      /// Returns the prefab associated to the structure of the tower
      /// </summary>
      /// <returns>The prefab of the structure</returns>
-     public GameObject GetStructurePrefab()
+     public GameObject GetStructurePrefab(Part structurePart)
      {
-          return enumtoGameObject[structure.specificTypeInfo];
+          if(structurePart.type != PartType.Structure) return null;
+          return enumToGameObject[structurePart.specificTypeInfo];
      }
      /// <summary>
      /// Returns the prefab associated to the source of the tower
      /// </summary>
      /// <returns>The prefab of the source</returns>
-     public GameObject GetSourcePrefab()
+     public GameObject GetSourcePrefab(Part sourcePart)
      {
-          return enumtoGameObject[source.specificTypeInfo];
+          if(sourcePart.type != PartType.Source) return null;
+          return enumToGameObject[sourcePart.specificTypeInfo];
      }
 }

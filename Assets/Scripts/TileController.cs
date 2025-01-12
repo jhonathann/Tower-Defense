@@ -43,7 +43,7 @@ public class TileController : MonoBehaviour
           //set the reference to the tower
           this.tower = gameData.towerData.tower.GetComponent<TowerController>();
           //Subscribes to the tower relocated event
-          tower.TowerRelocated += OnTowerRelocated;
+          tower.TowerBeingRelocated += OnTowerRelocated;
           //Sets tower state to placed
           tower.State = TowerState.Placed;
           //triggers the towerPlaced event

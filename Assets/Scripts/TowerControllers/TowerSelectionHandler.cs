@@ -20,7 +20,14 @@ public class TowerSelectionHandler : MonoBehaviour
      {
           this.selectionCollider = selectionCollider;
           this.hitZoneGameObjects = hitZoneGameObjects;
-          this.worldUI = Instantiate(worldUIPrefab, this.transform.position + Vector3.up * WORLD_UI_HEIGHT, Quaternion.identity, this.transform);
+          if (worldUI is null)
+          {
+               worldUI = Instantiate(worldUIPrefab, this.transform.position + Vector3.up * WORLD_UI_HEIGHT, Quaternion.identity, this.transform);
+          }
+          else
+          {
+               worldUI.GetComponent<TowerUIController>().Redraw();
+          }
      }
      private bool OnTowerSelected(RaycastHit raycastHit)
      {

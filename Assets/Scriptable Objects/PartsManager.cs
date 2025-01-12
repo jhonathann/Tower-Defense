@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
 /// Manages the collection of parts in the game.
@@ -19,9 +16,13 @@ public class PartsManager : ScriptableObject
     /// </summary>
     public static Action<Part> SelectPart;
     /// <summary>
+    /// Action called when a part is going to be changed
+    /// </summary>
+    public static Action<Part,Part> ChangePart;
+    /// <summary>
     /// List of parts currently managed by the PartsManager.
     /// </summary>
-    public List<Part> parts = new();
+    public readonly List<Part> parts = new();
     /// <summary>
     /// Reference to the creation panel state
     /// </summary>
@@ -32,14 +33,15 @@ public class PartsManager : ScriptableObject
     public Part structureSelectedPart;
     public Part sourceSelectedPart;
     //Array of parts that are going to be mixed
-    public List<Part> partsToMix = new();
+    public readonly List<Part> partsToMix = new();
     /// <summary>
     /// Called when the PartsManager scriptable object is enabled.
     /// Subscribes to necessary events.
     /// </summary>
-    void OnEnable()
+    private void OnEnable()
     {
         SelectPart += OnSelectPart;
+        ChangePart += OnChangePart;
         GameData.GameStarted += OnGameStarted;
         PortalController.NextWave += OnNextWave;
         HUDController.ChangeOfHUDState += OnChangeOfHUDState;
@@ -137,41 +139,30 @@ public class PartsManager : ScriptableObject
                 case PartType.Channeler:
                     if (IsPartAlreadySelected(newSelectedPart, channelerSelectedPart))
                     {
-                        newSelectedPart.RemoveFromClassList("selected");
                         channelerSelectedPart = null;
                     }
                     else
                     {
-                        channelerSelectedPart?.RemoveFromClassList("selected");
-                        newSelectedPart.AddToClassList("selected");
                         channelerSelectedPart = newSelectedPart;
                     }
                     break;
                 case PartType.Structure:
                     if (IsPartAlreadySelected(newSelectedPart, structureSelectedPart))
                     {
-                        newSelectedPart.RemoveFromClassList("selected");
                         structureSelectedPart = null;
-                        return;
                     }
                     else
                     {
-                        structureSelectedPart?.RemoveFromClassList("selected");
-                        newSelectedPart.AddToClassList("selected");
                         structureSelectedPart = newSelectedPart;
                     }
                     break;
                 case PartType.Source:
                     if (IsPartAlreadySelected(newSelectedPart, sourceSelectedPart))
                     {
-                        newSelectedPart.RemoveFromClassList("selected");
                         sourceSelectedPart = null;
-                        return;
                     }
                     else
                     {
-                        sourceSelectedPart?.RemoveFromClassList("selected");
-                        newSelectedPart.AddToClassList("selected");
                         sourceSelectedPart = newSelectedPart;
                     }
                     break;
@@ -187,18 +178,21 @@ public class PartsManager : ScriptableObject
             //If the part is already selected then it is deselected
             if (partsToMix.Contains(newSelectedPart))
             {
-                newSelectedPart.RemoveFromClassList("selected");
                 partsToMix.Remove(newSelectedPart);
             }
             else
             {
                 //If there are already 3 selected parts
                 if (partsToMix.Count == 3) return;
-
-                newSelectedPart.AddToClassList("selected");
+                
                 partsToMix.Add(newSelectedPart);
             }
         }
+    }
+    void OnChangePart(Part partToChangeFor,Part partToBeChanged)
+    {
+        parts.Remove(partToChangeFor);
+        parts.Add(partToBeChanged);
     }
     void OnCreateTower()
     {
@@ -216,15 +210,11 @@ public class PartsManager : ScriptableObject
         structureSelectedPart = null;
         sourceSelectedPart = null;
         partsToMix.Clear();
-        foreach (Part part in parts)
-        {
-            part.RemoveFromClassList("selected");
-        }
     }
     /// <summary>
     /// Activated when the user clicks the mix parts button
     /// </summary>
-    public void OnMixParts()
+    private void OnMixParts()
     {
         //When there aren't enough parts
         if (partsToMix.Count < 3)

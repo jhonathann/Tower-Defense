@@ -22,6 +22,7 @@ public class HUDController : MonoBehaviour
     private Button createTowerTab;
     private Button mixPartsTab;
     private Button closeButton;
+    private Button nextWaveButton;
     private VisualElement partsPanel;
     private VisualElement bodyContainer;
 
@@ -48,7 +49,8 @@ public class HUDController : MonoBehaviour
 
     //Event Triggered when the MixPartsButton Is pressed
     public static event Action MixPartsTriggered;
-
+    //Event Triggered when the NextWaveButton is pressed
+    public static event Action NextWaveButtonTriggered;
     /// <summary>
     /// Variable used to determine the current state of the panel
     /// </summary>
@@ -78,7 +80,14 @@ public class HUDController : MonoBehaviour
     {
         //Updates Values
         healthBar.value = gameData.health;
-        nextWaveTimeLabel.text = "Next Wave In: " + gameData.timerString;
+        if (PortalController.WaveState is WaveState.Waiting)
+        {
+            nextWaveTimeLabel.text = "Next Wave In: " + gameData.timerString;
+        }
+        else
+        {
+            nextWaveTimeLabel.text = String.Empty;
+        }
         waveCountLabel.text = "Wave " + gameData.waveCount;
         //Allows the toggle only when the game is Running(to avoid changes when player is placing a tower of when the game is over)
         if (gameData.gameState.State != GameStateType.Running) return;
@@ -129,6 +138,7 @@ public class HUDController : MonoBehaviour
         createTowerTab = HUD.rootVisualElement.Query<Button>("CreateTowerTab");
         mixPartsTab = HUD.rootVisualElement.Query<Button>("MixPartsTab");
         closeButton = HUD.rootVisualElement.Query<Button>("CloseButton");
+        nextWaveButton = HUD.rootVisualElement.Query<Button>("NextWaveButton");
     }
 
     /// <summary>
@@ -140,6 +150,7 @@ public class HUDController : MonoBehaviour
         createTowerTab.RegisterCallback<ClickEvent>(CreateTowerTabOnClick);
         mixPartsTab.RegisterCallback<ClickEvent>(MixPartsTabOnClick);
         closeButton.RegisterCallback<ClickEvent>(CloseButtonOnClick);
+        nextWaveButton.RegisterCallback<ClickEvent>(NextWaveButtonOnClick);
     }
 
     /// <summary>
@@ -191,6 +202,11 @@ public class HUDController : MonoBehaviour
     private void CloseButtonOnClick(ClickEvent evt)
     {
         State = CreationPanelState.Hidden;
+    }
+
+    private void NextWaveButtonOnClick(ClickEvent evt)
+    {
+        NextWaveButtonTriggered?.Invoke();
     }
 
     /// <summary>

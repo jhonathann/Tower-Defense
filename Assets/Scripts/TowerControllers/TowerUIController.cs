@@ -128,6 +128,11 @@ public class TowerUIController : MonoBehaviour
 
         void MoveTowerOnClick()
         {
+            if (PortalController.WaveState is WaveState.Running)
+            {
+                GameData.DisplayInformation("Towers can only be moved in between waves", 2);
+                return;
+            }
             towerController.State = TowerState.Unplaced;
             towerController.TowerBeingRelocated?.Invoke();
             //Set the tower to be placed

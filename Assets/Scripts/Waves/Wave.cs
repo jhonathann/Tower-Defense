@@ -1,30 +1,27 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
-using UnityEngine;
 
 /// <summary>
-/// Class that handels the wave behaviour
+/// Class that handles the wave behaviour
 /// </summary>
 public class Wave
 {
     public bool waveFinished = true;
     int numberOfEnemies = 9;
     int destroyedEnemies = 0;
-    public List<WaveMember> members = new();
+    public readonly List<WaveMember> members = new();
     /// <summary>
     /// Action to keep track of when the wave is over
     /// </summary>
-    public Action MemberDestroyedCallback;
+    private Action MemberDestroyedCallback;
     public Wave()
     {
         MemberDestroyedCallback = OnMemberDestroyed;
         Populate(numberOfEnemies);
     }
     /// <summary>
-    /// Adds the inmitial enemies
+    /// Adds the initial enemies
     /// </summary>
     /// <param name="numberOfEnemies">The number of initial enemies</param>
     private void Populate(int numberOfEnemies)
@@ -62,6 +59,7 @@ public class Wave
         if (destroyedEnemies == numberOfEnemies)
         {
             waveFinished = true;
+            PortalController.WaveState = WaveState.Waiting;
             destroyedEnemies = 0;
         }
     }
